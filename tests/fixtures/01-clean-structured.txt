@@ -1,0 +1,19 @@
+SUBJECTIVE:
+Patient is a 68 year old male with history of hypertension, diabetes who presents with chest pain. Pain started 2 hours ago, substernal, 7/10 severity, radiating to left arm. Associated with diaphoresis and shortness of breath. Denies nausea or vomiting.
+
+OBJECTIVE:
+Vitals: BP 156/92, HR 88, RR 18, Temp 98.6 F, SpO2 96% on room air
+Physical Exam: Alert and oriented, appears uncomfortable. Heart regular rate and rhythm, no murmurs. Lungs clear to auscultation bilaterally.
+
+ASSESSMENT:
+1. Acute coronary syndrome - NSTEMI likely given troponin elevation
+2. Hypertension - currently elevated
+3. Type 2 Diabetes Mellitus
+
+PLAN:
+1. Aspirin 325mg chewed, Plavix 600mg load
+2. Heparin drip per protocol
+3. Cardiology consult for cardiac catheterization
+4. Serial troponins q6h x3
+5. Cont home meds: Metformin, Lisinopril
+6. NPO for cath lab

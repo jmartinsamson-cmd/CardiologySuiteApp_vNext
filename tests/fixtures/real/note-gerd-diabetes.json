@@ -1,0 +1,72 @@
+{
+  "id": "note-gerd-diabetes",
+  "description": "ED note - 43yo M with GERD, new-onset diabetes (glucose 240)",
+  "category": "common",
+  "input": "Chief Complaint\nPatient presents with\n•\tVomiting\n \t \tPt had 1 episode of vomiting around 5 pm and states he feels like his chest is burning. Denies nausea/pain at this time\n \n43-year-old black male presents emergency department complaining of 1 episode of vomiting and since then he has had some midepigastric burning going up the middle of his chest the back of his throat\n\n \nReview of patient's allergies indicates:\nNo Known Allergies\nPast Medical History:\nDiagnosis\tDate\n•\tKnown health problems: none\t \n \nPast Surgical History:\nProcedure\tLaterality\tDate\n•\tnone \tN/A\t \n•\tREPAIR, TENDON, BICEPS, DISTAL\tRight\t9/14/2023\n \nFamily History\nProblem\tRelation\tName\tAge of Onset\n•\tDiabetes\tMother\t \t \n•\tHypertension\tFather\t \t \n•\tDiabetes\tFather\t \t \n \n[Social History]\n\n[Social History]\nTobacco Use\n•\tSmoking status:\tEvery Day\n \t \tCurrent packs/day:\t0.50\n \t \tAverage packs/day:\t0.5 packs/day for 17.0 years (8.5 ttl pk-yrs)\n•\tSmokeless tobacco:\tNever\nSubstance Use Topics\n•\tAlcohol use:\tYes\n \t \tComment: occ\n•\tDrug use:\tNever\n\nReview of Systems \nConstitutional: Negative.  Negative for activity change, appetite change, chills, diaphoresis, fatigue, fever and unexpected weight change. \nHENT: Negative.  Negative for congestion, dental problem, drooling, ear discharge, ear pain, facial swelling, hearing loss, mouth sores, nosebleeds, postnasal drip, rhinorrhea, sinus pressure, sinus pain, sneezing, sore throat, tinnitus, trouble swallowing and voice change.  \nEyes: Negative.  Negative for photophobia, pain, discharge, redness, itching and visual disturbance. \nRespiratory: Negative.  Negative for apnea, cough, choking, chest tightness, shortness of breath, wheezing and stridor.  \nCardiovascular: Negative.  Negative for chest pain, palpitations and leg swelling. \nGastrointestinal:  Positive for abdominal pain. Negative for abdominal distention, anal bleeding, blood in stool, constipation, diarrhea, nausea, rectal pain and vomiting. \nEndocrine: Negative.  Negative for cold intolerance, heat intolerance, polydipsia, polyphagia and polyuria. \nGenitourinary: Negative.  Negative for decreased urine volume, difficulty urinating, dysuria, enuresis, flank pain, frequency, genital sores, hematuria, penile discharge, penile pain, penile swelling, scrotal swelling, testicular pain and urgency. \nMusculoskeletal: Negative.  Negative for arthralgias, back pain, gait problem, joint swelling, myalgias, neck pain and neck stiffness. \nSkin: Negative.  Negative for color change, pallor, rash and wound. \nAllergic/Immunologic: Negative.  Negative for environmental allergies, food allergies and immunocompromised state. \nNeurological: Negative.  Negative for dizziness, tremors, seizures, syncope, facial asymmetry, speech difficulty, weakness, light-headedness, numbness and headaches. \nHematological: Negative.  Negative for adenopathy. Does not bruise/bleed easily. \nPsychiatric/Behavioral: Negative.  Negative for agitation, behavioral problems, confusion, decreased concentration, dysphoric mood, hallucinations, self-injury, sleep disturbance and suicidal ideas. The patient is not nervous/anxious and is not hyperactive.  \nAll other systems reviewed and are negative.\n\n \nPhysical Exam\n \nInitial Vitals [10/01/25 2218]\nBP\tPulse\tResp\tTemp\tSpO2\n(!) 163/85\t89\t18\t97.7 °F (36.5 °C)\t98 %\n \nPhysical Exam\n \nNursing note and vitals reviewed.\nConstitutional: He appears well-developed and well-nourished. \nHENT: \nHead: Normocephalic and atraumatic. \nEyes: Conjunctivae and EOM are normal. Pupils are equal, round, and reactive to light. \nNeck: Neck supple. \nNormal range of motion.\nCardiovascular:  Normal rate and regular rhythm.         \nPulmonary/Chest: Breath sounds normal. \nAbdominal: Abdomen is soft. Bowel sounds are normal. There is abdominal tenderness in the epigastric area. \nMusculoskeletal:    \n   General: Normal range of motion. \n   Cervical back: Normal range of motion and neck supple. \n \nNeurological: He is alert and oriented to person, place, and time. \nSkin: Skin is warm and dry. Capillary refill takes less than 2 seconds. \nPsychiatric: He has a normal mood and affect. His behavior is normal. Judgment and thought content normal. \n\n \n \nED Course\nProcedures\nLabs Reviewed\nCOMPREHENSIVE METABOLIC PANEL - Abnormal\n    Result\tValue\t\n \tSodium\t138 \t \n \tPotassium\t3.9 \t \n \tChloride\t105 \t \n \tCO2\t19 (*)\t \n \tGlucose\t240 (*)\t \n \tBlood Urea Nitrogen\t11.0 \t \n \tCreatinine\t1.11 \t \n \tCalcium\t9.9 \t \n \tProtein Total\t7.5 \t \n \tAlbumin\t3.4 (*)\t \n \tGlobulin\t4.1 (*)\t \n \tAlbumin/Globulin Ratio\t0.8 (*)\t \n \tBilirubin Total\t0.4 \t \n \tALP\t40 \t \n \tALT\t17 \t \n \tAST\t14 \t \n \teGFR\t>60 \t \n \tAnion Gap\t14.0 \t \n \tBUN/Creatinine Ratio\t10 \t \nCBC WITH DIFFERENTIAL - Abnormal\n \tWBC\t5.93 \t \n \tRBC\t5.15 \t \n \tHgb\t14.7 \t \n \tHct\t43.9 \t \n \tMCV\t85.2 \t \n \tMCH\t28.5 \t \n \tMCHC\t33.5 \t \n \tRDW\t14.6 \t \n \tPlatelet\t149 \t \n \tMPV\t11.9 (*)\t \n \tNeut %\t43.5 \t \n \tLymph %\t41.0 \t \n \tMono %\t10.5 \t \n \tEos %\t3.2 \t \n \tBasophil %\t0.8 \t \n \tImm Grans %\t1.0 \t \n \tNeut #\t2.58 \t \n \tLymph #\t2.43 \t \n \tMono #\t0.62 \t \n \tEos #\t0.19 \t \n \tBaso #\t0.05 \t \n \tImm Gran #\t0.06 (*)\t \n \tNRBC%\t0.0 \t \nAMYLASE - Normal\n \tAmylase Level\t44 \t \nLIPASE - Normal\n \tLipase Level\t29 \t \n \n \n \nImaging Results \nNone\n \n \n \nMedications\naluminum-magnesium hydroxide-simethicone 200-200-20 mg/5 mL suspension 30 mL (30 mLs Oral Given 10/1/25 2223)\n  And\nLIDOcaine viscous HCl 2% oral solution 15 mL (15 mLs Oral Given 10/1/25 2223)\n \nMedical Decision Making\n43-year-old black gentleman with midepigastric tenderness and burning up his chest after vomiting.  Differential diagnosis includes not limited to reflux with esophagitis, peptic ulcer disease, pancreatitis, gastritis.  Was given a GI cocktail phone arrival and this greatly reduced his symptoms and he feels markedly improved for completeness sake a CBC CMP amylase and lipase were done his blood work is relatively benign with the exception of having a blood sugar over 200.  Discussed this with him and he is unaware that he has ever had a high blood sugar.  The fact that his blood sugars greater than 200 meets criteria for diabetes I will print him on some information discussed at length find a primary care physician and I will begin metformin twice a day and discussed with him the importance of following up and having blood work done and a full workup\n \nProblems Addressed:\nGastroesophageal reflux disease with esophagitis without hemorrhage: acute illness or injury\nNew onset type 2 diabetes mellitus: acute illness or injury that poses a threat to life or bodily functions\n \nAmount and/or Complexity of Data Reviewed\nLabs: ordered. Decision-making details documented in ED Course.\n\nRisk\nOTC drugs.\nPrescription drug management.\nDiagnosis or treatment significantly limited by social determinants of health.",
+  "expected": {
+    "patient": {
+      "age": 43,
+      "gender": "male",
+      "mrn": null,
+      "dob": null
+    },
+    "vitals": {
+      "bp": "163/85",
+      "hr": 89,
+      "rr": 18,
+      "spo2": 98,
+      "temp": 97.7
+    },
+    "subjective": "43-year-old black male presents emergency department complaining of 1 episode of vomiting and since then he has had some midepigastric burning going up the middle of his chest",
+    "objective": "BP 163/85, HR 89, RR 18, Temp 97.7°F, SpO2 98%\nWell-developed, well-nourished, epigastric tenderness",
+    "assessment": "GERD with esophagitis, new-onset type 2 diabetes (glucose 240)",
+    "plan": "GI cocktail given with improvement. Start metformin. Follow up with PCP for diabetes workup",
+    "diagnoses": ["GERD", "Type 2 diabetes"],
+    "medications": [
+      "Aluminum-magnesium hydroxide",
+      "Simethicone",
+      "Lidocaine",
+      "Metformin"
+    ],
+    "allergies": ["NKDA"],
+    "labs": {
+      "glucose": 240,
+      "hgb": 14.7,
+      "creatinine": 1.11,
+      "wbc": 5.93,
+      "bun": 11.0,
+      "amylase": 44,
+      "lipase": 29
+    },
+    "socialHistory": {
+      "smoking": "0.5 PPD for 17 years (8.5 pack-years)",
+      "alcohol": "occasional",
+      "drugs": "never"
+    },
+    "familyHistory": ["Mother: Diabetes", "Father: Hypertension, Diabetes"]
+  },
+  "mustHave": {
+    "vitals.bp": "163/85",
+    "vitals.hr": 89,
+    "vitals.temp": 97.7,
+    "patient.age": 43,
+    "patient.gender": "male",
+    "diagnoses": ["GERD", "Type 2 diabetes"],
+    "labs.glucose": 240,
+    "labs.hgb": 14.7,
+    "allergies": ["NKDA"]
+  },
+  "shouldNotHave": {
+    "diagnoses": ["Myocardial infarction", "Pancreatitis", "Peptic ulcer"]
+  },
+  "notes": [
+    "ED note with extensive negative ROS",
+    "Social history with detailed smoking quantification (pack-years)",
+    "Family history in structured format",
+    "Labs showing new-onset diabetes (glucose 240)",
+    "NKDA explicitly stated",
+    "Medications include GI cocktail components",
+    "Plan includes new prescription (metformin) mentioned in narrative"
+  ],
+  "skip": false
+}

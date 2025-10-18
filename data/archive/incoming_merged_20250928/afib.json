@@ -1,0 +1,57 @@
+{
+  "id": "afib",
+  "name": "Atrial Fibrillation / Flutter",
+  "category": ["Arrhythmia"],
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Palpitations",
+      "Dyspnea",
+      "Fatigue",
+      "Chest discomfort",
+      "Dizziness/syncope"
+    ],
+    "signs_any": ["Irregularly irregular pulse", "Tachycardia", "Variable BP"]
+  },
+  "initial_tests": [
+    "12‑lead ECG (irregularly irregular rhythm, absent P waves)",
+    "TSH, BMP/Mg, CBC; consider troponin if ischemia suspected",
+    "Echocardiogram (structure, LA size, valves, LV function)"
+  ],
+  "risk_scoring": {
+    "anticoagulation": "Use CHA₂DS₂‑VASc to guide anticoagulation",
+    "bleeding_risk": "HAS‑BLED for bleeding risk (do not use to withhold OAC outright)"
+  },
+  "treatment": {
+    "acute": [
+      "Unstable (hypotension/ischemia/HF): immediate synchronized cardioversion",
+      "Stable: rate control (β‑blocker or diltiazem/verapamil); consider digoxin if hypotension/HFrEF",
+      "Anticoagulation strategy based on CHA₂DS₂‑VASc and duration of AF"
+    ],
+    "rhythm_control": [
+      "Electrical cardioversion if appropriate (consider TEE to exclude LAA thrombus if >48h or unknown)",
+      "Antiarrhythmics in selected patients (amiodarone, dofetilide, flecainide/propafenone if no structural heart disease)",
+      "Catheter ablation for symptomatic AF refractory or intolerant to AADs"
+    ],
+    "rate_control": [
+      "β‑blocker or non‑DHP CCB (verapamil/diltiazem) for most patients",
+      "Add digoxin in HFrEF or low BP limiting other agents"
+    ],
+    "anticoagulation": [
+      "DOAC preferred over warfarin in eligible patients",
+      "Peri‑cardioversion anticoagulation per guideline (≥3 weeks before and 4 weeks after if >48h or unknown duration)"
+    ]
+  },
+  "contraindications": {
+    "non_dhp_ccb": ["Avoid in HFrEF with decompensation"],
+    "class_ic": ["Avoid in structural heart disease or CAD (proarrhythmia)"]
+  },
+  "discharge": {
+    "instructions": [
+      "Stroke prevention plan documented (OAC if indicated)",
+      "Education on rate/rhythm meds and when to seek care (worsening palpitations, syncope, chest pain)"
+    ],
+    "follow_up": [
+      "Cardiology EP follow‑up; consider sleep apnea evaluation and risk factor modification (weight loss, ETOH moderation)"
+    ]
+  }
+}

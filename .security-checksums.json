@@ -1,0 +1,11 @@
+{
+  "package.json": "86da49c37913aa9dc2fc9f346b351c1135de3c86fbcd2e4b421df48a1edb9233",
+  "package-lock.json": "e0d12fa955bfb8776bd77c01d2b6c76ce91cfaf0976dee224eb9766bd7d3cdb0",
+  "eslint.config.js": "f512b94198ccd55196924c50083e44a669a05fbc776123f2dab4ae47ab11241c",
+  "tsconfig.json": "4d1faa2b553cfe1aad86219c25754f4d14da03d40b5a8557882b7bd54749c15f",
+  "src/core/app.js": "cf5d8037710e1d9196d6a18ede5c1c22b8577954605fd143a7fdeaa8e02d532e",
+  "data/cardiac_procedures.json": "cec01e5f59e1b1e72fd9ef8659b2d0b10eb56c4c101a041f40885794a0f81035",
+  "data/enhanced/": "6b327705639754671658855bb92b735ad1bfbb8e03b9de5046f025de65da60fd",
+  "data/guidelines/": "626afdfec745da6267de42fd2b36c3d51904c0ed619a8fae109d7d5edd3a5fb8",
+  ".github/workflows/security-checks.yml": "4631352548d5739a0adddda2006bed089f45d5b54ce6858f053c22370906a3be"
+}

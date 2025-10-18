@@ -1,0 +1,29 @@
+CHIEF COMPLAINT:
+Chest pain
+
+HISTORY OF PRESENT ILLNESS:
+65 year old male with history of hypertension presents with chest pain starting this morning. Pain is substernal, pressure-like, radiating to left arm.
+
+PAST MEDICAL HISTORY:
+Hypertension
+Hyperlipidemia
+
+MEDICATIONS:
+Lisinopril 20mg daily
+Simvastatin 40mg nightly
+
+ALLERGIES:
+NKDA
+
+VITALS:
+BP 152/88, HR 78, RR 16, Temp 98.4, SpO2 97%
+
+PHYSICAL EXAMINATION:
+Alert, in mild distress. Cardiovascular: regular rhythm, no murmurs. Lungs: clear to auscultation.
+
+LABS:
+Troponin 1.2
+BNP 420
+
+ASSESSMENT:
+Acute myocardial infarction

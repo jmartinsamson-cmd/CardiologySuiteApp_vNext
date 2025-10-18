@@ -1,0 +1,138 @@
+{
+  "diagnoses": [
+    {
+      "id": "pericarditis",
+      "name": "Acute Pericarditis",
+      "category": ["Pericardial"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Sharp, pleuritic chest pain improved by sitting forward",
+          "Fever",
+          "Dyspnea"
+        ],
+        "signs_any": [
+          "Pericardial friction rub",
+          "Diffuse ST elevation with PR depression (ECG)",
+          "Pericardial effusion (echo)"
+        ]
+      },
+      "initial_tests": [
+        "ECG (diffuse ST elevation, PR depression)",
+        "Echo (effusion, tamponade physiology)",
+        "CXR (may be normal or show enlarged silhouette if large effusion)",
+        "ESR/CRP, troponin (myopericarditis)",
+        "Blood cultures if febrile; TB/autoimmune/other workup as indicated"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "NSAIDs (ibuprofen, indomethacin, high-dose aspirin) for 1–2 weeks with taper",
+          "Colchicine for 3 months to reduce recurrence",
+          "Glucocorticoids only if refractory or specific indication (autoimmune, uremia, pregnancy)"
+        ]
+      },
+      "contraindications": {
+        "anticoagulation": ["Avoid in large effusion (tamponade risk)"]
+      },
+      "follow_up": [
+        "Repeat echo if effusion suspected or symptoms persist",
+        "Monitor CRP for response"
+      ],
+      "discharge": {
+        "instructions": [
+          "Report worsening chest pain, dyspnea, or syncope (tamponade)",
+          "Adherence to NSAID/colchicine regimen"
+        ],
+        "follow_up": ["Cardiology follow-up in 1–2 weeks"]
+      }
+    },
+    {
+      "id": "pericardial_effusion",
+      "name": "Pericardial Effusion / Tamponade",
+      "category": ["Pericardial"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Dyspnea",
+          "Chest pressure",
+          "Fatigue",
+          "In tamponade: syncope, shock"
+        ],
+        "signs_any": [
+          "Muffled heart sounds, JVD, hypotension (Beck’s triad)",
+          "Pulsus paradoxus",
+          "Tachycardia",
+          "Electrical alternans (ECG)"
+        ]
+      },
+      "initial_tests": [
+        "Echo (effusion size, diastolic chamber collapse, IVC plethora)",
+        "ECG (low voltage, electrical alternans)",
+        "CXR (enlarged cardiac silhouette if large effusion)",
+        "Consider pericardiocentesis for diagnosis/therapy"
+      ],
+      "treatment": {
+        "stable": [
+          "Treat underlying cause (infection, malignancy, autoimmune, uremia)",
+          "Serial echo monitoring if no tamponade physiology"
+        ],
+        "tamponade": [
+          "Urgent pericardiocentesis or surgical drainage",
+          "Volume resuscitation and pressors as temporizing measure"
+        ]
+      },
+      "follow_up": [
+        "Serial echo after drainage",
+        "Monitor for recurrence depending on etiology"
+      ],
+      "discharge": {
+        "instructions": [
+          "Report syncope, hypotension, or worsening dyspnea immediately",
+          "Medication adherence (if autoimmune/inflammatory)"
+        ],
+        "follow_up": [
+          "Cardiology follow-up; oncology/rheum/nephrology if secondary cause"
+        ]
+      }
+    },
+    {
+      "id": "constrictive_pericarditis",
+      "name": "Constrictive Pericarditis",
+      "category": ["Pericardial"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Progressive dyspnea",
+          "Edema",
+          "Abdominal distension/ascites",
+          "Fatigue"
+        ],
+        "signs_any": [
+          "Kussmaul’s sign (↑ JVP with inspiration)",
+          "Pericardial knock (early diastolic sound)",
+          "Edema, hepatomegaly, ascites",
+          "JVD with prominent y descent"
+        ]
+      },
+      "initial_tests": [
+        "Echo (septal bounce, respiratory ventricular interdependence, thickened pericardium)",
+        "CT/MRI (pericardial thickening/calcification)",
+        "Cardiac catheterization (equalization of diastolic pressures)"
+      ],
+      "treatment": {
+        "medical": ["Diuretics for volume overload"],
+        "definitive": [
+          "Pericardiectomy for symptomatic patients with chronic constriction"
+        ]
+      },
+      "follow_up": [
+        "Monitor for worsening right-sided HF symptoms",
+        "Consider referral for surgical pericardiectomy evaluation"
+      ],
+      "discharge": {
+        "instructions": [
+          "Daily weight, monitor edema and ascites",
+          "Adherence to low-sodium diet and diuretics"
+        ],
+        "follow_up": ["Cardiology/surgical follow-up"]
+      }
+    }
+  ]
+}

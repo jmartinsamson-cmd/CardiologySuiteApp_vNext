@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parsing Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        margin: 10px 0;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        background: #007cba;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #005a87;
+      }
+      .results {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .error {
+        background: #ffebee;
+        color: #c62828;
+      }
+      .success {
+        background: #e8f5e8;
+        color: #2e7d32;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Clinical Note Parsing Test</h1>
+
+      <div class="section">
+        <h2>Input Clinical Note</h2>
+        <textarea id="clinical-note" placeholder="Paste clinical note here...">
+CHIEF COMPLAINT: Chest pain
+
+HISTORY OF PRESENT ILLNESS:
+68-year-old male with history of hypertension and diabetes presents with acute onset chest pain. Pain started 2 hours ago while at rest, described as crushing, substernal, 8/10 severity, radiating to left arm. Associated with diaphoresis and nausea. No relief with rest.
+
+PAST MEDICAL HISTORY:
+- Hypertension
+- Type 2 diabetes mellitus
+- Hyperlipidemia
+
+MEDICATIONS:
+- Lisinopril 10 mg daily
+- Metformin 1000 mg BID
+- Atorvastatin 40 mg daily
+
+ALLERGIES: NKDA
+
+VITALS:
+BP: 150/90, HR: 95, RR: 20, Temp: 98.6°F, O2 sat: 95% on RA
+
+PHYSICAL EXAM:
+Generally ill-appearing male in moderate distress
+CV: RRR, no murmurs
+Lungs: Clear bilaterally
+Abd: Soft, non-tender
+
+ECG: ST elevation in leads II, III, aVF
+
+LABS:
+Troponin I: 2.5 ng/mL (elevated)
+BNP: 150 pg/mL
+Creatinine: 1.2 mg/dL
+
+ASSESSMENT AND PLAN:
+Acute inferior STEMI
+- Activate cath lab
+- Aspirin, clopidogrel loading
+- Heparin per protocol</textarea
+        >
+
+        <button onclick="testParsing()">Parse Note</button>
+        <button onclick="testTemplateRendering()">
+          Parse & Generate Template
+        </button>
+        <button onclick="clearResults()">Clear Results</button>
+      </div>
+
+      <div class="section">
+        <h2>Parsing Results</h2>
+        <div id="results" class="results">
+          Click "Parse Note" to see extracted data...
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Generated Template</h2>
+        <div id="template-output" class="results">
+          Click "Parse & Generate Template" to see rendered template...
+        </div>
+      </div>
+    </div>
+
+    <!-- Load required dependencies -->
+    <script src="src/utils/parserHelpers.js"></script>
+    <script src="src/parsers/noteParser.js"></script>
+    <script src="src/parsers/templateRenderer.js"></script>
+
+    <script>
+      function testParsing() {
+        const noteText = document.getElementById("clinical-note").value;
+        const resultsDiv = document.getElementById("results");
+
+        if (!noteText.trim()) {
+          resultsDiv.innerHTML =
+            '<div class="error">Please enter a clinical note to parse.</div>';
+          return;
+        }
+
+        try {
+          console.log("Parsing note...");
+          const parsed = parseClinicalNote(noteText);
+          console.log("Parsed result:", parsed);
+
+          resultsDiv.innerHTML = `
+                    <div class="success">
+                        <h3>✅ Parsing Successful</h3>
+                        <div style="margin-top: 15px;">
+                            <h4>Extracted Data Summary:</h4>
+                            <ul>
+                                <li><strong>Vitals:</strong> ${parsed.vitals?.length || 0} entries</li>
+                                <li><strong>Labs:</strong> ${parsed.labs?.length || 0} entries</li>
+                                <li><strong>Medications:</strong> ${parsed.medications?.length || 0} entries</li>
+                                <li><strong>Diagnoses:</strong> ${parsed.diagnoses?.length || 0} entries</li>
+                                <li><strong>Allergies:</strong> ${parsed.allergies?.length || 0} entries</li>
+                                <li><strong>Imaging:</strong> ${parsed.imaging?.length || 0} entries</li>
+                                <li><strong>ECG:</strong> ${parsed.ecg?.length || 0} entries</li>
+                            </ul>
+                            <details style="margin-top: 15px;">
+                                <summary style="cursor: pointer; font-weight: bold;">View Full Parsed Data</summary>
+                                <pre style="background: white; padding: 10px; margin: 10px 0; overflow: auto; max-height: 400px;">${JSON.stringify(parsed, null, 2)}</pre>
+                            </details>
+                        </div>
+                    </div>
+                `;
+        } catch (error) {
+          console.error("Parsing error:", error);
+          resultsDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Parsing Error</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p><strong>Stack:</strong> ${error.stack}</p>
+                    </div>
+                `;
+        }
+      }
+
+      function testTemplateRendering() {
+        const noteText = document.getElementById("clinical-note").value;
+        const templateDiv = document.getElementById("template-output");
+
+        if (!noteText.trim()) {
+          templateDiv.innerHTML =
+            '<div class="error">Please enter a clinical note to parse.</div>';
+          return;
+        }
+
+        try {
+          console.log("Parsing and rendering template...");
+          const parsed = parseClinicalNote(noteText);
+          console.log("Parsed result:", parsed);
+
+          // Create template renderer
+          const renderer = new TemplateRenderer();
+          const template = renderer.renderTemplate(parsed, "cis");
+          console.log("Generated template:", template);
+
+          templateDiv.innerHTML = `
+                    <div class="success">
+                        <h3>✅ Template Generated</h3>
+                        <div style="margin-top: 15px;">
+                            <h4>CIS Template Output:</h4>
+                            <div style="background: white; padding: 15px; border: 1px solid #ddd; border-radius: 3px; white-space: pre-wrap; font-family: monospace; max-height: 500px; overflow: auto;">${template}</div>
+                        </div>
+                    </div>
+                `;
+        } catch (error) {
+          console.error("Template rendering error:", error);
+          templateDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Template Rendering Error</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p><strong>Stack:</strong> ${error.stack}</p>
+                    </div>
+                `;
+        }
+      }
+
+      function clearResults() {
+        document.getElementById("results").innerHTML =
+          'Click "Parse Note" to see extracted data...';
+        document.getElementById("template-output").innerHTML =
+          'Click "Parse & Generate Template" to see rendered template...';
+      }
+
+      // Auto-load test when page loads
+      window.addEventListener("load", function () {
+        console.log("Test page loaded. Ready to test parsing functionality.");
+      });
+    </script>
+  </body>
+</html>

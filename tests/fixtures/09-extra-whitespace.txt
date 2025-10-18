@@ -1,0 +1,34 @@
+SUBJECTIVE:
+
+
+Patient is a  45   year  old    female    with    no significant PMH who  presents  with   palpitations.
+
+
+
+
+Started    3   hours    ago.    Denies    chest     pain.
+
+
+
+
+OBJECTIVE:
+
+
+BP   118/72      HR   142    irregular     RR  16     SpO2   98%
+
+
+Exam:    Alert.    Irregular   rhythm.    No   murmurs.    Lungs   clear.
+
+
+
+
+ASSESSMENT:
+
+New  onset  atrial  fibrillation
+
+
+PLAN:
+
+Rate  control  with  metoprolol
+Anticoagulation  -  calculate  CHA2DS2-VASc
+Cardiology  follow  up

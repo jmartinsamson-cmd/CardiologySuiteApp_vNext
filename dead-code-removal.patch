@@ -1,0 +1,35 @@
+diff --git a/src/parsers/normalize.js b/src/parsers/normalize.js
+index 1234567..abcdefg 100644
+--- a/src/parsers/normalize.js
++++ b/src/parsers/normalize.js
+@@ -59,7 +59,7 @@ export function normalize(text) {
+   return text;
+ }
+
+-export function normalizeHeader(header) {
++function normalizeHeader(header) {
+   return header.toLowerCase().replace(/[^a-z]/g, '');
+ }
+
+@@ -72,7 +72,7 @@ export function normalizeHeader(header) {
+  * @param {string} dateStr - Date string to standardize
+  * @returns {string} ISO format date or original string
+  */
+-export function standardizeDate(dateStr) {
++function standardizeDate(dateStr) {
+   // Try to parse common date formats and return ISO
+   const patterns = [
+     {
+diff --git a/src/parsers/synonyms.js b/src/parsers/synonyms.js
+index 2345678..bcdefgh 100644
+--- a/src/parsers/synonyms.js
++++ b/src/parsers/synonyms.js
+@@ -141,7 +141,7 @@ export const SIGNAL_WORDS = {
+  * @param {Object} synonymMap - Map of canonical -> synonym arrays
+  * @returns {Object} Lookup map synonym -> canonical
+  */
+-export function buildSynonymLookup(synonymMap) {
++function buildSynonymLookup(synonymMap) {
+   const lookup = {};
+   for (const [canonical, synonyms] of Object.entries(synonymMap)) {
+     for (const syn of synonyms) {

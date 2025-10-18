@@ -1,0 +1,142 @@
+{
+  "diagnoses": [
+    {
+      "id": "atrial_flutter",
+      "name": "Atrial Flutter",
+      "category": ["Arrhythmia", "Electrophysiology"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Palpitations",
+          "Fatigue",
+          "Dyspnea",
+          "Chest discomfort",
+          "Syncope (rare)"
+        ],
+        "signs_any": [
+          "ECG: sawtooth flutter waves (typically 300 bpm atrial rate)",
+          "Ventricular response often ~150 bpm if 2:1 conduction",
+          "Tachycardia, irregular pulse if variable block"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG (diagnosis)",
+        "Telemetry/monitoring",
+        "Echo (assess structural disease, LA size, LV function)",
+        "Labs: thyroid, electrolytes"
+      ],
+      "treatment": {
+        "acute": [
+          "Rate control with β-blocker or nondihydropyridine CCB",
+          "Anticoagulation if duration >48h or unknown",
+          "Electrical cardioversion if unstable or refractory"
+        ],
+        "long_term": [
+          "Catheter ablation (cavotricuspid isthmus ablation) — high success, first-line definitive therapy",
+          "Ongoing anticoagulation guided by CHA₂DS₂-VASc",
+          "Rate vs rhythm strategy individualized"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Adherence to anticoagulation if indicated",
+          "Monitor for recurrent palpitations",
+          "Lifestyle: reduce alcohol, caffeine, stimulants"
+        ],
+        "follow_up": [
+          "Cardiology/EP follow-up, especially if considering ablation"
+        ]
+      }
+    },
+    {
+      "id": "wpw",
+      "name": "Wolff-Parkinson-White (WPW) Syndrome",
+      "category": ["Electrophysiology"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Palpitations",
+          "Dizziness",
+          "Syncope",
+          "Sudden cardiac arrest (rare)"
+        ],
+        "signs_any": [
+          "ECG: short PR interval, delta wave, wide QRS",
+          "Tachyarrhythmias: AVRT most common"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG (baseline delta wave)",
+        "Ambulatory monitoring for intermittent pre-excitation",
+        "EPS study for risk stratification if symptomatic or high-risk occupation"
+      ],
+      "treatment": {
+        "acute": [
+          "Stable orthodromic AVRT: vagal maneuvers, adenosine",
+          "If pre-excited AF: avoid AV nodal blockers; use procainamide or ibutilide"
+        ],
+        "long_term": [
+          "Catheter ablation of accessory pathway is definitive",
+          "Avoid AV nodal blockers in pre-excited AF"
+        ]
+      },
+      "contraindications": {
+        "av_nodal_blockers": [
+          "Do not use β-blockers, CCBs, digoxin, adenosine in pre-excited AF"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Report recurrent palpitations/syncope",
+          "Avoid stimulants that may trigger tachyarrhythmia",
+          "Consider ablation even if asymptomatic but high-risk occupation/athlete"
+        ],
+        "follow_up": ["Electrophysiology follow-up"]
+      }
+    },
+    {
+      "id": "long_qt",
+      "name": "Long QT Syndrome (LQTS)",
+      "category": ["Electrophysiology"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Syncope",
+          "Seizure-like episodes",
+          "Palpitations",
+          "Sudden cardiac arrest"
+        ],
+        "signs_any": [
+          "ECG: prolonged QT interval (QTc >470 ms women, >450 ms men)",
+          "Torsades de pointes (polymorphic VT)"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG (QT interval measurement)",
+        "Holter/event monitor if intermittent",
+        "Family history, genetic testing if congenital LQTS suspected",
+        "Labs: electrolytes, thyroid, drug screen"
+      ],
+      "treatment": {
+        "general": [
+          "Avoid QT-prolonging drugs (macrolides, fluoroquinolones, antiarrhythmics, antipsychotics, methadone, etc.)",
+          "Correct electrolyte abnormalities (K+, Mg2+, Ca2+)"
+        ],
+        "long_term": [
+          "β-blockers (nadolol, propranolol) for congenital LQTS",
+          "ICD if history of cardiac arrest, recurrent syncope/VT despite β-blocker",
+          "Left cardiac sympathetic denervation in refractory cases"
+        ],
+        "torsades": [
+          "IV magnesium sulfate",
+          "Overdrive pacing or isoproterenol if bradycardic"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Adherence to β-blocker therapy",
+          "Avoid QT-prolonging drugs (provide list)",
+          "Family screening for congenital forms"
+        ],
+        "follow_up": ["Electrophysiology/genetics follow-up"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "diagnoses": [
+    {
+      "id": "cardiac_arrest",
+      "name": "Cardiac Arrest / Sudden Cardiac Death",
+      "category": ["Emergency", "Arrhythmia"],
+      "clinical_triggers": {
+        "symptoms_any": ["Collapse", "Unresponsiveness"],
+        "signs_any": ["Pulselessness", "Apnea", "Unresponsiveness"]
+      },
+      "initial_tests": [
+        "Immediate ACLS protocol",
+        "ECG rhythm identification (VF, pulseless VT, PEA, asystole)"
+      ],
+      "treatment": {
+        "vf_pulseless_vt": [
+          "Immediate defibrillation",
+          "CPR, epinephrine every 3–5 min, amiodarone"
+        ],
+        "pea_asystole": ["CPR, epinephrine, treat reversible causes (Hs & Ts)"],
+        "post_rosc": [
+          "Targeted temperature management",
+          "Coronary angiography if STEMI",
+          "ICU care"
+        ]
+      },
+      "discharge": {
+        "instructions": ["Family counseling, ICD consideration if appropriate"],
+        "follow_up": ["Cardiology, EP"]
+      }
+    },
+    {
+      "id": "torsades",
+      "name": "Torsades de Pointes",
+      "category": ["Arrhythmia", "Emergency"],
+      "clinical_triggers": {
+        "symptoms_any": ["Palpitations", "Syncope", "Sudden arrest"],
+        "signs_any": ["Polymorphic VT with twisting QRS axis, prolonged QT"]
+      },
+      "initial_tests": ["ECG", "Electrolytes"],
+      "treatment": {
+        "acute": [
+          "IV magnesium",
+          "Overdrive pacing or isoproterenol if bradycardic"
+        ],
+        "avoid": ["Avoid QT-prolonging drugs"]
+      },
+      "discharge": {
+        "instructions": ["Avoid QT-prolonging meds"],
+        "follow_up": ["EP follow-up"]
+      }
+    },
+    {
+      "id": "cardiogenic_shock",
+      "name": "Cardiogenic Shock",
+      "category": ["Emergency", "Shock"],
+      "clinical_triggers": {
+        "symptoms_any": ["Dyspnea", "Chest pain", "Syncope"],
+        "signs_any": [
+          "Hypotension",
+          "Cold/clammy skin",
+          "Pulmonary edema",
+          "Low urine output"
+        ]
+      },
+      "initial_tests": ["Echo (LV function)", "ECG", "Hemodynamics if cath"],
+      "treatment": {
+        "acute": [
+          "Revascularization if ACS",
+          "Inotropes (dobutamine, milrinone)",
+          "Vasopressors if needed",
+          "Mechanical support (IABP, Impella, ECMO)"
+        ]
+      },
+      "discharge": {
+        "instructions": ["Close HF follow-up"],
+        "follow_up": ["HF/advanced therapy clinic"]
+      }
+    },
+    {
+      "id": "pulmonary_htn",
+      "name": "Pulmonary Hypertension",
+      "category": ["Pulmonary Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": ["Dyspnea", "Fatigue", "Syncope"],
+        "signs_any": ["Loud P2", "RV heave", "Edema", "Ascites"]
+      },
+      "initial_tests": [
+        "Echo (RVSP)",
+        "RHC (gold standard)",
+        "CT chest, V/Q scan for cause"
+      ],
+      "treatment": {
+        "general": ["Diuretics, O2, anticoagulation in CTEPH"],
+        "specific": [
+          "Endothelin receptor antagonists, PDE5 inhibitors, prostacyclin analogs"
+        ]
+      },
+      "discharge": {
+        "instructions": ["Report syncope, edema"],
+        "follow_up": ["Pulmonary HTN specialist"]
+      }
+    },
+    {
+      "id": "takotsubo",
+      "name": "Takotsubo (Stress) Cardiomyopathy",
+      "category": ["Cardiomyopathy"],
+      "clinical_triggers": {
+        "symptoms_any": ["Chest pain", "Dyspnea", "Syncope"],
+        "signs_any": [
+          "ECG: ST elevation/T wave inversion",
+          "Mild troponin rise",
+          "Echo: apical ballooning"
+        ]
+      },
+      "initial_tests": [
+        "Coronary angiography to exclude ACS",
+        "Echo",
+        "ECG",
+        "Troponin"
+      ],
+      "treatment": {
+        "acute": ["Supportive (HF therapy)", "Avoid inotropes unless shock"],
+        "recovery": ["Usually recovers within weeks"]
+      },
+      "discharge": {
+        "instructions": ["Avoid stressors", "Medication adherence"],
+        "follow_up": ["Cardiology"]
+      }
+    },
+    {
+      "id": "myocarditis",
+      "name": "Myocarditis",
+      "category": ["Inflammatory"],
+      "clinical_triggers": {
+        "symptoms_any": ["Chest pain", "Dyspnea", "Palpitations", "Syncope"],
+        "signs_any": ["Tachycardia out of proportion", "HF signs"]
+      },
+      "initial_tests": [
+        "Troponin",
+        "ECG",
+        "Echo",
+        "Cardiac MRI",
+        "Endomyocardial biopsy (select)"
+      ],
+      "treatment": {
+        "general": [
+          "Supportive HF therapy",
+          "Avoid NSAIDs/ETOH",
+          "Immunosuppression if giant cell/autoimmune"
+        ],
+        "severe": ["Mechanical support, transplant if refractory"]
+      },
+      "discharge": {
+        "instructions": ["No exercise until cleared"],
+        "follow_up": ["Cardiology"]
+      }
+    },
+    {
+      "id": "syncope",
+      "name": "Syncope",
+      "category": ["General"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Transient LOC",
+          "Prodrome (lightheadedness, diaphoresis)"
+        ],
+        "signs_any": [
+          "Normal between episodes unless underlying cardiac/neuro cause"
+        ]
+      },
+      "initial_tests": [
+        "ECG",
+        "Orthostatics",
+        "Echo if structural disease",
+        "Holter/event monitor"
+      ],
+      "treatment": {
+        "vasovagal": ["Reassurance, hydration, avoid triggers"],
+        "cardiac": ["Treat arrhythmia, pacemaker/ICD if indicated"],
+        "orthostatic": ["Fluids, compression stockings, adjust meds"]
+      },
+      "discharge": {
+        "instructions": ["Avoid triggers"],
+        "follow_up": ["Cardiology/neurology as indicated"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,842 @@
+{
+  "teaching_rationales": {
+    "acs": {
+      "aspirin": "Aspirin irreversibly inhibits COX-1, preventing thromboxane A2 formation and reducing platelet aggregation - proven mortality benefit in ACS",
+      "dual_antiplatelet": "DAPT (aspirin + P2Y12 inhibitor) reduces ischemic events by 20% vs aspirin alone in ACS patients",
+      "statin_high_intensity": "High-intensity statins reduce LDL by >50% and lower MACE by 22% - start early in ACS for plaque stabilization",
+      "ace_inhibitor": "ACE inhibitors reduce afterload and prevent adverse remodeling post-MI, especially important if LVEF <40%",
+      "timI_risk_score": "TIMI score stratifies UA/NSTEMI risk: 0-2=medical therapy + stress testing; 3-7=early invasive strategy within 24-48h",
+      "stemi_reperfusion": "Primary PCI preferred over thrombolysis (<90 min door-to-balloon) - restores blood flow and improves outcomes",
+      "beta_blockers": "Reduce myocardial oxygen demand, prevent arrhythmias, improve survival post-MI (avoid in cocaine-associated MI)",
+      "right_sided_mi": "Preload dependent - avoid nitrates (decrease preload), consider fluid resuscitation for hypotension",
+      "cardiac_enzymes": "Troponin I preferred (rises 1-3h, peaks 24h, elevated 2 weeks); CK-MB for reinfarction (returns to baseline 36-48h)",
+      "ecg_findings": "STEMI: ST elevation ≥1mm in ≥2 contiguous leads; NSTEMI: ST depression/T inversion; new LBBB = STEMI equivalent",
+      "coronary_anatomy": "LAD=anterior LV/anterior septum; LCx=lateral LV/SA node; RCA=inferior LV/RV/SA-AV nodes",
+      "cocaine_mi": "Treat like standard ACS but avoid beta-blockers (unopposed alpha stimulation), use benzodiazepines for agitation",
+      "post_mi_monitoring": "Continuous telemetry for VT/VF (most common early death cause); serial ECGs for evolving changes",
+      "dressler_syndrome": "Autoimmune pericarditis 2-10 weeks post-MI - treat with aspirin, avoid steroids",
+      "mandatory_discharge_meds": "ASA 81mg, P2Y12 inhibitor (if stented), beta-blocker, high-intensity statin, ACEI (if EF<40%)"
+    },
+    "afib": {
+      "chadsvasc_calculation": "CHADS₂-VASc score predicts stroke risk: CHF(1), HTN(1), Age≥75(2), DM(1), Stroke/TIA(2), Vascular disease(1), Age 65-74(1), Sex female(1)",
+      "doac_preference": "DOACs have lower ICH risk than warfarin (0.3% vs 0.8% annually) with similar efficacy",
+      "rate_vs_rhythm": "Rate control non-inferior to rhythm control for most patients - focus on symptom improvement",
+      "af_duration": "AF <48h: Low thrombus risk, can cardiovert without anticoagulation; AF >48h: Requires anticoagulation strategy",
+      "cardioversion_approach": "TEE-guided: Rule out thrombus, anticoagulate, cardiovert, continue OAC 4 weeks; Conventional: 3-4 weeks anticoagulation before cardioversion",
+      "rate_control_goals": "Symptomatic patients <85 bpm, asymptomatic patients <110 bpm at rest",
+      "beta_blocker_first_line": "Metoprolol/atenolol preferred for rate control unless COPD/asthma contraindication",
+      "amiodarone_indications": "First-line for post-CABG AF, hemodynamically unstable, or refractory cases",
+      "digoxin_considerations": "Acceptable in systolic dysfunction/hypotension, requires K+ >4.0, renal dosing, careful monitoring",
+      "flutter_vs_fib": "Flutter: Regular atrial rate (~300 bpm), saw-tooth P waves; Fib: Irregularly irregular, absent P waves",
+      "cis_protocols": "Lovenox 1mg/kg SQ BID (renal dosing), metoprolol IVP 5mg q5min x3, cardizem IVP/drip if EF>40%, amiodarone per protocol"
+    },
+    "hfref": {
+      "ace_arb_arni": "RAAS blockade is cornerstone of HFrEF therapy - reduces mortality by 15-35%",
+      "beta_blocker": "Evidence-based beta-blockers (metoprolol succinate, carvedilol, bisoprolol) reduce mortality by 35%",
+      "mra": "MRAs prevent potassium and magnesium wasting, reduce sudden cardiac death in HFrEF",
+      "sglt2": "SGLT2 inhibitors reduce HF hospitalizations by 30% independent of diabetes status"
+    },
+    "htn": {
+      "silent_killer": "HTN often asymptomatic until end-organ damage occurs - regular screening essential",
+      "lifestyle_first_line": "Lifestyle modifications (DASH diet, exercise, weight loss) reduce BP by 5-10 mmHg",
+      "comorbidity_driven_therapy": "Treatment selection based on comorbidities: BB for post-MI, ACEi/ARB for DM/CKD, CCB for isolated systolic HTN",
+      "bp_measurement_technique": "Proper technique crucial: arm at heart level, back supported, 5-minute rest, avoid caffeine/smoking",
+      "white_coat_effect": "Elevated office BP but normal ambulatory/home readings - confirm with out-of-office measurements",
+      "secondary_htn_workup": "Consider secondary causes in young patients, resistant HTN, or sudden onset HTN",
+      "treatment_resistance": "True resistant HTN requires 3+ agents including diuretic - rule out non-adherence, white coat effect",
+      "hypokalemia_risk": "Thiazide diuretics cause hypokalemia - monitor potassium levels, especially with digoxin",
+      "ace_inhibitor_cough": "ACE inhibitor-induced cough occurs in 5-20% patients due to bradykinin accumulation",
+      "calcium_channel_blockers": "Dihydropyridines (amlodipine) cause peripheral edema - not dose-related, switch to ARB if problematic",
+      "beta_blocker_metabolic_effects": "Beta-blockers cause weight gain, dyslipidemia, insulin resistance - avoid as first-line monotherapy",
+      "aldosterone_antagonists": "Spironolactone effective for resistant HTN but monitor potassium and renal function closely",
+      "combination_therapy": "Fixed-dose combinations improve adherence and BP control compared to monotherapy",
+      "home_bp_monitoring": "Home BP readings more predictive of CV outcomes than office measurements",
+      "treatment_goals": "BP <130/80 mmHg for most patients, <120/80 for high-risk groups (DM, CKD, established CVD)"
+    },
+    "aaa": {
+      "screening_criteria": "One-time ultrasound screening for men 65-75 with smoking history or first-degree relative with AAA requiring treatment",
+      "size_thresholds": "AAA <3cm: observe; 3-3.9cm: US q1-3yrs; 4-5.4cm: US q6mo; ≥5.5cm: surgical evaluation",
+      "symptomatic_aaa": "All symptomatic AAA require urgent surgery regardless of size - pain/tenderness indicates possible rupture",
+      "risk_factors": "Smoking, atherosclerosis, hypertension, male gender, age >50, positive family history"
+    },
+    "aortic_dissection": {
+      "type_classification": "Type A (ascending aorta): emergency surgery; Type B (descending aorta): medical management unless complications",
+      "bp_control": "Beta-blockers first-line (SBP <100, HR <60), add vasodilators only after beta-blocker initiation",
+      "never_start_nitroprusside": "Never start with nitroprusside alone - causes reflex tachycardia that worsens dissection",
+      "imaging_surveillance": "Serial CTA/MRA at 3, 6, and 12 months to monitor for progression, redissections, new aneurysms"
+    },
+    "cardiomyopathy": {
+      "dcm_gdmt_sequence": "Start GDMT in sequence: ACEI/ARB/ARNI first, then beta-blocker, then MRA, then SGLT2i - wait 2-4 weeks between additions for tolerability",
+      "dcm_ef_monitoring": "Serial echocardiograms every 3-6 months to assess EF response to therapy before considering ICD",
+      "dcm_icd_timing": "ICD for primary prevention only after 3 months optimal GDMT and EF still ≤35%",
+      "dcm_daily_weights": "Daily weights essential for volume overload detection - call for >2kg gain in 1 week or >5lbs in 3 days",
+      "hcm_sudden_death_risk": "5-year risk calculator: Age, max wall thickness, LA diameter, LVOT gradient, family history, NSVT, syncope",
+      "hcm_beta_blocker_first": "Beta-blockers first-line for symptom relief and rate control - avoid digoxin (negative inotrope worsens obstruction)",
+      "hcm_avoid_nitrates": "Nitrates and high-dose diuretics reduce preload and worsen LVOT obstruction - contraindicated in HCM",
+      "hcm_family_screening": "Annual echocardiography for first-degree relatives starting at age 12, genetic testing if mutation identified",
+      "hcm_septal_reduction": "Surgical myectomy preferred over alcohol ablation for refractory symptoms with significant gradient",
+      "rcm_underlying_causes": "Always investigate for amyloidosis (SPEP/UPEP), hemochromatosis (iron studies), sarcoidosis (ACE levels)",
+      "rcm_diuretic_caution": "Use diuretics cautiously - excessive diuresis can cause hypotension in preload-dependent patients",
+      "takotsubo_triggers": "Common triggers: acute emotional stress, severe illness, surgery, catecholamine surge",
+      "takotsubo_recovery": "EF typically recovers within 4-8 weeks - avoid beta-blockers/ACEI long-term unless indicated",
+      "cardiomyopathy_differentiation": "DCM: Dilated LV, systolic dysfunction; HCM: Hypertrophied septum, diastolic dysfunction; RCM: Normal size, stiff ventricles"
+    },
+    "congenital_hd": {
+      "cyanotic_vs_acyanotic": "Cyanotic: right-to-left shunt (TOF, TGA, TA); Acyanotic: left-to-right shunt (ASD, VSD, PDA, coarctation)",
+      "asd_types": "Primum (with mitral cleft/MR), Secundum (most common), Sinus venosus (least common); PFO is not true ASD",
+      "eisenmenger_syndrome": "Initially left-to-right shunt → pulmonary HTN → right-to-left shunt; irreversible after 2 years",
+      "pda_physiology": "Normally closes within 24h due to rising O2; prostaglandins maintain patency, indomethacin promotes closure",
+      "tet_spells": "Hypercyanotic episodes in TOF; treat with knee-chest position, O2, morphine, propranolol, IV fluids",
+      "ductal_dependent_lesions": "TOF, TGA, hypoplastic left heart, pulmonary atresia - keep PDA open with prostaglandins",
+      "coarctation_associations": "Bicuspid aortic valve (50-70%), Turner syndrome; monitor for aortic aneurysm post-repair",
+      "tga_egg_sign": "Egg-shaped heart with narrow mediastinum on CXR; requires ASD/PDA for survival",
+      "truncus_associations": "DiGeorge syndrome (22q11 deletion) in 30%; requires early surgical intervention"
+    },
+    "chf": {
+      "systolic_vs_diastolic": "Systolic (HFrEF): EF <50%, decreased contractility; Diastolic (HFpEF): EF normal/high, poor relaxation",
+      "systolic_etiology": "CAD, HTN, cardiomyopathy, valvular disease, diabetes - most common causes",
+      "diastolic_etiology": "HTN, ischemia, age, cardiomyopathy, post-MI scarring - most common causes",
+      "lmnop_protocol": "Acute HF exacerbation: Loop diuretics, Morphine, Nitrates, Oxygen, Position (upright/positive pressure)",
+      "beta_blocker_caution": "Avoid initiation during acute exacerbation; use carvedilol/metoprolol succinate/bisoprolol",
+      "acei_arb_never_combine": "Never combine ACEi with ARB - increases hyperkalemia and renal failure risk",
+      "aldosterone_nyha_criteria": "Spironolactone/eplerenone for NYHA Class III-IV with EF ≤35% - reduces mortality",
+      "ivabradine_criteria": "Sinus rhythm, EF ≤35%, HR ≥70 bpm despite max beta-blocker - reduces HF hospitalizations",
+      "digoxin_role": "Symptom relief and rate control in AF; narrow therapeutic index, monitor potassium",
+      "mandatory_discharge_meds": "ACEi/ARNI/ARB, beta-blocker, diuretic, MRA, nitrates - document reason if omitted",
+      "device_therapy_criteria": "ICD: EF ≤35% after 3 months GDMT; CRT: LBBB + QRS ≥150ms + EF ≤35%",
+      "bnp_interpretation": "BNP >400 suggests HF exacerbation; BNP <100 rules out HF as cause of dyspnea",
+      "cis_principles": "Emphasize diuretic compliance, daily weights, low-sodium diet, accurate I/Os"
+    },
+    "dvt": {
+      "wells_criteria": "Modified Wells score stratifies DVT risk: ≤2=low (D-dimer rules out), 3-6=moderate (D-dimer), ≥7=high (proceed to imaging)",
+      "d_dimer_sensitivity": "D-dimer negative rules out DVT (95% sensitivity) but positive doesn't confirm - always follow with ultrasound",
+      "virchow_triad": "Hypercoagulability (cancer, OCP, pregnancy), venous stasis (immobility, surgery), endothelial injury (trauma, IV catheter)",
+      "doac_advantages": "Rivaroxaban/apixaban: Fixed dosing, no INR monitoring, lower ICH risk than warfarin, faster onset",
+      "anticoagulation_duration": "Provoked DVT: 3 months; Unprovoked: indefinite; Cancer-associated: LMWH preferred over DOACs",
+      "compression_ultrasound": "First-line imaging: Non-invasive, 95% sensitivity for proximal DVT, whole-leg study preferred",
+      "ivc_filter_indications": "Absolute anticoagulation contraindication (active bleeding, HIT) - not for recurrent DVT on therapy",
+      "pts_prevention": "30-40mmHg compression stockings for 2 years reduce post-thrombotic syndrome by 50%",
+      "pe_risk_assessment": "All DVT patients need PE risk stratification - 50% of untreated proximal DVT develop PE",
+      "provoked_vs_unprovoked": "Provoked: Recent surgery/immobility/OCP; Unprovoked: Consider thrombophilia workup and indefinite anticoagulation",
+      "thrombophilia_testing": "Factor V Leiden, prothrombin gene mutation, antiphospholipid syndrome - test after 3 months anticoagulation",
+      "outpatient_treatment": "Low-risk patients can be treated as outpatients with DOACs - reduces hospitalization and cost"
+    },
+    "infective_endocarditis": {
+      "duke_criteria": "Major: Positive blood cultures (2/3 sets), echocardiogram vegetation; Minor: Predisposing condition, fever, vascular/immunologic phenomena",
+      "blood_culture_technique": "Three sets (aerobic/anaerobic) from different sites, 1 hour apart, before antibiotics - increases yield by 90%",
+      "tee_vs_tte": "TEE preferred (sensitivity 90% vs 50% for TTE) for prosthetic valves, possible endocarditis, negative TTE with high suspicion",
+      "antibiotic_prophylaxis": "AHA recommends for high-risk patients: Prosthetic valves, previous IE, unrepaired cyanotic CHD, cardiac transplant with valvulopathy",
+      "staph_vs_strep": "Staph aureus (IVDU, healthcare-associated): Aggressive, metastatic; Strep viridans (dental): Subacute, responds to penicillin",
+      "prosthetic_valve_ie": "Higher mortality (20-40%), longer therapy (6-8 weeks), early surgery consideration, coagulase-negative staph common",
+      "surgical_indications": "Heart failure, uncontrolled infection, abscess, recurrent embolism, fungal etiology, large vegetation (>10mm)",
+      "hacek_organisms": "Haemophilus, Aggregatibacter, Cardiobacterium, Eikenella, Kingella - require ceftriaxone 4 weeks, dental source common",
+      "culture_negative_ie": "15% of cases - consider Coxiella, Bartonella, Tropheryma whippelii, prior antibiotics, fastidious organisms",
+      "embolization_risk": "Staph aureus: 60% embolization rate; Large vegetation (>10mm): Higher risk; Mitral > aortic valve location",
+      "anticoagulation_controversy": "No anticoagulation for native valve IE (increases bleeding without reducing embolism); Controversial for mechanical valves",
+      "follow_up_echo": "Repeat TEE 7-10 days after completing therapy to document vegetation resolution and assess complications"
+    },
+    "bradyarrhythmia": {
+      "av_block_classification": "First degree: PR>0.20s (all P conduct); Mobitz I: Progressive PR prolongation then dropped beat; Mobitz II: Fixed PR with dropped beat",
+      "pacemaker_indications": "Class I: Third degree AV block, Mobitz II with symptoms, symptomatic sinus bradycardia; Class IIa: Mobitz II asymptomatic",
+      "asymptomatic_first_degree": "No treatment needed - common in athletes, resolves with exercise; monitor for progression to higher degree block",
+      "mobitz_i_characteristics": "Usually at AV node level, often transient, rarely progresses to complete heart block, no pacemaker unless symptomatic",
+      "third_degree_ecg": "Complete dissociation between P waves and QRS complexes, atrial rate > ventricular rate, junctional or ventricular escape rhythm",
+      "sinus_bradycardia_causes": "Medications (beta-blockers, CCBs), ischemia, hypothyroidism, increased vagal tone, athletic training",
+      "chronotropic_incompetence": "Inability to increase heart rate appropriately with exercise - consider pacemaker for symptoms",
+      "atropine_dosing": "0.5-1.0mg IV for symptomatic bradycardia - acts on SA/AV nodes, ineffective in transplanted hearts or infranodal block",
+      "transcutaneous_pacing": "Bridge to transvenous pacing - anterior/posterior pads, start at 80mA, increase until capture, sedate if conscious",
+      "dual_vs_single_chamber": "Dual chamber (DDD) preferred for AV block with intact sinus function; Single chamber (VVI) for permanent AF",
+      "pacemaker_nomenclature": "First letter: Chamber paced (A/V); Second: Chamber sensed (A/V); Third: Response to sensing (I/T); Fourth: Rate response (R)",
+      "post_pacemaker_ecg": "Look for appropriate capture (QRS after spike), sensing (no spike when intrinsic rhythm present), threshold testing",
+      "device_infection": "Pocket infection: Erythema, drainage; Systemic: Fever, positive blood cultures - requires complete system removal",
+      "magnet_response": "Places pacemaker in asynchronous mode (VOO) - used for EMI, inappropriate sensing, or during surgery"
+    },
+    "rbbb": {
+      "ecg_findings": "RBBB: Wide QRS (>0.12s), RSR' pattern in V1-V3, S wave wider than R wave in I/V6 - reflects delayed RV activation",
+      "clinical_significance": "Often benign in young healthy individuals, but may indicate pulmonary hypertension, ASD, or right heart strain",
+      "bifascicular_block": "RBBB + LAFB = bifascicular block - pacemaker consideration if symptomatic or progressive conduction disease",
+      "exercise_response": "Exercise-induced RBBB may indicate right ventricular ischemia or pulmonary vascular disease",
+      "associated_conditions": "Common in pulmonary hypertension, ASD, pulmonary embolism, right ventricular infarction",
+      "progression_risk": "May progress to complete heart block, especially with additional conduction abnormalities",
+      "masking_stemi": "RBBB can mask inferior STEMI - look for ST changes in other leads and reciprocal changes",
+      "family_screening": "Consider genetic evaluation if congenital RBBB or family history of conduction disease"
+    },
+    "lbbb": {
+      "ecg_findings": "LBBB: Wide QRS (>0.12s), notched R wave in I/aVL/V5/V6, absent Q wave in I/V5/V6, ST/T opposite to QRS",
+      "stemi_equivalent": "New LBBB = STEMI equivalent - immediate cardiac catheterization required regardless of symptoms",
+      "underlying_disease": "Often indicates underlying LV dysfunction, hypertension, coronary disease, or cardiomyopathy",
+      "dyssynchrony": "LBBB causes ventricular dyssynchrony - may benefit from cardiac resynchronization therapy (CRT)",
+      "masking_ischemia": "LBBB can mask anterolateral STEMI - discordant ST changes may indicate ischemia",
+      "rate_dependence": "May be tachycardia-induced (resolves with rate control) or fixed conduction system disease",
+      "crt_criteria": "LBBB + QRS ≥150ms + EF ≤35% + NYHA II-IV = CRT indication for improved outcomes",
+      "progression": "May progress to complete heart block, especially with additional conduction abnormalities"
+    },
+    "psvt": {
+      "narrow_complex": "PSVT = narrow complex tachycardia (QRS <0.12s) - differentiates from VT which is wide complex",
+      "avnrt_avrt": "Most common SVTs: AVNRT (reentry within AV node) and AVRT (reentry using accessory pathway)",
+      "adenosine_mechanism": "Adenosine temporarily blocks AV node - diagnostic (interrupts SVT) and therapeutic",
+      "vagal_maneuvers": "Valsalva/carotid massage increase vagal tone, slow AV node conduction - first-line for stable SVT",
+      "wpw_consideration": "Irregular SVT or rapid ventricular response suggests WPW - avoid AV nodal blockers",
+      "ablation_success": "Catheter ablation cures 95% of PSVT cases with low complication rate",
+      "recurrent_prevention": "Beta-blockers or calcium channel blockers prevent recurrent episodes",
+      "unstable_criteria": "Hypotension, altered mental status, chest pain, heart failure = unstable, immediate cardioversion"
+    },
+    "wpw": {
+      "delta_wave": "Delta wave = slurred QRS upstroke caused by ventricular activation via accessory pathway before AV node",
+      "short_pr": "PR interval <0.12s due to accessory pathway bypassing AV node delay",
+      "af_risk": "AF through accessory pathway can cause ventricular rates >250 bpm - risk of VF",
+      "av_blockers_contraindicated": "Digoxin/beta-blockers/Ca blockers contraindicated - may accelerate ventricular rate in AF",
+      "eps_gold_standard": "Electrophysiology study maps accessory pathway and assesses sudden death risk",
+      "ablation_curative": "Radiofrequency ablation of accessory pathway cures WPW in >95% of cases",
+      "sudden_death_risk": "Low risk (~0.1%/year) but highest in young males with symptomatic WPW",
+      "asymptomatic_management": "Asymptomatic WPW requires cardiology follow-up but no treatment unless high-risk features"
+    },
+    "pvc": {
+      "ectopic_origin": "PVCs originate from ventricular myocardium outside normal conduction system",
+      "compensatory_pause": "Full compensatory pause follows PVC due to retrograde VA conduction blocking SA node",
+      "burden_assessment": "PVC burden >10% associated with PVC-induced cardiomyopathy and reduced EF",
+      "r_on_t_phenomenon": "PVC falling on T wave of preceding beat increases VF risk (R-on-T phenomenon)",
+      "benign_vs_pathologic": "Frequent PVCs (>1000/day) or symptomatic PVCs require evaluation for underlying disease",
+      "exercise_suppression": "PVCs that suppress with exercise are typically benign",
+      "ablation_indication": "Symptomatic PVCs refractory to medical therapy or causing cardiomyopathy",
+      "antiarrhythmic_selection": "Beta-blockers first-line; mexiletine or amiodarone for refractory cases"
+    },
+    "pac": {
+      "ectopic_origin": "PACs originate from atrial tissue outside SA node, causing early atrial depolarization",
+      "aberrant_conduction": "PACs may conduct aberrantly if premature enough, mimicking wide complex beats",
+      "af_predictor": "PAC burden >100/hour predicts development of atrial fibrillation",
+      "benign_nature": "PACs are usually benign but can be symptomatic and anxiety-provoking",
+      "trigger_mechanisms": "Caffeine, stress, alcohol, sleep apnea, and atrial irritability increase PAC frequency",
+      "treatment_threshold": "Symptomatic PACs or those triggering AF require treatment",
+      "rate_control": "Beta-blockers or calcium channel blockers reduce PAC frequency and symptoms",
+      "lifestyle_modification": "Caffeine reduction, stress management, sleep hygiene often sufficient treatment"
+    },
+    "sss": {
+      "sa_node_dysfunction": "Fibrosis and degeneration of SA node tissue causes bradycardia and conduction abnormalities",
+      "bradycardia_tachycardia": "Tachy-brady syndrome: AF with slow ventricular response alternating with sinus pauses",
+      "chronotropic_incompetence": "Inability to increase heart rate appropriately with exercise or stress",
+      "symptom_correlation": "Symptoms often intermittent - Holter monitoring essential for diagnosis",
+      "pacemaker_indication": "Symptomatic sinus bradycardia, pauses >3 seconds, or chronotropic incompetence",
+      "rate_responsive_pm": "Rate-responsive pacemaker preferred for chronotropic incompetence",
+      "reversible_causes": "Medications (beta-blockers, CCBs), hypothyroidism, ischemia must be excluded",
+      "progressive_nature": "SSS often progressive - early pacemaker consideration for symptomatic patients"
+    },
+    "vt": {
+      "wide_complex_tachycardia": "All wide complex tachycardias treated as VT until proven otherwise (SVT with aberrancy)",
+      "monomorphic_vs_polymorphic": "Monomorphic VT = same QRS morphology; Polymorphic VT = changing QRS (often ischemic)",
+      "sustained_vs_nonsustained": "Sustained VT >30 seconds; Nonsustained VT <30 seconds but still requires evaluation",
+      "hemodynamic_stability": "Stable = palpable BP, no altered mental status; Unstable = immediate cardioversion",
+      "antiarrhythmic_hierarchy": "Amiodarone first-line, lidocaine second-line, procainamide third-line for stable VT",
+      "underlying_cause": "Scar-related (post-MI), idiopathic, or associated with cardiomyopathy, channelopathies",
+      "icd_indication": "Secondary prevention ICD for survivors of sustained VT/VF",
+      "ablation_therapy": "Catheter ablation effective for scar-related VT (60-80% success rate)"
+    },
+    "torsades": {
+      "qt_prolongation": "TdP occurs when QT interval >500ms (Bazett correction), creating early afterdepolarizations",
+      "pause_dependent": "Often triggered by pause (long-short sequence) causing early afterdepolarization",
+      "drug_induced": "Most common cause - antiarrhythmics, antibiotics, antipsychotics, antidepressants",
+      "electrolyte_causes": "Hypokalemia, hypomagnesemia, hypocalcemia prolong QT interval",
+      "magnesium_first_line": "Magnesium sulfate 2g IV effective even with normal magnesium levels",
+      "pacing_prevention": "Temporary pacing at 80-100 bpm prevents pause-dependent TdP",
+      "isoproterenol_use": "For congenital long QT with bradycardia-dependent TdP",
+      "icd_consideration": "ICD for recurrent TdP or high-risk congenital long QT syndrome"
+    },
+    "vfib": {
+      "no_organized_rhythm": "VF = chaotic ventricular electrical activity with no cardiac output or perfusion",
+      "immediate_defibrillation": "Time to defibrillation most important prognostic factor in VF survival",
+      "acls_sequence": "CPR + defibrillation + epinephrine + antiarrhythmics (amiodarone preferred)",
+      "post_arrest_care": "Targeted temperature management (32-36°C) improves neurological outcomes",
+      "underlying_causes": "Ischemic heart disease (most common), electrolyte abnormalities, channelopathies, drugs",
+      "secondary_prevention": "ICD implantation reduces recurrent VF by 50-70%",
+      "comprehensive_evaluation": "Coronary angiography, echocardiography, genetic testing, autonomic evaluation",
+      "family_screening": "Essential for inherited channelopathies or cardiomyopathies"
+    }
+  },
+  "common_pitfalls": {
+    "medication_interactions": [
+      {
+        "interaction": "verapamil + beta_blocker",
+        "warning": "Both negative inotropes - risk of severe bradycardia/hypotension",
+        "action": "Monitor HR/BP closely, consider alternative rate control"
+      },
+      {
+        "interaction": "ace_inhibitor + high_potassium",
+        "warning": "ACE inhibitors can worsen hyperkalemia (K+ >5.0)",
+        "action": "Check renal function and electrolytes before starting"
+      },
+      {
+        "interaction": "contrast + metformin",
+        "warning": "Risk of contrast-induced nephropathy with metformin",
+        "action": "Hold metformin 48hrs post-contrast if eGFR <30"
+      },
+      {
+        "condition": "aortic_dissection",
+        "warning": "Starting vasodilators (nitroprusside) without beta-blocker coverage",
+        "action": "Always initiate beta-blockers first to prevent reflex tachycardia"
+      },
+      {
+        "condition": "aaa_screening",
+        "warning": "Missing screening opportunity in eligible patients",
+        "action": "Offer one-time ultrasound to men 65-75 with smoking history or family history"
+      },
+      {
+        "condition": "acs_right_sided_mi",
+        "warning": "Using nitrates in right-sided MI causing severe hypotension",
+        "action": "Avoid nitrates in inferior MI with RV involvement - consider fluid resuscitation instead"
+      },
+      {
+        "condition": "acs_cocaine_mi",
+        "warning": "Using beta-blockers in cocaine-associated MI",
+        "action": "Avoid beta-blockers due to unopposed alpha stimulation - use benzodiazepines for agitation"
+      },
+      {
+        "condition": "acs_thrombolytics",
+        "warning": "Giving thrombolytics to UA/NSTEMI patients",
+        "action": "Thrombolytics only for STEMI when PCI unavailable within goal time"
+      },
+      {
+        "condition": "acs_routine_oxygen",
+        "warning": "Giving supplemental oxygen to all ACS patients regardless of SpO2",
+        "action": "Oxygen only if hypoxic (SpO2 <94%) - routine oxygen may increase infarct size"
+      },
+      {
+        "condition": "afib_rate_control",
+        "warning": "Using diltiazem in patients with reduced EF or hypotension",
+        "action": "Use beta-blockers or digoxin instead - diltiazem contraindicated in EF <40%"
+      },
+      {
+        "condition": "afib_cardioversion",
+        "warning": "Cardioverting AF without anticoagulation when duration >48h",
+        "action": "Anticoagulate 3-4 weeks before cardioversion or use TEE-guided approach"
+      },
+      {
+        "condition": "afib_digoxin",
+        "warning": "Using digoxin without checking potassium level",
+        "action": "Ensure K+ >4.0 before digoxin - hypokalemia increases toxicity risk"
+      },
+      {
+        "condition": "afib_beta_blockers",
+        "warning": "Using beta-blockers in patients with active wheezing or severe COPD",
+        "action": "Use calcium channel blockers or digoxin instead for rate control"
+      },
+      {
+        "condition": "dcm_gdmt_sequence",
+        "warning": "Starting multiple HF medications simultaneously without titration",
+        "action": "Add GDMT sequentially every 2-4 weeks, starting with ACEI/ARB/ARNI"
+      },
+      {
+        "condition": "dcm_icd_timing",
+        "warning": "Implanting ICD before 3 months optimal GDMT and reassessment",
+        "action": "Wait for EF response to therapy before considering primary prevention ICD"
+      },
+      {
+        "condition": "hcm_digoxin",
+        "warning": "Using digoxin in HCM patients",
+        "action": "Digoxin is contraindicated - negative inotrope worsens LVOT obstruction"
+      },
+      {
+        "condition": "hcm_nitrates",
+        "warning": "Using nitrates or high-dose diuretics in HCM",
+        "action": "Both reduce preload and worsen LVOT obstruction - avoid in HCM"
+      },
+      {
+        "condition": "hcm_family_screening",
+        "warning": "Not screening family members of HCM patients",
+        "action": "Annual echo for first-degree relatives starting at age 12"
+      },
+      {
+        "condition": "rcm_diuretic_overuse",
+        "warning": "Aggressive diuresis in restrictive cardiomyopathy",
+        "action": "Use cautiously - excessive diuresis causes hypotension in preload-dependent patients"
+      },
+      {
+        "condition": "chd_pda_closure",
+        "warning": "Closing PDA in ductal-dependent cyanotic heart disease",
+        "action": "Keep PDA open with prostaglandins in TOF, TGA, hypoplastic left heart"
+      },
+      {
+        "condition": "chd_beta_blockers_tof",
+        "warning": "Using beta-blockers during TOF tet spells",
+        "action": "Beta-blockers may worsen RVOT obstruction - use morphine, O2, knee-chest position"
+      },
+      {
+        "condition": "chd_asd_delayed_closure",
+        "warning": "Delaying ASD closure in patients with paradoxical emboli",
+        "action": "Close ASD if history of CVA/TIA to prevent recurrence"
+      },
+      {
+        "condition": "chd_coarctation_acei",
+        "warning": "Using ACE inhibitors in coarctation patients",
+        "action": "ACEi can cause renal failure due to renal artery stenosis - avoid"
+      },
+      {
+        "condition": "chd_eisenmenger_exercise",
+        "warning": "Allowing unrestricted exercise in Eisenmenger syndrome",
+        "action": "Exercise restriction to prevent sudden death from pulmonary hypertensive crisis"
+      },
+      {
+        "condition": "chf_acei_arb_combination",
+        "warning": "Combining ACE inhibitor with ARB in HF patients",
+        "action": "Use either ACEi/ARNI or ARB, not both - increases hyperkalemia and renal failure risk"
+      },
+      {
+        "condition": "chf_beta_blocker_acute",
+        "warning": "Starting beta-blockers during acute HF decompensation",
+        "action": "Defer beta-blocker initiation until patient is euvolemic and stable"
+      },
+      {
+        "condition": "chf_ccb_hfref",
+        "warning": "Using calcium channel blockers in HFrEF patients",
+        "action": "CCBs are contraindicated in HFrEF - negative inotrope increases mortality"
+      },
+      {
+        "condition": "chf_digoxin_no_k",
+        "warning": "Using digoxin without checking potassium level",
+        "action": "Monitor potassium closely - hypokalemia increases digoxin toxicity risk"
+      },
+      {
+        "condition": "chf_nitrates_hfpef",
+        "warning": "Using routine nitrates for HFpEF symptom relief",
+        "action": "Nitrates have no proven benefit in HFpEF and may worsen preload-sensitive patients"
+      },
+      {
+        "condition": "chf_over_diuresis",
+        "warning": "Aggressive diuresis without monitoring renal function",
+        "action": "Monitor creatinine and electrolytes - over-diuresis causes AKI and electrolyte imbalances"
+      },
+      {
+        "condition": "chf_device_delay",
+        "warning": "Delaying ICD consideration in appropriate HFrEF patients",
+        "action": "Consider ICD for EF ≤35% after 3 months optimal GDMT for sudden death prevention"
+      },
+      {
+        "condition": "dvt_no_ultrasound",
+        "warning": "Ordering D-dimer without clinical assessment or proceeding to anticoagulation without imaging",
+        "action": "Always perform ultrasound after positive D-dimer - D-dimer alone cannot confirm DVT"
+      },
+      {
+        "condition": "dvt_ivc_filter_routine",
+        "warning": "Placing IVC filter for all DVT patients or as first-line therapy",
+        "action": "IVC filters only for absolute anticoagulation contraindications - anticoagulation is first-line"
+      },
+      {
+        "condition": "dvt_short_course",
+        "warning": "Treating provoked DVT with <3 months anticoagulation",
+        "action": "Provoked DVT requires minimum 3 months anticoagulation to prevent recurrence"
+      },
+      {
+        "condition": "endocarditis_delayed_cultures",
+        "warning": "Starting antibiotics before drawing blood cultures",
+        "action": "Draw 3 sets of blood cultures from different sites before antibiotic administration"
+      },
+      {
+        "condition": "endocarditis_tte_only",
+        "warning": "Using TTE alone for suspected prosthetic valve endocarditis",
+        "action": "TEE required for prosthetic valves - TTE sensitivity only 50% vs 90% for TEE"
+      },
+      {
+        "condition": "endocarditis_short_course",
+        "warning": "Treating native valve endocarditis with <2 weeks antibiotics",
+        "action": "Native valve endocarditis requires 4-6 weeks IV antibiotics based on organism"
+      },
+      {
+        "condition": "bradyarrhythmia_pacemaker_asymptomatic",
+        "warning": "Implanting pacemaker for asymptomatic first-degree or Mobitz I AV block",
+        "action": "No pacemaker indicated for asymptomatic first-degree or Mobitz I - monitor only"
+      },
+      {
+        "condition": "bradyarrhythmia_atropine_infranodal",
+        "warning": "Using atropine for infranodal (Mobitz II/third-degree) AV block",
+        "action": "Atropine ineffective for infranodal blocks - proceed directly to pacing"
+      },
+      {
+        "condition": "bradyarrhythmia_no_transvenous",
+        "warning": "Delaying transvenous pacing in unstable bradycardia despite transcutaneous pacing",
+        "action": "Transcutaneous pacing is temporary bridge - obtain transvenous access promptly"
+      },
+      {
+        "condition": "rbbb_ignore_underlying",
+        "warning": "Failing to investigate underlying cause of new RBBB",
+        "action": "New RBBB requires evaluation for pulmonary hypertension, ASD, pulmonary embolism"
+      },
+      {
+        "condition": "lbbb_delay_cath",
+        "warning": "Delaying cardiac catheterization for new LBBB in ACS setting",
+        "action": "New LBBB = STEMI equivalent - immediate cath lab activation required"
+      },
+      {
+        "condition": "psvt_wide_complex",
+        "warning": "Assuming wide complex tachycardia is SVT with aberrancy",
+        "action": "Treat all wide complex tachycardias as VT until proven otherwise"
+      },
+      {
+        "condition": "wpw_av_blockers",
+        "warning": "Using AV nodal blockers in WPW with atrial fibrillation",
+        "action": "AV blockers contraindicated in WPW - may accelerate ventricular rate to VF"
+      },
+      {
+        "condition": "pvc_ignore_burden",
+        "warning": "Not quantifying PVC burden in symptomatic patients",
+        "action": "PVC burden >10% associated with PVC-induced cardiomyopathy"
+      },
+      {
+        "condition": "pac_digoxin_toxicity",
+        "warning": "Missing digoxin toxicity as cause of frequent PACs",
+        "action": "Digoxin toxicity causes atrial irritability - check digoxin level"
+      },
+      {
+        "condition": "sss_reversible_causes",
+        "warning": "Implanting pacemaker without addressing reversible causes",
+        "action": "Exclude medications, electrolytes, ischemia, hypothyroidism before pacemaker"
+      },
+      {
+        "condition": "vt_svt_treatment",
+        "warning": "Treating wide complex tachycardia with adenosine assuming SVT",
+        "action": "Adenosine diagnostic for SVT but ineffective for VT - may delay proper treatment"
+      },
+      {
+        "condition": "torsades_no_magnesium",
+        "warning": "Not giving magnesium for polymorphic VT despite QT prolongation",
+        "action": "Magnesium first-line for TdP even with normal magnesium levels"
+      },
+      {
+        "condition": "vfib_delay_defib",
+        "warning": "Delaying defibrillation for VF while performing prolonged CPR",
+        "action": "CPR + defibrillation sequence - shock first for VF, then resume CPR"
+      },
+      {
+        "condition": "htn_white_coat",
+        "warning": "Treating based on office BP without ambulatory or home monitoring",
+        "action": "Confirm HTN with out-of-office measurements before initiating therapy"
+      },
+      {
+        "condition": "htn_resistant_definition",
+        "warning": "Labeling HTN as resistant without proper evaluation",
+        "action": "True resistant HTN requires 3+ agents including diuretic - rule out non-adherence, white coat effect"
+      },
+      {
+        "condition": "htn_beta_blocker_first_line",
+        "warning": "Using beta-blockers as first-line monotherapy in uncomplicated HTN",
+        "action": "Beta-blockers not first-line due to metabolic side effects - use thiazides, ACEi/ARB, CCBs first"
+      },
+      {
+        "condition": "htn_ccb_hf",
+        "warning": "Using non-dihydropyridine CCBs in patients with HF",
+        "action": "Verapamil/diltiazem contraindicated in HFrEF - use amlodipine instead"
+      },
+      {
+        "condition": "htn_acei_arb_combination",
+        "warning": "Combining ACE inhibitor with ARB for BP control",
+        "action": "Use either ACEi/ARB or ARNI, not both - increases hyperkalemia and renal failure risk"
+      },
+      {
+        "condition": "htn_urgency_rapid_reduction",
+        "warning": "Rapid BP reduction (>30% in first few hours) in hypertensive urgency",
+        "action": "Gradual BP reduction over 24-48 hours to prevent hypoperfusion of vital organs"
+      },
+      {
+        "condition": "htn_emergency_oral_agents",
+        "warning": "Using oral agents for hypertensive emergency",
+        "action": "IV agents required for emergency - oral agents too slow for acute end-organ damage"
+      },
+      {
+        "condition": "htn_nitroprusside_no_monitoring",
+        "warning": "Using nitroprusside without continuous BP monitoring",
+        "action": "Arterial line required for nitroprusside - rapid titration needed to prevent hypotension"
+      },
+      {
+        "condition": "htn_secondary_workup_delay",
+        "warning": "Not evaluating for secondary causes in young patients or resistant HTN",
+        "action": "Consider renal artery stenosis, pheochromocytoma, primary aldosteronism in appropriate patients"
+      },
+      {
+        "condition": "htn_lifestyle_only",
+        "warning": "Managing severe HTN with lifestyle modifications alone",
+        "action": "Lifestyle changes adjunctive only - pharmacologic therapy required for BP >160/100"
+      },
+      {
+        "condition": "htn_medication_adherence",
+        "warning": "Not addressing medication non-adherence in uncontrolled HTN",
+        "action": "Assess barriers to adherence - cost, side effects, complexity of regimen"
+      }
+    ],
+    "documentation_reminders": [
+      {
+        "condition": "chest_pain",
+        "reminder": "Always document: onset, quality, radiation, associated symptoms, exacerbating/relieving factors"
+      },
+      {
+        "condition": "dyspnea",
+        "reminder": "Quantify: NYHA class, orthopnea (# pillows), PND, exercise tolerance"
+      },
+      {
+        "condition": "new_medication",
+        "reminder": "Document: indication, dose, frequency, duration, patient education provided"
+      },
+      {
+        "condition": "aortic_dissection",
+        "reminder": "Document: type (A vs B), blood pressure in both arms, pulse deficits, neurological exam"
+      },
+      {
+        "condition": "aaa",
+        "reminder": "Document: size measurements, growth rate, symptoms, surgical candidacy assessment"
+      },
+      {
+        "condition": "acs_timI_score",
+        "reminder": "Document: TIMI risk score components and total score with management implications"
+      },
+      {
+        "condition": "acs_ecg_findings",
+        "reminder": "Document: ST elevations/depressions, new LBBB, reciprocal changes, and coronary territory involved"
+      },
+      {
+        "condition": "acs_cardiac_enzymes",
+        "reminder": "Document: Initial troponin, peak values, timing of elevation, and reinfarction criteria"
+      },
+      {
+        "condition": "acs_right_sided_mi",
+        "reminder": "Document: Inferior MI with RV involvement, bilateral BP measurements, fluid status"
+      },
+      {
+        "condition": "acs_right_sided_mi",
+        "reminder": "Document: Inferior MI with RV involvement, bilateral BP measurements, fluid status"
+      },
+      {
+        "condition": "acs_discharge_meds",
+        "reminder": "Document contraindications for any omitted mandatory discharge medications"
+      },
+      {
+        "condition": "afib_chadsvasc_score",
+        "reminder": "Document: CHADS₂-VASc score components, total score, and anticoagulation decision rationale"
+      },
+      {
+        "condition": "afib_duration",
+        "reminder": "Document: Duration of AF symptoms (<48h vs >48h) and anticoagulation strategy chosen"
+      },
+      {
+        "condition": "afib_rate_goals",
+        "reminder": "Document: Rate control goals (<85 bpm symptomatic, <110 bpm asymptomatic) and achievement"
+      },
+      {
+        "condition": "afib_cardioversion",
+        "reminder": "Document: Pre-cardioversion anticoagulation, TEE results if performed, and post-cardioversion plan"
+      },
+      {
+        "condition": "dcm_ef_monitoring",
+        "reminder": "Document: Serial EF measurements, GDMT optimization timeline, and ICD consideration timing"
+      },
+      {
+        "condition": "dcm_daily_weights",
+        "reminder": "Document: Daily weight instructions, red flag weight gain thresholds, and follow-up plan"
+      },
+      {
+        "condition": "hcm_risk_factors",
+        "reminder": "Document: 5-year sudden death risk score components and ICD recommendation rationale"
+      },
+      {
+        "condition": "hcm_family_screening",
+        "reminder": "Document: Family screening plan, genetic testing results if performed, and counseling provided"
+      },
+      {
+        "condition": "cardiomyopathy_differentiation",
+        "reminder": "Document: Type of cardiomyopathy (DCM/HCM/RCM), key echocardiographic findings, and distinguishing features"
+      },
+      {
+        "condition": "chd_cyanosis",
+        "reminder": "Document: Degree of cyanosis, oxygen saturations, and associated symptoms"
+      },
+      {
+        "condition": "chd_shunt_calculation",
+        "reminder": "Document: Qp:Qs ratio, shunt direction, and clinical significance"
+      },
+      {
+        "condition": "chd_pulmonary_hypertension",
+        "reminder": "Document: Pulmonary pressures, Eisenmenger syndrome if present, and treatment implications"
+      },
+      {
+        "condition": "chd_endocarditis_prophylaxis",
+        "reminder": "Document: Indication for prophylaxis, duration, and discontinuation criteria"
+      },
+      {
+        "condition": "chd_family_screening",
+        "reminder": "Document: Genetic testing results, family screening plan, and counseling provided"
+      },
+      {
+        "condition": "chf_nyha_class",
+        "reminder": "Document: NYHA functional classification and recent changes in symptoms"
+      },
+      {
+        "condition": "chf_daily_weights",
+        "reminder": "Document: Daily weight instructions, current weight, and red flag weight gain thresholds"
+      },
+      {
+        "condition": "chf_gdmt_status",
+        "reminder": "Document: Current GDMT medications, doses, titration plan, and contraindications"
+      },
+      {
+        "condition": "chf_device_therapy",
+        "reminder": "Document: ICD/CRT indications met, implantation status, and follow-up plan"
+      },
+      {
+        "condition": "chf_discharge_meds",
+        "reminder": "Document: Mandatory discharge medications prescribed and reasons for any omissions"
+      },
+      {
+        "condition": "chf_follow_up",
+        "reminder": "Document: Post-discharge follow-up timeline and HF management program enrollment"
+      },
+      {
+        "condition": "dvt_wells_score",
+        "reminder": "Document: All Wells criteria components, total score, and D-dimer result interpretation"
+      },
+      {
+        "condition": "dvt_anticoagulation",
+        "reminder": "Document: Anticoagulation indication, duration plan (provoked vs unprovoked), and follow-up monitoring"
+      },
+      {
+        "condition": "dvt_pe_risk",
+        "reminder": "Document: PE risk assessment, outpatient vs inpatient treatment decision, and patient education provided"
+      },
+      {
+        "condition": "endocarditis_blood_cultures",
+        "reminder": "Document: Blood culture timing, number of sets, and antibiotic administration timing relative to cultures"
+      },
+      {
+        "condition": "endocarditis_echo",
+        "reminder": "Document: TEE vs TTE choice rationale, vegetation size/location, and valve involvement assessment"
+      },
+      {
+        "condition": "endocarditis_prophylaxis",
+        "reminder": "Document: Prophylaxis indication assessment and antibiotic regimen prescribed for dental procedures"
+      },
+      {
+        "condition": "bradyarrhythmia_ecg",
+        "reminder": "Document: AV block type (1st/2nd/3rd degree), PR interval measurements, and escape rhythm characteristics"
+      },
+      {
+        "condition": "bradyarrhythmia_pacemaker",
+        "reminder": "Document: Pacemaker indication (ACC/AHA class), device type (DDD/VVI), and post-implant testing results"
+      },
+      {
+        "condition": "bradyarrhythmia_symptoms",
+        "reminder": "Document: Correlation between symptoms and ECG findings, medication review, and electrolyte abnormalities"
+      },
+      {
+        "condition": "rbbb_ecg_findings",
+        "reminder": "Document: QRS duration, RSR' pattern location, S wave characteristics, and associated ST-T changes"
+      },
+      {
+        "condition": "rbbb_underlying_cause",
+        "reminder": "Document: Evaluation for pulmonary hypertension, ASD, pulmonary embolism, and right heart strain"
+      },
+      {
+        "condition": "lbbb_ecg_findings",
+        "reminder": "Document: QRS duration, R wave morphology in lateral leads, ST-T discordance, and rate dependence"
+      },
+      {
+        "condition": "lbbb_stemi_equivalent",
+        "reminder": "Document: New LBBB in ACS setting treated as STEMI equivalent with immediate cath lab activation"
+      },
+      {
+        "condition": "psvt_ecg_characteristics",
+        "reminder": "Document: QRS width, regularity, P wave morphology, rate, and response to vagal maneuvers"
+      },
+      {
+        "condition": "psvt_treatment_response",
+        "reminder": "Document: Vagal maneuver technique used, adenosine dose/response, and cardioversion energy if performed"
+      },
+      {
+        "condition": "wpw_ecg_findings",
+        "reminder": "Document: PR interval, delta wave presence, QRS duration, and accessory pathway location if known"
+      },
+      {
+        "condition": "wpw_risk_stratification",
+        "reminder": "Document: EPS results, ablation recommendation, and ICD consideration for high-risk patients"
+      },
+      {
+        "condition": "pvc_burden",
+        "reminder": "Document: PVC frequency (per hour/day), morphology, coupling interval, and exercise response"
+      },
+      {
+        "condition": "pvc_underlying_cause",
+        "reminder": "Document: Evaluation for ischemia, electrolyte abnormalities, and structural heart disease"
+      },
+      {
+        "condition": "pac_frequency",
+        "reminder": "Document: PAC burden, morphology variation, and correlation with symptoms or AF episodes"
+      },
+      {
+        "condition": "pac_triggers",
+        "reminder": "Document: Caffeine intake, stress factors, sleep quality, and potential medication causes"
+      },
+      {
+        "condition": "sss_holter_findings",
+        "reminder": "Document: Longest pause duration, bradycardia-tachycardia patterns, and chronotropic incompetence"
+      },
+      {
+        "condition": "sss_pacemaker_indication",
+        "reminder": "Document: Symptoms present, pacemaker type chosen (DDD vs VVI), and rate response settings"
+      },
+      {
+        "condition": "vt_ecg_characteristics",
+        "reminder": "Document: QRS width, regularity, morphology, AV dissociation, and capture beats"
+      },
+      {
+        "condition": "vt_hemodynamic_stability",
+        "reminder": "Document: Blood pressure, mental status, chest pain, and response to treatment"
+      },
+      {
+        "condition": "torsades_qt_interval",
+        "reminder": "Document: QT interval measurement, Bazett correction, and underlying cause (drug/electrolyte)"
+      },
+      {
+        "condition": "torsades_treatment",
+        "reminder": "Document: Magnesium dose/response, pacing settings, and electrolyte correction"
+      },
+      {
+        "condition": "vfib_acls_interventions",
+        "reminder": "Document: Time to CPR initiation, defibrillation timing, medications given, and return of spontaneous circulation"
+      },
+      {
+        "condition": "vfib_post_arrest_care",
+        "reminder": "Document: Targeted temperature management, coronary angiography results, and neurological assessment"
+      }
+    ],
+    "age_specific": [
+      {
+        "age_group": "elderly_75plus",
+        "considerations": [
+          "Start low, go slow with new medications",
+          "Higher bleeding risk with anticoagulation",
+          "Increased fall risk - assess mobility",
+          "Polypharmacy interactions more common"
+        ]
+      }
+    ]
+  },
+  "quality_metrics": {
+    "hpi_completeness": [
+      "onset",
+      "location",
+      "duration",
+      "character",
+      "aggravating_factors",
+      "relieving_factors",
+      "timing",
+      "severity"
+    ],
+    "medication_documentation": [
+      "indication",
+      "dose",
+      "frequency",
+      "route",
+      "duration"
+    ],
+    "assessment_elements": [
+      "clinical_stability",
+      "acuity_level",
+      "response_to_treatment",
+      "plan_rationale"
+    ]
+  }
+}

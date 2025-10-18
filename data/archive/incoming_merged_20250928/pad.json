@@ -1,0 +1,64 @@
+{
+  "id": "pad",
+  "name": "Peripheral Arterial Disease (PAD)",
+  "category": ["Vascular"],
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Claudication (exertional leg pain relieved by rest)",
+      "Rest pain (advanced)",
+      "Non-healing wounds",
+      "Blue toe"
+    ],
+    "signs_any": [
+      "Diminished pulses",
+      "Bruits",
+      "Cool skin, hair loss",
+      "Dependent rubor",
+      "Ulceration/gangrene"
+    ]
+  },
+  "initial_tests": [
+    "Ankle-brachial index (ABI): PAD if ≤0.90",
+    "Toe-brachial index for diabetics or non-compressible vessels",
+    "Exercise ABI if symptoms and normal resting ABI",
+    "Duplex ultrasound for anatomic assessment; CTA/MRA when planning revascularization"
+  ],
+  "risk_factors": [
+    "Smoking",
+    "Diabetes",
+    "Hyperlipidemia",
+    "Hypertension",
+    "CKD",
+    "Age",
+    "CAD/CVD"
+  ],
+  "treatment": {
+    "all_patients_initial": [
+      "Smoking cessation",
+      "Supervised exercise therapy program",
+      "High-intensity statin",
+      "Antiplatelet therapy (aspirin or clopidogrel)",
+      "Optimize BP, diabetes; consider SGLT2i/GLP-1 RA for CV benefit in DM"
+    ],
+    "claudication_pharmacotherapy": [
+      "Cilostazol improves walking distance (avoid in HFrEF)"
+    ],
+    "revascularization": [
+      "Endovascular or surgical revascularization for lifestyle-limiting claudication refractory to therapy or critical limb-threatening ischemia"
+    ]
+  },
+  "contraindications": {
+    "cilostazol": ["Avoid in HFrEF"]
+  },
+  "follow_up": [
+    "Foot care education, wound surveillance in high-risk patients",
+    "ABI surveillance after revascularization per protocol"
+  ],
+  "discharge": {
+    "instructions": [
+      "Daily foot inspection, protective footwear",
+      "Adherence to exercise therapy and medications"
+    ],
+    "follow_up": ["Vascular/cardiology follow-up; wound care as needed"]
+  }
+}

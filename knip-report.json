@@ -1,0 +1,212 @@
+{
+  "files": [
+    "sw.js",
+    "data/validate_json.js",
+    "pages/meds.js",
+    "scripts/debug-fulltext.js",
+    "scripts/debug-sections.js",
+    "scripts/debug-test.js",
+    "scripts/debug-vitals-minmax.js",
+    "scripts/debug-vitals.js",
+    "tests/angina.spec.ts",
+    "tests/sidebar.sanitize.spec.ts",
+    "tests/smoke-parsing.spec.js",
+    "backups/visual-stable-2025-10-02/app.js",
+    "src/core/app.fixed.js",
+    "src/core/router.js",
+    "src/enhanced/afib-integration.js",
+    "src/guidelines/guidelines.js",
+    "src/parsers/noteParser.js",
+    "src/parsers/noteParser_full.js",
+    "src/parsers/noteUtils.js",
+    "src/parsers/templateRenderer.js",
+    "src/ui/navigation.js",
+    "src/ui/test-parser.js",
+    "src/utils/cardiac-guidelines.js",
+    "src/utils/debugInstrumentation.js",
+    "src/utils/diagnosisSanitizer.js",
+    "src/utils/diagnostic-reasoning.js",
+    "src/utils/error-reporting.js",
+    "src/utils/parserHelpers.js",
+    "src/utils/parserHelpers_clean.js",
+    "src/utils/progressBar.js",
+    "src/utils/sanitizer.js",
+    "src/utils/storage.js",
+    "src/utils/unknownWordsTracker.js",
+    "src/features/calculators/grace.js",
+    "src/features/calculators/timi.js",
+    "src/features/calculators/wells.js",
+    "src/features/note-tools/exportPanel.js",
+    "src/features/note-tools/index.js",
+    "src/features/note-tools/parsedView.js",
+    "src/features/note-tools/pastePanel.js",
+    "src/features/note-tools/useParser.js",
+    "src/features/note-tools/view.js",
+    "src/ui/components/button.js",
+    "src/ui/components/card.js",
+    "src/ui/components/metric.js",
+    "src/ui/components/sectionTitle.js",
+    "src/ui/patterns/copyBlock.js",
+    "src/ui/patterns/exportMenu.js",
+    "src/ui/patterns/stepCard.js",
+    "src/ui/patterns/stepper.js",
+    "src/ui/patterns/tabs.js",
+    "src/ui/shell/leftNav.js",
+    "src/ui/shell/rightRail.js",
+    "src/features/decision-trees/acs/view.js",
+    "src/features/decision-trees/engine/useDecisionTree.js"
+  ],
+  "issues": [
+    {
+      "file": "package.json",
+      "dependencies": [],
+      "devDependencies": [
+        { "name": "htmlhint", "line": 55, "col": 6, "pos": 3134 },
+        { "name": "stylelint", "line": 58, "col": 6, "pos": 3222 },
+        {
+          "name": "stylelint-config-standard",
+          "line": 59,
+          "col": 6,
+          "pos": 3252
+        }
+      ],
+      "optionalPeerDependencies": [],
+      "unlisted": [],
+      "binaries": [
+        { "name": "python" },
+        { "name": "playwright" },
+        { "name": "pwsh" },
+        { "name": "better-npm-audit" }
+      ],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "tests/playwright.config.ts",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [
+        { "name": "@playwright/test", "line": 2, "col": 10, "pos": 52 }
+      ],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "tests/a11y.spec.ts",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [
+        { "name": "@playwright/test", "line": 1, "col": 10, "pos": 8 },
+        { "name": "axe-playwright", "line": 2, "col": 53, "pos": 101 }
+      ],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "tests/visual.spec.ts",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [
+        { "name": "@playwright/test", "line": 2, "col": 10, "pos": 51 }
+      ],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "tests/e2e.spec.ts",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [
+        { "name": "@playwright/test", "line": 1, "col": 10, "pos": 8 }
+      ],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": ".github/workflows/quality.yml",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [],
+      "binaries": [{ "name": "playwright" }],
+      "unresolved": [],
+      "exports": [],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "src/parsers/smartParser.js",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [{ "name": "default", "line": 462, "col": 8, "pos": 13634 }],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": [
+        [
+          { "name": "parseNote", "line": 8, "col": 155, "pos": 410 },
+          { "name": "default", "line": 462, "col": 15, "pos": 13641 }
+        ]
+      ]
+    },
+    {
+      "file": "src/parsers/normalize.js",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [
+        { "name": "normalizeHeader", "line": 62, "col": 17, "pos": 1790 },
+        { "name": "standardizeDate", "line": 75, "col": 17, "pos": 2141 }
+      ],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    },
+    {
+      "file": "src/parsers/synonyms.js",
+      "dependencies": [],
+      "devDependencies": [],
+      "optionalPeerDependencies": [],
+      "unlisted": [],
+      "binaries": [],
+      "unresolved": [],
+      "exports": [
+        { "name": "SECTION_SYNONYMS", "line": 6, "col": 14, "pos": 114 },
+        { "name": "buildSynonymLookup", "line": 144, "col": 17, "pos": 2826 }
+      ],
+      "types": [],
+      "enumMembers": {},
+      "duplicates": []
+    }
+  ]
+}

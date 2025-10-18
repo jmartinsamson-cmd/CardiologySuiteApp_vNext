@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guidelines Debug</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #1a1f2e;
+        color: #fff;
+      }
+      .debug-section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #444;
+        border-radius: 8px;
+      }
+      .success {
+        color: #10b981;
+      }
+      .error {
+        color: #ef4444;
+      }
+      .info {
+        color: #3b82f6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Guidelines Page Debug Tool</h1>
+
+    <div class="debug-section">
+      <h2>Debug Results</h2>
+      <div id="debug-results">Running diagnostics...</div>
+    </div>
+
+    <script src="src/guidelines/guidelines.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const results = document.getElementById("debug-results");
+        let output = "";
+
+        // Test 1: Check if DIAGNOSES array exists
+        output += "<h3>Test 1: DIAGNOSES Array</h3>";
+        if (typeof DIAGNOSES !== "undefined") {
+          output += `<p class="success">✅ DIAGNOSES array found with ${DIAGNOSES.length} items</p>`;
+          output += `<p class="info">First diagnosis: ${DIAGNOSES[0].name}</p>`;
+          output += `<p class="info">Last diagnosis: ${DIAGNOSES[DIAGNOSES.length - 1].name}</p>`;
+        } else {
+          output += '<p class="error">❌ DIAGNOSES array not found</p>';
+        }
+
+        // Test 2: Check DOM element
+        output += "<h3>Test 2: DOM Element</h3>";
+        const testElement = document.getElementById("guidelines-dx-list");
+        if (testElement) {
+          output +=
+            '<p class="success">✅ guidelines-dx-list element found</p>';
+        } else {
+          output +=
+            '<p class="error">❌ guidelines-dx-list element not found</p>';
+        }
+
+        // Test 3: Check functions
+        output += "<h3>Test 3: Functions</h3>";
+        if (typeof initializeGuidelinesList === "function") {
+          output +=
+            '<p class="success">✅ initializeGuidelinesList function exists</p>';
+        } else {
+          output +=
+            '<p class="error">❌ initializeGuidelinesList function not found</p>';
+        }
+
+        // Test 4: Try to populate manually
+        output += "<h3>Test 4: Manual Population Test</h3>";
+        if (typeof DIAGNOSES !== "undefined" && DIAGNOSES.length > 0) {
+          output +=
+            '<div style="max-height: 200px; overflow-y: auto; border: 1px solid #444; padding: 10px; margin: 10px 0;">';
+          DIAGNOSES.slice(0, 10).forEach((diagnosis) => {
+            output += `<div style="padding: 5px; border-bottom: 1px solid #333;">${diagnosis.name} (${diagnosis.id})</div>`;
+          });
+          output += `<div style="padding: 5px; font-style: italic;">... and ${DIAGNOSES.length - 10} more diagnoses</div>`;
+          output += "</div>";
+        }
+
+        results.innerHTML = output;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "id": "ms",
+  "name": "Mitral Stenosis",
+  "category": ["Valvular"],
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Exertional dyspnea",
+      "Orthopnea",
+      "Fatigue",
+      "Hemoptysis (rare)"
+    ],
+    "signs_any": [
+      "Diastolic rumble at apex with opening snap",
+      "Loud S1",
+      "Signs of pulmonary HTN (loud P2, RV heave)"
+    ]
+  },
+  "initial_tests": [
+    "Transthoracic echo (valve area, mean gradient, LA size, pulmonary pressures)",
+    "ECG (LA enlargement, AF common)",
+    "CXR (LA enlargement, pulmonary congestion)"
+  ],
+  "treatment": {
+    "all_patients_initial": [
+      "Diuretics for pulmonary congestion",
+      "Rate control (β-blocker, diltiazem, digoxin) if AF",
+      "Anticoagulation if AF, prior embolism, or LA thrombus"
+    ],
+    "intervention": [
+      "Percutaneous balloon mitral valvotomy if suitable anatomy",
+      "Surgical repair/replacement if not suitable or concurrent valve disease"
+    ]
+  },
+  "contraindications": {
+    "pregnancy": [
+      "Careful management; balloon valvotomy considered if severe symptoms"
+    ]
+  },
+  "follow_up": ["Echo q3–5y (mild), q1–2y (moderate), annually (severe)"],
+  "discharge": {
+    "instructions": [
+      "Report new-onset dyspnea, palpitations, or hemoptysis",
+      "Endocarditis prophylaxis only in select prosthetic/high-risk cases"
+    ],
+    "follow_up": ["Cardiology follow-up per severity and rhythm status"]
+  }
+}

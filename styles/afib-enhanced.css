@@ -1,0 +1,1001 @@
+/* Enhanced Atrial Fibrillation Styles */
+
+.enhanced-afib-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enhanced Header */
+.enhanced-header {
+  background: linear-gradient(135deg, var(--cardio-primary) 0%, #dc2626 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-header::before {
+  content: "🫀";
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  opacity: 0.3;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+
+  30% {
+    transform: translateY(-50%) scale(1.15);
+  }
+
+  60% {
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+.enhanced-header h2 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.af-classification {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.classification-badge,
+.prevalence-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+/* Quick Decision Panel */
+.quick-decisions {
+  border-left: 4px solid var(--cardio-primary);
+  background: linear-gradient(
+    145deg,
+    rgba(220, 38, 38, 0.05) 0%,
+    var(--panel) 100%
+  );
+}
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.decision-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.decision-card h4 {
+  margin: 0 0 1rem 0;
+  color: var(--cardio-primary);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.decision-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.decision-btn {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.decision-btn.unstable {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.decision-btn.unstable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.decision-btn.stable {
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.decision-btn.stable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.decision-btn.chadsvasc {
+  background: linear-gradient(135deg, var(--accent-2) 0%, #1e40af 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.decision-btn.chadsvasc:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Clinical Assessment */
+.assessment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.symptoms-section,
+.physical-findings,
+.classification-section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.symptom-list,
+.findings-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.symptom-list li,
+.findings-list li {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.symptom-marker {
+  color: var(--cardio-primary);
+  font-weight: bold;
+}
+
+.finding-marker {
+  color: var(--accent-2);
+  font-weight: bold;
+}
+
+.clinical-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid var(--accent-2);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.classification-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.classification-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.classification-item strong {
+  color: var(--cardio-primary);
+  font-size: 0.9rem;
+}
+
+/* CHADSVASC Calculator */
+.chadsvasc-calculator {
+  background: linear-gradient(
+    145deg,
+    rgba(59, 130, 246, 0.05) 0%,
+    rgba(220, 38, 38, 0.03) 100%
+  );
+  border-radius: 16px;
+  padding: 2rem;
+  border: 2px solid var(--border);
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.calculator-header h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.3rem;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.score-label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--cardio-primary) 0%,
+    var(--cardio-secondary) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.risk-assessment {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.risk-assessment.lowrisk {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+}
+
+.risk-assessment.lowmoderaterisk {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warn);
+}
+
+.risk-assessment.moderaterisk,
+.risk-assessment.highrisk {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.calculator-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calculator-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-2);
+}
+
+.calculator-item input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.calculator-item input[type="checkbox"]:checked + .checkmark {
+  background: var(--cardio-primary);
+  border-color: var(--cardio-primary);
+}
+
+.calculator-item input[type="checkbox"]:checked + .checkmark::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.condition {
+  flex: 1;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.points {
+  font-weight: 600;
+  color: var(--accent-2);
+  font-size: 0.9rem;
+}
+
+.interpretation-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.interpretation-panel h5 {
+  margin: 0 0 1rem 0;
+  color: var(--cardio-primary);
+}
+
+.risk-interpretation {
+  display: grid;
+  gap: 1rem;
+}
+
+.annual-risk,
+.recommendation {
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-2);
+}
+
+.annual-risk {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.recommendation {
+  background: rgba(220, 38, 38, 0.05);
+  border-left-color: var(--cardio-primary);
+}
+
+/* Treatment Tabs */
+.strategy-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tab-btn.active {
+  background: var(--cardio-primary);
+  color: white;
+}
+
+.tab-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--ink);
+}
+
+.treatment-tabs {
+  margin-top: 1rem;
+}
+
+.tab-content {
+  display: none;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 12px 12px 12px;
+  border: 1px solid var(--border);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Rate Control Content */
+.targets-section {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--success);
+  padding: 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 2rem;
+}
+
+.targets-section h4 {
+  color: var(--success);
+  margin: 0 0 1rem 0;
+}
+
+.targets-section ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.targets-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.agent-card {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.agent-card h5 {
+  margin: 0 0 1rem 0;
+  color: var(--cardio-primary);
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.agent-details p {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+}
+
+.agent-details strong {
+  color: var(--accent-2);
+}
+
+/* Medication Reference */
+.med-reference-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.med-tab {
+  padding: 1rem 2rem;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+.med-tab.active {
+  color: var(--cardio-primary);
+  border-bottom-color: var(--cardio-primary);
+}
+
+.med-tab:hover:not(.active) {
+  color: var(--ink);
+}
+
+.med-reference-content {
+  margin-top: 2rem;
+}
+
+.med-tab-content {
+  display: none;
+}
+
+.med-tab-content.active {
+  display: block;
+}
+
+.med-category {
+  margin-bottom: 2rem;
+}
+
+.med-category h5 {
+  color: var(--cardio-primary);
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  border-bottom: 2px solid var(--cardio-primary);
+  padding-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.drug-info {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--accent-2);
+}
+
+.drug-info h6 {
+  margin: 0 0 1rem 0;
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.dosing-info p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.dosing-info strong {
+  color: var(--accent-2);
+}
+
+.contraindications {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 3px solid var(--danger);
+  padding: 0.75rem;
+  border-radius: 0 6px 6px 0;
+  margin-top: 1rem;
+}
+
+.contraindications strong {
+  color: var(--danger);
+}
+
+/* DOAC Comparison */
+.doac-section,
+.warfarin-section {
+  margin-bottom: 2rem;
+}
+
+.doac-section h5,
+.warfarin-section h5 {
+  color: var(--cardio-primary);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  border-bottom: 2px solid var(--cardio-primary);
+  padding-bottom: 0.5rem;
+}
+
+.doac-card,
+.warfarin-info {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.doac-card h6,
+.warfarin-info h6 {
+  margin: 0 0 1rem 0;
+  color: var(--cardio-primary);
+  font-size: 1.1rem;
+}
+
+.unique-features {
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 3px solid var(--accent-2);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+}
+
+.unique-features strong {
+  color: var(--accent-2);
+}
+
+.unique-features ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.indications {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--success);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+}
+
+.indications strong {
+  color: var(--success);
+}
+
+.indications ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+/* Teaching Content */
+.teaching-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.teaching-tab {
+  padding: 1rem 2rem;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+.teaching-tab.active {
+  color: var(--cardio-primary);
+  border-bottom-color: var(--cardio-primary);
+}
+
+.teaching-tab:hover:not(.active) {
+  color: var(--ink);
+}
+
+.teaching-tab-content {
+  margin-top: 2rem;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Clinical Pearls */
+.pearl-category {
+  margin-bottom: 2rem;
+}
+
+.pearl-category h5 {
+  color: var(--cardio-primary);
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  border-bottom: 2px solid var(--cardio-primary);
+  padding-bottom: 0.5rem;
+}
+
+.pearl-item {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--success);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.pearl-item:hover {
+  background: rgba(16, 185, 129, 0.1);
+  transform: translateX(2px);
+}
+
+.pearl-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.pearl-significance,
+.pearl-evidence {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.pearl-significance strong,
+.pearl-evidence strong {
+  color: var(--success);
+}
+
+/* Common Pitfalls */
+.pitfall-item {
+  background: rgba(239, 68, 68, 0.05);
+  border-left: 3px solid var(--danger);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.pitfall-item:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: translateX(2px);
+}
+
+.pitfall-warning {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--danger);
+  margin-bottom: 1rem;
+}
+
+.pitfall-consequence,
+.pitfall-recognition,
+.pitfall-solution {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.pitfall-consequence strong,
+.pitfall-recognition strong,
+.pitfall-solution strong {
+  color: var(--danger);
+}
+
+/* Safety Alerts */
+.safety-alert-item {
+  background: rgba(245, 158, 11, 0.05);
+  border-left: 3px solid var(--warn);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.safety-alert-item:hover {
+  background: rgba(245, 158, 11, 0.1);
+  transform: translateX(2px);
+}
+
+.alert-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--warn);
+  margin-bottom: 1rem;
+}
+
+.alert-scenario,
+.alert-recognition,
+.alert-management,
+.alert-prevention {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.alert-scenario strong,
+.alert-recognition strong,
+.alert-management strong,
+.alert-prevention strong {
+  color: var(--warn);
+}
+
+/* Discharge Planning */
+.discharge-checklist {
+  margin-bottom: 2rem;
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.checklist-section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.checklist-section h5 {
+  color: var(--cardio-primary);
+  margin: 0 0 1rem 0;
+}
+
+.discharge-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.discharge-list li {
+  margin-bottom: 0.75rem;
+}
+
+.discharge-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.discharge-list input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cardio-primary);
+}
+
+.red-flags {
+  background: rgba(239, 68, 68, 0.05);
+  border: 2px solid var(--danger);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.red-flags h4 {
+  color: var(--danger);
+  margin: 0 0 1rem 0;
+}
+
+.red-flag-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.red-flag-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--danger);
+  font-weight: 500;
+}
+
+.follow-up {
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid var(--accent-2);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.follow-up h4 {
+  color: var(--accent-2);
+  margin: 0 0 1rem 0;
+}
+
+.follow-up-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.follow-up-item:last-child {
+  border-bottom: none;
+}
+
+.follow-up-item strong {
+  color: var(--accent-2);
+}
+
+/* Modal Styles */
+.afib-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: var(--panel);
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--cardio-primary) 0%, #dc2626 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+  padding: 2rem;
+  max-height: calc(80vh - 100px);
+  overflow-y: auto;
+}
+
+.emergency-steps ol {
+  padding-left: 1.5rem;
+}
+
+.emergency-steps li {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.emergency-note,
+.management-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid var(--accent-2);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+}

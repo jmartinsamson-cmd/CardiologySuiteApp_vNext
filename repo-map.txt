@@ -1,0 +1,250 @@
+.
+(0tqq (B8081PORT=8081
+(0tqq (BACCESSIBILITY_FIXES.md
+(0tqq (BACCESSIBILITY_FIXES_SUMMARY.md
+(0tqq (BAI_ANALYZER_COMMANDS.md
+(0tqq (BAI_PROJECT_CONTEXT.md
+(0tqq (BAImodule
+(0tqq (BCHANGELOG.md
+(0tqq (BCI_PIPELINE.md
+(0tqq (BCSS-LOCKDOWN.md
+(0tqq (BDEBUG_GUIDE.md
+(0tqq (BDEBUG_MODE.md
+(0tqq (BDEV_CONTEXT.md
+(0tqq (BFEATURE_FLAGS.md
+(0tqq (BMedicalQandA.prompt.yml
+(0tqq (BPARSER_DEBUG.md
+(0tqq (BPERFORMANCE_BUDGET.md
+(0tqq (BQUALITY_PIPELINE.md
+(0tqq (BREADME.md
+(0tqq (BSECURITY.md
+(0tqq (BSECURITY_CONFIG.md
+(0tqq (BVISUAL_PRESERVATION_GUIDE.md
+(0tqq (Ba11y-patch.md
+(0tqq (Badd_onclick.py
+(0tqq (Banalyze_cleanup.py
+(0tqq (Bapi-search.log
+(0tqq (Bcardiology-suite.code-workspace
+(0tqq (Bconfig
+(0x   mqq (Bfeatures.json
+(0tqq (Bcspell-cardiology-dict.txt
+(0tqq (Bcspell.json
+(0tqq (Bdata
+(0x   tqq (Barchive
+(0x   x   mqq (Bincoming_merged_20250928
+(0x   tqq (Bcardiac_procedures.json
+(0x   tqq (Bcardiology_diagnoses
+(0x   x   mqq (Bcardiology.json
+(0x   tqq (Bcardiology_index.json
+(0x   tqq (Bdb.json
+(0x   tqq (Bdiagnosis_blacklist.json
+(0x   tqq (Bdiagnosis_whitelist.json
+(0x   tqq (Benhanced
+(0x   x   tqq (Bafib_enhanced.json
+(0x   x   tqq (Bafib_medications.json
+(0x   x   tqq (Bafib_procedures.json
+(0x   x   mqq (Bafib_teaching.json
+(0x   tqq (Bguidelines
+(0x   x   mqq (Bacc_guidelines.json
+(0x   tqq (Blabs_reference
+(0x   x   mqq (Blabs_reference.json
+(0x   tqq (Bmeds
+(0x   x   mqq (Bcardiac_meds.json
+(0x   tqq (Bplan_rules
+(0x   x   mqq (Bplan_rules.json
+(0x   tqq (Bteaching
+(0x   x   mqq (Bteaching_content.json
+(0x   tqq (Bvalidate_json.cjs
+(0x   mqq (Bvalidate_json.js
+(0tqq (Bdead-code-removal.patch
+(0tqq (Bdocs
+(0x   tqq (BAI_ANALYZER_INTEGRATION.md
+(0x   tqq (BAI_ANALYZER_QUICKSTART.md
+(0x   tqq (BAI_ANALYZER_TEST_RESULTS.md
+(0x   tqq (BAI_ANALYZER_VERIFICATION.md
+(0x   tqq (BPARSER_IMPROVEMENTS_NEEDED.md
+(0x   tqq (BPARSER_PATTERNS_ANALYSIS.md
+(0x   tqq (BPARSER_PROGRESS_REPORT.md
+(0x   tqq (BPARSER_TESTING_GUIDE.md
+(0x   tqq (BPARSER_TESTING_QUICKSTART.md
+(0x   tqq (BQUICK_REFERENCE.md
+(0x   tqq (BSESSION_SUMMARY.md
+(0x   tqq (BSVG_SANITIZER.md
+(0x   tqq (Barchive
+(0x   x   tqq (BBUNDLE_REPORT.md
+(0x   x   tqq (BCLEANUP_COMPLETE.md
+(0x   x   tqq (BCLEANUP_SUMMARY.md
+(0x   x   tqq (BCOLOR_ANIMATION_STATUS.md
+(0x   x   tqq (BDEAD_CODE_REPORT.md
+(0x   x   tqq (BDIRECTORY_ISSUE_SOLVED.md
+(0x   x   tqq (BPROBLEM_SOLVED.md
+(0x   x   tqq (BREADME_new.md
+(0x   x   tqq (BREADME_old.md
+(0x   x   mqq (BRELIABILITY_SYSTEM_COMPLETE.md
+(0x   tqq (Bgovernance.md
+(0x   tqq (Blegacy-migration.md
+(0x   tqq (Brelease-notes-v1.0.0.md
+(0x   tqq (Buat-results.md
+(0x   tqq (Buat.md
+(0x   tqq (Bunused-report.json
+(0x   mqq (Bunused-report.md
+(0tqq (Beslint.config.cjs
+(0tqq (Beslint.config.js
+(0tqq (Bguidelines.html
+(0tqq (Bhealth-check-simple.ps1
+(0tqq (Bhealth-check.ps1
+(0tqq (Bicons
+(0x   mqq (Bicon.svg
+(0tqq (Bindex.html
+(0tqq (Bindex_original_github.html
+(0tqq (Bjsconfig.json
+(0tqq (Bknip-output.json
+(0tqq (Bknip-report.json
+(0tqq (Blighthouserc.json
+(0tqq (Bmanifest.json
+(0tqq (Bmeds.html
+(0tqq (Bpackage-lock.json
+(0tqq (Bpackage.json
+(0tqq (Bpages
+(0x   mqq (Bmeds.js
+(0tqq (Brepo-map.txt
+(0tqq (Brestore-visual-layout.ps1
+(0tqq (Bscripts
+(0x   tqq (Banalyze-imports.js
+(0x   tqq (Bclean-data-jsons.js
+(0x   tqq (Bcss-integrity-check.ps1
+(0x   tqq (Bcss-protection-check.ps1
+(0x   tqq (Bdebug-fulltext.js
+(0x   tqq (Bdebug-sections.js
+(0x   tqq (Bdebug-test.js
+(0x   tqq (Bdebug-vitals-minmax.js
+(0x   tqq (Bdebug-vitals.js
+(0x   tqq (Bgenerate-css-hash.ps1
+(0x   tqq (BgenerateNote.ts
+(0x   tqq (Bparse-samples.js
+(0x   tqq (Bparse.js
+(0x   tqq (Bremove-dead-code.sh
+(0x   tqq (Bsecurity-file-integrity.js
+(0x   tqq (Bsecurity-phi-scanner.js
+(0x   tqq (Btest-diff.js
+(0x   tqq (Bupdate-snapshots.js
+(0x   tqq (Bvalidate-data-jsons.js
+(0x   tqq (Bvalidate-features.js
+(0x   mqq (Bvalidate-json-simple.js
+(0tqq (Bserver.py
+(0tqq (Bsrc
+(0x   tqq (Bassets
+(0x   x   mqq (Bpdfs
+(0x   tqq (Bcore
+(0x   x   mqq (Bapp.js
+(0x   tqq (Beducation
+(0x   x   tqq (BREADME.md
+(0x   x   tqq (BSETUP.md
+(0x   x   tqq (Bcontent
+(0x   x   tqq (Bindex.js
+(0x   x   tqq (Bresources
+(0x   x   mqq (Brouter-integration.example.js
+(0x   tqq (Bguidelines
+(0x   x   mqq (Bguidelines.js
+(0x   tqq (Bparsers
+(0x   x   tqq (BaiAnalyzer.js
+(0x   x   tqq (BentityExtraction.js
+(0x   x   tqq (Bnormalize.js
+(0x   x   tqq (BnoteParser.js
+(0x   x   tqq (BnoteParser.worker.js
+(0x   x   tqq (BnoteParser_full.js
+(0x   x   tqq (BnoteParser_full_async.js
+(0x   x   tqq (BparseNoteCoordinator.js
+(0x   x   tqq (BparserChunker.js
+(0x   x   tqq (BsmartParser.js
+(0x   x   tqq (Bsynonyms.js
+(0x   x   mqq (BtemplateRenderer.js
+(0x   tqq (Bserver
+(0x   x   mqq (Bai-search
+(0x   mqq (Butils
+(0x       tqq (BdebugInstrumentation.js
+(0x       tqq (BdiagnosisSanitizer.js
+(0x       tqq (BjankMonitor.js
+(0x       tqq (BparserHelpers.js
+(0x       tqq (Bregex.ts
+(0x       tqq (Bsanitizer.js
+(0x       tqq (Bscheduler.js
+(0x       tqq (BsvgSanitizer.browser.js
+(0x       mqq (BsvgSanitizer.js
+(0tqq (Bstart-ai-suite.sh
+(0tqq (Bstart-cardiology-suite-clean.ps1
+(0tqq (Bstart-cardiology-suite-fixed.ps1
+(0tqq (Bstart-cardiology-suite.ps1
+(0tqq (Bstart-server.bat
+(0tqq (Bstart-server.sh
+(0tqq (Bstop-ai-servers.sh
+(0tqq (Bstyles
+(0x   tqq (Bafib-enhanced.css
+(0x   tqq (Bcss-integrity.json
+(0x   tqq (Bdx-labs.css
+(0x   tqq (Bglobals.css
+(0x   tqq (Bguidelines.css
+(0x   tqq (Blayout.css
+(0x   tqq (Bmeds.css
+(0x   tqq (Bnote-styles.css
+(0x   tqq (Bstyle.css
+(0x   tqq (Btokens.css
+(0x   mqq (Bunified-diagnosis.css
+(0tqq (Bsw.js
+(0tqq (Btailwind.config.js
+(0tqq (Btest-results
+(0tqq (Btests
+(0x   tqq (BPERF_TEST_README.md
+(0x   tqq (BSNAPSHOT_DEMO.md
+(0x   tqq (BTESTING_SUMMARY.md
+(0x   tqq (BVISUAL_TESTING.md
+(0x   tqq (Ba11y-mpa.spec.ts
+(0x   tqq (Ba11y.spec.ts
+(0x   tqq (Bangina.spec.ts
+(0x   tqq (Be2e.spec.ts
+(0x   tqq (Bfixtures
+(0x   x   tqq (B01-clean-structured.txt
+(0x   x   tqq (B02-out-of-order.txt
+(0x   x   tqq (B03-synonyms.txt
+(0x   x   tqq (B04-all-caps.txt
+(0x   x   tqq (B05-no-plan.txt
+(0x   x   tqq (B06-inline-vitals.txt
+(0x   x   tqq (B07-bullets-vs-paragraphs.txt
+(0x   x   tqq (B08-unicode-quotes.txt
+(0x   x   tqq (B09-extra-whitespace.txt
+(0x   x   tqq (B10-minimal-note.txt
+(0x   x   tqq (Breal
+(0x   x   mqq (Bunit
+(0x   tqq (Bmanual
+(0x   x   tqq (Bdebug.html
+(0x   x   tqq (Bguidelines-debug.html
+(0x   x   tqq (Binspect.html
+(0x   x   tqq (Bjstest.html
+(0x   x   tqq (Bsvg-sanitizer-browser-test.html
+(0x   x   tqq (Btest-angina-routing.html
+(0x   x   tqq (Btest-parse-debug.html
+(0x   x   mqq (Btest-parsing.html
+(0x   tqq (Bparser-pipeline.unit.spec.js
+(0x   tqq (Bparsing.real-notes.spec.js
+(0x   tqq (Bparsing.smart.spec.js
+(0x   tqq (Bperf-no-freeze.spec.ts
+(0x   tqq (Bplaywright.config.ts
+(0x   tqq (Bsidebar.sanitize.spec.ts
+(0x   tqq (Bsmoke-parsing.spec.js
+(0x   tqq (Bsnapshots
+(0x   x   mqq (Bvisual.spec.ts
+(0x   tqq (Bsvg-sanitizer.spec.js
+(0x   tqq (Btest-runner.html
+(0x   tqq (Btest_large_note.js
+(0x   tqq (Btsconfig.json
+(0x   tqq (Bunit
+(0x   x   tqq (BextractVitals.spec.ts
+(0x   x   mqq (Bvitals-labs.spec.ts
+(0x   tqq (Bvisual.spec.ts
+(0x   mqq (Bvitals-labs-check.spec.ts
+(0tqq (Btsconfig.json
+(0tqq (Btypes
+(0x   mqq (Bglobal.d.ts
+(0mqq (Bvite.config.js
+
+40 directories, 208 files

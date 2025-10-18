@@ -1,0 +1,162 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+# Cancel in-progress runs for same workflow + branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI Pipeline
+    runs-on: ubuntu-latest
+
+    # Fail fast - stop on first error
+    strategy:
+      fail-fast: true
+
+    steps:
+      # ===================================================================
+      # SETUP
+      # ===================================================================
+
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+        env:
+          CI: true
+
+      # ===================================================================
+      # VALIDATION
+      # ===================================================================
+
+      - name: ✅ Validate feature flags
+        id: validate
+        run: npm run validate:features
+        continue-on-error: false
+
+      # ===================================================================
+      # LINTING
+      # ===================================================================
+
+      - name: 🔍 Lint code (ESLint)
+        id: lint
+        run: npm run lint
+        continue-on-error: false
+
+      # ===================================================================
+      # TYPE CHECKING
+      # ===================================================================
+
+      - name: 🔎 Type check (TypeScript)
+        id: typecheck
+        run: npm run type-check
+        continue-on-error: false
+
+      # ===================================================================
+      # UNIT TESTS
+      # ===================================================================
+
+      - name: 🧪 Run unit tests
+        id: unit
+        run: npm run test:unit
+        continue-on-error: false
+
+      - name: 🧪 Run parser tests
+        id: parser
+        run: npm run test:parser
+        continue-on-error: false
+
+      # ===================================================================
+      # E2E TESTS
+      # ===================================================================
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: 🧪 Run E2E tests (headless)
+        id: e2e
+        run: npm run test:e2e
+        env:
+          CI: true
+        continue-on-error: false
+
+      - name: 📸 Upload E2E test artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: 📸 Upload E2E screenshots (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-screenshots
+          path: test-results/
+          retention-days: 7
+
+      # ===================================================================
+      # PERFORMANCE
+      # ===================================================================
+
+      - name: 📊 Check bundle sizes
+        id: size
+        run: npm run size
+        env:
+          CI: true
+        continue-on-error: false
+
+      # ===================================================================
+      # SUMMARY
+      # ===================================================================
+
+      - name: ✅ Generate job summary
+        if: always()
+        run: |
+          echo "## CI Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Stage | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Install | ✅ Pass |" >> $GITHUB_STEP_SUMMARY
+          echo "| Feature Flags | ${{ steps.validate.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint | ${{ steps.lint.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Type Check | ${{ steps.typecheck.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Unit Tests | ${{ steps.unit.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| E2E Tests | ${{ steps.e2e.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Bundle Size | ${{ steps.size.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+
+  # Optional: Add annotations for common errors
+  annotate-errors:
+    name: Annotate Errors
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: ci
+
+    steps:
+      - name: 📝 Add error annotations
+        run: |
+          echo "::error::CI Pipeline failed. Check the logs above for details."
+          echo "::notice::Common fixes:"
+          echo "::notice::- Lint errors: Run 'npm run lint:fix' locally"
+          echo "::notice::- Type errors: Run 'npm run type-check' locally"
+          echo "::notice::- Test failures: Run 'npm run test:unit' locally"
+          echo "::notice::- E2E failures: Check test-results artifacts"
+          echo "::notice::- Bundle size: Check .size-limit.json budgets"

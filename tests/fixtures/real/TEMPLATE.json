@@ -1,0 +1,49 @@
+{
+  "id": "note-XXX",
+  "description": "Brief description of clinical scenario (e.g., 'STEMI admission', 'HF follow-up', 'EP consult')",
+  "category": "common | edge-case | specialty | error",
+  "input": "PASTE YOUR FULL DE-IDENTIFIED NOTE TEXT HERE\n\nHISTORY OF PRESENT ILLNESS:\n68yo M with...\n\nPHYSICAL EXAMINATION:\nVitals: BP 145/88, HR 92...\n\nASSESSMENT:\n1. Acute decompensated heart failure...\n\nPLAN:\n1. Increase furosemide...",
+  "expected": {
+    "patient": {
+      "age": 68,
+      "gender": "male",
+      "mrn": null,
+      "dob": null
+    },
+    "vitals": {
+      "bp": "145/88",
+      "hr": 92,
+      "rr": 18,
+      "spo2": 94,
+      "temp": 98.6
+    },
+    "subjective": "Expected HPI/Subjective content here (can be abbreviated, just key phrases)",
+    "objective": "Expected Physical Exam content here",
+    "assessment": "Expected Assessment/Diagnoses content here",
+    "plan": "Expected Plan content here",
+    "diagnoses": ["Heart failure", "Hypertension", "Diabetes"],
+    "medications": ["Furosemide", "Metoprolol", "Lisinopril"],
+    "allergies": ["NKDA"],
+    "labs": {
+      "troponin": null,
+      "bnp": 850,
+      "hgb": 12.5,
+      "creatinine": 1.2
+    }
+  },
+  "mustHave": {
+    "vitals.bp": "145/88",
+    "vitals.hr": 92,
+    "patient.age": 68,
+    "diagnoses": ["Heart failure"]
+  },
+  "shouldNotHave": {
+    "diagnoses": ["Cancer", "Stroke"]
+  },
+  "notes": [
+    "Optional: Document known parser limitations with this note",
+    "Optional: Link to related GitHub issue"
+  ],
+  "skip": false,
+  "skipReason": "Optional: Why this test is temporarily disabled"
+}

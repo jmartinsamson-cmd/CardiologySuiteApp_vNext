@@ -1,0 +1,88 @@
+{
+  "diagnoses": [
+    {
+      "id": "tr",
+      "name": "Tricuspid Regurgitation",
+      "category": ["Valvular"],
+      "clinical_triggers": {
+        "symptoms_any": ["Fatigue", "Abdominal fullness", "Edema", "Ascites"],
+        "signs_any": [
+          "Holosystolic murmur at lower left sternal border, ↑ with inspiration (Carvallo sign)",
+          "Jugular venous distension with prominent v waves",
+          "Hepatomegaly, pulsatile liver",
+          "Peripheral edema, ascites"
+        ]
+      },
+      "initial_tests": [
+        "Transthoracic echo (severity, RV size/function, annular dilation, pulmonary pressures)",
+        "ECG (AF, RVH if pulmonary HTN)",
+        "CXR (RA/RV enlargement, pleural effusion)"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "Treat underlying cause (pulmonary HTN, left-sided heart disease, endocarditis, congenital)",
+          "Diuretics for volume overload"
+        ],
+        "intervention": [
+          "Surgical repair/replacement if severe symptomatic TR or undergoing left-sided surgery",
+          "Transcatheter options emerging for high-risk surgical candidates"
+        ]
+      },
+      "follow_up": ["Serial echo based on severity and RV function"],
+      "discharge": {
+        "instructions": [
+          "Monitor for worsening edema, ascites, fatigue",
+          "Medication adherence (diuretics, anticoagulation if AF)"
+        ],
+        "follow_up": [
+          "Cardiology follow-up; consider advanced therapies if refractory symptoms"
+        ]
+      }
+    },
+    {
+      "id": "pulm_valve",
+      "name": "Pulmonic Valve Disease",
+      "category": ["Valvular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Often asymptomatic if mild",
+          "Dyspnea on exertion",
+          "Fatigue",
+          "Right-sided heart failure symptoms (advanced)"
+        ],
+        "signs_any": [
+          "Pulmonic stenosis: systolic ejection murmur at LUSB radiating to back",
+          "Pulmonic regurgitation: diastolic decrescendo murmur (Graham Steell if due to pulmonary HTN)",
+          "RV lift/heave if severe disease"
+        ]
+      },
+      "initial_tests": [
+        "Transthoracic echo (valve morphology, gradients, regurgitant jet, RV size/function)",
+        "ECG (RVH, RA enlargement)",
+        "CXR (pulmonary artery dilation, RV enlargement)"
+      ],
+      "treatment": {
+        "pulmonic_stenosis": [
+          "Balloon valvuloplasty for symptomatic severe PS (or asymptomatic severe with RV dysfunction)",
+          "Surgery if not suitable for balloon or with other lesions"
+        ],
+        "pulmonic_regurgitation": [
+          "Treat underlying pulmonary HTN",
+          "Valve replacement if severe PR with RV dilation/dysfunction and symptoms"
+        ]
+      },
+      "follow_up": [
+        "Serial echo for moderate/severe lesions, RV size/function monitoring"
+      ],
+      "discharge": {
+        "instructions": [
+          "Report exertional dyspnea, edema, syncope",
+          "Maintain dental hygiene (endocarditis risk if prosthetic valve)"
+        ],
+        "follow_up": [
+          "Cardiology/congenital specialist follow-up depending on etiology"
+        ]
+      }
+    }
+  ]
+}

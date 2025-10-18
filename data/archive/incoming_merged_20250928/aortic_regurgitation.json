@@ -1,0 +1,45 @@
+{
+  "id": "ar",
+  "name": "Aortic Regurgitation",
+  "category": ["Valvular"],
+  "clinical_triggers": {
+    "symptoms_any": ["Exertional dyspnea", "Fatigue", "Palpitations", "Angina"],
+    "signs_any": [
+      "Diastolic blowing murmur at left sternal border",
+      "Wide pulse pressure",
+      "Bounding 'water-hammer' pulse",
+      "De Musset’s head bobbing, Quincke’s pulse (severe chronic AR)"
+    ]
+  },
+  "initial_tests": [
+    "Transthoracic echo (severity, LV size/function, root/ascending aorta)",
+    "ECG (LVH, nonspecific changes)",
+    "CXR (cardiomegaly, aortic root dilation)",
+    "BNP for prognostic info in chronic AR"
+  ],
+  "treatment": {
+    "all_patients_initial": [
+      "Afterload reduction (ACEi/ARB, nifedipine) may improve symptoms in severe AR if not surgical candidate",
+      "Treat underlying causes (syphilis, endocarditis, aortic root disease, etc.)"
+    ],
+    "definitive": [
+      "Symptomatic severe AR or LV systolic dysfunction (LVEF ≤50%): AVR (surgical preferred)",
+      "Asymptomatic severe AR with progressive LV dilation: AVR"
+    ]
+  },
+  "contraindications": {
+    "beta_blockers": [
+      "Avoid in isolated severe AR — prolongs diastole and worsens regurgitant volume"
+    ]
+  },
+  "follow_up": [
+    "Echo surveillance: mild q3–5y, moderate q1–2y, severe q6–12mo"
+  ],
+  "discharge": {
+    "instructions": [
+      "Monitor for new dyspnea, chest pain, palpitations",
+      "Maintain good dental hygiene (endocarditis risk)"
+    ],
+    "follow_up": ["Cardiology/valve clinic follow-up per severity"]
+  }
+}

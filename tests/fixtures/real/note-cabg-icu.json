@@ -1,0 +1,84 @@
+{
+  "id": "note-003",
+  "description": "70yo M post-CABG/AVR/LAA ligation, ESRD on HD, intubated in ICU",
+  "input": "70 year old male, with significant past medical history of hypertension, type 2 diabetes mellitus, HFrEF, ESRD s/p transplant now on HD, Enterococcus infective endocarditis, CAD s/p two-vessel CABG with aortic valve replacement and ligation of left atrial appendage, and prostate cancer s/p prostatectomy, who was admitted to the ICU post CABG on 9/11/2025. Stepped down on 9/18/25. Worsening respiratory distress noted on 9/23/25 and imaging demonstrated worsening volume overload. Pulmonology was consulted for further evaluation. Transferred back to ICU 9/25/25 for close monitoring. \n \n\n9/11/25: admitted to ICU post CABG, AVR, and left atrial appendage ligation\n9/15/25: HD initiated\n9/18/25: stepped down from ICU\n9/24/25: Pulm consulted for right pleural effusion and increased work of breathing\n \n \nInterval History:\nCurrently intubated RR18, TV 450, PEEP 5, FIO@ 30%.  Occ opens eyes on command and moves all 4 extremities.  Receiving dialysis today.  Left chest tube remains in place with limited output.\n \nScheduled Medications: \n•\talbum human 25%\t 12.5 g\tIntravenous\tOnce\n•\talbumin human 25%\t 12.5 g\tIntravenous\tOnce\n•\talbumin human 25%\t 25 g\tIntravenous\tOnce\n•\talbuterol-ipratropium\t 3 mL\tNebulization\tQ6H\n•\tamiodarone\t 200 mg\tPer NG tube\tDaily\n•\tamLODIPine\t 10 mg\tPer OG tube\tDaily\n•\tampicillin IV (PEDS and ADULTS)\t 2 g\tIntravenous\tQ12H\n•\taspirin\t 81 mg\tPer OG tube\tDaily\n•\tatorvastatin\t 40 mg\tPer OG tube\tQHS\n•\tcalcitRIOL\t 0.5 mcg\tPer OG tube\tDaily\n•\tcefTRIAXone (Rocephin) IV (PEDS and ADULTS)\t 2 g\tIntravenous\tQ12H\n•\tdocusate\t 100 mg\tPer G Tube\tBID\n•\tenoxparin\t 30 mg\tSubcutaneous\tQ24H (prophylaxis, 1700)\n•\tfamotidine (PF)\t 20 mg\tIntravenous\tDaily\n•\tfolic acid\t 1 mg\tPer OG tube\tDaily\n•\tinsulin glargine U-100\t 20 Units\tSubcutaneous\tBID\n•\tmetoprolol tartrate\t 25 mg\tPer OG tube\tBID\n•\tpredniSONE\t 7 mg\tPer OG tube\tDaily\n•\tsodium chloride 3%\t 4 mL\tNebulization\tQ6H\n•\ttacrolimus\t 3 mg\tPer OG tube\tBID\n \n \nPRN Medications: \n \nCurrent Facility-Administered Medications: \n•  0.9%  NaCl infusion (for blood administration), , Intravenous, Q24H PRN\n•  acetaminophen, 650 mg, Per OG tube, Q6H PRN\n•  albumin human 25%, 25 g, Intravenous, Q20 Min PRN\n•  albumin human 5%, 12.5 g, Intravenous, PRN\n•  calcium carbonate, 500 mg, Per OG tube, TID PRN\n•  calcium gluconate IVPB, 1 g, Intravenous, PRN\n•  calcium gluconate IVPB, 2 g, Intravenous, PRN\n•  calcium gluconate IVPB, 3 g, Intravenous, PRN\n•  dextrose 50%, 12.5 g, Intravenous, PRN\n•  dextrose 50%, 25 g, Intravenous, PRN\n•  glucagon (human recombinant), 1 mg, Intramuscular, PRN\n•  glucose, 16 g, Per OG tube, PRN\n•  glucose, 24 g, Per OG tube, PRN\n•  guaiFENesin 100 mg/5 ml, 200 mg, Per OG tube, Q4H PRN\n•  hydrALAZINE, 10 mg, Intravenous, Q6H PRN\n•  insulin aspart U-100, 0-10 Units, Subcutaneous, Q6H PRN\n•  lactulose 10 gram/15 ml, 20 g, Per OG tube, Q6H PRN\n•  loperamide, 2 mg, Per OG tube, Continuous PRN\n•  magnesium sulfate 2 g IVPB, 2 g, Intravenous, PRN\n•  magnesium sulfate 2 g IVPB, 2 g, Intravenous, PRN\n•  metoclopramide, 5 mg, Intravenous, Q12H PRN\n•  naloxone, 0.02 mg, Intravenous, PRN\n•  ondansetron, 4 mg, Intravenous, Q4H PRN\n•  potassium chloride in water, 20 mEq, Intravenous, PRN\n•  potassium chloride in water, 40 mEq, Intravenous, PRN\n•  potassium chloride in water, 60 mEq, Intravenous, PRN\n•  [COMPLETED] CTA Chest Non-Coronary (PE Studies), , , Once **AND** sodium chloride 0.9%, 1,000 mL, Intravenous, Daily PRN\n•  sodium chloride 0.9%, 10 mL, Intravenous, PRN\n•  sodium phosphate 15 mmol in D5W 250 mL IVPB, 15 mmol, Intravenous, PRN\n•  sodium phosphate 20.1 mmol in D5W 250 mL IVPB, 20.1 mmol, Intravenous, PRN\n•  sodium phosphate 30 mmol in D5W 250 mL IVPB, 30 mmol, Intravenous, PRN\n \n \nInfusions:  \n•\tloperamide\t 2 mg\tPer OG tube\tContinuous PRN\t \t \n•\tNORepinephrine bitartrate-D5W\t 0-3 mcg/kg/min\tIntravenous\tContinuous\t \tStopped at 09/29/25 1238\n•\tpropofoL\t 0-50 mcg/kg/min\tIntravenous\tContinuous\t4.6 mL/hr at 09/27/25 0600\t10 mcg/kg/min at 09/27/25 0600\n \n \n \nFluid Balance: \n \nIntake/Output Summary (Last 24 hours) at 10/1/2025 0905\nLast data filed at 10/1/2025 0530\nGross per 24 hour\nIntake\t1961 ml\nOutput\t2500 ml\nNet\t-539 ml\n \n \n \nVital Signs: \nVitals:\n \t10/01/25 0824\nBP:\t \nPulse:\t74\nResp:\t(!) 22\nTemp:\t \n \n \n \nPhysical Exam\nVitals and nursing note reviewed. \nConstitutional:  \n   General: He is not in acute distress.\n   Appearance: Normal appearance. He is ill-appearing. He is not toxic-appearing. \nHENT: \n   Head: Normocephalic and atraumatic. \n   Right Ear: External ear normal. \n   Left Ear: External ear normal. \n   Nose: Nose normal. \n   Mouth/Throat: \n   Pharynx: No posterior oropharyngeal erythema. \n   Comments: Unable to visualize posterior oropharynx secondary to endotracheal tube\nEyes: \n   General: No scleral icterus.\n   Conjunctiva/sclera: Conjunctivae normal. \n   Pupils: Pupils are equal, round, and reactive to light. \nNeck: \n   Vascular: No carotid bruit. \nCardiovascular: \n   Rate and Rhythm: Normal rate and regular rhythm. \n   Pulses: Normal pulses. \n   Heart sounds: Normal heart sounds. No murmur heard.\n   No friction rub. No gallop. \nPulmonary: \n   Effort: Pulmonary effort is normal. No respiratory distress. \n   Breath sounds: Normal breath sounds. No wheezing, rhonchi or rales. \n   Comments: Intubated, on mechanical ventilation\nAbdominal: \n   General: Abdomen is flat. Bowel sounds are normal. There is no distension. \n   Palpations: Abdomen is soft. \n   Tenderness: There is no abdominal tenderness. There is no guarding or rebound. \nMusculoskeletal:    \n   General: No swelling or deformity. \n   Cervical back: Neck supple. No rigidity or tenderness. \nSkin:\n   General: Skin is warm and dry. \n   Capillary Refill: Capillary refill takes less than 2 seconds. \n   Findings: No erythema or rash. \nNeurological: \n   Comments: Unable to fully assess neurologic status and orientation.  Does  follow commands and is currently not sedated.  Withdraws to pain at lower extremities and minimally to command.  Occ opens eyes \nPsychiatric: \n   Comments: Unable to fully assess as patient is intubated and nonverbal \n\n \n \n \nVentilator Settings\nVent Mode: A/C (10/01/25 0523)\nVentilator Initiated: Yes (09/25/25 2300)\nSet Rate: 18 BPM (10/01/25 0523)\nVt Set: 450 mL (10/01/25 0523)\nPressure Support: 8 cmH20 (09/27/25 0803)\nPEEP/CPAP: 5 cmH20 (10/01/25 0523)\nOxygen Concentration (%): 30 (10/01/25 0523)\nPeak Airway Pressure: 20 cmH20 (10/01/25 0523)\nPlateau Pressure: 21 cmH20 (09/29/25 1809)\nTotal Ve: 8.9 L/m (10/01/25 0523)\nF/VT Ratio<105 (RSBI): (!) 45.05 (10/01/25 0523)\n \n \nLaboratory Studies: \nRecent Labs\nLab\t10/01/25\n0508\nPH\t7.490*\nPCO2\t40.0\nPO2\t116.0*\nHCO3\t30.5*\n \nRecent Labs\nLab\t10/01/25\n0351\nWBC\t12.09*\nRBC\t3.89*\nHGB\t10.6*\nHCT\t35.8*\nPLT\t184\nMCV\t92.0\nMCH\t27.2\nMCHC\t29.6*\n \nRecent Labs\nLab\t10/01/25\n0351\nNA\t136\nK\t5.0\nCL\t98\nCO2\t25\nBUN\t45.2*\nCREATININE\t3.89*\nCALCIUM\t8.5*\nMG\t2.20\n \n \n \nMicrobiology Data: \nMicrobiology Results (last 7 days) \n \n \tProcedure\tComponent\tValue\tUnits\tDate/Time\n \tBlood Culture [1336834478]  (Normal)\tCollected: 09/26/25 1240\n \tOrder Status: Completed\tSpecimen: Blood, Venous\tUpdated: 09/30/25 1601\n \t \tBlood Culture\tNo Growth At 96 Hours\n \tBlood Culture [1336834479]  (Normal)\tCollected: 09/26/25 1240\n \tOrder Status: Completed\tSpecimen: Blood, Venous\tUpdated: 09/30/25 1601\n \t \tBlood Culture\tNo Growth At 96 Hours\n \tRespiratory Culture [1336829459]\tCollected: 09/26/25 1018\n \tOrder Status: Completed\tSpecimen: Respiratory from Endotracheal Aspirate\tUpdated: 09/28/25 0813\n \t \tRespiratory Culture\tRare normal respiratory flora\n \t \tGRAM STAIN\tQuality 1+\n \t \t \tNo bacteria seen\n \tFungal Culture [1329582542]  (Normal)\tCollected: 09/11/25 0816\n \tOrder Status: Completed\tSpecimen: Tissue from Heart Valve\tUpdated: 09/25/25 0900\n \t \tFungal Culture\tNo Fungus Isolated at 2 Weeks\n \n \n \n \nImaging: \nX-Ray Chest 1 View\nNarrative: EXAMINATION:\nXR CHEST 1 VIEW\n \nCLINICAL HISTORY:\nCT maintenance;\n \nTECHNIQUE:\nOne view\n \nCOMPARISON:\nSeptember 27, 2025.\n \nFINDINGS:\nCardiopericardial silhouette appearance similar.  Sternotomy changes.  Supporting tubes and lines in similar location.  Bilateral pleural effusions and lower lung zones atelectasis.  No overt pulmonary edema.  No pneumothorax.\nImpression: No significant interval change.\n \nElectronically signed by:Mian Ibrahim\nDate:                                        09/28/2025\nTime:                                       08:22",
+  "expected": {
+    "patient": {
+      "age": 70,
+      "gender": "male",
+      "mrn": null,
+      "dob": null
+    },
+    "vitals": {
+      "bp": null,
+      "hr": 74,
+      "rr": 22,
+      "temp": null,
+      "spo2": null
+    },
+    "labs": {
+      "wbc": 12.09,
+      "rbc": 3.89,
+      "hgb": 10.6,
+      "hct": 35.8,
+      "plt": 184,
+      "na": 136,
+      "k": 5.0,
+      "cl": 98,
+      "co2": 25,
+      "bun": 45.2,
+      "creatinine": 3.89,
+      "calcium": 8.5,
+      "mg": 2.2,
+      "ph": 7.49,
+      "pco2": 40.0,
+      "po2": 116.0,
+      "hco3": 30.5
+    },
+    "allergies": [],
+    "medications": [
+      "albumin human 25% 12.5 g Intravenous Once",
+      "albuterol-ipratropium 3 mL Nebulization Q6H",
+      "amiodarone 200 mg Per NG tube Daily",
+      "amLODIPine 10 mg Per OG tube Daily",
+      "ampicillin IV (PEDS and ADULTS) 2 g Intravenous Q12H",
+      "aspirin 81 mg Per OG tube Daily",
+      "atorvastatin 40 mg Per OG tube QHS",
+      "calcitRIOL 0.5 mcg Per OG tube Daily",
+      "cefTRIAXone (Rocephin) IV (PEDS and ADULTS) 2 g Intravenous Q12H",
+      "docusate 100 mg Per G Tube BID",
+      "enoxparin 30 mg Subcutaneous Q24H (prophylaxis, 1700)",
+      "famotidine (PF) 20 mg Intravenous Daily",
+      "folic acid 1 mg Per OG tube Daily",
+      "insulin glargine U-100 20 Units Subcutaneous BID",
+      "metoprolol tartrate 25 mg Per OG tube BID",
+      "predniSONE 7 mg Per OG tube Daily",
+      "sodium chloride 3% 4 mL Nebulization Q6H",
+      "tacrolimus 3 mg Per OG tube BID"
+    ],
+    "pmh": [
+      "hypertension",
+      "type 2 diabetes mellitus",
+      "HFrEF",
+      "ESRD s/p transplant now on HD",
+      "Enterococcus infective endocarditis",
+      "CAD s/p two-vessel CABG with aortic valve replacement and ligation of left atrial appendage",
+      "prostate cancer s/p prostatectomy"
+    ],
+    "subjective": "70 year old male, with significant past medical history of hypertension, type 2 diabetes mellitus, HFrEF, ESRD s/p transplant now on HD, Enterococcus infective endocarditis, CAD s/p two-vessel CABG with aortic valve replacement and ligation of left atrial appendage, and prostate cancer s/p prostatectomy, who was admitted to the ICU post CABG on 9/11/2025. Stepped down on 9/18/25. Worsening respiratory distress noted on 9/23/25 and imaging demonstrated worsening volume overload. Pulmonology was consulted for further evaluation. Transferred back to ICU 9/25/25 for close monitoring.",
+    "objective": "Currently intubated RR18, TV 450, PEEP 5, FIO@ 30%.  Occ opens eyes on command and moves all 4 extremities.  Receiving dialysis today.  Left chest tube remains in place with limited output.",
+    "assessment": null,
+    "plan": null
+  },
+  "mustHave": {
+    "patient.age": 70,
+    "patient.gender": "male",
+    "vitals.hr": 74,
+    "vitals.rr": 22,
+    "labs.wbc": 12.09,
+    "labs.hgb": 10.6,
+    "labs.bun": 45.2,
+    "labs.creatinine": 3.89
+  },
+  "shouldNotHave": {}
+}

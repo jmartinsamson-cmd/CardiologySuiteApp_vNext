@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "name": "Cardiology Suite",
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "problems.decorations.enabled": false,
+    "typescript.preferences.includePackageJsonAutoImports": "off",
+    "javascript.preferences.includePackageJsonAutoImports": "off",
+    "html.completion.attributeDefaultValue": "empty",
+    "emmet.triggerExpansionOnTab": false,
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/*.min.js": true,
+      "**/*.min.css": true,
+      "**/dist": true,
+      "**/build": true,
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "streetsidesoftware.code-spell-checker",
+      "streetsidesoftware.code-spell-checker-medical-terms",
+      "ms-vscode.vscode-eslint",
+    ],
+  },
+}

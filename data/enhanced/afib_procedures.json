@@ -1,0 +1,364 @@
+{
+  "catheter_ablation": {
+    "overview": {
+      "definition": "Invasive procedure to isolate pulmonary veins and eliminate AF triggers/substrate",
+      "success_rates": {
+        "paroxysmal_af": "80-90% freedom from AF at 1 year (single procedure)",
+        "persistent_af": "60-80% freedom from AF at 1 year (single procedure)",
+        "repeat_procedures": "85-95% success after multiple procedures"
+      },
+      "durability": "Long-term success maintained in 70-80% at 5 years"
+    },
+    "indications": {
+      "class_i": [
+        "Symptomatic paroxysmal AF refractory to or intolerant of ≥1 AAD",
+        "Symptomatic persistent AF refractory to or intolerant of ≥1 AAD"
+      ],
+      "class_iia": [
+        "First-line therapy for symptomatic paroxysmal AF (patient preference)",
+        "AF-mediated cardiomyopathy",
+        "Symptomatic AF patients with heart failure"
+      ],
+      "emerging_indications": [
+        "Asymptomatic AF with reduced EF",
+        "Young patients to avoid lifelong AADs",
+        "Athletes with AF"
+      ]
+    },
+    "patient_selection": {
+      "ideal_candidates": [
+        "Age <65 years",
+        "Paroxysmal AF",
+        "Normal LA size (<40mm)",
+        "No significant structural heart disease",
+        "Symptomatic despite medical therapy"
+      ],
+      "relative_contraindications": [
+        "LA size >55mm",
+        "Severe mitral regurgitation",
+        "Severe LV dysfunction (EF <30%)",
+        "Inability to anticoagulate",
+        "Life expectancy <1 year"
+      ],
+      "absolute_contraindications": [
+        "Intracardiac thrombus",
+        "Active infection",
+        "Pregnancy",
+        "Severe bleeding disorder"
+      ]
+    },
+    "pre_procedural_evaluation": {
+      "imaging": [
+        "Transthoracic echocardiogram (LA size, LV function, valves)",
+        "TEE to exclude thrombus (especially if suboptimal anticoagulation)",
+        "Cardiac CT or MRI for LA anatomy and PV assessment",
+        "Consider coronary angiography if CAD risk factors"
+      ],
+      "laboratory": [
+        "CBC, CMP, PT/PTT/INR",
+        "TSH",
+        "Type and screen",
+        "Pregnancy test (women of childbearing age)"
+      ],
+      "anticoagulation": [
+        "Therapeutic anticoagulation ≥3 weeks pre-procedure",
+        "INR 2.0-3.0 (warfarin) or therapeutic DOAC",
+        "Continue through procedure (uninterrupted approach preferred)"
+      ]
+    },
+    "procedure_details": {
+      "approach": {
+        "vascular_access": "Femoral vein cannulation (typically 2-3 sheaths)",
+        "transseptal_puncture": "Single or double transseptal puncture",
+        "intracardiac_echocardiography": "Real-time imaging guidance"
+      },
+      "ablation_strategy": {
+        "standard": "Pulmonary vein isolation (PVI) - cornerstone of all procedures",
+        "additional_lesions": [
+          "Linear lesions (roof line, mitral isthmus)",
+          "Complex fractionated atrial electrograms (CFAE)",
+          "Posterior wall isolation",
+          "Left atrial appendage isolation"
+        ]
+      },
+      "energy_sources": {
+        "radiofrequency": {
+          "advantages": "Precise, well-established, real-time assessment",
+          "technique": "Point-by-point ablation with contact force sensing",
+          "power": "25-35 watts",
+          "temperature": "Target <45°C"
+        },
+        "cryoablation": {
+          "advantages": "Balloon-based, faster procedure, less pain",
+          "technique": "Balloon occlusion of PV ostia",
+          "freeze_cycle": "-40 to -50°C for 180-240 seconds",
+          "limitations": "Less precise, cannot perform linear lesions"
+        },
+        "pulsed_field_ablation": {
+          "advantages": "Tissue-selective, reduces collateral damage",
+          "status": "Emerging technology, FDA approved 2023",
+          "mechanism": "Irreversible electroporation"
+        }
+      },
+      "procedural_endpoints": [
+        "Entrance block: No conduction into PVs",
+        "Exit block: No conduction out of PVs",
+        "Adenosine testing: No dormant conduction",
+        "Non-inducibility of AF (if applicable)"
+      ]
+    },
+    "complications": {
+      "major": {
+        "incidence": "2-5%",
+        "types": [
+          {
+            "complication": "Stroke/TIA",
+            "incidence": "0.5-1%",
+            "prevention": "Therapeutic anticoagulation, ICE guidance, air embolism prevention",
+            "management": "Immediate neurology consultation, IV thrombolytics if appropriate"
+          },
+          {
+            "complication": "Cardiac tamponade",
+            "incidence": "1-2%",
+            "recognition": "Hypotension, elevated JVP, pulsus paradoxus",
+            "management": "Immediate pericardiocentesis, volume resuscitation"
+          },
+          {
+            "complication": "Pulmonary vein stenosis",
+            "incidence": "<1% (with modern techniques)",
+            "prevention": "Avoid ablation within PVs, anatomic mapping",
+            "symptoms": "Dyspnea, hemoptysis, recurrent pneumonia"
+          },
+          {
+            "complication": "Atrio-esophageal fistula",
+            "incidence": "0.1-0.25%",
+            "prevention": "Esophageal temperature monitoring, reduced power on posterior wall",
+            "presentation": "Fever, sepsis, neurologic symptoms 1-4 weeks post-procedure"
+          }
+        ]
+      },
+      "minor": {
+        "incidence": "5-10%",
+        "types": [
+          "Vascular complications (hematoma, pseudoaneurysm)",
+          "Transient phrenic nerve palsy",
+          "Pericarditis",
+          "Radiation skin injury (rare with modern techniques)"
+        ]
+      }
+    },
+    "post_procedural_care": {
+      "immediate": [
+        "4-6 hours bed rest with leg immobilization",
+        "Continuous cardiac monitoring",
+        "Vital signs and vascular checks q15min x 4, then q30min x 4",
+        "Echocardiogram if tamponade suspected",
+        "Chest X-ray to rule out pneumothorax"
+      ],
+      "anticoagulation": [
+        "Resume therapeutic anticoagulation 3-4 hours post-procedure",
+        "Continue anticoagulation ≥2 months (regardless of CHADSVASC score)",
+        "Long-term anticoagulation based on CHADSVASC score"
+      ],
+      "medications": [
+        "Continue pre-procedure AADs for 3 months (blanking period)",
+        "PPI for 4-6 weeks (reduce esophageal inflammation)",
+        "Colchicine 0.6mg BID x 3 months (reduce pericarditis)"
+      ]
+    },
+    "blanking_period": {
+      "definition": "First 3 months post-ablation when AF recurrence doesn't count as failure",
+      "rationale": "Inflammation and healing may cause transient arrhythmias",
+      "management": [
+        "Continue AADs during this period",
+        "Cardioversion acceptable for sustained episodes",
+        "Don't discontinue anticoagulation solely based on AF absence"
+      ]
+    },
+    "follow_up_protocol": {
+      "timeline": [
+        {
+          "timepoint": "1-2 weeks",
+          "assessment": "Wound check, symptoms, basic metabolic panel",
+          "actions": "Address any immediate concerns"
+        },
+        {
+          "timepoint": "3 months",
+          "assessment": "Symptoms, ECG, 24-48 hour Holter monitor",
+          "actions": "Discontinue AAD if no recurrence, reassess anticoagulation"
+        },
+        {
+          "timepoint": "6 months",
+          "assessment": "Symptoms, ECG, event monitor or 7-day Holter",
+          "actions": "Consider repeat procedure if symptomatic recurrence"
+        },
+        {
+          "timepoint": "12 months",
+          "assessment": "Comprehensive evaluation, extended monitoring",
+          "actions": "Long-term management plan, anticoagulation decision"
+        }
+      ],
+      "monitoring_strategies": [
+        "7-14 day Holter monitors",
+        "30-day event monitors",
+        "Smartphone-based ECG (AliveCor, Apple Watch)",
+        "Implantable loop recorder (selected patients)"
+      ]
+    },
+    "success_definition": {
+      "primary_endpoint": "Freedom from AF/AT/AFL >30 seconds after 3-month blanking period",
+      "secondary_endpoints": [
+        "Reduction in AF burden",
+        "Improvement in symptoms/quality of life",
+        "Reduction in hospitalizations"
+      ],
+      "monitoring_requirements": "≥7 days of monitoring at 6-12 months"
+    },
+    "repeat_procedures": {
+      "indications": [
+        "Symptomatic AF recurrence >3 months post-ablation",
+        "Documentation of AF on extended monitoring"
+      ],
+      "success_rates": "Additional 15-20% success with repeat procedures",
+      "strategy": [
+        "Assess PV reconnection (most common mechanism)",
+        "Additional substrate modification",
+        "Linear lesions or posterior wall isolation"
+      ]
+    },
+    "special_populations": {
+      "heart_failure": {
+        "benefits": "CASTLE-AF trial showed mortality benefit",
+        "considerations": "Higher complication risk, may need staged approach",
+        "outcomes": "Significant improvement in EF and symptoms"
+      },
+      "elderly": {
+        "age_considerations": ">75 years associated with lower success, higher complications",
+        "selection": "Careful risk-benefit analysis, consider comorbidities",
+        "alternative": "Rate control may be preferred in very elderly"
+      },
+      "persistent_af": {
+        "challenges": "Lower success rates, more extensive substrate",
+        "strategy": "PVI + additional lesions often required",
+        "duration_effect": "Success inversely related to AF duration"
+      }
+    },
+    "alternative_procedures": {
+      "surgical_ablation": {
+        "indications": "Concomitant cardiac surgery, failed catheter ablation",
+        "technique": "Cut-and-sew or cryoablation, LAA exclusion",
+        "success_rates": "90-95% for concomitant procedures"
+      },
+      "hybrid_procedures": {
+        "approach": "Combined surgical and catheter ablation",
+        "indications": "Persistent AF, failed previous ablations",
+        "advantage": "Epicardial and endocardial approach"
+      },
+      "left_atrial_appendage_occlusion": {
+        "indications": "High stroke risk, contraindication to anticoagulation",
+        "devices": "Watchman, Amulet",
+        "note": "Not a treatment for AF rhythm, only stroke prevention"
+      }
+    },
+    "cost_effectiveness": {
+      "upfront_cost": "$15,000-25,000 per procedure",
+      "long_term_savings": "Reduced hospitalizations, medication costs, improved QOL",
+      "cost_per_qaly": "Favorable in symptomatic patients <65 years"
+    },
+    "patient_counseling": {
+      "realistic_expectations": [
+        "70-90% chance of significant improvement",
+        "May need 2-3 procedures for optimal results",
+        "Complete cure not guaranteed",
+        "Some patients may still need medications"
+      ],
+      "lifestyle_modifications": [
+        "Weight loss if overweight (>10% weight loss reduces AF)",
+        "Alcohol moderation (<1 drink/day)",
+        "Sleep apnea treatment",
+        "Regular exercise program",
+        "Stress management"
+      ],
+      "warning_signs": [
+        "Chest pain or severe shortness of breath",
+        "Signs of stroke (FAST assessment)",
+        "Fever >101°F after first few days",
+        "Excessive bleeding or large hematoma"
+      ]
+    }
+  },
+  "cardioversion": {
+    "overview": {
+      "definition": "Restoration of normal sinus rhythm using electrical or pharmacologic methods",
+      "success_rates": "85-95% electrical, 50-70% pharmacologic"
+    },
+    "indications": [
+      "Hemodynamically unstable AF/AFL",
+      "Recent-onset AF in stable patients",
+      "Symptomatic AF refractory to rate control",
+      "AF-mediated cardiomyopathy"
+    ],
+    "electrical_cardioversion": {
+      "preparation": [
+        "Informed consent",
+        "NPO ≥4-6 hours",
+        "IV access",
+        "Continuous monitoring",
+        "Emergency equipment available"
+      ],
+      "anticoagulation_strategy": {
+        "duration_less_48h": "Can proceed without anticoagulation if low stroke risk",
+        "duration_more_48h": "3-4 weeks therapeutic anticoagulation before, 4 weeks after",
+        "unknown_duration": "Treat as >48 hours",
+        "tee_guided": "TEE to exclude thrombus → immediate cardioversion → 4 weeks anticoagulation"
+      },
+      "procedure": {
+        "sedation": "Propofol or etomidate preferred",
+        "pad_placement": "Anterior-posterior preferred over anterior-lateral",
+        "energy": "Biphasic 200J initially, escalate to 300J, then 360J",
+        "synchronization": "ALWAYS synchronized to avoid VF induction"
+      },
+      "post_procedure": [
+        "Monitor until fully awake",
+        "12-lead ECG to confirm rhythm",
+        "Vital signs stable before discharge",
+        "Resume anticoagulation if indicated"
+      ]
+    },
+    "pharmacologic_cardioversion": {
+      "agents": {
+        "amiodarone": {
+          "dosing": "15mg/kg IV over 24h, then 0.5-1mg/min maintenance",
+          "success_rate": "50-70% within 24 hours",
+          "advantages": "Safe in structural heart disease, hemodynamically stable",
+          "onset": "4-24 hours"
+        },
+        "ibutilide": {
+          "dosing": "1mg IV over 10min, may repeat once after 10min",
+          "success_rate": "70-80% within 90 minutes",
+          "monitoring": "Continuous telemetry for ≥4 hours (QT prolongation)",
+          "contraindications": "QTc >440ms, hypokalemia, CHF"
+        },
+        "propafenone": {
+          "dosing": "1.5-2mg/kg IV over 10-20min",
+          "success_rate": "60-80% within 2 hours",
+          "contraindications": "Structural heart disease, CAD, heart failure"
+        }
+      }
+    },
+    "contraindications": [
+      "Intracardiac thrombus",
+      "Active infection/sepsis",
+      "Severe electrolyte abnormalities",
+      "Digoxin toxicity",
+      "Recent myocardial infarction (relative)"
+    ],
+    "complications": [
+      "Thromboembolism (0.5-3%)",
+      "Arrhythmias (VT/VF rare with synchronization)",
+      "Bradycardia/asystole (usually transient)",
+      "Hypotension",
+      "Skin burns (rare with biphasic)"
+    ]
+  }
+}

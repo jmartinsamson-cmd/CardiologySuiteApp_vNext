@@ -1,0 +1,73 @@
+/* Unified diagnosis card style - consistent red cards for all items */
+.dx-card {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: 1px solid var(--primary-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.dx-card:hover {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dx-card.active,
+.dx-card[aria-current="page"] {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark, #b91c1c)
+  );
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Override existing dx-item styles to match unified style */
+.dx-item {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: 1px solid var(--primary-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dx-item:hover {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dx-item.active,
+.dx-item[aria-current="page"] {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark, #b91c1c)
+  );
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure route badge styling works */
+.dx-route-badge {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: auto;
+}
+
+.dx-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

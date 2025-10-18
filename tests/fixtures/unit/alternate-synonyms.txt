@@ -1,0 +1,34 @@
+ROS:
+80 yo M with SOB x 2 days, +orthopnea, +PND
+
+Background:
+CHF (EF 30%), CAD s/p CABG x3 2016, DM2, CKD stage 3
+
+Home Rx:
+Furosemide 40 bid
+Carvedilol 12.5 bid
+Lisinopril 10 qd
+Insulin glargine 20 units qhs
+
+Drug sensitivities: none
+
+PE:
+Vitals - BP 110/70, P 88, RR 24, T 98.1, sat 91% on RA
+Exam - JVD present, crackles at bases bilaterally, 2+ pitting edema
+
+Studies:
+BNP 3500
+Cr 1.8
+Trop neg
+
+Diagnosis:
+Acute on chronic systolic heart failure
+Volume overload
+
+Management:
+• IV furosemide 80mg
+• Increase oral furosemide to 80 bid
+• Strict I/Os
+• Daily weights
+• Low sodium diet
+• Follow up clinic 1 week

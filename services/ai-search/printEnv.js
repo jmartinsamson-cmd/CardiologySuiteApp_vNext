@@ -1,0 +1,10 @@
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env') });
+console.log('endpoint=', process.env.AZURE_SEARCH_ENDPOINT);
+console.log('index=', process.env.AZURE_SEARCH_INDEX);
+console.log('keyPresent=', !!process.env.AZURE_SEARCH_QUERY_KEY);
+console.log('PORT value=', process.env.PORT, 'type=', typeof process.env.PORT);

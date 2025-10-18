@@ -1,0 +1,105 @@
+{
+  "diagnoses": [
+    {
+      "id": "infective_endocarditis",
+      "name": "Infective Endocarditis",
+      "category": ["Infective/Inflammatory"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Fever",
+          "Chills",
+          "Night sweats",
+          "Fatigue",
+          "Dyspnea",
+          "Stroke symptoms (emboli)"
+        ],
+        "signs_any": [
+          "New murmur or changing regurgitant murmur",
+          "Petechiae, splinter hemorrhages",
+          "Janeway lesions, Osler nodes, Roth spots",
+          "Embolic phenomena (stroke, limb ischemia)"
+        ]
+      },
+      "initial_tests": [
+        "Blood cultures (≥3 sets before antibiotics)",
+        "Echo (TTE initial, TEE more sensitive for vegetations/abscess)",
+        "CBC, ESR/CRP, renal function",
+        "CXR if pulmonary symptoms (right-sided IE)"
+      ],
+      "treatment": {
+        "empiric": ["IV vancomycin ± cefepime until cultures available"],
+        "definitive": [
+          "Targeted IV antibiotics for 4–6 weeks based on organism",
+          "Surgery if heart failure, uncontrolled infection, large vegetations with emboli, abscess"
+        ]
+      },
+      "contraindications": {
+        "anticoagulation": [
+          "Avoid starting anticoagulation in acute IE with CNS emboli (risk of hemorrhage)"
+        ]
+      },
+      "follow_up": [
+        "Repeat echo to assess response",
+        "Monitor renal function, drug levels (aminoglycosides, vancomycin)"
+      ],
+      "discharge": {
+        "instructions": [
+          "Adherence to prolonged IV antibiotic therapy (often via PICC)",
+          "Report fevers, embolic symptoms",
+          "Dental hygiene to reduce recurrence risk"
+        ],
+        "follow_up": ["Infectious disease and cardiology follow-up"]
+      }
+    },
+    {
+      "id": "rheumatic_hd",
+      "name": "Rheumatic Heart Disease",
+      "category": ["Infective/Inflammatory"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "History of untreated strep throat",
+          "Migratory arthritis",
+          "Fever",
+          "Carditis symptoms (dyspnea, palpitations)",
+          "Sydenham chorea"
+        ],
+        "signs_any": [
+          "New murmur of MR or MS",
+          "Pericardial rub",
+          "Erythema marginatum, subcutaneous nodules"
+        ]
+      },
+      "initial_tests": [
+        "Throat culture or rapid strep test (initial infection)",
+        "ASO/anti-DNase B titers",
+        "Echo (valve lesions, carditis)",
+        "Jones Criteria for diagnosis (2 major or 1 major + 2 minor)"
+      ],
+      "treatment": {
+        "acute": [
+          "Penicillin (or erythromycin if allergic) for GAS eradication",
+          "NSAIDs for arthritis",
+          "Corticosteroids if severe carditis"
+        ],
+        "long_term": [
+          "Secondary prophylaxis with IM benzathine penicillin every 3–4 weeks (duration depends on severity, often 10+ years)",
+          "Valve repair/replacement for severe chronic MR/MS"
+        ]
+      },
+      "follow_up": [
+        "Monitor for progression to valvular disease (esp. MS, MR)",
+        "Long-term adherence to antibiotic prophylaxis"
+      ],
+      "discharge": {
+        "instructions": [
+          "Importance of strep throat treatment",
+          "Strict adherence to prophylaxis regimen",
+          "Report new dyspnea, palpitations, or edema"
+        ],
+        "follow_up": [
+          "Cardiology follow-up; infectious disease if recurrent strep"
+        ]
+      }
+    }
+  ]
+}

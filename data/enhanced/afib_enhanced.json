@@ -1,0 +1,466 @@
+{
+  "id": "afib",
+  "name": "Atrial Fibrillation / Flutter",
+  "category": ["Arrhythmia", "Electrophysiology"],
+  "enhanced": true,
+  "version": "2.0",
+  "clinical_overview": {
+    "definition": "Most common sustained cardiac arrhythmia characterized by disorganized atrial electrical activity with irregular ventricular response",
+    "epidemiology": {
+      "prevalence": "2.7-6.1 million Americans",
+      "age_related": "Affects 9% of people ≥65 years",
+      "stroke_risk": "5x increased stroke risk"
+    }
+  },
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Palpitations (most common - 54% of patients)",
+      "Dyspnea on exertion (44% of patients)",
+      "Fatigue and exercise intolerance",
+      "Chest discomfort or pressure",
+      "Dizziness, lightheadedness, or syncope",
+      "Anxiety or sense of impending doom"
+    ],
+    "signs_any": [
+      "Irregularly irregular pulse (pathognomonic)",
+      "Tachycardia (often 100-150 bpm)",
+      "Variable pulse amplitude",
+      "Variable BP with beat-to-beat variation",
+      "Signs of heart failure if prolonged RVR"
+    ],
+    "asymptomatic": "30-45% of AF episodes are asymptomatic"
+  },
+  "classification": {
+    "temporal": {
+      "first_detected": "First documented episode regardless of duration",
+      "paroxysmal": "Self-terminating within 7 days (usually <48 hours)",
+      "persistent": "Sustained >7 days or requiring intervention to terminate",
+      "long_standing_persistent": "Continuous AF >12 months",
+      "permanent": "Accepted AF, no further attempts at rhythm control"
+    },
+    "mechanism": {
+      "focal": "Triggered activity from pulmonary veins (early AF)",
+      "reentrant": "Multiple wavelet reentry (sustained AF)",
+      "substrate": "Atrial fibrosis and electrical remodeling"
+    }
+  },
+  "risk_factors": {
+    "modifiable": [
+      "Hypertension (most important - 60% of AF patients)",
+      "Obesity (BMI >30 increases risk 49%)",
+      "Sleep apnea (increases AF risk 2-4x)",
+      "Alcohol use (>1 drink/day increases risk)",
+      "Smoking",
+      "Physical inactivity",
+      "Diabetes mellitus"
+    ],
+    "non_modifiable": [
+      "Age (most powerful predictor)",
+      "Male sex",
+      "Caucasian race",
+      "Family history",
+      "Height (taller individuals at higher risk)"
+    ],
+    "cardiac_conditions": [
+      "Heart failure (both cause and consequence)",
+      "Valvular disease (especially mitral)",
+      "Coronary artery disease",
+      "Cardiomyopathy",
+      "Congenital heart disease",
+      "Prior cardiac surgery"
+    ]
+  },
+  "pathophysiology": {
+    "triggers": [
+      "Pulmonary vein ectopy (90% originate here)",
+      "Superior vena cava",
+      "Left atrial posterior wall",
+      "Coronary sinus"
+    ],
+    "substrate": [
+      "Atrial fibrosis and scarring",
+      "Autonomic imbalance",
+      "Calcium handling abnormalities",
+      "Gap junction remodeling"
+    ],
+    "perpetuation": [
+      "Electrical remodeling ('AF begets AF')",
+      "Structural remodeling",
+      "Multiple wavelet reentry"
+    ]
+  },
+  "initial_tests": {
+    "essential": [
+      "12-lead ECG (irregularly irregular rhythm, absent P waves, variable RR intervals)",
+      "Complete metabolic panel including Mg²⁺",
+      "TSH (hyperthyroidism in 13% of new AF)",
+      "CBC (rule out anemia, infection)",
+      "Troponin if chest pain or suspected ACS"
+    ],
+    "structural_assessment": [
+      "Transthoracic echocardiogram (LA size, LV function, valves, wall motion)",
+      "Consider transesophageal echo if cardioversion planned >48h duration"
+    ],
+    "monitoring": [
+      "Continuous telemetry if inpatient",
+      "Event monitor or extended Holter if paroxysmal AF suspected",
+      "Consider implantable loop recorder for cryptogenic stroke"
+    ]
+  },
+  "risk_scoring": {
+    "stroke_risk": {
+      "chadsvasc": {
+        "components": [
+          "CHF/LV dysfunction (1 point)",
+          "Hypertension (1 point)",
+          "Age ≥75 years (2 points)",
+          "Diabetes mellitus (1 point)",
+          "Stroke/TIA/thromboembolism (2 points)",
+          "Vascular disease (1 point)",
+          "Age 65-74 years (1 point)",
+          "Sex category female (1 point)"
+        ],
+        "interpretation": {
+          "score_0_male": "0.2% annual stroke risk - no anticoagulation",
+          "score_1_female": "0.3% annual stroke risk - no anticoagulation",
+          "score_1_male": "0.6% annual stroke risk - consider anticoagulation",
+          "score_2_plus": "≥1.3% annual stroke risk - anticoagulation recommended"
+        }
+      }
+    },
+    "bleeding_risk": {
+      "has_bled": {
+        "components": [
+          "Hypertension (SBP >160)",
+          "Abnormal renal/liver function",
+          "Stroke history",
+          "Bleeding history",
+          "Labile INRs",
+          "Elderly (>65 years)",
+          "Drugs/alcohol"
+        ],
+        "interpretation": "Score ≥3 indicates high bleeding risk but should NOT prevent anticoagulation"
+      }
+    }
+  },
+  "treatment": {
+    "emergency_management": {
+      "unstable_af": [
+        "Immediate synchronized cardioversion if hemodynamically unstable",
+        "Sedation with propofol or etomidate",
+        "Biphasic shock 200J, increase to 300J if unsuccessful",
+        "Consider amiodarone 150mg IV if cardioversion fails"
+      ],
+      "stable_af_rvr": [
+        "Rate control as primary strategy",
+        "Metoprolol 2.5-5mg IV q5min (max 15mg) or",
+        "Diltiazem 0.25mg/kg IV over 2 min, then 5-15mg/hr infusion",
+        "Avoid diltiazem if EF <40% or signs of heart failure"
+      ]
+    },
+    "rate_control": {
+      "targets": [
+        "Resting HR <110 bpm (lenient control) for asymptomatic patients",
+        "Resting HR <80 bpm (strict control) if symptomatic on lenient control"
+      ],
+      "agents": {
+        "beta_blockers": {
+          "preferred": "Metoprolol succinate 25-200mg daily",
+          "alternatives": "Atenolol 25-100mg daily, Carvedilol 3.125-25mg BID",
+          "contraindications": "Severe COPD/asthma, decompensated HF",
+          "benefits": "First-line, cardioprotective, mortality benefit in CAD/HF"
+        },
+        "calcium_channel_blockers": {
+          "diltiazem": "120-360mg daily (extended-release preferred)",
+          "verapamil": "120-480mg daily",
+          "contraindications": "EF <40%, hypotension, heart block",
+          "benefits": "Effective rate control, well-tolerated"
+        },
+        "digoxin": {
+          "indications": "HFrEF with hypotension limiting other agents",
+          "dosing": "0.125-0.25mg daily (adjust for age/renal function)",
+          "monitoring": "Serum level 0.5-2.0 ng/mL, renal function, electrolytes",
+          "limitations": "Less effective during exercise, narrow therapeutic window"
+        },
+        "combination_therapy": "Often needed - beta-blocker + digoxin common in HFrEF"
+      }
+    },
+    "rhythm_control": {
+      "indications": [
+        "Symptomatic patients despite adequate rate control",
+        "Young patients (<65 years)",
+        "AF-mediated cardiomyopathy",
+        "First episode in hemodynamically stable patients"
+      ],
+      "cardioversion": {
+        "electrical": {
+          "procedure": "Synchronized biphasic shock under conscious sedation",
+          "energy": "200J initially, increase stepwise to 360J",
+          "success_rate": "85-95% for recent-onset AF"
+        },
+        "pharmacologic": {
+          "amiodarone": "Loading 15mg/kg IV over 24h, then 0.5-1mg/min",
+          "ibutilide": "1mg IV over 10min, repeat once if needed",
+          "propafenone": "1.5-2mg/kg IV (if no structural heart disease)",
+          "success_rate": "50-70% within 24 hours"
+        },
+        "anticoagulation_strategy": {
+          "duration_less_48h": "Can cardiovert without anticoagulation if low stroke risk",
+          "duration_more_48h": "3 weeks anticoagulation before + 4 weeks after cardioversion",
+          "tee_guided": "TEE to exclude thrombus → immediate cardioversion → 4 weeks anticoagulation"
+        }
+      },
+      "long_term_aad": {
+        "class_iii": {
+          "amiodarone": {
+            "indications": "Most effective AAD, structural heart disease acceptable",
+            "dosing": "Load 600-800mg daily x 2-4 weeks, maintain 200mg daily",
+            "monitoring": "Baseline: PFT, TFT, LFT, ophthalmology; Follow-up q6months",
+            "toxicities": "Pulmonary, thyroid, hepatic, dermatologic, ocular"
+          },
+          "dofetilide": {
+            "indications": "Heart failure, post-MI patients",
+            "requirement": "3-day inpatient initiation with telemetry",
+            "dosing": "125-500mcg BID based on CrCl and QTc",
+            "contraindications": "QTc >440ms (men) or >460ms (women)"
+          }
+        },
+        "class_ic": {
+          "flecainide": {
+            "indications": "Structurally normal hearts only",
+            "dosing": "50-150mg BID",
+            "contraindications": "CAD, structural heart disease, bundle branch block"
+          },
+          "propafenone": {
+            "indications": "Structurally normal hearts only",
+            "dosing": "150-300mg TID",
+            "contraindications": "Same as flecainide"
+          }
+        }
+      }
+    },
+    "anticoagulation": {
+      "indications": "CHA₂DS₂-VASc ≥2 (men) or ≥3 (women)",
+      "doac_preferred": {
+        "advantages": [
+          "Fixed dosing (no INR monitoring)",
+          "Faster onset/offset",
+          "Lower ICH risk (0.3% vs 0.8% annually vs warfarin)",
+          "Fewer drug interactions"
+        ],
+        "agents": {
+          "apixaban": {
+            "dosing": "5mg BID (2.5mg BID if ≥2: age≥80, weight≤60kg, SCr≥1.5)",
+            "renal_adjustment": "Avoid if CrCl <15mL/min",
+            "reversal": "Andexanet alfa (4-Factor PCC if unavailable)"
+          },
+          "rivaroxaban": {
+            "dosing": "20mg daily with food (15mg if CrCl 15-50mL/min)",
+            "renal_adjustment": "Avoid if CrCl <15mL/min",
+            "reversal": "Andexanet alfa (4-Factor PCC if unavailable)"
+          },
+          "dabigatran": {
+            "dosing": "150mg BID (75mg BID if CrCl 15-30mL/min)",
+            "advantages": "Only reversible DOAC (idarucizumab)",
+            "disadvantages": "Highest GI bleeding risk, requires acid environment"
+          },
+          "edoxaban": {
+            "dosing": "60mg daily (30mg if CrCl 15-50mL/min, weight ≤60kg, or certain P-gp inhibitors)",
+            "contraindication": "CrCl >95mL/min (decreased efficacy)"
+          }
+        }
+      },
+      "warfarin": {
+        "indications": [
+          "Mechanical heart valve",
+          "Moderate-severe mitral stenosis",
+          "DOAC contraindicated/intolerant",
+          "Cost considerations"
+        ],
+        "dosing": "Start 5mg daily (2.5mg if elderly/bleeding risk)",
+        "target_inr": "2.0-3.0",
+        "monitoring": "Weekly x 4 weeks, then monthly when stable"
+      },
+      "special_populations": {
+        "ckd": "DOACs preferred if eGFR >15mL/min with dose adjustment",
+        "dialysis": "Warfarin only FDA-approved option",
+        "pregnancy": "Heparin/LMWH throughout, no DOACs or warfarin",
+        "active_cancer": "DOAC or LMWH preferred over warfarin"
+      }
+    },
+    "catheter_ablation": {
+      "indications": [
+        "Symptomatic paroxysmal AF refractory to ≥1 AAD",
+        "Symptomatic persistent AF refractory to ≥1 AAD",
+        "AF-mediated cardiomyopathy",
+        "Patient preference over AADs (first-line for some)"
+      ],
+      "procedure": "Pulmonary vein isolation (PVI) ± additional lesions",
+      "success_rates": {
+        "paroxysmal": "80-90% freedom from AF at 1 year",
+        "persistent": "60-80% freedom from AF at 1 year",
+        "repeat_procedures": "May need 2-3 procedures for optimal results"
+      },
+      "complications": {
+        "major": "Stroke (0.5%), cardiac tamponade (1%), PV stenosis (<1%)",
+        "minor": "Bleeding, infection, transient phrenic nerve palsy"
+      }
+    }
+  },
+  "contraindications": {
+    "rate_control": {
+      "beta_blockers": [
+        "Severe bradycardia (<50 bpm)",
+        "High-grade AV block",
+        "Decompensated heart failure",
+        "Severe COPD/asthma"
+      ],
+      "ccb": [
+        "EF <40%",
+        "Decompensated heart failure",
+        "Hypotension",
+        "Heart block"
+      ],
+      "digoxin": ["Heart block", "Hypertrophic cardiomyopathy", "WPW syndrome"]
+    },
+    "rhythm_control": {
+      "class_ic": [
+        "Structural heart disease",
+        "CAD",
+        "Bundle branch block",
+        "Heart failure"
+      ],
+      "amiodarone": [
+        "Severe pulmonary disease",
+        "Thyroid dysfunction",
+        "Severe hepatic disease"
+      ],
+      "dofetilide": [
+        "QTc >440ms (men) or >460ms (women)",
+        "Severe renal impairment"
+      ]
+    }
+  },
+  "complications": {
+    "thromboembolic": {
+      "stroke": "5x increased risk, 15-20% of all strokes",
+      "systemic_embolism": "Peripheral, mesenteric, renal arteries",
+      "prevention": "Anticoagulation reduces stroke risk by 64%"
+    },
+    "hemodynamic": {
+      "heart_failure": "Loss of atrial kick (15-25% CO reduction)",
+      "cardiomyopathy": "Tachycardia-mediated if prolonged RVR",
+      "hypotension": "Irregular filling, reduced stroke volume"
+    },
+    "quality_of_life": "Fatigue, exercise intolerance, anxiety, depression"
+  },
+  "special_considerations": {
+    "postoperative_af": {
+      "incidence": "30% after cardiac surgery, 5-15% after non-cardiac surgery",
+      "treatment": "Amiodarone first-line, usually self-limited",
+      "anticoagulation": "Consider if CHADSVASC ≥2 and AF persists >48h"
+    },
+    "heart_failure": {
+      "bidirectional_relationship": "AF causes HF, HF causes AF",
+      "rate_control": "Beta-blockers + digoxin preferred",
+      "anticoagulation": "Lower threshold (CHADSVASC ≥1)"
+    },
+    "pregnancy": {
+      "treatment": "Rate control with metoprolol or digoxin",
+      "anticoagulation": "Heparin/LMWH only, no warfarin or DOACs",
+      "cardioversion": "Safe if indicated"
+    }
+  },
+  "discharge_planning": {
+    "medication_reconciliation": [
+      "Anticoagulation plan clearly documented",
+      "Rate control medications optimized",
+      "Drug interactions reviewed",
+      "Patient education on medication adherence"
+    ],
+    "monitoring_plan": [
+      "INR monitoring if warfarin",
+      "Renal function if DOAC",
+      "Heart rate and symptoms",
+      "Annual echocardiogram if cardiomyopathy"
+    ],
+    "lifestyle_counseling": [
+      "Weight management (10% weight loss can reduce AF burden)",
+      "Alcohol moderation (<1 drink/day)",
+      "Sleep apnea evaluation and treatment",
+      "Regular exercise program",
+      "Smoking cessation"
+    ],
+    "red_flag_symptoms": [
+      "Chest pain or pressure",
+      "Severe shortness of breath",
+      "Syncope or pre-syncope",
+      "Signs of stroke (FAST)",
+      "Significant bleeding if anticoagulated"
+    ]
+  },
+  "follow_up": {
+    "timeline": {
+      "1_week": "Post-discharge phone call, medication adherence",
+      "2_4_weeks": "Cardiology follow-up, rate/rhythm assessment",
+      "3_6_months": "Long-term management plan, anticoagulation review",
+      "annually": "Echocardiogram, CHADSVASC reassessment"
+    },
+    "specialists": {
+      "electrophysiology": "Ablation evaluation, complex AAD management",
+      "anticoagulation_clinic": "Warfarin management, DOAC counseling",
+      "sleep_medicine": "OSA evaluation (present in 50% of AF patients)"
+    }
+  },
+  "quality_metrics": {
+    "core_measures": [
+      "Appropriate anticoagulation prescribed at discharge",
+      "Rate control achieved <110 bpm",
+      "Patient education documented",
+      "Cardiology follow-up scheduled"
+    ],
+    "guideline_adherence": [
+      "CHADSVASC score calculated and documented",
+      "HAS-BLED score calculated if anticoagulation considered",
+      "Contraindications to anticoagulation clearly documented",
+      "Shared decision-making documented"
+    ]
+  },
+  "teaching_points": {
+    "clinical_pearls": [
+      "AF begets AF - early rhythm control may prevent progression",
+      "Rate control is non-inferior to rhythm control for most patients",
+      "DOACs preferred over warfarin except in specific situations",
+      "Always calculate CHADSVASC, not just CHADS2",
+      "HAS-BLED should inform but not prevent anticoagulation"
+    ],
+    "common_pitfalls": [
+      "Using AV nodal blockers in WPW with AF (can accelerate ventricular rate)",
+      "Stopping anticoagulation after successful cardioversion",
+      "Using Class IC drugs in structural heart disease",
+      "Not adjusting DOAC doses for renal function",
+      "Withholding anticoagulation solely based on fall risk"
+    ],
+    "safety_alerts": [
+      "Always check renal function before DOAC initiation",
+      "Avoid digoxin in WPW syndrome",
+      "Class IC drugs contraindicated in CAD/structural disease",
+      "Amiodarone requires extensive monitoring",
+      "Anticoagulation perioperatively requires careful planning"
+    ]
+  },
+  "evidence_base": {
+    "landmark_trials": [
+      "AFFIRM (2002): Rate vs rhythm control",
+      "ROCKET-AF (2011): Rivaroxaban vs warfarin",
+      "ARISTOTLE (2011): Apixaban vs warfarin",
+      "RE-LY (2009): Dabigatran vs warfarin",
+      "CASTLE-AF (2018): Ablation vs medical therapy in HF"
+    ],
+    "current_guidelines": [
+      "2023 ACC/AHA/ACCP/HRS Guideline for Management of AF",
+      "2020 ESC Guidelines for AF",
+      "2019 AHA/ACC/HRS Focused Update"
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+name: Monthly Guideline Review
+
+on:
+  schedule:
+    # Runs on the first Monday of each month at 9:00 AM UTC
+    - cron: "0 9 1-7 * 1" # First Monday of month at 9 AM
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  create-guideline-review-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get current date
+        id: date
+        run: |
+          echo "current_date=$(date +'%B %Y')" >> $GITHUB_OUTPUT
+          echo "due_date=$(date -d '+30 days' +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create monthly guideline review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const currentDate = '${{ steps.date.outputs.current_date }}';
+            const dueDate = '${{ steps.date.outputs.due_date }}';
+
+            const title = `📋 Monthly Guideline Review - ${currentDate}`;
+
+            const body = `# Monthly Clinical Guideline Review
+
+            ## 🗓️ Review Period: ${currentDate}
+            **Due Date:** ${dueDate}
+
+            ## 📚 Guideline Review Checklist
+
+            ### Major Cardiovascular Guidelines
+            - [ ] **AHA/ACC Guidelines** - Check for updates to coronary artery disease management
+            - [ ] **ESC Guidelines** - Review European Society of Cardiology updates
+            - [ ] **CCS Guidelines** - Canadian Cardiovascular Society guideline changes
+            - [ ] **ACCP Guidelines** - American College of Chest Physicians (anticoagulation)
+
+            ### Clinical Pathways Review
+            - [ ] **ACS Decision Tree** (\`#/trees/acs\`) - Validate current pathway accuracy
+            - [ ] **Heart Failure Management** - Review HFrEF and HFpEF recommendations
+            - [ ] **Atrial Fibrillation** (\`#/afib\`) - Check anticoagulation and rate control updates
+            - [ ] **Syncope Evaluation** - Validate diagnostic approach
+            - [ ] **Hypertension Management** - Review BP targets and medication choices
+
+            ### Calculator Validation
+            - [ ] **TIMI Risk Score** - Verify algorithm accuracy and reference ranges
+            - [ ] **GRACE Score** - Check for updates to risk stratification
+            - [ ] **Wells Score** - Validate PE and DVT assessment criteria
+            - [ ] **CHA2DS2-VASc** - Confirm stroke risk calculation accuracy
+            - [ ] **HAS-BLED** - Review bleeding risk assessment
+
+            ### Medication Updates
+            - [ ] **Antiplatelet Therapy** - DAPT duration and drug choices
+            - [ ] **Anticoagulation** - DOAC vs warfarin recommendations
+            - [ ] **Heart Failure Medications** - GDMT updates and new therapies
+            - [ ] **Lipid Management** - Statin and PCSK9 inhibitor guidelines
+            - [ ] **Blood Pressure Medications** - First-line and combination therapy
+
+            ### Technical Updates Required
+            - [ ] **Update timestamps** in \`utils/cardiac-guidelines.js\`
+            - [ ] **Version control** - Tag any guideline changes with version numbers
+            - [ ] **Documentation** - Update \`docs/governance.md\` with review notes
+            - [ ] **Changelog** - Document all clinical content changes
+
+            ### Quality Assurance
+            - [ ] **Clinical validation** by qualified healthcare professional
+            - [ ] **Cross-reference** with institutional protocols
+            - [ ] **User feedback** review from previous month
+            - [ ] **Literature search** for emerging evidence
+
+            ### Emergency/Critical Updates
+            - [ ] **FDA Safety Communications** - Review drug safety updates
+            - [ ] **Urgent Guidelines** - Check for emergency clinical advisories
+            - [ ] **Recall Notices** - Medical device or medication recalls
+
+            ## 📋 Review Process
+
+            1. **Assign Reviewer**: Tag clinical team member responsible
+            2. **Literature Search**: Systematic review of recent publications
+            3. **Guideline Comparison**: Compare current app content with latest guidelines
+            4. **Update Implementation**: Make necessary changes to clinical pathways
+            5. **Documentation**: Update governance documents and changelogs
+            6. **Testing**: Validate all clinical pathway changes
+            7. **Approval**: Clinical team sign-off on updates
+
+            ## 🚨 Escalation Criteria
+
+            **Immediate Action Required** (within 24 hours):
+            - Major safety concerns or contraindications discovered
+            - Critical medication dosing errors identified
+            - Emergency guideline updates from major societies
+
+            **Urgent Review** (within 1 week):
+            - Significant clinical pathway changes
+            - New contraindications or warnings
+            - Major diagnostic criteria updates
+
+            ## 📞 Contacts
+
+            - **Clinical Lead**: @clinical-team
+            - **Technical Lead**: @technical-team
+            - **Quality Assurance**: @qa-team
+
+            ## 📝 Additional Notes
+
+            - All updates must maintain HIPAA compliance
+            - Changes should be evidence-based with references
+            - User impact assessment required for major changes
+            - Training materials may need updates
+
+            ---
+
+            **Next Review Date**: First Monday of next month
+            **Automated Issue**: This issue was created automatically by GitHub Actions
+
+            /cc @clinical-team @technical-team`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['clinical-review', 'monthly-maintenance', 'guidelines', 'high-priority'],
+              assignees: [], // Add default assignees if needed
+            });
+
+            console.log(\`Created issue #\${issue.data.number}: \${title}\`);
+
+            // Optional: Create a comment with additional context
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.data.number,
+              body: \`🤖 **Automated Reminder**: This monthly review ensures our clinical decision support tools remain current with the latest evidence-based guidelines. Please complete this review by **\${dueDate}** to maintain clinical accuracy and patient safety.\`
+            });
+
+      - name: Notify team (optional)
+        if: success()
+        run: |
+          echo "✅ Monthly guideline review issue created successfully"
+          echo "📅 Review period: ${{ steps.date.outputs.current_date }}"
+          echo "⏰ Due date: ${{ steps.date.outputs.due_date }}"

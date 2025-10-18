@@ -1,0 +1,63 @@
+{
+  "id": "as",
+  "name": "Aortic Stenosis",
+  "category": ["Valvular"],
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Exertional dyspnea",
+      "Angina",
+      "Syncope/presyncope",
+      "Fatigue"
+    ],
+    "signs_any": [
+      "Harsh, late-peaking systolic ejection murmur at RUSB radiating to carotids",
+      "Soft/absent A2 in severe AS",
+      "Parvus et tardus carotid upstroke"
+    ]
+  },
+  "initial_tests": [
+    "Transthoracic echo (valve area, mean gradient, jet velocity, LV function)",
+    "ECG (LVH)",
+    "CXR (post-stenotic dilation)",
+    "BNP in advanced disease prognostication"
+  ],
+  "diagnostics": {
+    "echo_criteria": [
+      "Severe AS: Vmax ≥4.0 m/s or mean gradient ≥40 mmHg or valve area ≤1.0 cm²",
+      "Low-flow/low-gradient AS: consider dobutamine stress echo or CT calcium scoring"
+    ]
+  },
+  "treatment": {
+    "all_patients_initial": [
+      "Medical therapy does not halt progression; manage comorbidities (HTN, lipids)",
+      "Avoid hypotension and excessive preload reduction"
+    ],
+    "definitive": [
+      "Symptomatic severe AS or LVEF <50%: valve replacement (SAVR or TAVR)",
+      "Asymptomatic severe AS with very severe Vmax, rapid progression, or abnormal exercise test: consider intervention"
+    ],
+    "periop": [
+      "Cardiology/heart-team evaluation for TAVR vs SAVR based on age, anatomy, surgical risk"
+    ]
+  },
+  "contraindications": {
+    "afterload_reduction": [
+      "Use vasodilators cautiously; avoid precipitous BP drops"
+    ],
+    "nitrates": [
+      "Use with caution if preload dependent; monitor for hypotension"
+    ]
+  },
+  "follow_up": [
+    "Echo surveillance: mild q3–5y, moderate q1–2y, severe q6–12mo or sooner if symptoms change"
+  ],
+  "discharge": {
+    "instructions": [
+      "Educate on red-flag symptoms (syncope, angina, dyspnea) and prompt evaluation",
+      "Endocarditis prophylaxis only for high-risk prosthetic valve patients"
+    ],
+    "follow_up": [
+      "Valve clinic/cardiology follow-up per severity; post-TAVR/SAVR protocols as applicable"
+    ]
+  }
+}

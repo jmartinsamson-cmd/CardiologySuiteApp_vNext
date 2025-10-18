@@ -1,0 +1,251 @@
+{
+  "version": "0.1.0",
+  "last_updated": "2025-08-22",
+  "procedures": [
+    {
+      "id": "cath_diagnostic",
+      "name": "Diagnostic Coronary Angiography",
+      "type": "Invasive",
+      "aka": ["Cardiac Cath", "Coronary Angiogram"],
+      "indications": [
+        "Suspected ACS/unstable angina",
+        "Positive high-risk stress test",
+        "Persistent angina despite therapy",
+        "Pre-op evaluation in high-risk patients"
+      ],
+      "key_findings": [
+        "Obstructive CAD locations/percent stenosis",
+        "LVEDP, ventriculogram if performed"
+      ],
+      "post_care": [
+        "Bedrest per access route",
+        "Hydration (contrast nephropathy risk)",
+        "Access site monitoring"
+      ],
+      "links_dx": ["acs", "stable_angina"]
+    },
+    {
+      "id": "pci",
+      "name": "Percutaneous Coronary Intervention (PCI)",
+      "type": "Invasive",
+      "aka": ["Coronary Stent"],
+      "indications": [
+        "STEMI/NSTEMI culprit lesion",
+        "Refractory angina",
+        "High-risk anatomy in stable angina"
+      ],
+      "key_findings": ["Stent location/size", "Residual stenosis", "TIMI flow"],
+      "post_care": [
+        "Dual antiplatelet therapy per stent type",
+        "Access site care",
+        "High-intensity statin optimization"
+      ],
+      "links_dx": ["acs", "stable_angina"]
+    },
+    {
+      "id": "cabg",
+      "name": "Coronary Artery Bypass Grafting (CABG)",
+      "type": "Surgical",
+      "indications": [
+        "Left main disease",
+        "3-vessel CAD with LV dysfunction or diabetes",
+        "Failed PCI",
+        "Complex multivessel disease"
+      ],
+      "key_findings": ["Grafts (LIMA/RIMA/SVG)", "Targets (LAD/LCx/RCA)"],
+      "post_care": [
+        "Sternal precautions",
+        "DAPT per graft strategy",
+        "Cardiac rehab"
+      ],
+      "links_dx": ["acs", "stable_angina"]
+    },
+    {
+      "id": "tavr",
+      "name": "Transcatheter Aortic Valve Replacement (TAVR)",
+      "type": "Structural",
+      "indications": ["Severe symptomatic AS", "LVEF <50% due to AS"],
+      "key_findings": [
+        "Valve size/type",
+        "Access route",
+        "Post-implant gradients/AR"
+      ],
+      "post_care": [
+        "Antithrombotic per protocol",
+        "Echo surveillance",
+        "Endocarditis prophylaxis per risk"
+      ],
+      "links_dx": ["as"]
+    },
+    {
+      "id": "savr",
+      "name": "Surgical Aortic Valve Replacement (SAVR)",
+      "type": "Surgical",
+      "indications": [
+        "Severe symptomatic AS/AR",
+        "Asymptomatic severe with LV dysfunction"
+      ],
+      "key_findings": [
+        "Valve type (mechanical/bioprosthetic)",
+        "Size",
+        "Concomitant procedures"
+      ],
+      "post_care": [
+        "Anticoagulation if mechanical",
+        "Echo surveillance",
+        "Sternal precautions"
+      ],
+      "links_dx": ["as", "ar"]
+    },
+    {
+      "id": "mvr",
+      "name": "Mitral Valve Repair/Replacement",
+      "type": "Surgical/Structural",
+      "indications": ["Severe symptomatic MR", "Acute severe MR"],
+      "key_findings": ["Repair vs replacement", "Ring size", "Residual MR"],
+      "post_care": ["Anticoagulation if mechanical valve", "Echo surveillance"],
+      "links_dx": ["mr"]
+    },
+    {
+      "id": "teer_mitraclip",
+      "name": "Transcatheter Edge-to-Edge Repair (MitraClip/TEER)",
+      "type": "Structural",
+      "indications": [
+        "Severe primary or secondary MR in non-surgical candidates"
+      ],
+      "key_findings": [
+        "Number of clips",
+        "Residual MR",
+        "Transmitral gradient"
+      ],
+      "post_care": ["Antithrombotic per protocol", "Echo follow-up"],
+      "links_dx": ["mr", "hfref"]
+    },
+    {
+      "id": "ppm",
+      "name": "Permanent Pacemaker (PPM) Implantation",
+      "type": "EP",
+      "indications": ["Symptomatic bradycardia", "High-grade AV block"],
+      "key_findings": ["Lead locations", "Device type (single/dual/CRT)"],
+      "post_care": [
+        "Wound care",
+        "Activity restrictions",
+        "Device check schedule"
+      ],
+      "links_dx": ["bradyarrhythmia"]
+    },
+    {
+      "id": "icd",
+      "name": "Implantable Cardioverter-Defibrillator (ICD)",
+      "type": "EP",
+      "indications": [
+        "Secondary prevention after VT/VF arrest",
+        "Primary prevention EF ≤35% despite GDMT"
+      ],
+      "key_findings": ["Programmed zones", "Shocks/ATP delivered"],
+      "post_care": ["Driving/work guidance", "Device clinic follow-up"],
+      "links_dx": ["vt", "cardiac_arrest", "hfref"]
+    },
+    {
+      "id": "crt",
+      "name": "Cardiac Resynchronization Therapy (CRT)",
+      "type": "EP",
+      "indications": ["EF ≤35% with LBBB and QRS ≥150 ms on GDMT"],
+      "key_findings": ["BiV capture", "Lead thresholds"],
+      "post_care": ["Device optimization", "HF clinic follow-up"],
+      "links_dx": ["hfref"]
+    },
+    {
+      "id": "af_ablation",
+      "name": "Atrial Fibrillation Ablation",
+      "type": "EP",
+      "indications": [
+        "Symptomatic AF refractory to meds",
+        "Selected HFrEF for rhythm control"
+      ],
+      "key_findings": [
+        "PVI completed",
+        "Adjunctive lines",
+        "Complications (tamponade, PV stenosis)"
+      ],
+      "post_care": [
+        "Anticoagulation per CHA₂DS₂-VASc",
+        "PPI if on AADs",
+        "Recurrence window (blanking)"
+      ],
+      "links_dx": ["afib"]
+    },
+    {
+      "id": "laao",
+      "name": "Left Atrial Appendage Occlusion (LAAO/Watchman)",
+      "type": "EP/Structural",
+      "indications": ["AF with contraindication to long-term anticoagulation"],
+      "key_findings": ["Device size/position", "Peri-device leak"],
+      "post_care": [
+        "Short-term anticoag/antiplatelet per protocol",
+        "TEE at ~45 days"
+      ],
+      "links_dx": ["afib"]
+    },
+    {
+      "id": "dccv",
+      "name": "Electrical Cardioversion (DCCV)",
+      "type": "EP",
+      "indications": [
+        "AF/AFlutter rhythm control",
+        "VT with pulse (synchronized)"
+      ],
+      "key_findings": ["Energy used", "Post-conversion rhythm"],
+      "post_care": ["Anticoagulation if AF/flutter >48h or unknown duration"],
+      "links_dx": ["afib", "atrial_flutter", "vt"]
+    },
+    {
+      "id": "echo_tte",
+      "name": "Transthoracic Echocardiogram (TTE)",
+      "type": "Imaging",
+      "indications": ["HF evaluation", "Valve disease", "Pericardial disease"],
+      "key_findings": [
+        "LVEF",
+        "Chamber sizes",
+        "Valve lesions",
+        "Pericardial effusion"
+      ],
+      "post_care": ["Surveillance intervals based on lesion severity"],
+      "links_dx": ["hfref", "hfpef", "as", "mr", "pericardial_effusion"]
+    },
+    {
+      "id": "echo_tee",
+      "name": "Transesophageal Echocardiogram (TEE)",
+      "type": "Imaging",
+      "indications": [
+        "Endocarditis",
+        "MR mechanism",
+        "LAA thrombus/sizing for LAAO"
+      ],
+      "key_findings": [
+        "Vegetations/abscess",
+        "Valve morphology",
+        "LAA thrombus"
+      ],
+      "post_care": ["NPO recovery, sore throat care"],
+      "links_dx": ["infective_endocarditis", "mr", "afib"]
+    },
+    {
+      "id": "stress_test",
+      "name": "Cardiac Stress Test (Exercise/Pharmacologic)",
+      "type": "Diagnostic",
+      "indications": [
+        "Chest pain evaluation",
+        "Pre-op risk assessment",
+        "Functional capacity"
+      ],
+      "key_findings": [
+        "ECG changes",
+        "Perfusion defects",
+        "Exercise tolerance"
+      ],
+      "post_care": ["Activity as tolerated"],
+      "links_dx": ["stable_angina", "cad"]
+    }
+  ]
+}

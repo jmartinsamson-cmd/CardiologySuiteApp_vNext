@@ -1,0 +1,36 @@
+SUBJECTIVE:
+72 year old male presents with chest pain. Pain started 2 hours ago while at rest. Associated with shortness of breath and diaphoresis.
+
+PAST MEDICAL HISTORY:
+- Hypertension
+- Diabetes mellitus type 2
+- Prior MI 2015
+
+MEDICATIONS:
+- Aspirin 81mg daily
+- Metoprolol 50mg BID
+- Atorvastatin 40mg daily
+
+ALLERGIES:
+Penicillin - rash
+
+OBJECTIVE:
+BP: 145/92, HR: 88, RR: 18, Temp: 98.6, SpO2: 96%
+
+PHYSICAL EXAM:
+Alert and oriented x3. Lungs clear bilaterally. Heart regular rate and rhythm, no murmurs.
+
+LABS:
+Troponin 0.8 ng/mL
+
+ASSESSMENT:
+1. Acute coronary syndrome
+2. Hypertension, controlled
+3. Diabetes mellitus, type 2
+
+PLAN:
+- Aspirin 325mg chewed
+- Heparin bolus and drip
+- Cardiology consult
+- Serial troponins
+- Admit to CCU

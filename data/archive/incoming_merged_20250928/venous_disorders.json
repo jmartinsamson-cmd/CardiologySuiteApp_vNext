@@ -1,0 +1,149 @@
+{
+  "diagnoses": [
+    {
+      "id": "dvt",
+      "name": "Deep Vein Thrombosis (DVT)",
+      "category": ["Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Unilateral leg swelling",
+          "Pain/tenderness",
+          "Erythema",
+          "Warmth"
+        ],
+        "signs_any": [
+          "Calf swelling >3 cm vs other leg",
+          "Pitting edema",
+          "Collateral superficial veins"
+        ]
+      },
+      "initial_tests": [
+        "Wells score for pretest probability",
+        "D-dimer (rule out in low probability)",
+        "Compression ultrasound (diagnostic)"
+      ],
+      "treatment": {
+        "anticoagulation": [
+          "DOAC (apixaban, rivaroxaban) preferred if not contraindicated",
+          "LMWH/warfarin if DOAC not suitable (cancer, pregnancy special considerations)"
+        ],
+        "duration": [
+          "Provoked DVT: 3 months",
+          "Unprovoked: ≥3 months, consider indefinite if low bleeding risk",
+          "Cancer-associated: at least 3–6 months, often longer"
+        ]
+      },
+      "contraindications": {
+        "anticoagulation": [
+          "Active bleeding, high bleeding risk — consider IVC filter if acute proximal DVT"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Medication adherence (anticoagulant)",
+          "Report bleeding/bruising",
+          "Leg elevation, compression stockings if chronic symptoms"
+        ],
+        "follow_up": ["Hematology/PCP follow-up for duration decision"]
+      }
+    },
+    {
+      "id": "pe",
+      "name": "Pulmonary Embolism (PE)",
+      "category": ["Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Dyspnea",
+          "Pleuritic chest pain",
+          "Cough",
+          "Hemoptysis",
+          "Syncope if massive PE"
+        ],
+        "signs_any": [
+          "Tachypnea, tachycardia",
+          "Hypoxemia",
+          "Signs of DVT",
+          "Hypotension/shock if massive"
+        ]
+      },
+      "initial_tests": [
+        "Wells or Geneva score",
+        "D-dimer (rule out in low/intermediate risk)",
+        "CT pulmonary angiography (diagnostic)",
+        "V/Q scan if CTA contraindicated",
+        "Echo for RV strain if massive/submassive"
+      ],
+      "treatment": {
+        "anticoagulation": [
+          "DOAC preferred if not contraindicated",
+          "LMWH in pregnancy or cancer"
+        ],
+        "massive_pe": [
+          "Systemic thrombolysis (alteplase) if shock/hemodynamic collapse and no contraindications",
+          "Catheter-directed thrombolysis or surgical embolectomy if thrombolysis contraindicated/failed"
+        ],
+        "submassive_pe": [
+          "Anticoagulation mainstay",
+          "Thrombolysis considered if worsening RV dysfunction or clinical decline"
+        ]
+      },
+      "contraindications": {
+        "thrombolysis": [
+          "Recent major surgery, hemorrhagic stroke, active bleeding"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Medication adherence to anticoagulation",
+          "Report bleeding, recurrent chest pain/dyspnea",
+          "Encourage ambulation as tolerated"
+        ],
+        "follow_up": [
+          "Hematology/pulmonology follow-up; duration based on provoked vs unprovoked"
+        ]
+      }
+    },
+    {
+      "id": "cvi",
+      "name": "Chronic Venous Insufficiency / Varicose Veins",
+      "category": ["Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Leg heaviness/aching",
+          "Swelling worse with standing",
+          "Itching",
+          "Varicose veins",
+          "Skin changes (hyperpigmentation, lipodermatosclerosis)",
+          "Ulceration (advanced)"
+        ],
+        "signs_any": [
+          "Varicose veins",
+          "Edema (worse at end of day)",
+          "Stasis dermatitis",
+          "Venous stasis ulcers (medial malleolus)"
+        ]
+      },
+      "initial_tests": ["Duplex venous ultrasound (reflux, obstruction)"],
+      "treatment": {
+        "conservative": [
+          "Compression stockings",
+          "Leg elevation, exercise, weight management",
+          "Skin care for stasis dermatitis"
+        ],
+        "intervention": [
+          "Endovenous ablation (laser, radiofrequency)",
+          "Sclerotherapy",
+          "Surgical vein stripping for severe/refractory disease"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Daily use of compression stockings",
+          "Regular ambulation, avoid prolonged standing",
+          "Skin care with emollients, wound care if ulcers"
+        ],
+        "follow_up": ["Vascular follow-up; wound care clinic if ulcers present"]
+      }
+    }
+  ]
+}

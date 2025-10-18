@@ -1,0 +1,98 @@
+{
+  "diagnoses": [
+    {
+      "id": "htn",
+      "name": "Essential Hypertension",
+      "category": ["Hypertension"],
+      "clinical_triggers": {
+        "symptoms_any": ["Often asymptomatic", "Headache", "Dizziness"],
+        "signs_any": [
+          "Elevated office BP (≥130/80 per guideline context)",
+          "End-organ signs if longstanding (LVH, retinopathy)"
+        ]
+      },
+      "initial_tests": [
+        "Confirm with out-of-office BP (home/ambulatory) when feasible",
+        "BMP (K+, Cr/eGFR), fasting glucose/A1c, lipids",
+        "TSH if clinically indicated",
+        "Urinalysis (protein/hematuria)",
+        "ECG (LVH, prior MI) ± Echo if indicated"
+      ],
+      "risk_scoring": {
+        "tools": [{ "id": "ascvd_10y", "name": "ASCVD 10-year risk" }],
+        "use": "Guides intensity of BP and lipid therapy; lifestyle vs meds"
+      },
+      "treatment": {
+        "all_patients_initial": [
+          "Lifestyle: weight loss, DASH diet, salt restriction, exercise, alcohol moderation, avoid NSAIDs",
+          "First-line meds (non-Black, no CKD): thiazide (chlorthalidone), ACEi/ARB, or CCB",
+          "CKD/proteinuria: ACEi/ARB preferred",
+          "Black patients (without CKD): thiazide or CCB preferred",
+          "Diabetes: ACEi/ARB reasonable; consider SGLT2i/GLP-1 RA for CV benefit (comorbidity management)"
+        ],
+        "targets": ["Typical goal <130/80 mmHg for most adults (individualize)"]
+      },
+      "follow_up": [
+        "Titrate every 2–4 weeks until at goal",
+        "Monitor K+/Cr after starting ACEi/ARB or diuretics",
+        "Reinforce lifestyle at each visit"
+      ],
+      "notes": [
+        "Screen for secondary causes if resistant HTN, abrupt onset, hypokalemia, or young age at diagnosis."
+      ]
+    },
+    {
+      "id": "htn_urgency",
+      "name": "Hypertensive Urgency / Emergency",
+      "category": ["Hypertension"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Headache",
+          "Visual changes",
+          "Chest pain",
+          "Dyspnea",
+          "Neurologic deficits",
+          "Oliguria"
+        ],
+        "signs_any": [
+          "Marked BP elevation (often ≥180/120 mmHg)",
+          "Evidence of acute end-organ damage suggests **Emergency** (e.g., encephalopathy, stroke, ACS, AHF, aortic dissection, AKI, eclampsia)"
+        ]
+      },
+      "initial_tests": [
+        "Focused exam for end-organ damage (neuro, cardio-pulm)",
+        "BMP, UA",
+        "ECG ± troponin",
+        "CXR if pulmonary edema; Head CT if neuro deficits; Fundoscopy if concern for retinal hemorrhages"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "Differentiate **Urgency** (no end-organ damage) vs **Emergency** (with damage)",
+          "Urgency: oral agents, gradual reduction over 24–48h, close follow-up",
+          "Emergency: ICU, IV meds; lower MAP ~10–20% in first hour, then additional 5–15% over next 23h (avoid rapid over-correction)"
+        ],
+        "iv_options_emergency": [
+          "Nicardipine, clevidipine",
+          "Labetalol, esmolol",
+          "Nitroprusside (monitor cyanide/thiocyanate)",
+          "Nitroglycerin (esp. ACS/pulmonary edema)",
+          "Hydralazine (selected settings, e.g., pregnancy)"
+        ],
+        "special_cases": [
+          "Aortic dissection: reduce HR/BP rapidly with β-blocker + vasodilator (SBP <120, HR <60)",
+          "Ischemic stroke: follow thrombolysis/EVT BP thresholds",
+          "Preeclampsia/eclampsia: labetalol, hydralazine, or nifedipine; magnesium for seizure prophylaxis"
+        ]
+      },
+      "contraindications": {
+        "rapid_lowering": [
+          "Avoid precipitous BP drops that risk cerebral/coronary ischemia"
+        ],
+        "pregnancy": ["ACEi/ARB/ARNI contraindicated"]
+      },
+      "follow_up": [
+        "Close outpatient follow-up within days after urgency; ensure long-term regimen optimization"
+      ]
+    }
+  ]
+}

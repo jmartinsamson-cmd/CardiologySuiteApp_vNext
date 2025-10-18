@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Medications - Cardiology Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0f1419" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/meds.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dc2626' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"
+    />
+
+    <!-- SVG Sanitizer (protect against invalid viewBox from extensions) -->
+    <script src="src/utils/svgSanitizer.browser.js"></script>
+
+    <script type="module">
+      import { mountMeds } from "./pages/meds.js";
+
+      // Initialize theme
+      function initializeTheme() {
+        const themeToggle = document.querySelector(".theme-toggle");
+        if (themeToggle) {
+          themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("theme-light");
+          });
+        }
+      }
+
+      // Mount medications page
+      document.addEventListener("DOMContentLoaded", async () => {
+        console.log("💊 Loading Medications page...");
+
+        initializeTheme();
+
+        const container = document.getElementById("meds-container");
+        if (container) {
+          await mountMeds(container);
+        }
+      });
+    </script>
+  </head>
+  <body class="theme-dark">
+    <!-- Fixed Header -->
+    <header id="banner">
+      <div class="brand">Cardiology Suite</div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-tab" data-page="main">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+          Main
+        </a>
+        <a href="guidelines.html" class="nav-tab" data-page="guidelines">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path
+              fill="currentColor"
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+            />
+          </svg>
+          Guidelines & Teaching
+        </a>
+        <a href="meds.html" class="nav-tab active" data-page="meds">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path
+              fill="currentColor"
+              d="M10.5 13H8v-3h2.5V7.5h3V10H16v3h-2.5v2.5h-3V13zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+          Medications
+        </a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg
+          class="theme-icon sun-icon"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1z"
+          />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Medications Page Container -->
+    <main id="meds-container">
+      <!-- Content loaded dynamically by meds.js -->
+    </main>
+  </body>
+</html>

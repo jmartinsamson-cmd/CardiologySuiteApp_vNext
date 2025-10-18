@@ -1,0 +1,118 @@
+{
+  "CodeGPT.apiKey": "Perplexity",
+  "liveServer.settings.port": 8081,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.CustomBrowser": null,
+  "liveServer.settings.NoBrowser": false,
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
+  ],
+  "liveServer.settings.root": "/",
+  "liveServer.settings.mount": [["/", "./"]],
+  "liveServer.settings.file": "index.html",
+  "liveServer.settings.wait": 100,
+  "livePreview.defaultPreviewType": "internalPreview",
+  "livePreview.portNumber": 3000,
+  "livePreview.showStatusBarItem": true,
+  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+  "livePreview.openPreviewTarget": "Embedded Preview",
+
+  // Stylelint - CSS files only, no HTML/MD processing
+  "stylelint.validate": ["css", "scss", "sass", "less"],
+  "stylelint.ignoreDisables": false,
+  "stylelint.snippet": ["css", "scss", "sass", "less"],
+  "stylelint.config": null,
+  "stylelint.configFile": ".stylelintrc.json",
+  "stylelint.enable": true,
+  "stylelint.packageManager": "npm",
+  "stylelint.reportNeedlessDisables": false,
+
+  // Language-specific overrides - DISABLE problematic linters
+  "[html]": {
+    "stylelint.enable": false,
+    "css.validate": false,
+    "html.validate.scripts": false,
+    "html.validate.styles": false
+  },
+  "[markdown]": {
+    "stylelint.enable": false,
+    "css.validate": false
+  },
+
+  // Problem panel - Hide unnecessary errors
+  "problems.decorations.enabled": false,
+  "problems.showCurrentInStatus": false,
+
+  // Validation settings - Clean and minimal
+  "css.validate": true,
+  "scss.validate": true,
+  "less.validate": true,
+  "html.validate.scripts": false,
+  "html.validate.styles": false,
+  "html.suggest.html5": false,
+  "html.format.enable": false,
+
+  // CSS linting - Ignore cosmetic warnings
+  "css.lint.duplicateProperties": "ignore",
+  "css.lint.vendorPrefix": "ignore",
+  "css.lint.unknownProperties": "ignore",
+  "css.lint.boxModel": "ignore",
+  "css.lint.universalSelector": "ignore",
+  "css.lint.zeroUnits": "ignore",
+
+  // JavaScript/TypeScript - Proper validation only
+  "javascript.validate.enable": true,
+  "typescript.validate.enable": true,
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "typescript"],
+
+  // File associations
+  "files.associations": {
+    "*.js": "javascript",
+    "*.ts": "typescript",
+    "*.md": "markdown",
+    "*.html": "html"
+  },
+
+  // Medical dictionary spell checker
+  "cSpell.enabled": true,
+  "cSpell.enabledFileTypes": {
+    "html": true,
+    "javascript": true,
+    "typescript": true,
+    "markdown": true,
+    "json": true,
+    "css": true
+  },
+  "cSpell.words": ["NSTEMI", "STEMI", "TIMI", "cardiology", "Samson"],
+  "cSpell.dictionaries": ["medical-terms", "cardiology-suite-custom"],
+  "cSpell.ignorePaths": [
+    "node_modules/**",
+    ".git/**",
+    "*.min.js",
+    "*.min.css",
+    "dist/**",
+    "build/**",
+    "backups/**"
+  ],
+
+  // Editor - Suppress diagnostic noise
+  "editor.renderValidationDecorations": "off",
+  "workbench.problems.visibility": "filtered",
+  "stylelint.reportInvalidScopeDisables": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "never"
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": [
+    {
+      "path": "",
+      "envManager": "ms-python.python:system",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
+}

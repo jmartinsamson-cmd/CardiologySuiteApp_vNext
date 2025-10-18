@@ -1,0 +1,345 @@
+{
+  "clinical_pearls": {
+    "diagnosis": [
+      {
+        "pearl": "AF begets AF - Electrical and structural remodeling makes AF self-perpetuating",
+        "clinical_significance": "Early rhythm control may prevent progression from paroxysmal to persistent AF",
+        "evidence": "EARLY-AF trial showed benefit of early ablation"
+      },
+      {
+        "pearl": "Holiday Heart Syndrome - AF triggered by acute alcohol ingestion",
+        "clinical_significance": "Even moderate drinking (>1 drink/day) increases AF risk",
+        "management": "Alcohol cessation can reduce AF recurrence by 50%"
+      },
+      {
+        "pearl": "Lone AF - AF without structural heart disease in patients <60 years",
+        "clinical_significance": "Lower stroke risk but still follow CHADSVASC guidelines",
+        "prognosis": "Generally good but may progress with age"
+      },
+      {
+        "pearl": "PAC burden >100/hour predicts development of AF",
+        "clinical_significance": "Monitor patients with frequent PACs on Holter",
+        "intervention": "Consider lifestyle modifications, treat sleep apnea"
+      }
+    ],
+    "anticoagulation": [
+      {
+        "pearl": "DOACs have 50% lower ICH risk than warfarin (0.3% vs 0.8% annually)",
+        "clinical_significance": "Should be first-line unless contraindicated",
+        "cost_consideration": "Cost-effective due to reduced monitoring and complications"
+      },
+      {
+        "pearl": "Fall risk should NOT prevent anticoagulation in appropriate patients",
+        "evidence": "Need 295 falls/year to offset stroke prevention benefit",
+        "approach": "Address fall risk factors, consider gait training"
+      },
+      {
+        "pearl": "Time in therapeutic range (TTR) <70% warfarin patients should switch to DOAC",
+        "rationale": "Poor INR control negates warfarin benefits",
+        "implementation": "Use anticoagulation clinics to optimize TTR first"
+      },
+      {
+        "pearl": "CHADSVASC score more predictive than CHADS2 in low-risk patients",
+        "difference": "CHADSVASC better identifies truly low-risk patients (score 0-1)",
+        "clinical_impact": "Reduces unnecessary anticoagulation in young women"
+      }
+    ],
+    "rate_vs_rhythm_control": [
+      {
+        "pearl": "Rate control non-inferior to rhythm control for most patients",
+        "evidence": "AFFIRM, RACE trials showed no mortality difference",
+        "implications": "Focus on symptom improvement rather than rhythm"
+      },
+      {
+        "pearl": "Rhythm control beneficial in young, symptomatic patients",
+        "evidence": "CABANA, EAST-AFNET 4 suggest early rhythm control beneficial",
+        "selection": "Age <65, symptomatic, structurally normal hearts"
+      },
+      {
+        "pearl": "Lenient rate control (<110 bpm) adequate for most patients",
+        "evidence": "RACE II trial showed non-inferiority to strict control",
+        "exception": "Use strict control (<80 bpm) if symptomatic"
+      }
+    ],
+    "cardioversion": [
+      {
+        "pearl": "AF <48h duration can be cardioverted without anticoagulation if low stroke risk",
+        "caveat": "Consider TEE if clinical uncertainty about duration",
+        "post_cardioversion": "Still need 4 weeks anticoagulation due to atrial stunning"
+      },
+      {
+        "pearl": "TEE-guided cardioversion allows immediate procedure",
+        "indications": "Patient preference, urgent need for rhythm control",
+        "success_rate": "Similar to conventional approach"
+      },
+      {
+        "pearl": "Atrial stunning occurs after cardioversion regardless of method",
+        "mechanism": "Temporary atrial mechanical dysfunction",
+        "duration": "Up to 4 weeks, requires continued anticoagulation"
+      }
+    ]
+  },
+  "common_pitfalls": [
+    {
+      "pitfall": "Using AV nodal blockers (CCB, digoxin) in WPW with AF",
+      "consequence": "Can accelerate ventricular rate via accessory pathway",
+      "recognition": "Delta waves on ECG, very rapid irregular rhythm",
+      "management": "IV procainamide or ibutilide, avoid adenosine/verapamil"
+    },
+    {
+      "pitfall": "Stopping anticoagulation after successful cardioversion",
+      "problem": "Atrial stunning persists 4 weeks, high recurrence rate",
+      "correct_approach": "Continue anticoagulation ≥4 weeks, then reassess CHADSVASC"
+    },
+    {
+      "pitfall": "Using Class IC antiarrhythmics in CAD/structural heart disease",
+      "consequence": "Pro-arrhythmic effects, increased mortality",
+      "screening": "Always obtain echo and stress test before Class IC",
+      "alternative": "Amiodarone or dofetilide in structural disease"
+    },
+    {
+      "pitfall": "Not adjusting DOAC doses for renal function",
+      "problem": "Accumulation and bleeding risk with renal impairment",
+      "monitoring": "Check CrCl every 6-12 months, adjust accordingly"
+    },
+    {
+      "pitfall": "Withholding anticoagulation solely based on HAS-BLED score",
+      "misunderstanding": "HAS-BLED predicts bleeding risk but shouldn't prevent anticoagulation",
+      "correct_use": "Identify modifiable bleeding risks, inform shared decision-making"
+    },
+    {
+      "pitfall": "Using immediate-release metoprolol for rate control",
+      "problem": "BID dosing reduces compliance, less cardioprotective",
+      "preferred": "Metoprolol succinate (extended-release) daily dosing"
+    },
+    {
+      "pitfall": "Not checking thyroid function in new-onset AF",
+      "prevalence": "Hyperthyroidism found in 13% of new AF diagnoses",
+      "management": "TSH should be checked in all patients with new AF"
+    }
+  ],
+  "safety_alerts": [
+    {
+      "alert": "DOAC + Dual antiplatelet therapy = High bleeding risk",
+      "scenario": "Post-PCI patients with AF",
+      "management": "Limit triple therapy duration, prefer P2Y12 inhibitor + DOAC",
+      "monitoring": "Frequent CBC, consider PPI"
+    },
+    {
+      "alert": "Amiodarone pulmonary toxicity can be fatal",
+      "recognition": "New cough, dyspnea, fever, bilateral infiltrates",
+      "prevention": "Baseline PFTs, CXR every 6 months",
+      "management": "Discontinue immediately, high-dose steroids"
+    },
+    {
+      "alert": "Digoxin toxicity in elderly/renal impairment",
+      "symptoms": "N/V, visual changes, arrhythmias, altered mental status",
+      "prevention": "Dose based on age/CrCl, check levels, monitor K+/Mg2+",
+      "management": "Hold digoxin, correct electrolytes, consider Fab fragments"
+    },
+    {
+      "alert": "Atrio-esophageal fistula after AF ablation",
+      "incidence": "0.1-0.25% but often fatal",
+      "presentation": "Fever, sepsis, neurologic symptoms 1-4 weeks post-ablation",
+      "prevention": "Esophageal temperature monitoring, reduced posterior wall power"
+    },
+    {
+      "alert": "Dofetilide requires inpatient initiation with telemetry",
+      "rationale": "QT prolongation and torsades risk highest in first 3 days",
+      "protocol": "3-day admission, QTc monitoring after each dose"
+    }
+  ],
+  "case_based_learning": [
+    {
+      "case_title": "Young Athlete with Paroxysmal AF",
+      "presentation": "25-year-old marathon runner with palpitations during training",
+      "key_points": [
+        "Consider lone AF vs secondary causes",
+        "Exercise-induced AF may be vagally mediated",
+        "Class IC drugs effective if structurally normal heart",
+        "Ablation often first-line in young athletes"
+      ],
+      "management_pearls": [
+        "Obtain exercise stress test and echo",
+        "Consider EP study if WPW suspected",
+        "Discuss sport participation restrictions",
+        "Anticoagulation based on CHADSVASC (likely score 0)"
+      ]
+    },
+    {
+      "case_title": "Post-operative AF",
+      "presentation": "68-year-old man develops AF on POD#2 after CABG",
+      "key_points": [
+        "Very common after cardiac surgery (30-40%)",
+        "Usually self-limited but increases length of stay",
+        "Amiodarone is first-line treatment",
+        "May need temporary anticoagulation"
+      ],
+      "management_approach": [
+        "Amiodarone 400mg BID x 1 week, then 200mg daily",
+        "Metoprolol for rate control",
+        "Anticoagulation if AF persists >48h",
+        "Usually resolves within days to weeks"
+      ]
+    },
+    {
+      "case_title": "AF with RVR in Heart Failure",
+      "presentation": "75-year-old woman with HFrEF presents with AF RVR and decompensation",
+      "key_points": [
+        "AF and HF have bidirectional relationship",
+        "Rate control crucial but limited by hypotension",
+        "Digoxin useful in this population",
+        "Lower threshold for anticoagulation"
+      ],
+      "management_strategy": [
+        "Careful IV metoprolol with BP monitoring",
+        "Add digoxin for additional rate control",
+        "Diuresis for volume overload",
+        "Consider cardioversion if hemodynamically unstable"
+      ]
+    },
+    {
+      "case_title": "Elderly Patient with Fall Risk",
+      "presentation": "82-year-old with AF, CHADSVASC 4, history of falls",
+      "teaching_points": [
+        "Fall risk should not prevent appropriate anticoagulation",
+        "Address modifiable fall risk factors",
+        "DOACs preferred over warfarin in elderly",
+        "Consider reduced doses based on age/weight/renal function"
+      ],
+      "decision_making": [
+        "Stroke risk (8.5%/year) >> bleeding risk from falls",
+        "Comprehensive fall assessment",
+        "Apixaban 2.5mg BID if meets criteria",
+        "Physical therapy referral"
+      ]
+    }
+  ],
+  "board_exam_focus": [
+    {
+      "topic": "CHADSVASC Scoring",
+      "high_yield_facts": [
+        "Age ≥75 gets 2 points (not 1)",
+        "Female sex only counts if other risk factors present",
+        "Score 0 (men) or 1 (women only) = no anticoagulation",
+        "Score ≥2 (men) or ≥3 (women) = anticoagulation recommended"
+      ],
+      "common_mistakes": [
+        "Forgetting that female sex requires other risk factors to count",
+        "Not doubling points for age ≥75 and stroke/TIA history"
+      ]
+    },
+    {
+      "topic": "Antiarrhythmic Drug Classes",
+      "key_associations": [
+        "Class IC (flecainide/propafenone): Normal hearts only",
+        "Amiodarone: Safe in structural disease but multiple toxicities",
+        "Dofetilide: Requires inpatient initiation, good for HF/post-MI",
+        "Sotalol: Beta-blocker + Class III, QT prolongation risk"
+      ]
+    },
+    {
+      "topic": "Cardioversion Anticoagulation",
+      "algorithm": [
+        "<48h + low stroke risk: Can cardiovert without anticoagulation",
+        ">48h or unknown: 3 weeks pre + 4 weeks post anticoagulation",
+        "TEE-guided: Exclude thrombus → immediate cardioversion → 4 weeks anticoagulation",
+        "Emergency cardioversion: Proceed immediately, start anticoagulation ASAP"
+      ]
+    }
+  ],
+  "quality_improvement": [
+    {
+      "metric": "Appropriate anticoagulation at discharge",
+      "target": ">95% of eligible patients",
+      "common_gaps": [
+        "Not calculating CHADSVASC score",
+        "Contraindications not clearly documented",
+        "Patient refusal not addressed with education"
+      ],
+      "improvement_strategies": [
+        "EMR clinical decision support",
+        "Pharmacist-led anticoagulation programs",
+        "Patient education materials"
+      ]
+    },
+    {
+      "metric": "Rate control achievement",
+      "target": "Resting HR <110 bpm at discharge",
+      "monitoring": "24-48 hours post-initiation of rate control",
+      "optimization": "Combination therapy often needed"
+    }
+  ],
+  "emerging_concepts": [
+    {
+      "topic": "Early Rhythm Control",
+      "evidence": "EAST-AFNET 4 trial showed benefit of early rhythm control",
+      "definition": "Rhythm control within 1 year of AF diagnosis",
+      "implications": "May change paradigm from rate-first to early rhythm control"
+    },
+    {
+      "topic": "AF Burden and Outcomes",
+      "concept": "Amount of AF (burden) may be more important than presence/absence",
+      "thresholds": ">5.5 hours/day associated with stroke risk",
+      "monitoring": "Extended monitoring becoming more important"
+    },
+    {
+      "topic": "Lifestyle Modification as Treatment",
+      "evidence": "LEGACY trial showed 10% weight loss reduces AF",
+      "components": "Weight loss, exercise, sleep apnea treatment, alcohol reduction",
+      "effectiveness": "Can be as effective as antiarrhythmic drugs"
+    },
+    {
+      "topic": "Pulsed Field Ablation",
+      "advantage": "Tissue-selective ablation reduces collateral damage",
+      "status": "FDA approved 2023, rapidly being adopted",
+      "potential": "May improve safety profile of AF ablation"
+    }
+  ],
+  "patient_education_points": [
+    {
+      "topic": "Stroke Risk and Prevention",
+      "key_messages": [
+        "AF increases stroke risk 5-fold",
+        "Anticoagulation reduces this risk by 64%",
+        "Blood thinners work even if AF comes and goes",
+        "Benefits usually outweigh bleeding risks"
+      ],
+      "addressing_concerns": [
+        "Bleeding fear: Explain low ICH risk with DOACs",
+        "Cost concerns: Discuss assistance programs",
+        "Lifestyle impact: Emphasize freedom from monitoring"
+      ]
+    },
+    {
+      "topic": "Lifestyle Modifications",
+      "evidence_based": [
+        "10% weight loss can reduce AF episodes by 50%",
+        "Alcohol >1 drink/day increases AF risk",
+        "Sleep apnea treatment reduces AF burden",
+        "Regular exercise beneficial but avoid extreme endurance"
+      ],
+      "practical_tips": [
+        "Mediterranean diet for heart health",
+        "Stress management techniques",
+        "Sleep hygiene practices",
+        "Moderate exercise program"
+      ]
+    },
+    {
+      "topic": "Recognizing Symptoms",
+      "common_symptoms": [
+        "Palpitations (racing, skipping heart)",
+        "Fatigue and reduced exercise tolerance",
+        "Shortness of breath with activity",
+        "Chest discomfort or pressure"
+      ],
+      "when_to_seek_care": [
+        "Severe chest pain (call 911)",
+        "Severe shortness of breath",
+        "Fainting or near-fainting",
+        "Symptoms of stroke (FAST)"
+      ]
+    }
+  ]
+}

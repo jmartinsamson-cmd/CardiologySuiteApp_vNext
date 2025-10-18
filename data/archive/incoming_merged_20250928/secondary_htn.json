@@ -1,0 +1,124 @@
+{
+  "diagnoses": [
+    {
+      "id": "primary_aldosteronism",
+      "name": "Primary Aldosteronism",
+      "category": ["Hypertension", "Secondary Causes"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Often asymptomatic",
+          "Headache",
+          "Fatigue",
+          "Muscle weakness/cramps",
+          "Polyuria/polydipsia"
+        ],
+        "signs_any": ["Resistant hypertension", "Hypokalemia (not always)"]
+      },
+      "initial_tests": [
+        "Plasma aldosterone concentration (PAC) / plasma renin activity (PRA) ratio (screening)",
+        "Confirmatory tests: saline suppression, oral salt loading, fludrocortisone suppression",
+        "Adrenal CT to localize adenoma vs hyperplasia",
+        "Adrenal vein sampling if surgery considered"
+      ],
+      "treatment": {
+        "unilateral_adenoma": ["Laparoscopic adrenalectomy"],
+        "bilateral_hyperplasia": [
+          "Mineralocorticoid receptor antagonist (spironolactone, eplerenone)"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Medication adherence if MRA prescribed",
+          "Report gynecomastia, hyperkalemia (spironolactone side effects)"
+        ],
+        "follow_up": ["Endocrinology and cardiology follow-up"]
+      }
+    },
+    {
+      "id": "renal_artery_stenosis",
+      "name": "Renal Artery Stenosis (RAS)",
+      "category": ["Hypertension", "Secondary Causes"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Often asymptomatic",
+          "May present with resistant HTN",
+          "Flash pulmonary edema",
+          "Worsening renal function on ACEi/ARB"
+        ],
+        "signs_any": [
+          "Abdominal bruit",
+          "Unexplained asymmetry in renal size (imaging)"
+        ]
+      },
+      "initial_tests": [
+        "Renal duplex Doppler ultrasound (screening)",
+        "CTA or MRA (noninvasive anatomic imaging)",
+        "Renal angiography (gold standard, usually for intervention)"
+      ],
+      "treatment": {
+        "medical": [
+          "ACEi/ARB (cautiously, monitor creatinine)",
+          "Statins, antiplatelets, BP control, smoking cessation"
+        ],
+        "intervention": [
+          "Angioplasty ± stent in select patients (recurrent flash pulmonary edema, refractory HTN, progressive renal failure)"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Monitor BP and kidney function regularly",
+          "Medication adherence (ACEi/ARB, statin, antiplatelet)"
+        ],
+        "follow_up": ["Nephrology/vascular follow-up"]
+      }
+    },
+    {
+      "id": "pheochromocytoma",
+      "name": "Pheochromocytoma / Paraganglioma",
+      "category": ["Hypertension", "Secondary Causes"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Paroxysmal HTN",
+          "Headaches",
+          "Palpitations",
+          "Sweating",
+          "Panic attacks"
+        ],
+        "signs_any": [
+          "Tachycardia",
+          "Paroxysmal severe hypertension",
+          "Orthostatic hypotension (chronic catecholamine excess)"
+        ]
+      },
+      "initial_tests": [
+        "Plasma free metanephrines (preferred screening)",
+        "24h urine catecholamines/metanephrines",
+        "CT/MRI abdomen-pelvis for localization",
+        "MIBG or PET for metastatic/extra-adrenal disease"
+      ],
+      "treatment": {
+        "preop": [
+          "α-blockade (phenoxybenzamine or doxazosin) 7–14d before surgery",
+          "Then add β-blocker after α-blockade if tachycardia"
+        ],
+        "definitive": [
+          "Surgical resection (laparoscopic adrenalectomy if adrenal)"
+        ]
+      },
+      "contraindications": {
+        "beta_blocker_monotherapy": [
+          "Never start β-blocker before α-blocker — risk hypertensive crisis"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Medication adherence pre-surgery",
+          "Report headaches, palpitations, diaphoresis"
+        ],
+        "follow_up": [
+          "Endocrinology follow-up, genetic counseling for familial cases"
+        ]
+      }
+    }
+  ]
+}

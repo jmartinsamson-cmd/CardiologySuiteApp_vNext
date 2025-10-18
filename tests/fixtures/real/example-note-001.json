@@ -1,0 +1,49 @@
+{
+  "id": "note-001",
+  "description": "Heart failure follow-up with common abbreviations",
+  "category": "common",
+  "input": "HISTORY OF PRESENT ILLNESS:\n68yo M h/o CAD s/p PCI 2020, DM2, HTN presents with 3 days progressive DOE and LE edema. Denies CP, palpitations. Reports med compliance. Last echo 2024 showed EF 35%.\n\nPHYSICAL EXAMINATION:\nVitals: BP 145/88, HR 92, RR 18, O2sat 94% RA, Temp 98.2F\nGen: NAD, comfortable at rest\nCV: RRR, 2/6 systolic murmur at apex, JVP elevated to 10cm\nResp: Bibasilar crackles, no wheeze\nExt: 2+ pitting edema bilateral LE to knees\n\nLABS:\nBNP 1250 (prev 450)\nTroponin <0.01\nCr 1.3 (baseline 1.1)\nHgb 11.2\n\nASSESSMENT:\n1. Acute decompensated heart failure (HFrEF) - volume overload\n2. CAD - stable, no ACS\n3. CKD stage 3 - worsening, likely prerenal\n4. Diabetes - well controlled\n\nPLAN:\n1. Increase furosemide to 40mg BID\n2. Daily weights, strict I/O\n3. Repeat BMP tomorrow\n4. Hold lisinopril until Cr improves\n5. Cardiology f/u 1 week\n6. Consider IV diuresis if no response to PO",
+  "expected": {
+    "patient": {
+      "age": 68,
+      "gender": "male",
+      "mrn": null,
+      "dob": null
+    },
+    "vitals": {
+      "bp": "145/88",
+      "hr": 92,
+      "rr": 18,
+      "spo2": 94,
+      "temp": 98.2
+    },
+    "subjective": "68yo M h/o CAD s/p PCI 2020, DM2, HTN presents with 3 days progressive DOE and LE edema",
+    "objective": "BP 145/88, HR 92, RR 18, O2sat 94% RA, Temp 98.2F",
+    "assessment": "Acute decompensated heart failure",
+    "plan": "Increase furosemide to 40mg BID",
+    "diagnoses": ["Heart failure", "CAD", "CKD", "Diabetes"],
+    "medications": ["Furosemide", "Lisinopril"],
+    "allergies": [],
+    "labs": {
+      "bnp": 1250,
+      "troponin": 0.01,
+      "creatinine": 1.3,
+      "hgb": 11.2
+    }
+  },
+  "mustHave": {
+    "vitals.bp": "145/88",
+    "vitals.hr": 92,
+    "patient.age": 68,
+    "patient.gender": "male",
+    "diagnoses": ["Heart failure", "CAD"],
+    "labs.bnp": 1250
+  },
+  "shouldNotHave": {
+    "diagnoses": ["Acute coronary syndrome", "STEMI", "Atrial fibrillation"]
+  },
+  "notes": [
+    "Tests abbreviation handling: CAD, s/p, PCI, DM2, HTN, DOE, LE, CP, EF, NAD, RRR, JVP, Cr, HFrEF, ACS, CKD, BID, I/O, BMP, f/u, IV, PO"
+  ],
+  "skip": false
+}

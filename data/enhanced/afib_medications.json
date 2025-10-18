@@ -1,0 +1,354 @@
+{
+  "anticoagulants": {
+    "doacs": {
+      "apixaban": {
+        "name": "Apixaban (Eliquis)",
+        "mechanism": "Factor Xa inhibitor",
+        "dosing": {
+          "standard": "5mg PO BID",
+          "reduced": "2.5mg PO BID if ≥2 criteria: age ≥80, weight ≤60kg, SCr ≥1.5mg/dL",
+          "renal_adjustment": "Avoid if CrCl <15mL/min"
+        },
+        "advantages": [
+          "Lowest bleeding risk among DOACs",
+          "No food requirements",
+          "BID dosing may improve compliance",
+          "Effective in both valvular and non-valvular AF"
+        ],
+        "monitoring": [
+          "Baseline: CBC, CMP, PT/PTT",
+          "Follow-up: Renal function q6-12 months",
+          "No routine coagulation monitoring needed"
+        ],
+        "reversal": "Andexanet alfa (preferred), 4-Factor PCC if unavailable",
+        "drug_interactions": [
+          "Strong CYP3A4 and P-gp inhibitors (reduce dose)",
+          "Strong CYP3A4 and P-gp inducers (avoid concurrent use)"
+        ],
+        "clinical_pearls": [
+          "Most studied DOAC with excellent safety profile",
+          "First choice for most AF patients",
+          "Lower GI bleeding risk compared to rivaroxaban"
+        ]
+      },
+      "rivaroxaban": {
+        "name": "Rivaroxaban (Xarelto)",
+        "mechanism": "Factor Xa inhibitor",
+        "dosing": {
+          "standard": "20mg PO daily with food",
+          "reduced": "15mg PO daily with food if CrCl 15-50mL/min",
+          "renal_adjustment": "Avoid if CrCl <15mL/min"
+        },
+        "advantages": [
+          "Once daily dosing",
+          "Extensive clinical experience",
+          "Good efficacy data"
+        ],
+        "requirements": [
+          "MUST take with food to ensure absorption",
+          "Crushing tablet acceptable if mixed with applesauce"
+        ],
+        "monitoring": "Same as apixaban",
+        "reversal": "Andexanet alfa (preferred), 4-Factor PCC if unavailable",
+        "disadvantages": [
+          "Higher GI bleeding risk than apixaban",
+          "Food requirement may affect adherence"
+        ]
+      },
+      "dabigatran": {
+        "name": "Dabigatran (Pradaxa)",
+        "mechanism": "Direct thrombin inhibitor",
+        "dosing": {
+          "standard": "150mg PO BID",
+          "reduced": "110mg PO BID if age ≥80, 75mg PO BID if CrCl 15-30mL/min",
+          "renal_adjustment": "Avoid if CrCl <15mL/min"
+        },
+        "unique_features": [
+          "Only reversible DOAC (idarucizumab - Praxbind)",
+          "Direct thrombin inhibition vs Factor Xa"
+        ],
+        "disadvantages": [
+          "Highest GI bleeding risk among DOACs",
+          "BID dosing",
+          "Dyspepsia in 5-10% patients",
+          "Requires acidic environment (avoid PPI when possible)"
+        ],
+        "storage": "Keep in original bottle, discard after 30 days",
+        "reversal": "Idarucizumab (Praxbind) - specific antidote"
+      },
+      "edoxaban": {
+        "name": "Edoxaban (Savaysa)",
+        "mechanism": "Factor Xa inhibitor",
+        "dosing": {
+          "standard": "60mg PO daily",
+          "reduced": "30mg PO daily if CrCl 15-50mL/min, weight ≤60kg, or concomitant P-gp inhibitors"
+        },
+        "unique_contraindication": "CrCl >95mL/min (decreased efficacy)",
+        "advantages": [
+          "Once daily dosing",
+          "No food requirement",
+          "Good tolerability profile"
+        ],
+        "clinical_use": "Less commonly prescribed, good alternative if others not tolerated"
+      }
+    },
+    "warfarin": {
+      "name": "Warfarin (Coumadin)",
+      "mechanism": "Vitamin K antagonist",
+      "indications": [
+        "Mechanical heart valve",
+        "Moderate-severe mitral stenosis",
+        "DOAC contraindicated/intolerant",
+        "Cost considerations",
+        "Dialysis patients"
+      ],
+      "dosing": {
+        "initial": "5mg daily (2.5mg if elderly, high bleeding risk)",
+        "target_inr": "2.0-3.0",
+        "mechanical_valve": "2.5-3.5 depending on valve type/position"
+      },
+      "monitoring": {
+        "initiation": "INR every 2-3 days x 1 week, then weekly x 3 weeks",
+        "maintenance": "Monthly when stable, every 6 weeks maximum",
+        "dose_adjustments": "Change weekly dose by 10-20%"
+      },
+      "drug_interactions": [
+        "Antibiotics (especially quinolones, sulfonamides)",
+        "Amiodarone (reduce warfarin dose 25-50%)",
+        "NSAIDs, aspirin (increase bleeding risk)",
+        "Numerous others - always check interactions"
+      ],
+      "dietary_considerations": [
+        "Consistent vitamin K intake",
+        "Green leafy vegetables in moderation",
+        "Avoid cranberry juice, alcohol binges"
+      ],
+      "reversal": {
+        "major_bleeding": "4-Factor PCC + Vitamin K 5-10mg IV",
+        "urgent_surgery": "4-Factor PCC",
+        "elevated_inr_no_bleeding": "Hold doses, Vitamin K 2.5-5mg PO"
+      }
+    }
+  },
+  "rate_control": {
+    "beta_blockers": {
+      "metoprolol": {
+        "name": "Metoprolol",
+        "formulations": {
+          "immediate_release": "25-100mg PO BID",
+          "extended_release": "25-200mg PO daily (succinate - preferred)"
+        },
+        "iv_dosing": "2.5-5mg IV q5min x3 (max 15mg)",
+        "advantages": [
+          "First-line for rate control",
+          "Cardioprotective in CAD",
+          "Mortality benefit in heart failure"
+        ],
+        "monitoring": "HR, BP, signs of heart failure",
+        "contraindications": [
+          "Severe bradycardia (<50 bpm)",
+          "High-grade AV block",
+          "Decompensated heart failure",
+          "Severe COPD/asthma"
+        ],
+        "clinical_pearls": [
+          "Use succinate form for heart failure",
+          "Start low, titrate slowly",
+          "Check for peripheral signs of poor perfusion"
+        ]
+      },
+      "carvedilol": {
+        "name": "Carvedilol (Coreg)",
+        "dosing": "3.125-25mg PO BID",
+        "unique_features": [
+          "Alpha and beta blockade",
+          "Preferred in heart failure",
+          "Vasodilatory properties"
+        ],
+        "advantages": "Mortality benefit in heart failure, less bradycardia",
+        "food_requirement": "Take with food to reduce orthostatic hypotension"
+      }
+    },
+    "calcium_channel_blockers": {
+      "diltiazem": {
+        "name": "Diltiazem (Cardizem)",
+        "formulations": {
+          "immediate_release": "30-90mg PO QID",
+          "extended_release": "120-360mg PO daily"
+        },
+        "iv_dosing": {
+          "bolus": "0.25mg/kg IV over 2 min",
+          "infusion": "5-15mg/hr continuous infusion"
+        },
+        "advantages": [
+          "Excellent rate control",
+          "Well tolerated",
+          "Effective during exercise"
+        ],
+        "contraindications": [
+          "EF <40%",
+          "Hypotension",
+          "Heart block",
+          "Decompensated heart failure"
+        ]
+      },
+      "verapamil": {
+        "name": "Verapamil (Calan)",
+        "dosing": "120-480mg daily (extended-release preferred)",
+        "advantages": "Effective rate control, less negative inotropy than diltiazem",
+        "disadvantages": "More constipation, drug interactions"
+      }
+    },
+    "digoxin": {
+      "name": "Digoxin (Lanoxin)",
+      "mechanism": "Na+/K+-ATPase inhibitor, vagal stimulation",
+      "indications": [
+        "HFrEF with hypotension limiting other agents",
+        "Combination therapy for rate control",
+        "Sedentary patients (less effective during exercise)"
+      ],
+      "dosing": {
+        "maintenance": "0.125-0.25mg PO daily",
+        "elderly": "0.125mg daily or every other day",
+        "renal_adjustment": "Reduce dose if CrCl <60mL/min"
+      },
+      "monitoring": {
+        "baseline": "Renal function, electrolytes, ECG",
+        "ongoing": "Digoxin level (target 0.5-2.0 ng/mL), K+, Mg2+",
+        "toxicity": "N/V, visual changes, arrhythmias"
+      },
+      "drug_interactions": [
+        "Amiodarone (reduce digoxin dose 50%)",
+        "Verapamil/diltiazem (reduce digoxin dose 25%)",
+        "Quinidine, macrolides"
+      ],
+      "contraindications": [
+        "Heart block",
+        "Hypertrophic cardiomyopathy",
+        "WPW syndrome with AF"
+      ]
+    }
+  },
+  "antiarrhythmics": {
+    "class_iii": {
+      "amiodarone": {
+        "name": "Amiodarone (Cordarone, Pacerone)",
+        "indications": [
+          "Most effective antiarrhythmic",
+          "Structural heart disease acceptable",
+          "Post-operative AF",
+          "Hemodynamically unstable AF"
+        ],
+        "dosing": {
+          "loading": "600-800mg PO daily x 2-4 weeks",
+          "maintenance": "200mg PO daily (lowest effective dose)",
+          "iv_acute": "150mg IV over 10min, then 1mg/min x 6h, then 0.5mg/min"
+        },
+        "monitoring": {
+          "baseline": "PFT, TFT, LFT, ophthalmology exam, CXR, ECG",
+          "ongoing": "Every 6 months - PFT, TFT, LFT, ophthalmology"
+        },
+        "toxicities": [
+          "Pulmonary fibrosis (most serious - 5-10%)",
+          "Thyroid dysfunction (hyper/hypothyroid - 10-20%)",
+          "Hepatotoxicity (5-10%)",
+          "Photosensitivity, blue-gray skin discoloration",
+          "Corneal deposits (nearly universal, usually asymptomatic)"
+        ],
+        "drug_interactions": [
+          "Warfarin (reduce dose 25-50%)",
+          "Digoxin (reduce dose 50%)",
+          "QT-prolonging drugs"
+        ],
+        "contraindications": [
+          "Severe pulmonary disease",
+          "Thyroid dysfunction",
+          "Severe hepatic disease",
+          "Iodine allergy (relative)"
+        ]
+      },
+      "dofetilide": {
+        "name": "Dofetilide (Tikosyn)",
+        "indications": [
+          "AF with heart failure",
+          "Post-MI patients",
+          "Renal dysfunction (renally cleared)"
+        ],
+        "requirements": "3-day inpatient initiation with continuous telemetry",
+        "dosing": {
+          "initial": "Based on CrCl: 500mcg BID (CrCl >60), 250mcg BID (CrCl 40-60), 125mcg BID (CrCl 20-40)",
+          "adjustment": "Based on QTc measurements"
+        },
+        "monitoring": {
+          "initiation": "QTc at 2-3 hours after each dose",
+          "ongoing": "QTc, electrolytes, renal function"
+        },
+        "contraindications": [
+          "QTc >440ms (men) or >460ms (women)",
+          "CrCl <20mL/min",
+          "Hypokalemia, hypomagnesemia"
+        ]
+      }
+    },
+    "class_ic": {
+      "flecainide": {
+        "name": "Flecainide (Tambocor)",
+        "indications": "Structurally normal hearts only",
+        "dosing": "50-150mg PO BID",
+        "contraindications": [
+          "CAD",
+          "Structural heart disease",
+          "Heart failure",
+          "Bundle branch block",
+          "CrCl <35mL/min"
+        ],
+        "monitoring": "ECG (QRS widening), electrolytes",
+        "advantages": "Very effective for paroxysmal AF, well-tolerated in appropriate patients"
+      },
+      "propafenone": {
+        "name": "Propafenone (Rythmol)",
+        "indications": "Structurally normal hearts only",
+        "dosing": "150-300mg PO TID",
+        "contraindications": "Same as flecainide",
+        "unique_features": "Mild beta-blocking properties"
+      }
+    }
+  },
+  "combination_strategies": {
+    "rate_control_combinations": [
+      "Beta-blocker + digoxin (especially in HFrEF)",
+      "Beta-blocker + diltiazem (if inadequate rate control)",
+      "Avoid: Beta-blocker + verapamil (excessive bradycardia risk)"
+    ],
+    "anticoagulation_antiplatelet": [
+      "DOAC + aspirin 81mg (if CAD, increase bleeding risk)",
+      "Triple therapy: DOAC + aspirin + clopidogrel (post-PCI, limit duration)",
+      "Avoid: DOAC + dual antiplatelet therapy long-term"
+    ]
+  },
+  "perioperative_management": {
+    "elective_surgery": {
+      "low_bleeding_risk": "Continue anticoagulation",
+      "high_bleeding_risk": "Hold DOAC 24-48h pre-op, restart 12-24h post-op",
+      "bridging": "Generally not needed for DOACs"
+    },
+    "urgent_surgery": {
+      "recent_doac": "Delay surgery if possible, consider reversal agents",
+      "time_since_dose": ">12h (apixaban/dabigatran), >24h (rivaroxaban/edoxaban)"
+    }
+  },
+  "patient_counseling": {
+    "anticoagulation": [
+      "Bleeding precautions (soft toothbrush, electric razor)",
+      "When to seek medical attention (unusual bleeding, severe headache)",
+      "Medication adherence critical for stroke prevention",
+      "No need for dietary restrictions with DOACs"
+    ],
+    "rate_control": [
+      "Monitor pulse daily, report if <50 or >120 bpm",
+      "Rise slowly to prevent dizziness",
+      "Regular exercise as tolerated",
+      "Report worsening shortness of breath or fatigue"
+    ]
+  }
+}

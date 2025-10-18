@@ -1,0 +1,172 @@
+{
+  "diagnoses": [
+    {
+      "id": "asd",
+      "name": "Atrial Septal Defect (ASD)",
+      "category": ["Congenital"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Often asymptomatic until adulthood",
+          "Dyspnea on exertion",
+          "Fatigue",
+          "Palpitations",
+          "Stroke (paradoxical embolus)"
+        ],
+        "signs_any": [
+          "Fixed split S2",
+          "Systolic ejection murmur at LUSB (↑ flow across pulmonic valve)",
+          "RV heave"
+        ]
+      },
+      "initial_tests": [
+        "Echo with bubble study (diagnosis, shunt size/direction)",
+        "TEE for small or sinus venosus ASD",
+        "ECG (RBBB, RVH)",
+        "CXR (enlarged RA/RV, prominent PA)"
+      ],
+      "treatment": {
+        "indications_for_closure": [
+          "ASD with RA/RV enlargement or significant shunt (Qp:Qs >1.5)",
+          "History of paradoxical embolus",
+          "Symptoms attributable to ASD"
+        ],
+        "closure_options": [
+          "Percutaneous device closure if suitable anatomy",
+          "Surgical closure if not suitable for device"
+        ]
+      },
+      "follow_up": [
+        "Monitor for AF, RV dysfunction, pulmonary HTN in adulthood"
+      ],
+      "discharge": {
+        "instructions": [
+          "Endocarditis prophylaxis not routinely indicated except 6 mo post-device closure",
+          "Report new palpitations, syncope, or dyspnea"
+        ],
+        "follow_up": ["Cardiology follow-up, lifelong in some cases"]
+      }
+    },
+    {
+      "id": "vsd",
+      "name": "Ventricular Septal Defect (VSD)",
+      "category": ["Congenital"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Small VSD: often asymptomatic",
+          "Large VSD: HF symptoms in infancy (tachypnea, poor feeding, FTT)"
+        ],
+        "signs_any": [
+          "Harsh holosystolic murmur at LLSB",
+          "Thrill at LLSB",
+          "Large VSD: signs of CHF, pulmonary HTN"
+        ]
+      },
+      "initial_tests": [
+        "Echo (defect location, size, shunt magnitude, chamber enlargement)",
+        "ECG (LVH, RVH with large shunts)",
+        "CXR (cardiomegaly, ↑ pulmonary vascularity if large)"
+      ],
+      "treatment": {
+        "small_vsd": ["Often close spontaneously, observation only"],
+        "moderate_large_vsd": [
+          "Medical management of CHF (diuretics, ACEi, calories)",
+          "Surgical closure if persistent large shunt with CHF, growth failure, pulmonary HTN"
+        ]
+      },
+      "follow_up": [
+        "Serial echo to monitor size/shunt",
+        "Monitor for endocarditis, arrhythmias, aortic regurgitation"
+      ],
+      "discharge": {
+        "instructions": [
+          "Endocarditis prophylaxis only if residual defect at site of patch/device",
+          "Report worsening dyspnea, poor growth (peds), new murmur"
+        ],
+        "follow_up": ["Pediatric/adult congenital cardiology follow-up"]
+      }
+    },
+    {
+      "id": "pda",
+      "name": "Patent Ductus Arteriosus (PDA)",
+      "category": ["Congenital"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Small PDA: often asymptomatic",
+          "Large PDA: HF, poor growth, frequent respiratory infections"
+        ],
+        "signs_any": [
+          "Continuous 'machinery' murmur at LUSB/infraclavicular",
+          "Bounding pulses, wide pulse pressure",
+          "HF signs if large shunt"
+        ]
+      },
+      "initial_tests": [
+        "Echo (ductal anatomy, shunt magnitude)",
+        "ECG (LVH, LAE if large)",
+        "CXR (↑ pulmonary vascularity, cardiomegaly if large)"
+      ],
+      "treatment": {
+        "pharmacologic": [
+          "Indomethacin/ibuprofen to close PDA in preterm neonates"
+        ],
+        "closure": [
+          "Device closure (preferred if suitable anatomy)",
+          "Surgical ligation if not suitable"
+        ]
+      },
+      "follow_up": [
+        "Echo to confirm closure",
+        "Monitor for pulmonary HTN if untreated large PDA"
+      ],
+      "discharge": {
+        "instructions": [
+          "Endocarditis prophylaxis for 6 mo after closure",
+          "Report dyspnea, recurrent infections"
+        ],
+        "follow_up": ["Congenital cardiology follow-up"]
+      }
+    },
+    {
+      "id": "tof",
+      "name": "Tetralogy of Fallot (TOF)",
+      "category": ["Congenital"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Cyanosis (esp. 'tet spells')",
+          "Dyspnea on exertion",
+          "Clubbing",
+          "Syncope"
+        ],
+        "signs_any": [
+          "Harsh systolic murmur (RVOT obstruction)",
+          "Cyanosis, clubbing",
+          "Squatting behavior in children (↑ SVR reduces shunt)"
+        ]
+      },
+      "initial_tests": [
+        "Echo (VSD, RVOT obstruction, overriding aorta, RVH)",
+        "ECG (RVH)",
+        "CXR ('boot-shaped' heart from RVH)"
+      ],
+      "treatment": {
+        "acute_tet_spell": [
+          "Oxygen, knee-chest position, morphine, β-blocker (propranolol), IV fluids"
+        ],
+        "definitive": [
+          "Surgical repair in infancy (VSD closure + relieve RVOT obstruction)"
+        ]
+      },
+      "follow_up": [
+        "Monitor for residual RVOT obstruction, pulmonary regurgitation, arrhythmias, RV dysfunction",
+        "Lifelong congenital cardiology care"
+      ],
+      "discharge": {
+        "instructions": [
+          "Lifelong follow-up with congenital cardiology",
+          "Endocarditis prophylaxis if prosthetic material used"
+        ],
+        "follow_up": ["Congenital heart disease specialist follow-up"]
+      }
+    }
+  ]
+}

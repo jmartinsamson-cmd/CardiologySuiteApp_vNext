@@ -1,0 +1,7 @@
+Patient reports chest discomfort started this morning. 58 year old woman with diabetes and high cholesterol. Her blood pressure today is 144/88 with heart rate of 94. Temperature is normal at 98.4 and she's breathing at 18 breaths per minute with oxygen saturation 97% on room air.
+
+On examination, she appears mildly uncomfortable. Cardiovascular exam shows regular rhythm, no murmurs appreciated. Respiratory exam reveals clear lung fields bilaterally.
+
+This is likely angina given her risk factors. ECG shows no acute ST changes but has T wave flattening in lateral leads. Troponin is pending.
+
+Will start aspirin, obtain serial cardiac enzymes, cardiology consultation requested. Patient to remain NPO pending further evaluation.

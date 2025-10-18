@@ -1,0 +1,32 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "serviceworker": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["node_modules/", "backups/", "dist/", "build/"],
+  "rules": {
+    "no-unmodified-loop-condition": "error",
+    "no-constant-condition": ["error", { "checkLoops": true }]
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.js"],
+      "rules": {
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "WhileStatement > CallExpression[callee.property.name='exec']",
+            "message": "Unguarded while(re.exec()) can cause infinite loops. Use matchAll with withGlobal helper instead."
+          }
+        ]
+      }
+    }
+  ]
+}

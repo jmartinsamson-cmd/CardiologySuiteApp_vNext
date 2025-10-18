@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardiology Suite Debug</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .test {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .pass {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .fail {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .info {
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+      }
+      pre {
+        background: #f8f9fa;
+        padding: 10px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔍 Cardiology Suite Diagnostic Tool</h1>
+    <div id="results"></div>
+
+    <script>
+      const results = document.getElementById("results");
+
+      function addResult(title, status, message, details = null) {
+        const div = document.createElement("div");
+        div.className = `test ${status}`;
+        div.innerHTML = `
+                <h3>${status === "pass" ? "✅" : status === "fail" ? "❌" : "ℹ️"} ${title}</h3>
+                <p>${message}</p>
+                ${details ? `<pre>${details}</pre>` : ""}
+            `;
+        results.appendChild(div);
+      }
+
+      // Test 1: Check if main files exist
+      addResult(
+        "Diagnostic Started",
+        "info",
+        "Running comprehensive diagnostic tests...",
+      );
+
+      // Test 2: Check CSS files
+      fetch("./styles/style.css")
+        .then((response) => {
+          if (response.ok) {
+            addResult(
+              "CSS Files",
+              "pass",
+              "Main CSS file (style.css) loads successfully",
+            );
+          } else {
+            addResult(
+              "CSS Files",
+              "fail",
+              `Main CSS file failed to load: ${response.status}`,
+            );
+          }
+        })
+        .catch((error) => {
+          addResult(
+            "CSS Files",
+            "fail",
+            "CSS file request failed",
+            error.toString(),
+          );
+        });
+
+      // Test 3: Check JavaScript file
+      fetch("./src/core/app.js")
+        .then((response) => {
+          if (response.ok) {
+            addResult(
+              "JavaScript Files",
+              "pass",
+              "Main JS file (app.js) loads successfully",
+            );
+            return response.text();
+          } else {
+            addResult(
+              "JavaScript Files",
+              "fail",
+              `Main JS file failed to load: ${response.status}`,
+            );
+            return null;
+          }
+        })
+        .then((jsContent) => {
+          if (jsContent) {
+            // Check for syntax issues in the JS content
+            if (jsContent.includes("DIAGNOSES")) {
+              addResult(
+                "JavaScript Content",
+                "pass",
+                "DIAGNOSES array found in JavaScript",
+              );
+            } else {
+              addResult(
+                "JavaScript Content",
+                "fail",
+                "DIAGNOSES array not found in JavaScript",
+              );
+            }
+          }
+        })
+        .catch((error) => {
+          addResult(
+            "JavaScript Files",
+            "fail",
+            "JavaScript file request failed",
+            error.toString(),
+          );
+        });
+
+      // Test 4: Check data file
+      fetch("./data/cardiology_diagnoses/cardiology.json")
+        .then((response) => {
+          if (response.ok) {
+            addResult(
+              "Data Files",
+              "pass",
+              "Cardiology data file loads successfully",
+            );
+            return response.json();
+          } else {
+            addResult(
+              "Data Files",
+              "fail",
+              `Data file failed to load: ${response.status}`,
+            );
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data && data.diagnoses) {
+            addResult(
+              "Data Content",
+              "pass",
+              `Found ${data.diagnoses.length} diagnoses in database`,
+            );
+          } else if (data) {
+            addResult(
+              "Data Content",
+              "fail",
+              "Data file loaded but no diagnoses array found",
+            );
+          } else {
+            addResult("Data Content", "fail", "Data file is null or invalid");
+          }
+        })
+        .catch((error) => {
+          addResult(
+            "Data Files",
+            "fail",
+            "Data file request failed",
+            error.toString(),
+          );
+        });
+
+      // Test 5: Check DOM elements after a delay
+      setTimeout(() => {
+        const elements = {
+          banner: document.getElementById("banner"),
+          layout: document.getElementById("layout"),
+          "dx-rail": document.getElementById("dx-rail"),
+          "dx-list": document.querySelector(".dx-list"),
+          main: document.getElementById("main"),
+          "dx-detail": document.getElementById("dx-detail"),
+        };
+
+        let allFound = true;
+        let missing = [];
+
+        for (const [name, element] of Object.entries(elements)) {
+          if (element) {
+            addResult(
+              `DOM Element: ${name}`,
+              "pass",
+              `Element #${name} found in DOM`,
+            );
+          } else {
+            addResult(
+              `DOM Element: ${name}`,
+              "fail",
+              `Element #${name} NOT found in DOM`,
+            );
+            allFound = false;
+            missing.push(name);
+          }
+        }
+
+        if (allFound) {
+          addResult("DOM Structure", "pass", "All required DOM elements found");
+        } else {
+          addResult(
+            "DOM Structure",
+            "fail",
+            `Missing elements: ${missing.join(", ")}`,
+          );
+        }
+      }, 1000);
+
+      // Test 6: Check if main app.js is executing
+      setTimeout(() => {
+        // Try to access variables that should be defined by app.js
+        let appLoaded = false;
+        try {
+          if (typeof populateDiagnoses === "function") {
+            addResult(
+              "JavaScript Execution",
+              "pass",
+              "Main application functions are loaded",
+            );
+            appLoaded = true;
+          } else {
+            addResult(
+              "JavaScript Execution",
+              "fail",
+              "Main application functions not found",
+            );
+          }
+        } catch (error) {
+          addResult(
+            "JavaScript Execution",
+            "fail",
+            "Error checking JavaScript functions",
+            error.toString(),
+          );
+        }
+
+        // Test CSS rendering
+        const testDiv = document.createElement("div");
+        testDiv.style.display = "none";
+        testDiv.id = "css-test";
+        document.body.appendChild(testDiv);
+
+        const computedStyle = window.getComputedStyle(testDiv);
+        if (computedStyle.display === "none") {
+          addResult("CSS Rendering", "pass", "CSS is being applied correctly");
+        } else {
+          addResult("CSS Rendering", "fail", "CSS may not be loading properly");
+        }
+      }, 1500);
+
+      // Final summary
+      setTimeout(() => {
+        addResult(
+          "Diagnostic Complete",
+          "info",
+          "All tests completed. Check results above for issues.",
+        );
+      }, 2000);
+    </script>
+  </body>
+</html>

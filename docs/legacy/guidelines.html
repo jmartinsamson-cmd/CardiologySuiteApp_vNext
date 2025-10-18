@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Guidelines & Teaching - Cardiology Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0f1419" />
+    <meta name="apple-mobile-web-app-title" content="Cardiology Suite" />
+    <meta name="application-name" content="Cardiology Suite" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/dx-labs.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/note-styles.css" />
+    <link rel="stylesheet" href="styles/afib-enhanced.css" />
+    <link rel="stylesheet" href="styles/guidelines.css" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Icons -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dc2626' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"
+    />
+
+    <!-- SVG Sanitizer (protect against invalid viewBox from extensions) -->
+    <script src="src/utils/svgSanitizer.browser.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="src/core/app.js?v=20251002"></script>
+    <script
+      type="module"
+      src="src/guidelines/guidelines.js?v=20251003"
+    ></script>
+
+    <!-- Diagnosis Selection Handler -->
+    <script type="text/javascript">
+      /* stylelint-disable */
+      function selectDiagnosis(element) {
+        // Clear previous selections
+        document
+          .querySelectorAll(".guidelines-dx-item")
+          .forEach((i) => (i.style.background = ""));
+
+        // Highlight selected item
+        element.style.background = "rgba(220, 38, 38, 0.2)";
+
+        // Get elements
+        const welcome = document.getElementById("guidelines-welcome");
+        const content = document.getElementById("guidelines-content");
+        const title = document.getElementById("guidelines-title");
+
+        // Show content area
+        if (welcome) welcome.style.display = "none";
+        if (content) content.style.display = "block";
+        if (title)
+          title.textContent = element.textContent + " - Clinical Guidelines";
+      }
+      /* stylelint-enable */
+    </script>
+  </head>
+  <body class="theme-dark">
+    <div id="splash" aria-hidden="true"></div>
+
+    <!-- Fixed Header -->
+    <header id="banner">
+      <div class="brand">Cardiology Suite</div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-tab" data-page="main">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+          Main
+        </a>
+        <a href="guidelines.html" class="nav-tab active" data-page="guidelines">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path
+              fill="currentColor"
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+            />
+          </svg>
+          Guidelines & Teaching
+        </a>
+        <!-- Medications tab - only visible if feature flag enabled -->
+        <a
+          href="meds.html"
+          class="nav-tab"
+          data-page="meds"
+          id="meds-nav-tab"
+          style="display: none"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path
+              fill="currentColor"
+              d="M10.5 13H8v-3h2.5V7.5h3V10H16v3h-2.5v2.5h-3V13zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+          Medications
+        </a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg
+          class="theme-icon sun-icon"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1z"
+          />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Guidelines Page Layout -->
+    <div id="guidelines-layout">
+      <!-- Left Sidebar for Diagnosis Selection -->
+      <aside id="guidelines-sidebar">
+        <div class="sidebar-header">
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="currentColor"
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            Select Diagnosis
+          </h3>
+          <div class="guidelines-search">
+            <input
+              type="text"
+              placeholder="Search diagnoses..."
+              id="guidelines-search-input"
+              aria-label="Search diagnoses"
+            />
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path
+                fill="currentColor"
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="guidelines-dx-list" id="guidelines-dx-list">
+          <!-- All 80 Diagnoses - Direct HTML Injection -->
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="aaa"
+            onclick="selectDiagnosis(this)"
+          >
+            Abdominal Aortic Aneurysm (AAA)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="acs"
+            onclick="selectDiagnosis(this)"
+          >
+            Acute Coronary Syndrome (UA/NSTEMI/STEMI)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="acute_limb_ischemia"
+            onclick="selectDiagnosis(this)"
+          >
+            Acute Limb Ischemia (ALI)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="acute_mesenteric_ischemia"
+            onclick="selectDiagnosis(this)"
+          >
+            Acute Mesenteric Ischemia (AMI)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pericarditis"
+            onclick="selectDiagnosis(this)"
+          >
+            Acute Pericarditis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="angina"
+            onclick="selectDiagnosis(this)"
+          >
+            Angina
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="aortic_dissection"
+            onclick="selectDiagnosis(this)"
+          >
+            Aortic Dissection
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="ar"
+            onclick="selectDiagnosis(this)"
+          >
+            Aortic Regurgitation
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="as"
+            onclick="selectDiagnosis(this)"
+          >
+            Aortic Stenosis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="afib"
+            onclick="selectDiagnosis(this)"
+          >
+            Atrial Fibrillation / Flutter
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="atrial_flutter"
+            onclick="selectDiagnosis(this)"
+          >
+            Atrial Flutter
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="asd"
+            onclick="selectDiagnosis(this)"
+          >
+            Atrial Septal Defect (ASD)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="bradyarrhythmia"
+            onclick="selectDiagnosis(this)"
+          >
+            Bradyarrhythmias (Sinus Node Dysfunction & AV Block)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="cardiac_arrest"
+            onclick="selectDiagnosis(this)"
+          >
+            Cardiac Arrest / Sudden Cardiac Death
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="cardiogenic_shock"
+            onclick="selectDiagnosis(this)"
+          >
+            Cardiogenic Shock
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="cvi"
+            onclick="selectDiagnosis(this)"
+          >
+            Chronic Venous Insufficiency / Varicose Veins
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="coarctation_aorta"
+            onclick="selectDiagnosis(this)"
+          >
+            Coarctation of the Aorta
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="cardiac_medications"
+            onclick="selectDiagnosis(this)"
+          >
+            Common Cardiac Medications & Dosages
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="chf"
+            onclick="selectDiagnosis(this)"
+          >
+            Congestive Heart Failure (CHF)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="constrictive_pericarditis"
+            onclick="selectDiagnosis(this)"
+          >
+            Constrictive Pericarditis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="dvt"
+            onclick="selectDiagnosis(this)"
+          >
+            Deep Vein Thrombosis (DVT)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="dcm"
+            onclick="selectDiagnosis(this)"
+          >
+            Dilated Cardiomyopathy (DCM)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="distributive_shock"
+            onclick="selectDiagnosis(this)"
+          >
+            Distributive Shock
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="ep_guidelines"
+            onclick="selectDiagnosis(this)"
+          >
+            Electrophysiology (EP) Guidelines
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="documentation_guidelines"
+            onclick="selectDiagnosis(this)"
+          >
+            H&P and Consult Note Guidelines
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="hfpef"
+            onclick="selectDiagnosis(this)"
+          >
+            Heart Failure with Preserved EF (HFpEF)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="hfref"
+            onclick="selectDiagnosis(this)"
+          >
+            Heart Failure with Reduced EF (HFrEF)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="htn"
+            onclick="selectDiagnosis(this)"
+          >
+            Hypertension (HTN)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="htn_emergency"
+            onclick="selectDiagnosis(this)"
+          >
+            Hypertensive Emergency
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="htn_urgency"
+            onclick="selectDiagnosis(this)"
+          >
+            Hypertensive Urgency / Emergency
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="hcm"
+            onclick="selectDiagnosis(this)"
+          >
+            Hypertrophic Cardiomyopathy (HCM)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="hypovolemic_shock"
+            onclick="selectDiagnosis(this)"
+          >
+            Hypovolemic Shock
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="infective_endocarditis"
+            onclick="selectDiagnosis(this)"
+          >
+            Infective Endocarditis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="lbbb"
+            onclick="selectDiagnosis(this)"
+          >
+            Left Bundle Branch Block (LBBB)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="long_qt"
+            onclick="selectDiagnosis(this)"
+          >
+            Long QT Syndrome (LQTS)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="mitraclip_postop"
+            onclick="selectDiagnosis(this)"
+          >
+            MitraClip (Post-Operative Care by NP)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="mr"
+            onclick="selectDiagnosis(this)"
+          >
+            Mitral Regurgitation
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="ms"
+            onclick="selectDiagnosis(this)"
+          >
+            Mitral Stenosis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="mvp"
+            onclick="selectDiagnosis(this)"
+          >
+            Mitral Valve Prolapse
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="myocarditis"
+            onclick="selectDiagnosis(this)"
+          >
+            Myocarditis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="obstructive_shock"
+            onclick="selectDiagnosis(this)"
+          >
+            Obstructive Shock
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="orthostatic_hypotension"
+            onclick="selectDiagnosis(this)"
+          >
+            Orthostatic Hypotension
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="psvt"
+            onclick="selectDiagnosis(this)"
+          >
+            Paroxysmal Supraventricular Tachycardia (PSVT)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pda"
+            onclick="selectDiagnosis(this)"
+          >
+            Patent Ductus Arteriosus (PDA)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pericardial_effusion"
+            onclick="selectDiagnosis(this)"
+          >
+            Pericardial Effusion / Tamponade
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="perioperative_medication_management"
+            onclick="selectDiagnosis(this)"
+          >
+            Perioperative Medication Management
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pad"
+            onclick="selectDiagnosis(this)"
+          >
+            Peripheral Arterial Disease (PAD)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pheochromocytoma"
+            onclick="selectDiagnosis(this)"
+          >
+            Pheochromocytoma / Paraganglioma
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pac"
+            onclick="selectDiagnosis(this)"
+          >
+            Premature Atrial Contraction (PAC)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pvc"
+            onclick="selectDiagnosis(this)"
+          >
+            Premature Ventricular Contraction (PVC)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="primary_aldosteronism"
+            onclick="selectDiagnosis(this)"
+          >
+            Primary Aldosteronism
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pe"
+            onclick="selectDiagnosis(this)"
+          >
+            Pulmonary Embolism (PE)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pulmonary_htn"
+            onclick="selectDiagnosis(this)"
+          >
+            Pulmonary Hypertension
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pr"
+            onclick="selectDiagnosis(this)"
+          >
+            Pulmonic Regurgitation
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="ps"
+            onclick="selectDiagnosis(this)"
+          >
+            Pulmonic Stenosis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="pulm_valve"
+            onclick="selectDiagnosis(this)"
+          >
+            Pulmonic Valve Disease
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="renal_artery_stenosis"
+            onclick="selectDiagnosis(this)"
+          >
+            Renal Artery Stenosis (RAS)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="rcm"
+            onclick="selectDiagnosis(this)"
+          >
+            Restrictive Cardiomyopathy (RCM)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="rheumatic_hd"
+            onclick="selectDiagnosis(this)"
+          >
+            Rheumatic Heart Disease
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="rbbb"
+            onclick="selectDiagnosis(this)"
+          >
+            Right Bundle Branch Block (RBBB)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="shock"
+            onclick="selectDiagnosis(this)"
+          >
+            Shock - Comprehensive Guide
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="sss"
+            onclick="selectDiagnosis(this)"
+          >
+            Sick Sinus Syndrome (SSS)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="svt"
+            onclick="selectDiagnosis(this)"
+          >
+            Supraventricular Tachycardia (SVT)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="surgical_risk_stratification"
+            onclick="selectDiagnosis(this)"
+          >
+            Surgical Risk Stratification
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="syncope"
+            onclick="selectDiagnosis(this)"
+          >
+            Syncope
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="takotsubo"
+            onclick="selectDiagnosis(this)"
+          >
+            Takotsubo (Stress) Cardiomyopathy
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="tof"
+            onclick="selectDiagnosis(this)"
+          >
+            Tetralogy of Fallot (TOF)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="torsades"
+            onclick="selectDiagnosis(this)"
+          >
+            Torsades de Pointes
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="transposition_great_vessels"
+            onclick="selectDiagnosis(this)"
+          >
+            Transposition of the Great Vessels (TGA)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="tr"
+            onclick="selectDiagnosis(this)"
+          >
+            Tricuspid Regurgitation
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="ts"
+            onclick="selectDiagnosis(this)"
+          >
+            Tricuspid Stenosis
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="truncus_arteriosus"
+            onclick="selectDiagnosis(this)"
+          >
+            Truncus Arteriosus (TA)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="vfib"
+            onclick="selectDiagnosis(this)"
+          >
+            Ventricular Fibrillation (VF)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="vsd"
+            onclick="selectDiagnosis(this)"
+          >
+            Ventricular Septal Defect (VSD)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="vt"
+            onclick="selectDiagnosis(this)"
+          >
+            Ventricular Tachycardia (VT)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="watchman_postop"
+            onclick="selectDiagnosis(this)"
+          >
+            Watchman (Post-Operative Care by NP)
+          </div>
+          <div
+            class="guidelines-dx-item"
+            data-diagnosis="wpw"
+            onclick="selectDiagnosis(this)"
+          >
+            Wolff-Parkinson-White Syndrome (WPW)
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main id="guidelines-main">
+        <div class="guidelines-welcome" id="guidelines-welcome">
+          <div class="welcome-content">
+            <h2>📋 Guidelines & Teaching Center</h2>
+            <p>
+              Select a diagnosis from the sidebar to view comprehensive clinical
+              guidelines, teaching points, and educational resources.
+            </p>
+
+            <div class="feature-grid">
+              <div class="feature-card">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                  <path
+                    fill="currentColor"
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                  />
+                </svg>
+                <h4>ACC/AHA Guidelines</h4>
+                <p>Latest clinical practice guidelines and recommendations</p>
+              </div>
+
+              <div class="feature-card">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                  <path
+                    fill="currentColor"
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+                <h4>Teaching Points</h4>
+                <p>Key educational insights and clinical pearls</p>
+              </div>
+
+              <div class="feature-card">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+                <h4>Safety Alerts</h4>
+                <p>Critical safety considerations and contraindications</p>
+              </div>
+
+              <div class="feature-card">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                  <path
+                    fill="currentColor"
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4 18c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm3.25-4H6.75V4h6.5v12z"
+                  />
+                </svg>
+                <h4>Clinical Resources</h4>
+                <p>Evidence-based references and additional materials</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guidelines Content (Hidden initially) -->
+        <div
+          class="guidelines-content-area"
+          id="guidelines-content"
+          style="display: none"
+        >
+          <div class="guidelines-header">
+            <h2 id="guidelines-title">Diagnosis Guidelines</h2>
+            <div class="guidelines-meta">
+              <span class="last-updated"
+                >Last updated: <span id="last-updated-date">--</span></span
+              >
+              <span class="evidence-level"
+                >Evidence Level: <span id="evidence-level">--</span></span
+              >
+            </div>
+          </div>
+
+          <div class="guidelines-tabs">
+            <button class="guidelines-tab active" data-tab="guidelines">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path
+                  fill="currentColor"
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                />
+              </svg>
+              Clinical Guidelines
+            </button>
+            <button class="guidelines-tab" data-tab="teaching">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path
+                  fill="currentColor"
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+              Teaching Points
+            </button>
+            <button class="guidelines-tab" data-tab="safety">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+              Safety Alerts
+            </button>
+            <button class="guidelines-tab" data-tab="resources">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path
+                  fill="currentColor"
+                  d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4 18c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm3.25-4H6.75V4h6.5v12z"
+                />
+              </svg>
+              Resources
+            </button>
+          </div>
+
+          <div class="guidelines-tab-content">
+            <!-- Guidelines Tab -->
+            <div class="tab-panel active" id="guidelines-panel">
+              <div class="guidelines-section">
+                <h3>🏛️ ACC/AHA Clinical Practice Guidelines</h3>
+                <div id="acc-guidelines-content" class="content-area">
+                  <p>Loading guidelines...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Teaching Tab -->
+            <div class="tab-panel" id="teaching-panel">
+              <div class="guidelines-section">
+                <h3>💡 Key Teaching Points</h3>
+                <div id="teaching-points-content" class="content-area">
+                  <p>Loading teaching points...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Safety Tab -->
+            <div class="tab-panel" id="safety-panel">
+              <div class="guidelines-section">
+                <h3>🚨 Safety Alerts & Contraindications</h3>
+                <div id="safety-alerts-content" class="content-area">
+                  <p>Loading safety information...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div class="tab-panel" id="resources-panel">
+              <div class="guidelines-section">
+                <h3>📚 Clinical Resources & References</h3>
+                <div id="clinical-resources-content" class="content-area">
+                  <p>Loading resources...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer
+      style="
+        text-align: center;
+        padding: 2rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+      "
+    >
+      <p>Created by Martin Samson RN, BSN</p>
+    </footer>
+  </body>
+</html>

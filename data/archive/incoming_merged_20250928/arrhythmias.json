@@ -1,0 +1,160 @@
+{
+  "diagnoses": [
+    {
+      "id": "vt",
+      "name": "Ventricular Tachycardia (VT)",
+      "category": ["Arrhythmia"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Palpitations",
+          "Syncope",
+          "Chest pain",
+          "Dyspnea",
+          "Sudden cardiac arrest"
+        ],
+        "signs_any": [
+          "Wide-complex tachycardia on ECG (≥120 ms)",
+          "AV dissociation, capture/fusion beats",
+          "Hypotension, shock if unstable"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG (monomorphic vs polymorphic VT)",
+        "Telemetry/monitor strip",
+        "Labs (K+, Mg2+, troponin)",
+        "Echo (structural disease)",
+        "Consider coronary angiography if ischemia suspected"
+      ],
+      "treatment": {
+        "unstable": ["Immediate synchronized cardioversion"],
+        "stable": [
+          "IV amiodarone, procainamide, or lidocaine",
+          "Correct electrolytes (K+, Mg2+)"
+        ],
+        "long_term": [
+          "ICD for sustained VT with structural heart disease or cardiac arrest survivors",
+          "Antiarrhythmics (amiodarone, sotalol) in selected patients",
+          "Catheter ablation for recurrent VT"
+        ]
+      },
+      "contraindications": {
+        "polymorphic_vt": [
+          "Avoid antiarrhythmics if due to prolonged QT — treat as Torsades"
+        ]
+      },
+      "follow_up": ["Cardiology/EP follow-up", "ICD monitoring if placed"],
+      "discharge": {
+        "instructions": [
+          "Adherence to antiarrhythmic therapy if prescribed",
+          "Avoid QT-prolonging meds if history of Torsades",
+          "Emergency response plan if ICD shocks occur"
+        ],
+        "follow_up": ["Electrophysiology follow-up"]
+      }
+    },
+    {
+      "id": "svt",
+      "name": "Supraventricular Tachycardia (SVT)",
+      "category": ["Arrhythmia"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Palpitations",
+          "Dizziness",
+          "Chest discomfort",
+          "Dyspnea"
+        ],
+        "signs_any": [
+          "Narrow-complex tachycardia (most cases)",
+          "Regular rapid rhythm",
+          "Hypotension if prolonged/unstable"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG during episode",
+        "Telemetry strip",
+        "Labs (K+, Mg2+, TSH if indicated)",
+        "Echo if structural disease suspected"
+      ],
+      "treatment": {
+        "unstable": ["Immediate synchronized cardioversion"],
+        "stable": [
+          "Vagal maneuvers",
+          "Adenosine IV push (diagnostic and therapeutic)",
+          "IV β-blocker or diltiazem if refractory"
+        ],
+        "long_term": [
+          "Catheter ablation for recurrent symptomatic SVT",
+          "β-blockers or nondihydropyridine CCBs as alternatives if not ablation candidate"
+        ]
+      },
+      "contraindications": {
+        "wpw_af": [
+          "Avoid AV nodal blockers (β-blocker, diltiazem, digoxin) if AF with WPW"
+        ]
+      },
+      "follow_up": [
+        "EP referral for recurrent episodes",
+        "Patient education on vagal maneuvers"
+      ],
+      "discharge": {
+        "instructions": [
+          "Avoid stimulants (caffeine, sympathomimetics) that trigger SVT",
+          "Seek urgent care if episodes prolonged or associated with syncope"
+        ],
+        "follow_up": ["Cardiology/EP follow-up"]
+      }
+    },
+    {
+      "id": "bradyarrhythmia",
+      "name": "Bradyarrhythmias (Sinus Node Dysfunction & AV Block)",
+      "category": ["Arrhythmia"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Syncope",
+          "Presyncope",
+          "Fatigue",
+          "Dyspnea",
+          "Exercise intolerance"
+        ],
+        "signs_any": [
+          "ECG: sinus pauses, sinus bradycardia <50 bpm",
+          "ECG: AV block (Mobitz I, Mobitz II, 3rd degree)",
+          "Hypotension, CHF if severe"
+        ]
+      },
+      "initial_tests": [
+        "12-lead ECG",
+        "Telemetry/Holter monitor",
+        "Labs (TSH, electrolytes, drug levels e.g. digoxin)",
+        "Echo if structural disease suspected"
+      ],
+      "treatment": {
+        "acute": [
+          "Atropine IV for symptomatic bradycardia",
+          "Temporary pacing if refractory",
+          "Treat reversible causes (ischemia, meds, hypothyroidism)"
+        ],
+        "long_term": [
+          "Permanent pacemaker for symptomatic sinus node dysfunction",
+          "Pacemaker for Mobitz II or complete heart block regardless of symptoms"
+        ]
+      },
+      "contraindications": {
+        "asymptomatic": [
+          "No pacing for asymptomatic sinus bradycardia or Mobitz I"
+        ]
+      },
+      "follow_up": [
+        "Pacemaker clinic follow-up if implanted",
+        "Monitor for progression in conduction disease"
+      ],
+      "discharge": {
+        "instructions": [
+          "Report syncope, dizziness, new palpitations",
+          "Medication adherence; avoid AV nodal blockers if worsening bradycardia"
+        ],
+        "follow_up": ["Cardiology/EP follow-up"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Patient is a 45 year old male presenting with palpitations. Blood pressure today is 128/82, heart rate of 110 bpm, breathing at 18 breaths per minute, temperature is normal at 98.6F, oxygen saturation 98%.
+
+History: Patient has hypertension and takes metoprolol 25mg twice daily. No known drug allergies.
+
+Physical exam shows anxious appearing male. Heart is tachycardic but regular rhythm. Lungs are clear.
+
+Labs drawn show troponin less than 0.01, BNP 125.
+
+Impression: Sinus tachycardia, likely anxiety related. Hypertension controlled.
+
+Will reassure patient, continue home medications, follow up with PCP in 1 week.

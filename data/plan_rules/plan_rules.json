@@ -1,0 +1,239 @@
+{
+  "version": "1.0.0",
+  "rules": {
+    "acs": {
+      "category": "cardiac",
+      "aliases": [
+        "acute coronary syndrome",
+        "acs",
+        "nstemi",
+        "stemi",
+        "unstable angina",
+        "ua"
+      ],
+      "assessment": [
+        "Correlate symptoms with ECG and serial high‑sensitivity troponins.",
+        "Risk stratify; consult cardiology as appropriate."
+      ],
+      "plan": [
+        "Early invasive vs conservative strategy per risk and stability.",
+        "Antithrombotic and anti‑ischemic therapy per guideline and bleeding risk."
+      ],
+      "med_refs": [
+        "asa",
+        "p2y12",
+        "heparin",
+        "statin_high",
+        "beta_blocker",
+        "nitrates",
+        "o2_prn"
+      ],
+      "test_refs": ["cath", "tte", "stress_img", "ccta"]
+    },
+    "hfref": {
+      "category": "cardiac",
+      "aliases": [
+        "hfrEF",
+        "reduced ejection fraction",
+        "systolic heart failure",
+        "hf with reduced ef",
+        "hfref"
+      ],
+      "assessment": [
+        "Assess perfusion/congestion; identify precipitants; trend I/O, weights, BMP/K+."
+      ],
+      "plan": ["Diuresis to euvolemia; start/optimize GDMT as tolerated."],
+      "med_refs": [
+        "arni_or_ace_arb",
+        "beta_blocker",
+        "mra",
+        "sglt2i",
+        "loop_diuretic"
+      ],
+      "test_refs": ["tte"]
+    },
+    "hfpef": {
+      "category": "cardiac",
+      "aliases": [
+        "hfpef",
+        "preserved ejection fraction",
+        "diastolic heart failure"
+      ],
+      "assessment": [
+        "Control BP and comorbidities (AF, DM, CKD, OSA, obesity)."
+      ],
+      "plan": ["Diuretics for volume control; exercise/weight management."],
+      "med_refs": ["sglt2i", "loop_diuretic", "mra", "ace_arb_arn"],
+      "test_refs": ["tte", "stress_img"]
+    },
+    "htn": {
+      "category": "cardiac",
+      "aliases": ["hypertension", "high blood pressure", "elevated bp"],
+      "assessment": [
+        "Assess BP control, target organ damage, and cardiovascular risk factors."
+      ],
+      "plan": [
+        "Lifestyle modifications; antihypertensive therapy per guidelines and comorbidities."
+      ],
+      "med_refs": ["ace_arb", "thiazide", "ccb", "beta_blocker"],
+      "test_refs": ["tte", "renal_doppler"]
+    },
+    "afib": {
+      "category": "cardiac",
+      "aliases": ["atrial fibrillation", "a fib", "irregular rhythm"],
+      "assessment": [
+        "Rate vs rhythm control strategy; anticoagulation per CHA2DS2-VASc/HAS-BLED."
+      ],
+      "plan": [
+        "Rate control; anticoagulation if indicated; consider cardioversion if appropriate."
+      ],
+      "med_refs": ["warfarin", "doac", "diltiazem", "metoprolol", "digoxin"],
+      "test_refs": ["tte", "tee"]
+    },
+    "valve_as": {
+      "category": "cardiac",
+      "aliases": ["aortic stenosis", "as", "valve disease"],
+      "assessment": [
+        "Assess severity with echo; evaluate symptoms and surgical candidacy."
+      ],
+      "plan": [
+        "Medical management; surgical/interventional evaluation per guidelines."
+      ],
+      "med_refs": ["beta_blocker", "ace_arb", "loop_diuretic"],
+      "test_refs": ["tte", "cath", "stress_img"]
+    },
+    "valve_ar": {
+      "category": "cardiac",
+      "aliases": ["aortic regurgitation", "ar", "aortic insufficiency"],
+      "assessment": [
+        "Assess LV function and chamber size; evaluate for surgery."
+      ],
+      "plan": ["Vasodilator therapy; surgical evaluation per guidelines."],
+      "med_refs": ["ace_arb", "nitrates", "loop_diuretic"],
+      "test_refs": ["tte", "cath"]
+    },
+    "valve_ms": {
+      "category": "cardiac",
+      "aliases": ["mitral stenosis", "ms", "mitral valve disease"],
+      "assessment": ["Assess severity and pulmonary hypertension."],
+      "plan": ["Anticoagulation; surgical evaluation per symptoms."],
+      "med_refs": ["warfarin", "beta_blocker", "loop_diuretic"],
+      "test_refs": ["tte", "cath"]
+    },
+    "valve_mr": {
+      "category": "cardiac",
+      "aliases": ["mitral regurgitation", "mr", "mitral insufficiency"],
+      "assessment": ["Assess LV function; evaluate surgical candidacy."],
+      "plan": ["Medical therapy; surgical evaluation per guidelines."],
+      "med_refs": ["ace_arb", "beta_blocker", "loop_diuretic"],
+      "test_refs": ["tte", "cath"]
+    },
+    "cardiomyopathy": {
+      "category": "cardiac",
+      "aliases": ["cardiomyopathy", "cm", "dilated cm", "hypertrophic cm"],
+      "assessment": ["Assess etiology; evaluate for ICD/CRT candidacy."],
+      "plan": ["GDMT optimization; device evaluation per guidelines."],
+      "med_refs": ["arni_or_ace_arb", "beta_blocker", "mra", "sglt2i"],
+      "test_refs": ["tte", "cath", "genetic_testing"]
+    },
+    "pericarditis": {
+      "category": "cardiac",
+      "aliases": ["pericarditis", "pericardial disease"],
+      "assessment": ["Assess for tamponade; identify etiology."],
+      "plan": ["NSAIDs/colchicine; pericardiocentesis if tamponade."],
+      "med_refs": ["nsaid", "colchicine", "steroid"],
+      "test_refs": ["tte", "cath"]
+    },
+    "tamponade": {
+      "category": "cardiac",
+      "aliases": ["tamponade", "cardiac tamponade"],
+      "assessment": ["Assess hemodynamic stability; identify etiology."],
+      "plan": ["Urgent pericardiocentesis; treat underlying cause."],
+      "med_refs": ["fluid_resuscitation"],
+      "test_refs": ["tte", "cath"]
+    },
+    "ep_procedures": {
+      "category": "cardiac",
+      "aliases": [
+        "ep",
+        "electrophysiology",
+        "device implant",
+        "pacemaker",
+        "icd",
+        "crt",
+        "ablation",
+        "ep study",
+        "cardiac device"
+      ],
+      "assessment": [
+        "Pre-procedure evaluation including anticoagulation status and device interrogation."
+      ],
+      "plan": [
+        "Anticoagulation management; antibiotic prophylaxis; post-procedure monitoring per EP guidelines."
+      ],
+      "med_refs": [
+        "amiodarone",
+        "warfarin",
+        "doac",
+        "aspirin",
+        "clopidogrel",
+        "cefazolin"
+      ],
+      "test_refs": ["ecg", "cxr", "device_check", "tee", "holter"]
+    },
+    "cardiac_medications": {
+      "category": "cardiac",
+      "aliases": [
+        "medications",
+        "cardiac meds",
+        "dosages",
+        "drug dosing",
+        "antiplatelets",
+        "anticoagulants",
+        "beta blockers",
+        "ace inhibitors",
+        "diuretics",
+        "statins",
+        "antiarrhythmics"
+      ],
+      "assessment": [
+        "Review current medications and assess for optimization opportunities."
+      ],
+      "plan": [
+        "Prescribe evidence-based cardiac medications with appropriate dosing and monitoring."
+      ],
+      "med_refs": [
+        "aspirin",
+        "clopidogrel",
+        "warfarin",
+        "doac",
+        "metoprolol",
+        "lisinopril",
+        "furosemide",
+        "atorvastatin",
+        "amiodarone",
+        "digoxin"
+      ],
+      "test_refs": ["ecg", "echo", "labs"]
+    },
+    "documentation": {
+      "category": "cardiac",
+      "aliases": [
+        "documentation",
+        "h&p",
+        "consult note",
+        "clinical note",
+        "charting",
+        "documentation guidelines"
+      ],
+      "assessment": [
+        "Review documentation completeness and clinical accuracy."
+      ],
+      "plan": [
+        "Follow standardized H&P and consult note guidelines for comprehensive patient care."
+      ],
+      "med_refs": [],
+      "test_refs": []
+    }
+  }
+}

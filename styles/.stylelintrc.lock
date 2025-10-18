@@ -1,0 +1,12 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "no-duplicate-selectors": true,
+    "no-descending-specificity": true,
+    "comment-empty-line-before": "always",
+    "rule-empty-line-before": "always-multi-line",
+    "property-no-vendor-prefix": true,
+    "no-invalid-position-declaration": true
+  },
+  "ignoreFiles": []
+}

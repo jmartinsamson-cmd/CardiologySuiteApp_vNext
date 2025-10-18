@@ -1,0 +1,211 @@
+{
+  "index": [
+    {
+      "id": "acs",
+      "name": "Acute Coronary Syndrome"
+    },
+    {
+      "id": "stable_angina",
+      "name": "Stable Angina",
+      "category": "Angina"
+    },
+    {
+      "id": "variant_angina",
+      "name": "Variant (Prinzmetal) Angina",
+      "category": "Angina"
+    },
+    {
+      "id": "microvascular_angina",
+      "name": "Microvascular Angina",
+      "category": "Angina"
+    },
+    {
+      "id": "hfref",
+      "name": "Heart Failure with Reduced EF"
+    },
+    {
+      "id": "hfpef",
+      "name": "Heart Failure with Preserved EF"
+    },
+    {
+      "id": "dcm",
+      "name": "Dilated Cardiomyopathy"
+    },
+    {
+      "id": "hcm",
+      "name": "Hypertrophic Cardiomyopathy"
+    },
+    {
+      "id": "rcm",
+      "name": "Restrictive Cardiomyopathy"
+    },
+    {
+      "id": "takotsubo",
+      "name": "Takotsubo Cardiomyopathy"
+    },
+    {
+      "id": "as",
+      "name": "Aortic Stenosis"
+    },
+    {
+      "id": "ar",
+      "name": "Aortic Regurgitation"
+    },
+    {
+      "id": "ms",
+      "name": "Mitral Stenosis"
+    },
+    {
+      "id": "mr",
+      "name": "Mitral Regurgitation"
+    },
+    {
+      "id": "tr",
+      "name": "Tricuspid Regurgitation"
+    },
+    {
+      "id": "pulm_valve",
+      "name": "Pulmonic Valve Disease"
+    },
+    {
+      "id": "pericarditis",
+      "name": "Acute Pericarditis"
+    },
+    {
+      "id": "pericardial_effusion",
+      "name": "Pericardial Effusion / Tamponade"
+    },
+    {
+      "id": "constrictive_pericarditis",
+      "name": "Constrictive Pericarditis"
+    },
+    {
+      "id": "afib",
+      "name": "Atrial Fibrillation / Flutter"
+    },
+    {
+      "id": "atrial_flutter",
+      "name": "Atrial Flutter"
+    },
+    {
+      "id": "vt",
+      "name": "Ventricular Tachycardia"
+    },
+    {
+      "id": "svt",
+      "name": "Supraventricular Tachycardia"
+    },
+    {
+      "id": "bradyarrhythmia",
+      "name": "Bradyarrhythmias"
+    },
+    {
+      "id": "wpw",
+      "name": "Wolff-Parkinson-White Syndrome"
+    },
+    {
+      "id": "long_qt",
+      "name": "Long QT Syndrome"
+    },
+    {
+      "id": "torsades",
+      "name": "Torsades de Pointes"
+    },
+    {
+      "id": "asd",
+      "name": "Atrial Septal Defect"
+    },
+    {
+      "id": "vsd",
+      "name": "Ventricular Septal Defect"
+    },
+    {
+      "id": "pda",
+      "name": "Patent Ductus Arteriosus"
+    },
+    {
+      "id": "tof",
+      "name": "Tetralogy of Fallot"
+    },
+    {
+      "id": "pad",
+      "name": "Peripheral Arterial Disease"
+    },
+    {
+      "id": "aaa",
+      "name": "Abdominal Aortic Aneurysm"
+    },
+    {
+      "id": "aortic_dissection",
+      "name": "Aortic Dissection"
+    },
+    {
+      "id": "dvt",
+      "name": "Deep Vein Thrombosis"
+    },
+    {
+      "id": "pe",
+      "name": "Pulmonary Embolism"
+    },
+    {
+      "id": "cvi",
+      "name": "Chronic Venous Insufficiency / Varicose Veins"
+    },
+    {
+      "id": "acute_limb_ischemia",
+      "name": "Acute Limb Ischemia"
+    },
+    {
+      "id": "acute_mesenteric_ischemia",
+      "name": "Acute Mesenteric Ischemia"
+    },
+    {
+      "id": "infective_endocarditis",
+      "name": "Infective Endocarditis"
+    },
+    {
+      "id": "rheumatic_hd",
+      "name": "Rheumatic Heart Disease"
+    },
+    {
+      "id": "myocarditis",
+      "name": "Myocarditis"
+    },
+    {
+      "id": "htn",
+      "name": "Essential Hypertension"
+    },
+    {
+      "id": "htn_urgency",
+      "name": "Hypertensive Urgency / Emergency"
+    },
+    {
+      "id": "primary_aldosteronism",
+      "name": "Primary Aldosteronism"
+    },
+    {
+      "id": "renal_artery_stenosis",
+      "name": "Renal Artery Stenosis"
+    },
+    {
+      "id": "pheochromocytoma",
+      "name": "Pheochromocytoma / Paraganglioma"
+    },
+    {
+      "id": "cardiac_arrest",
+      "name": "Cardiac Arrest / Sudden Cardiac Death"
+    },
+    {
+      "id": "cardiogenic_shock",
+      "name": "Cardiogenic Shock"
+    },
+    {
+      "id": "pulmonary_htn",
+      "name": "Pulmonary Hypertension"
+    },
+    {
+      "id": "syncope",
+      "name": "Syncope"
+    }
+  ]
+}

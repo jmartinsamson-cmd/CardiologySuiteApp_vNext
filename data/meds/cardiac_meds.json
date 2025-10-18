@@ -1,0 +1,837 @@
+{
+  "version": "1.0.0",
+  "medications": [
+    {
+      "id": "asa",
+      "name": "Aspirin",
+      "class": "Antiplatelet",
+      "inpatient": {
+        "load": "162–325 mg PO chewed once",
+        "maint": "81 mg PO daily"
+      },
+      "avoid": ["Active bleeding", "Severe aspirin allergy"],
+      "pearls": [
+        "Prefer chewable for loading; consider PPI with DAPT if GI risk."
+      ]
+    },
+    {
+      "id": "p2y12",
+      "name": "P2Y12 inhibitor (ticagrelor/clopidogrel/prasugrel)",
+      "class": "Antiplatelet",
+      "inpatient": {
+        "load": "Per strategy (e.g., ticagrelor 180 mg PO once)",
+        "maint": "Per agent (e.g., ticagrelor 90 mg BID)"
+      },
+      "avoid": ["Active bleeding", "History of ICH (prasugrel)"],
+      "pearls": ["Choose agent per PCI/lysis strategy and bleeding risk."]
+    },
+    {
+      "id": "heparin",
+      "name": "Heparin (UFH) / Fondaparinux",
+      "class": "Anticoagulant",
+      "inpatient": {
+        "load": "UFH bolus per protocol",
+        "maint": "UFH infusion titrated by anti‑Xa/aPTT"
+      },
+      "avoid": ["Active bleeding", "Hx HIT (avoid heparin)"],
+      "pearls": ["Select per renal function/strategy; monitor closely."]
+    },
+    {
+      "id": "statin_high",
+      "name": "High‑intensity statin",
+      "class": "Lipid lowering",
+      "outpatient": {
+        "maint": "Atorvastatin 40–80 mg or Rosuvastatin 20–40 mg daily"
+      },
+      "pearls": [
+        "Check lipids; counsel on myalgias; consider drug interactions."
+      ]
+    },
+    {
+      "id": "beta_blocker",
+      "name": "Evidence‑based β‑blocker",
+      "class": "Beta‑blocker",
+      "outpatient": {
+        "maint": "Carvedilol, metoprolol succinate, or bisoprolol; titrate to HR/BP"
+      },
+      "avoid": ["Acute decompensated HF with shock/pulmonary edema"],
+      "pearls": ["Initiate after stabilization in ACS/HF."]
+    },
+    {
+      "id": "nitrates",
+      "name": "Nitrates (SL nitroglycerin)",
+      "class": "Vasodilator",
+      "inpatient": { "prn": "0.4 mg SL q5min up to 3 doses for chest pain" },
+      "avoid": ["RV infarct", "Recent PDE‑5 inhibitor use", "Hypotension"],
+      "pearls": ["Prefer SL early; topical/IV per BP and relief."]
+    },
+    {
+      "id": "o2_prn",
+      "name": "Oxygen if hypoxic",
+      "class": "Supportive",
+      "pearls": ["Use only if hypoxic; target SpO2 per protocol."]
+    },
+    {
+      "id": "arni_or_ace_arb",
+      "name": "ARNI or ACEi/ARB",
+      "class": "RAAS",
+      "outpatient": {
+        "maint": "Sacubitril/valsartan preferred; otherwise ACEi/ARB per BP/renal function"
+      },
+      "avoid": [
+        "Hx angioedema (ACEi/ARNI)",
+        "Pregnancy",
+        "Severe hyperkalemia"
+      ],
+      "pearls": ["Washout 36 h when switching ACEi → ARNI."]
+    },
+    {
+      "id": "mra",
+      "name": "Mineralocorticoid receptor antagonist",
+      "class": "MRA",
+      "outpatient": { "maint": "Spironolactone 12.5–25 mg daily; titrate" },
+      "avoid": ["K+ >5.0", "Severe renal dysfunction"],
+      "pearls": ["Monitor BMP/K+ within 1–2 weeks after changes."]
+    },
+    {
+      "id": "sglt2i",
+      "name": "SGLT2 inhibitor",
+      "class": "SGLT2i",
+      "outpatient": { "maint": "Dapagliflozin or empagliflozin 10 mg daily" },
+      "avoid": ["History of DKA", "Severe renal failure per label"],
+      "pearls": [
+        "Hold during severe illness/procedures; counsel on GU effects."
+      ]
+    },
+    {
+      "id": "loop_diuretic",
+      "name": "Loop diuretic",
+      "class": "Diuretic",
+      "inpatient": { "init": "IV furosemide ≈ 1–2× home PO dose" },
+      "outpatient": { "prn": "Titrate to weight/symptoms" },
+      "pearls": ["Consider thiazide add‑on for diuretic resistance."]
+    },
+    {
+      "id": "ace_arb_arn",
+      "name": "ACEi/ARB/ARNI (per BP/tolerance)",
+      "class": "RAAS",
+      "outpatient": { "maint": "Select agent per comorbidity and BP" }
+    },
+    {
+      "id": "ace_arb",
+      "name": "ACE inhibitor or ARB",
+      "class": "RAAS inhibitor",
+      "outpatient": {
+        "maint": "Lisinopril 10-40 mg daily or Losartan 50-100 mg daily"
+      },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Angioedema history"],
+      "pearls": [
+        "First-line for HTN; check K+ and creatinine after initiation."
+      ]
+    },
+    {
+      "id": "thiazide",
+      "name": "Thiazide/thiazide-like diuretic",
+      "class": "Diuretic",
+      "outpatient": {
+        "maint": "Hydrochlorothiazide 25-50 mg daily or Chlorthalidone 25 mg daily"
+      },
+      "avoid": ["Severe hyponatremia", "Gout exacerbation"],
+      "pearls": ["Preferred diuretic for HTN; monitor electrolytes."]
+    },
+    {
+      "id": "ccb",
+      "name": "Calcium channel blocker",
+      "class": "Calcium channel blocker",
+      "outpatient": {
+        "maint": "Amlodipine 5-10 mg daily or Nifedipine XL 30-60 mg daily"
+      },
+      "avoid": ["Severe aortic stenosis", "Cardiogenic shock"],
+      "pearls": ["Effective for HTN; watch for peripheral edema."]
+    },
+    {
+      "id": "warfarin",
+      "name": "Warfarin",
+      "class": "Vitamin K antagonist",
+      "inpatient": { "maint": "Dose to INR 2.0-3.0" },
+      "outpatient": { "maint": "Dose to INR 2.0-3.0 with regular monitoring" },
+      "avoid": ["Active bleeding", "Pregnancy"],
+      "pearls": ["Requires frequent INR monitoring; many drug interactions."]
+    },
+    {
+      "id": "doac",
+      "name": "Direct oral anticoagulant (DOAC)",
+      "class": "Direct anticoagulant",
+      "outpatient": {
+        "maint": "Apixaban 5 mg BID, Rivaroxaban 20 mg daily, or Dabigatran 150 mg BID"
+      },
+      "avoid": ["Active bleeding", "Severe renal impairment (varies by agent)"],
+      "pearls": [
+        "Preferred over warfarin for most patients; dose adjust for renal function."
+      ]
+    },
+    {
+      "id": "diltiazem",
+      "name": "Diltiazem",
+      "class": "Non-dihydropyridine CCB",
+      "inpatient": {
+        "maint": "Immediate-release 30-90 mg QID or extended-release per formulation"
+      },
+      "outpatient": { "maint": "Extended-release 120-360 mg daily" },
+      "avoid": ["Severe LV dysfunction", "Heart block"],
+      "pearls": ["Effective for rate control in atrial fibrillation."]
+    },
+    {
+      "id": "metoprolol",
+      "name": "Metoprolol",
+      "class": "Beta-blocker",
+      "inpatient": { "maint": "Immediate-release 25-100 mg BID" },
+      "outpatient": { "maint": "Metoprolol succinate 50-200 mg daily" },
+      "avoid": ["Severe bradycardia", "Decompensated heart failure"],
+      "pearls": [
+        "Rate control for atrial fibrillation; use succinate form for HF."
+      ]
+    },
+    {
+      "id": "digoxin",
+      "name": "Digoxin",
+      "class": "Cardiac glycoside",
+      "inpatient": {
+        "maint": "0.125-0.25 mg daily (adjust for age/renal function)"
+      },
+      "outpatient": { "maint": "0.125-0.25 mg daily with level monitoring" },
+      "avoid": ["Hyperkalemia", "Severe renal impairment"],
+      "pearls": ["Monitor digoxin levels; narrow therapeutic window."]
+    },
+    {
+      "id": "nsaid",
+      "name": "NSAID (ibuprofen)",
+      "class": "Anti-inflammatory",
+      "inpatient": { "maint": "400-600 mg PO q8h" },
+      "avoid": [
+        "Active GI bleed",
+        "Severe renal impairment",
+        "CHF exacerbation"
+      ],
+      "pearls": ["Use with PPI for GI protection; monitor renal function."]
+    },
+    {
+      "id": "colchicine",
+      "name": "Colchicine",
+      "class": "Anti-inflammatory",
+      "inpatient": {
+        "load": "1.2 mg PO once",
+        "maint": "0.6 mg PO q12h x 3-6 doses"
+      },
+      "avoid": ["Severe renal/hepatic impairment"],
+      "pearls": ["For pericarditis; monitor for GI toxicity."]
+    },
+    {
+      "id": "steroid",
+      "name": "Prednisone",
+      "class": "Corticosteroid",
+      "inpatient": { "maint": "20-40 mg PO daily taper" },
+      "avoid": ["Active infection", "Uncontrolled diabetes"],
+      "pearls": ["Use for refractory pericarditis; taper slowly."]
+    },
+    {
+      "id": "fluid_resuscitation",
+      "name": "IV Fluid Resuscitation",
+      "class": "Supportive",
+      "inpatient": { "init": "500-1000 mL NS bolus" },
+      "avoid": ["Fluid overload", "Severe HF"],
+      "pearls": ["For tamponade stabilization; monitor hemodynamics."]
+    },
+    {
+      "id": "ace_inhibitors",
+      "name": "ACE Inhibitors",
+      "class": "ACE Inhibitor",
+      "medications": [
+        "Benazepril (Lotensin)",
+        "Captopril (Capoten)",
+        "Enalapril (Vasotec)",
+        "Fosinopril (Monopril)",
+        "Lisinopril (Zestril/Prinivil)",
+        "Moexipril (Univasc)",
+        "Perindopril (Aceon)",
+        "Quinapril (Accupril)",
+        "Ramipril (Altace)",
+        "Trandolapril (Mavik)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": [
+        "Pregnancy",
+        "Hyperkalemia",
+        "Angioedema history",
+        "Bilateral renal artery stenosis"
+      ],
+      "pearls": [
+        "First-line for HTN and HF; monitor K+ and creatinine; cough common side effect."
+      ]
+    },
+    {
+      "id": "ace_diuretic_combos",
+      "name": "ACE Inhibitor/Diuretic Combinations",
+      "class": "ACE Inhibitor + Diuretic",
+      "medications": [
+        "Accuretic (Quinapril/HCTZ)",
+        "Capozide (Captopril/HCTZ)",
+        "Lotensin HCT (Benazepril/HCTZ)",
+        "Monopril HCT (Fosinopril/HCTZ)",
+        "Prinzide (Lisinopril/HCTZ)",
+        "Uniretic (Moexipril/HCTZ)",
+        "Vaseretic (Enalapril/HCTZ)",
+        "Zestoretic (Lisinopril/HCTZ)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Convenient combination for HTN; monitor electrolytes closely."
+      ]
+    },
+    {
+      "id": "arbs",
+      "name": "Angiotensin II Receptor Blockers (ARBs)",
+      "class": "ARB",
+      "medications": [
+        "Azilsartan Medoxomil (Edarbi)",
+        "Candesartan (Atacand)",
+        "Eprosartan (Teveten)",
+        "Irbesartan (Avapro)",
+        "Losartan (Cozaar)",
+        "Olmesartan (Benicar)",
+        "Telmisartan (Micardis)",
+        "Valsartan (Diovan)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Bilateral renal artery stenosis"],
+      "pearls": [
+        "Alternative to ACEi if cough; monitor K+ and creatinine; less cough than ACEi."
+      ]
+    },
+    {
+      "id": "arb_diuretic_combos",
+      "name": "ARB/Diuretic Combinations",
+      "class": "ARB + Diuretic",
+      "medications": [
+        "Atacand HCT (Candesartan/HCTZ)",
+        "Avalide (Irbesartan/HCTZ)",
+        "Benicar HCT (Olmesartan/HCTZ)",
+        "Diovan HCT (Valsartan/HCTZ)",
+        "Edarbyclor (Azilsartan/Chlorthalidone)",
+        "Hyzaar (Losartan/HCTZ)",
+        "Micardis HCT (Telmisartan/HCTZ)",
+        "Teveten HCT (Eprosartan/HCTZ)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Convenient combination for HTN; monitor electrolytes and renal function."
+      ]
+    },
+    {
+      "id": "beta_blockers",
+      "name": "Beta Blockers",
+      "class": "Beta-Blocker",
+      "medications": [
+        "Acebutolol (Sectral)",
+        "Atenolol (Tenormin)",
+        "Betaxolol (Kerlone)",
+        "Bisoprolol (Zebeta)",
+        "Carvedilol (Coreg, Coreg CR)",
+        "Labetalol (Trandate)",
+        "Metoprolol (Lopressor, Toprol-XL)",
+        "Metoprolol tartrate (immediate release)",
+        "Metoprolol succinate (extended release)",
+        "Nadolol (Corgard)",
+        "Nebivolol (Bystolic)",
+        "Pindolol (Visken)",
+        "Propranolol (Inderal, InnoPran XL)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to HR/BP goal" },
+      "avoid": [
+        "Severe bradycardia",
+        "Decompensated HF",
+        "Asthma/COPD (non-selective agents)"
+      ],
+      "pearls": [
+        "Rate control for AF/atrial flutter; evidence-based for HF/ACS; fatigue common."
+      ]
+    },
+    {
+      "id": "beta_blocker_diuretic_combos",
+      "name": "Beta Blocker/Diuretic Combinations",
+      "class": "Beta-Blocker + Diuretic",
+      "medications": [
+        "Corzide (Nadolol/Bendroflumethiazide)",
+        "Inderide (Propranolol/HCTZ)",
+        "Lopressor HCT (Metoprolol/HCTZ)",
+        "Tenoretic (Atenolol/Chlorthalidone)",
+        "Ziac (Bisoprolol/HCTZ)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to HR/BP goal" },
+      "avoid": [
+        "Severe bradycardia",
+        "Decompensated HF",
+        "Severe renal impairment"
+      ],
+      "pearls": [
+        "Convenient combination; monitor electrolytes and renal function."
+      ]
+    },
+    {
+      "id": "ccb_non_dhp",
+      "name": "Non-Dihydropyridine Calcium Channel Blockers",
+      "class": "Non-DHP CCB",
+      "medications": [
+        "Diltiazem (Cardizem, Cardizem LA, Cardizem CD, Cartia XT, Dilacor XR, Diltzac, Diltia XT, Taztia XT, Tiazac)",
+        "Verapamil (Isoptin SR, Calan, Covera-HS, Verelan)"
+      ],
+      "outpatient": {
+        "maint": "Diltiazem 120-360 mg daily; Verapamil 120-480 mg daily"
+      },
+      "avoid": ["Severe LV dysfunction", "Heart block", "WPW with AF"],
+      "pearls": [
+        "Effective for rate control in AF; negative inotrope; constipation with verapamil."
+      ]
+    },
+    {
+      "id": "ccb_dhp",
+      "name": "Dihydropyridine Calcium Channel Blockers",
+      "class": "DHP CCB",
+      "medications": [
+        "Amlodipine (Norvasc)",
+        "Felodipine (Plendil)",
+        "Isradipine (DynaCirc, DynaCirc CR)",
+        "Nicardipine (Cardene, Cardene SR)",
+        "Nifedipine (Adalat, Procardia, Procardia XL, Adalat CC)",
+        "Nisoldipine (Sular)"
+      ],
+      "outpatient": {
+        "maint": "Amlodipine 5-10 mg daily; others per formulation"
+      },
+      "avoid": ["Severe aortic stenosis", "Cardiogenic shock"],
+      "pearls": [
+        "Effective for HTN; peripheral edema common; amlodipine preferred for HF."
+      ]
+    },
+    {
+      "id": "direct_renin_inhibitors",
+      "name": "Direct Renin Inhibitors",
+      "class": "Direct Renin Inhibitor",
+      "medications": ["Aliskiren (Tekturna)", "Tekturna HCT (Aliskiren/HCTZ)"],
+      "outpatient": { "maint": "Aliskiren 150-300 mg daily" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Less commonly used; monitor K+ and creatinine; avoid with ACEi/ARB."
+      ]
+    },
+    {
+      "id": "hf_medications",
+      "name": "Heart Failure Medications",
+      "class": "Heart Failure",
+      "medications": [
+        "BiDil (Hydralazine/Isosorbide Dinitrate)",
+        "Corlanor (Ivabradine)",
+        "Entresto (Sacubitril/Valsartan)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; titrate to symptoms" },
+      "avoid": ["Severe hypotension", "Bradycardia (ivabradine)"],
+      "pearls": [
+        "BiDil for African Americans with HF; ivabradine for HFrEF with HR >70; Entresto preferred over ACEi."
+      ]
+    },
+    {
+      "id": "aldosterone_antagonists",
+      "name": "Aldosterone Antagonists",
+      "class": "MRA",
+      "medications": [
+        "Eplerenone (Inspra)",
+        "Spironolactone (Aldactone)",
+        "Aldactazide (Spironolactone/HCTZ)"
+      ],
+      "outpatient": {
+        "maint": "Spironolactone 12.5-50 mg daily; Eplerenone 25-50 mg daily"
+      },
+      "avoid": ["K+ >5.0", "Severe renal dysfunction", "Pregnancy"],
+      "pearls": [
+        "Monitor K+ closely; gynecomastia with spironolactone; evidence-based for HFrEF."
+      ]
+    },
+    {
+      "id": "antiadrenergic_agents",
+      "name": "Antiadrenergic Agents",
+      "class": "Antiadrenergic",
+      "medications": [
+        "Clonidine (Catapres, Catapres-TTS, Patch)",
+        "Doxazosin (Cardura, Cardura XL)",
+        "Guanabenz (Wytensin)",
+        "Guanfacine (Tenex)",
+        "Methyldopa (Aldomet)",
+        "Prazosin (Minipress)",
+        "Terazosin (Hytrin)",
+        "Aldoril (Methyldopa/HCTZ)",
+        "Minizide (Prazosin/Polythiazide)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": [
+        "Severe bradycardia",
+        "Pheochromocytoma (unopposed alpha-blockade)"
+      ],
+      "pearls": [
+        "Second-line for HTN; clonidine for rebound HTN; methyldopa for pregnancy HTN."
+      ]
+    },
+    {
+      "id": "diuretics",
+      "name": "Diuretics",
+      "class": "Diuretic",
+      "medications": {
+        "Carbonic Anhydrase Inhibitors": [
+          "Acetazolamide (Diamox, Diamox Sequels)"
+        ],
+        "Loop Diuretics": [
+          "Bumetanide (Bumex)",
+          "Furosemide (Lasix)",
+          "Torsemide (Demadex)"
+        ]
+      },
+      "outpatient": {
+        "maint": "Titrate to symptoms/weight; monitor electrolytes"
+      },
+      "avoid": ["Severe electrolyte abnormalities", "Anuria"],
+      "pearls": [
+        "Loop diuretics first-line for HF; monitor renal function and electrolytes."
+      ]
+    },
+    {
+      "id": "thiazide_diuretics",
+      "name": "Thiazide Diuretics",
+      "class": "Thiazide Diuretic",
+      "medications": [
+        "Chlorothiazide (Diuril)",
+        "Chlorthalidone (Thalitone)",
+        "Hydrochlorothiazide (HCTZ, Microzide)",
+        "Indapamide (Lozol)",
+        "Metolazone (Zaroxolyn)"
+      ],
+      "outpatient": { "maint": "12.5-50 mg daily; titrate to BP goal" },
+      "avoid": [
+        "Severe hyponatremia",
+        "Gout exacerbation",
+        "Severe renal impairment"
+      ],
+      "pearls": [
+        "First-line for HTN; monitor electrolytes; chlorthalidone may be more effective."
+      ]
+    },
+    {
+      "id": "ace_ccb_combos",
+      "name": "ACE Inhibitor/CCB Combinations",
+      "class": "ACE Inhibitor + CCB",
+      "medications": [
+        "Lexxel (Enalapril/Felodipine)",
+        "Lotrel (Benazepril/Amlodipine)",
+        "Tarka (Trandolapril/Verapamil)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Convenient dual mechanism for HTN; monitor K+ and creatinine."
+      ]
+    },
+    {
+      "id": "ccb_direct_renin_combos",
+      "name": "CCB/Direct Renin Inhibitor Combinations",
+      "class": "CCB + Direct Renin Inhibitor",
+      "medications": ["Tekamlo (Amlodipine/Aliskiren)"],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Triple mechanism for resistant HTN; monitor K+ and creatinine."
+      ]
+    },
+    {
+      "id": "ccb_direct_renin_diuretic_combos",
+      "name": "CCB/Direct Renin Inhibitor/Diuretic Combinations",
+      "class": "CCB + Direct Renin Inhibitor + Diuretic",
+      "medications": ["Amturnide (Amlodipine/Aliskiren/HCTZ)"],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Quadruple mechanism for resistant HTN; monitor electrolytes closely."
+      ]
+    },
+    {
+      "id": "arb_ccb_combos",
+      "name": "ARB/CCB Combinations",
+      "class": "ARB + CCB",
+      "medications": [
+        "Azor (Olmesartan/Amlodipine)",
+        "Exforge (Valsartan/Amlodipine)",
+        "Twynsta (Telmisartan/Amlodipine)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe aortic stenosis"],
+      "pearls": ["Dual mechanism for HTN; less cough than ACEi; monitor K+."]
+    },
+    {
+      "id": "arb_ccb_diuretic_combos",
+      "name": "ARB/CCB/Diuretic Combinations",
+      "class": "ARB + CCB + Diuretic",
+      "medications": [
+        "Exforge HCT (Valsartan/Amlodipine/HCTZ)",
+        "Tribenzor (Olmesartan/Amlodipine/HCTZ)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Pregnancy", "Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Triple mechanism for HTN; convenient combination; monitor electrolytes."
+      ]
+    },
+    {
+      "id": "vasodilator_diuretic_combos",
+      "name": "Vasodilator/Diuretic Combinations",
+      "class": "Vasodilator + Diuretic",
+      "medications": ["Apresazide (Hydralazine/HCTZ)"],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Lupus exacerbation", "Severe renal impairment"],
+      "pearls": [
+        "For HTN in African Americans; monitor for drug-induced lupus."
+      ]
+    },
+    {
+      "id": "potassium_sparing_diuretic_combos",
+      "name": "Potassium-Sparing Diuretic Combinations",
+      "class": "Potassium-Sparing Diuretic + Thiazide",
+      "medications": [
+        "Dyazide (Triamterene/HCTZ)",
+        "Maxzide (Triamterene/HCTZ)",
+        "Moduretic (Amiloride/HCTZ)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to BP goal" },
+      "avoid": ["Hyperkalemia", "Severe renal impairment"],
+      "pearls": [
+        "Spare potassium while providing diuresis; monitor K+ closely."
+      ]
+    },
+    {
+      "id": "anticoagulants",
+      "name": "Anticoagulants",
+      "class": "Anticoagulant",
+      "medications": [
+        "Apixaban (Eliquis)",
+        "Dabigatran (Pradaxa)",
+        "Enoxaparin (Lovenox)",
+        "Edoxaban (Savaysa)",
+        "Rivaroxaban (Xarelto)",
+        "Warfarin (Coumadin, Jantoven)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; monitor per protocol" },
+      "avoid": ["Active bleeding", "Severe renal/hepatic impairment"],
+      "pearls": [
+        "DOACs preferred over warfarin for most; warfarin requires INR monitoring."
+      ]
+    },
+    {
+      "id": "antiplatelets",
+      "name": "Antiplatelets",
+      "class": "Antiplatelet",
+      "medications": [
+        "Aggrenox (Aspirin + Dipyridamole)",
+        "Aspirin (Ecotrin, Empirin, Bayer, ASA)",
+        "Clopidogrel (Plavix)",
+        "Dipyridamole (Persantine)",
+        "Prasugrel (Effient)",
+        "Ticlopidine (Ticlid)",
+        "Ticagrelor (Brilinta)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; aspirin 81-325 mg daily" },
+      "avoid": ["Active bleeding", "Severe hepatic impairment"],
+      "pearls": [
+        "Aspirin first-line for primary prevention; dual therapy for ACS/PCI."
+      ]
+    },
+    {
+      "id": "other_anticoagulants",
+      "name": "Other Anticoagulants",
+      "class": "Other Anticoagulant",
+      "medications": [
+        "Vorapaxar (Zontivity)",
+        "Cilostazol (Pletal)",
+        "Pentoxifylline (Trental)"
+      ],
+      "outpatient": { "maint": "Per agent dosing" },
+      "avoid": ["Active bleeding", "Severe hepatic impairment"],
+      "pearls": [
+        "Vorapaxar for secondary prevention; cilostazol for PAD; pentoxifylline for claudication."
+      ]
+    },
+    {
+      "id": "antiarrhythmics",
+      "name": "Antiarrhythmics",
+      "class": "Antiarrhythmic",
+      "medications": [
+        "Adenosine (Adenocard)",
+        "Amiodarone (Cordarone, Pacerone)",
+        "Digoxin (Lanoxin, Digitek)",
+        "Dronedarone (Multaq)",
+        "Flecainide (Tambocor)",
+        "Mexiletine (Mexitil)",
+        "Propafenone (Rythmol, Rythmol SR)",
+        "Sotalol (Betapace, Betapace AF)",
+        "Tikosyn (Dofetilide)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; monitor ECG/QT" },
+      "avoid": ["Long QT syndrome", "Severe renal/hepatic impairment"],
+      "pearls": [
+        "Class-specific indications; monitor for proarrhythmia; many drug interactions."
+      ]
+    },
+    {
+      "id": "nitrates",
+      "name": "Nitrates",
+      "class": "Nitrate",
+      "medications": {
+        "Isosorbide Dinitrate": [
+          "Isordil (Immediate release)",
+          "Dilatrate SR (Extended release)"
+        ],
+        "Isosorbide Mononitrate": [
+          "ISMO/Monoket (Immediate release)",
+          "Imdur (Sustained release)"
+        ],
+        "Nitroglycerin": [
+          "Nitroglycerin Ointment (Nitro-BID)",
+          "Nitroglycerin Spray (Nitrolingual, NitroMist)",
+          "Nitroglycerin Sublingual (Nitrostat, NitroQuick)",
+          "Nitroglycerin Transdermal (Minitran, Nitro-Dur)"
+        ]
+      },
+      "outpatient": {
+        "maint": "Per formulation; apply patch 12-14 hrs/day with 12 hr break"
+      },
+      "avoid": ["Severe hypotension", "Recent PDE-5 inhibitor use"],
+      "pearls": [
+        "For angina; tolerance develops with continuous exposure; headache common."
+      ]
+    },
+    {
+      "id": "antiangina_other",
+      "name": "Other Anti-Angina Agents",
+      "class": "Anti-Angina",
+      "medications": ["Ranolazine (Ranexa)"],
+      "outpatient": { "maint": "500-1000 mg BID" },
+      "avoid": ["QT prolongation", "Severe hepatic impairment"],
+      "pearls": [
+        "For chronic angina; prolongs QT interval; use with other antianginals."
+      ]
+    },
+    {
+      "id": "bile_acid_sequestrants",
+      "name": "Bile Acid Sequestrants",
+      "class": "Bile Acid Sequestrant",
+      "medications": [
+        "Cholestyramine (Questran, Questran Light)",
+        "Colesevelam (Welchol)",
+        "Colestipol (Colestid)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; take with meals" },
+      "avoid": ["Complete biliary obstruction", "Severe constipation"],
+      "pearls": [
+        "Lower LDL; may increase triglycerides; take with other lipid-lowering agents."
+      ]
+    },
+    {
+      "id": "epa_omega3",
+      "name": "EPA/Omega-3 Fatty Acids",
+      "class": "Omega-3",
+      "medications": [
+        "Vascepa (Icosapent ethyl)",
+        "Lovaza (Omega-3 Fatty Acid)"
+      ],
+      "outpatient": { "maint": "Per agent dosing" },
+      "avoid": ["Fish allergy", "Active bleeding"],
+      "pearls": [
+        "Lower triglycerides; Vascepa reduces CV events in high-risk patients."
+      ]
+    },
+    {
+      "id": "statins",
+      "name": "Statins (HMG-CoA Reductase Inhibitors)",
+      "class": "Statin",
+      "medications": [
+        "Atorvastatin (Lipitor)",
+        "Fluvastatin (Lescol, Lescol XL)",
+        "Lovastatin (Mevacor, Altoprev)",
+        "Pitavastatin (Livalo)",
+        "Pravastatin (Pravachol)",
+        "Rosuvastatin (Crestor)",
+        "Simvastatin (Zocor)"
+      ],
+      "outpatient": { "maint": "Start low dose, titrate to LDL goal" },
+      "avoid": ["Active liver disease", "Pregnancy"],
+      "pearls": [
+        "First-line for dyslipidemia; monitor LFTs; muscle toxicity rare but serious."
+      ]
+    },
+    {
+      "id": "pcsk9_inhibitors",
+      "name": "PCSK9 Inhibitors",
+      "class": "PCSK9 Inhibitor",
+      "medications": ["Praluent (Alirocumab)", "Repatha (Evolocumab)"],
+      "outpatient": { "maint": "Per agent dosing; subcutaneous injection" },
+      "avoid": ["Severe renal impairment", "Pregnancy"],
+      "pearls": [
+        "For severe hypercholesterolemia; very effective LDL reduction; expensive."
+      ]
+    },
+    {
+      "id": "fibrates",
+      "name": "Fibrates",
+      "class": "Fibrate",
+      "medications": [
+        "Fenofibrate (Tricor, Triglide, Antara, Lipofen)",
+        "Fenofibric Acid (Trilipix, Fibricor)",
+        "Gemfibrozil (Lopid)"
+      ],
+      "outpatient": { "maint": "Per agent dosing; take with food" },
+      "avoid": ["Severe renal/hepatic impairment", "Gallbladder disease"],
+      "pearls": ["Lower triglycerides; may increase LDL; monitor LFTs and CK."]
+    },
+    {
+      "id": "niacin",
+      "name": "Niacin",
+      "class": "Niacin",
+      "medications": ["Niacin (Vitamin B3, Niaspan, SloNiacin)"],
+      "outpatient": { "maint": "500-2000 mg daily; titrate slowly" },
+      "avoid": ["Active liver disease", "Gout", "Peptic ulcer disease"],
+      "pearls": ["Lowers LDL and triglycerides; flushing common; monitor LFTs."]
+    },
+    {
+      "id": "acl_inhibitors",
+      "name": "ACL Inhibitors",
+      "class": "ACL Inhibitor",
+      "medications": [
+        "Nexletol (Bempedoic acid)",
+        "Nexlizet (Bempedoic acid/Ezetimibe)"
+      ],
+      "outpatient": { "maint": "Per agent dosing" },
+      "avoid": ["Severe renal impairment", "Pregnancy"],
+      "pearls": [
+        "For LDL lowering; oral alternative to injectable PCSK9 inhibitors."
+      ]
+    },
+    {
+      "id": "lipid_combinations",
+      "name": "Lipid-Lowering Combinations",
+      "class": "Lipid Combination",
+      "medications": ["Advicor (Lovastatin/Niacin)"],
+      "outpatient": { "maint": "Per combination dosing" },
+      "avoid": ["Severe hepatic impairment", "Gout"],
+      "pearls": [
+        "Convenient combinations; monitor LFTs and side effects of components."
+      ]
+    }
+  ]
+}

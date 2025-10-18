@@ -1,0 +1,144 @@
+{
+  "diagnoses": [
+    {
+      "id": "dcm",
+      "name": "Dilated Cardiomyopathy (DCM)",
+      "category": ["Cardiomyopathy"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Progressive dyspnea",
+          "Fatigue",
+          "Orthopnea",
+          "PND",
+          "Edema"
+        ],
+        "signs_any": [
+          "S3 gallop",
+          "Displaced apical impulse",
+          "Signs of HF (edema, JVD, rales)"
+        ]
+      },
+      "initial_tests": [
+        "Echo (dilated LV, reduced EF, global hypokinesis)",
+        "ECG (non-specific changes, arrhythmias, conduction disease)",
+        "CXR (cardiomegaly, pulmonary congestion)",
+        "Labs (BNP, troponin, TSH, iron studies, viral/autoimmune workup as indicated)",
+        "Consider cardiac MRI for fibrosis/infiltrative disease"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "Guideline-directed HF therapy (ARNI/ACEi/ARB, β-blocker, MRA, SGLT2i)",
+          "Diuretics for volume overload",
+          "ICD for EF ≤35% after 3 mo optimal therapy",
+          "CRT if EF ≤35% with LBBB and QRS ≥150 ms"
+        ]
+      },
+      "follow_up": [
+        "Serial echo to monitor EF",
+        "Monitor for arrhythmias and progression"
+      ],
+      "discharge": {
+        "instructions": [
+          "Adherence to GDMT regimen",
+          "Daily weight, low-sodium diet",
+          "Call for rapid weight gain, worsening dyspnea/edema"
+        ],
+        "follow_up": ["Cardiology/HF clinic follow-up"]
+      }
+    },
+    {
+      "id": "hcm",
+      "name": "Hypertrophic Cardiomyopathy (HCM)",
+      "category": ["Cardiomyopathy"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Dyspnea",
+          "Chest pain",
+          "Palpitations",
+          "Syncope, esp. exertional"
+        ],
+        "signs_any": [
+          "Harsh systolic murmur at LSB/apex, ↑ with Valsalva, ↓ with squatting",
+          "S4 gallop",
+          "Family history of sudden death"
+        ]
+      },
+      "initial_tests": [
+        "Echo (asymmetric septal hypertrophy, systolic anterior motion of mitral valve, dynamic LVOT gradient)",
+        "ECG (LVH, repolarization abnormalities)",
+        "Holter/event monitor (arrhythmias)",
+        "Cardiac MRI for morphology/fibrosis",
+        "Genetic testing in selected patients"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "β-blockers (first-line) or non-DHP CCBs (verapamil, diltiazem)",
+          "Avoid dehydration, excessive exertion, vasodilators, diuretics (↓ preload)",
+          "ICD if prior cardiac arrest, sustained VT, or high-risk features"
+        ],
+        "advanced": [
+          "Septal reduction (surgical myectomy or alcohol ablation) if refractory symptoms with gradient",
+          "Transplant if end-stage HF"
+        ]
+      },
+      "contraindications": {
+        "vasodilators": [
+          "Avoid nitrates, ACEi/ARB, diuretics in obstructive HCM — worsen gradient"
+        ]
+      },
+      "follow_up": [
+        "Annual echo if symptomatic or every 1–2y if stable",
+        "Family screening with echo/ECG"
+      ],
+      "discharge": {
+        "instructions": [
+          "Avoid strenuous exertion/competitive sports",
+          "Adherence to β-blocker/CCB",
+          "Seek urgent care if syncope/palpitations"
+        ],
+        "follow_up": ["Cardiology/HCM specialist follow-up"]
+      }
+    },
+    {
+      "id": "rcm",
+      "name": "Restrictive Cardiomyopathy (RCM)",
+      "category": ["Cardiomyopathy"],
+      "clinical_triggers": {
+        "symptoms_any": ["Dyspnea", "Fatigue", "Edema", "Ascites"],
+        "signs_any": [
+          "JVD with prominent y descent",
+          "Right > left HF signs",
+          "S4 common unless AF"
+        ]
+      },
+      "initial_tests": [
+        "Echo (normal LV size, biatrial enlargement, impaired diastolic filling, normal/small LV cavity)",
+        "Cardiac MRI (fibrosis, infiltrative disease)",
+        "ECG (low voltage, arrhythmias)",
+        "BNP, iron studies, SPEP/UPEP (amyloidosis), genetic testing if indicated",
+        "Endomyocardial biopsy in select cases"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "Treat underlying cause (amyloidosis, hemochromatosis, sarcoidosis)",
+          "Diuretics for volume management (cautious)",
+          "Rate/rhythm control for AF, anticoagulation",
+          "Advanced therapies (transplant) if refractory"
+        ]
+      },
+      "follow_up": [
+        "Monitor volume status, renal function",
+        "Serial imaging for progression"
+      ],
+      "discharge": {
+        "instructions": [
+          "Adherence to therapy, report edema/ascites",
+          "Genetic counseling for inherited forms"
+        ],
+        "follow_up": [
+          "Cardiology follow-up; specialty clinics if infiltrative disease"
+        ]
+      }
+    }
+  ]
+}

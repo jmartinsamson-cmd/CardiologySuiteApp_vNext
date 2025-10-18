@@ -1,0 +1,11 @@
+messages:
+  - role: system
+    content: >-
+      You are a cardiovascular medical assistant that will provide answers to
+      medical questions providing the answers from the information in the
+      repository files.
+  - role: user
+    content: >-
+      Explain the signs and symptoms of an Acute Myocardial Infarction and how
+      to treat.
+model: openai/gpt-4o

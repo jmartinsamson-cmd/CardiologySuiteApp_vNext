@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <title>HTML Inspector</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .result {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 10px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔍 HTML Content Inspector</h1>
+    <div id="results"></div>
+
+    <script>
+      fetch("./")
+        .then((response) => response.text())
+        .then((html) => {
+          const results = document.getElementById("results");
+
+          // Check if it contains expected elements
+          const checks = [
+            {
+              name: "Contains DOCTYPE",
+              test: html.includes("<!doctype html>"),
+            },
+            {
+              name: "Contains banner element",
+              test: html.includes('id="banner"'),
+            },
+            {
+              name: "Contains layout element",
+              test: html.includes('id="layout"'),
+            },
+            {
+              name: "Contains dx-rail element",
+              test: html.includes('id="dx-rail"'),
+            },
+            {
+              name: "Contains dx-list class",
+              test: html.includes('class="dx-list"'),
+            },
+            { name: "Contains main element", test: html.includes('id="main"') },
+            {
+              name: "Contains app.js script",
+              test: html.includes("src/core/app.js"),
+            },
+            { name: "HTML length > 1000 chars", test: html.length > 1000 },
+          ];
+
+          checks.forEach((check) => {
+            const div = document.createElement("div");
+            div.className = "result";
+            div.style.backgroundColor = check.test ? "#d4edda" : "#f8d7da";
+            div.innerHTML = `<strong>${check.test ? "✅" : "❌"} ${check.name}</strong>`;
+            results.appendChild(div);
+          });
+
+          // Show first 500 characters of HTML
+          const htmlPreview = document.createElement("div");
+          htmlPreview.className = "result";
+          htmlPreview.innerHTML = `
+                    <strong>HTML Content Preview (first 500 chars):</strong>
+                    <pre>${html.substring(0, 500)}</pre>
+                    <p>Total length: ${html.length} characters</p>
+                `;
+          results.appendChild(htmlPreview);
+        })
+        .catch((error) => {
+          document.getElementById("results").innerHTML =
+            `<div class="result" style="background: #f8d7da">❌ Error: ${error}</div>`;
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+name: Validate Configuration Files
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "config/features.json"
+      - "scripts/validate-features.js"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "config/features.json"
+      - "scripts/validate-features.js"
+
+jobs:
+  validate-features:
+    name: Validate Feature Flags
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate features.json
+        run: npm run validate:features
+
+      - name: Show feature flag status
+        if: success()
+        run: |
+          echo "✅ Feature flags validated successfully"
+          echo ""
+          echo "Current flags:"
+          cat config/features.json | jq .

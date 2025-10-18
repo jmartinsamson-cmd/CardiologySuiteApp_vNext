@@ -1,0 +1,18 @@
+Chief Complaint: Shortness of breath
+
+HPI:
+65 year old gentleman with CHF (EF 25%), presents with worsening dyspnea on exertion over past week. Reports orthopnea, PND. Compliance with medications good. Weight up 5 lbs.
+
+Exam:
+Vitals - BP 110/68, pulse 76, resp rate 22, temp 98.4, O2 sat 91% RA
+JVP elevated to 12 cm. Crackles bilateral bases. 2+ pitting edema bilateral legs.
+
+Impression:
+Acute on chronic systolic heart failure exacerbation
+
+Recommendations:
+- Furosemide 40mg IV now
+- Daily weights
+- Strict fluid restriction 1.5L/day
+- Uptitrate ACEI as tolerated
+- Consider SGLT2i initiation

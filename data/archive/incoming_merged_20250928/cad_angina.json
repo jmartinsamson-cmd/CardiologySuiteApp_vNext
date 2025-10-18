@@ -1,0 +1,121 @@
+{
+  "diagnoses": [
+    {
+      "id": "stable_angina",
+      "name": "Stable (Chronic) Angina Pectoris",
+      "category": ["Coronary Artery Disease"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Exertional chest pressure or discomfort, relieved by rest or nitroglycerin",
+          "Predictable, transient episodes",
+          "May radiate to arm, neck, jaw"
+        ],
+        "signs_any": [
+          "Often normal exam between episodes",
+          "Possible signs of CAD (bruits, HF signs if advanced)"
+        ]
+      },
+      "initial_tests": [
+        "Resting ECG (often normal, may show old MI or nonspecific changes)",
+        "Exercise treadmill test (first-line if able to exercise)",
+        "Stress imaging (echo or nuclear) if baseline ECG abnormal or unable to exercise",
+        "Coronary CT angiography or invasive coronary angiography for diagnosis/therapy if indicated"
+      ],
+      "treatment": {
+        "antianginal": [
+          "Sublingual nitroglycerin for acute relief",
+          "β-blockers (first-line for prevention)",
+          "Long-acting nitrates or CCBs if β-blocker contraindicated or uncontrolled"
+        ],
+        "secondary_prevention": [
+          "Aspirin (or clopidogrel if ASA intolerant)",
+          "High-intensity statin",
+          "ACEi/ARB if HTN, DM, CKD, LV dysfunction",
+          "Lifestyle: smoking cessation, diet, exercise, weight management"
+        ],
+        "revascularization": [
+          "Consider PCI or CABG for refractory angina or high-risk anatomy"
+        ]
+      },
+      "follow_up": [
+        "Monitor symptom frequency, tolerance to meds",
+        "Regular risk factor modification follow-up"
+      ],
+      "discharge": {
+        "instructions": [
+          "Carry nitroglycerin at all times, use for chest pain episodes",
+          "Call EMS if pain >5 minutes or not relieved by nitroglycerin"
+        ],
+        "follow_up": [
+          "Cardiology follow-up; repeat stress testing if symptoms worsen"
+        ]
+      }
+    },
+    {
+      "id": "variant_angina",
+      "name": "Variant (Prinzmetal) Angina",
+      "category": ["Coronary Artery Disease"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Rest angina, often nocturnal or early morning",
+          "Episodes not clearly related to exertion"
+        ],
+        "signs_any": [
+          "Transient ST elevation during pain episodes",
+          "Often normal exam"
+        ]
+      },
+      "initial_tests": [
+        "Resting ECG during episode (transient ST elevation)",
+        "Coronary angiography (often normal or mild CAD, may show spasm with provocation)"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "CCBs (diltiazem, amlodipine, verapamil)",
+          "Long-acting nitrates"
+        ],
+        "contraindicated": ["Avoid nonselective β-blockers (may worsen spasm)"]
+      },
+      "follow_up": ["Monitor angina episodes, adjust CCB/nitrate therapy"],
+      "discharge": {
+        "instructions": [
+          "Avoid precipitants (cocaine, smoking, cold exposure)",
+          "Adherence to CCB/nitrate therapy"
+        ],
+        "follow_up": ["Cardiology follow-up"]
+      }
+    },
+    {
+      "id": "microvascular_angina",
+      "name": "Microvascular Angina (Cardiac Syndrome X)",
+      "category": ["Coronary Artery Disease"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Angina-like chest pain, often prolonged and not always exertional",
+          "Frequently in women"
+        ],
+        "signs_any": ["Normal or near-normal coronaries on angiography"]
+      },
+      "initial_tests": [
+        "Stress testing (may be positive for ischemia)",
+        "Coronary angiography (normal/mild disease)",
+        "Coronary flow reserve testing (abnormal in microvascular angina)"
+      ],
+      "treatment": {
+        "all_patients_initial": [
+          "Antianginal therapy: β-blockers, CCBs, nitrates (variable efficacy)",
+          "Risk factor modification (HTN, DM, lipids, obesity)",
+          "ACEi/ARB and statins may improve endothelial function"
+        ]
+      },
+      "follow_up": ["Symptom monitoring, risk factor management"],
+      "discharge": {
+        "instructions": [
+          "Adherence to medications for angina and risk factor control",
+          "Seek urgent care for worsening or new typical angina symptoms"
+        ],
+        "follow_up": ["Cardiology follow-up"]
+      }
+    }
+  ]
+}

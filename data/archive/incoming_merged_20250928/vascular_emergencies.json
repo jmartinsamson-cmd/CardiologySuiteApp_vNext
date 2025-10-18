@@ -1,0 +1,80 @@
+{
+  "diagnoses": [
+    {
+      "id": "acute_limb_ischemia",
+      "name": "Acute Limb Ischemia (ALI)",
+      "category": ["Vascular", "Emergency"],
+      "clinical_triggers": {
+        "symptoms_any": ["Sudden limb pain", "Paresthesia", "Paralysis (late)"],
+        "signs_any": [
+          "6 P’s: Pain, Pallor, Pulselessness, Paresthesia, Paralysis, Poikilothermia",
+          "Absent distal pulses"
+        ]
+      },
+      "initial_tests": [
+        "Bedside vascular exam (Doppler)",
+        "CTA runoff (definitive imaging if stable)",
+        "Immediate vascular surgery consult"
+      ],
+      "treatment": {
+        "immediate": [
+          "IV heparin anticoagulation",
+          "Analgesia, limb positioning (dependent)",
+          "Urgent revascularization (surgical embolectomy, bypass, thrombolysis)"
+        ]
+      },
+      "contraindications": {
+        "delay": [
+          "Do not delay revascularization for imaging if limb immediately threatened"
+        ]
+      },
+      "discharge": {
+        "instructions": [
+          "Report recurrent limb pain, numbness, weakness",
+          "Adherence to anticoagulation/antiplatelet therapy"
+        ],
+        "follow_up": ["Vascular surgery follow-up"]
+      }
+    },
+    {
+      "id": "acute_mesenteric_ischemia",
+      "name": "Acute Mesenteric Ischemia (AMI)",
+      "category": ["Vascular", "Emergency"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Severe abdominal pain out of proportion to exam",
+          "Nausea/vomiting",
+          "Diarrhea or occult GI bleeding"
+        ],
+        "signs_any": [
+          "Abdominal tenderness (late peritonitis)",
+          "Bloody stool in advanced cases",
+          "Shock if bowel necrosis"
+        ]
+      },
+      "initial_tests": [
+        "CTA abdomen (diagnostic)",
+        "Lactate, metabolic acidosis labs",
+        "Angiography (diagnosis + therapy in some cases)"
+      ],
+      "treatment": {
+        "immediate": [
+          "Aggressive resuscitation (IV fluids, broad-spectrum antibiotics)",
+          "Systemic anticoagulation (heparin)",
+          "Urgent revascularization (embolectomy, stent, bypass)",
+          "Surgery for peritonitis/necrosis"
+        ]
+      },
+      "contraindications": {
+        "delay": ["Do not delay operative intervention if peritonitis or shock"]
+      },
+      "discharge": {
+        "instructions": [
+          "Adherence to anticoagulation if indicated",
+          "Report recurrent abdominal pain immediately"
+        ],
+        "follow_up": ["Vascular surgery and gastroenterology follow-up"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+Patient states "I've been having chest pain" that started yesterday. She's a 62-year-old female with history of hypertension—currently on amlodipine 5mg daily… Reports pain is 6/10, described as "pressure-like."
+
+Vitals – BP 152/94, pulse 76, RR 18, temp 98.6°F, O₂ sat 96%
+
+Physical exam reveals she's alert and oriented. Heart sounds are normal—no murmurs, rubs, or gallops. Lungs are clear throughout.
+
+Assessment:
+• Atypical chest pain – r/o ACS
+• HTN – suboptimal control
+
+Plan:
+Obtain ECG, troponin levels. Start aspirin 325mg if enzymes elevated. Consider stress testing if enzymes negative. Uptitrate antihypertensive medication.

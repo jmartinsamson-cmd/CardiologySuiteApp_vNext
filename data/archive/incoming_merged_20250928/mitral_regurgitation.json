@@ -1,0 +1,50 @@
+{
+  "id": "mr",
+  "name": "Mitral Regurgitation",
+  "category": ["Valvular"],
+  "clinical_triggers": {
+    "symptoms_any": [
+      "Dyspnea",
+      "Fatigue",
+      "Palpitations",
+      "Acute MR: pulmonary edema, shock"
+    ],
+    "signs_any": [
+      "Holosystolic murmur at apex radiating to axilla",
+      "S3 in chronic severe MR",
+      "Acute severe MR: pulmonary edema, soft/absent murmur"
+    ]
+  },
+  "initial_tests": [
+    "Transthoracic echo (jet severity, LA/LV size, function, mechanism)",
+    "TEE if needed for mechanism/surgical planning",
+    "ECG (AF, LA enlargement)",
+    "CXR (cardiomegaly, pulmonary congestion)"
+  ],
+  "treatment": {
+    "all_patients_initial": [
+      "Treat HTN, AF, and heart failure symptoms",
+      "Afterload reduction (ACEi/ARB, vasodilators) in acute or symptomatic MR if not immediately surgical"
+    ],
+    "definitive": [
+      "Symptomatic severe MR or LVEF ≤60% or LVESD ≥40 mm → mitral surgery (repair preferred over replacement)",
+      "Acute severe MR (papillary rupture, chordal rupture, endocarditis): urgent surgery"
+    ],
+    "device": ["MitraClip (TEER) for selected patients not surgical candidates"]
+  },
+  "contraindications": {
+    "vasodilators": [
+      "Use cautiously in preload-dependent patients with acute MR and hypotension"
+    ]
+  },
+  "follow_up": [
+    "Echo surveillance: mild q3–5y, moderate q1–2y, severe q6–12mo"
+  ],
+  "discharge": {
+    "instructions": [
+      "Report new or worsening dyspnea, edema, or palpitations",
+      "Maintain dental hygiene to reduce endocarditis risk"
+    ],
+    "follow_up": ["Cardiology/valve clinic follow-up per severity"]
+  }
+}

@@ -1,0 +1,47 @@
+name: Size Limit Check
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "src/**/*.js"
+      - "pages/**/*.js"
+      - ".size-limit.json"
+      - "package.json"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "src/**/*.js"
+      - "pages/**/*.js"
+      - ".size-limit.json"
+      - "package.json"
+
+jobs:
+  size-limit:
+    name: Check Bundle Size
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check file sizes
+        run: npm run size
+        env:
+          CI: true
+
+      - name: Post size report
+        if: github.event_name == 'pull_request'
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install

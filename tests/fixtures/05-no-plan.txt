@@ -1,0 +1,15 @@
+Patient: John Doe, MRN: 123456, DOB: 01/15/1960
+
+Reason for Visit: Follow-up after cardiac cath
+
+HPI: 64 yo M s/p PCI to LAD yesterday. Doing well, no chest pain, groin site intact without hematoma.
+
+Physical Exam:
+BP 128/76, HR 68, RR 14, SpO2 98%
+Groin: No bleeding, no bruit, distal pulses intact
+Heart: RRR, no murmurs
+Lungs: Clear
+
+Assessment:
+S/P PCI to LAD - uncomplicated
+Stable CAD

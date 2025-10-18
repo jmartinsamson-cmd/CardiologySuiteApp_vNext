@@ -1,0 +1,116 @@
+{
+  "diagnoses": [
+    {
+      "id": "aaa",
+      "name": "Abdominal Aortic Aneurysm (AAA)",
+      "category": ["Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Often asymptomatic",
+          "Abdominal/back pain",
+          "Pulsatile abdominal mass"
+        ],
+        "signs_any": [
+          "Pulsatile abdominal mass (expansile)",
+          "Tenderness if impending rupture",
+          "Hypotension/shock if rupture"
+        ]
+      },
+      "initial_tests": [
+        "Abdominal ultrasound (screening and surveillance)",
+        "CT angiography (definitive sizing, pre-op planning)"
+      ],
+      "screening": [
+        "Men 65–75 who ever smoked: one-time abdominal US",
+        "Consider in women >65 with smoking/family history"
+      ],
+      "treatment": {
+        "surveillance": [
+          "AAA 3.0–3.9 cm: US q2–3y",
+          "AAA 4.0–4.9 cm: US/CT q6–12mo",
+          "AAA 5.0–5.4 cm: US/CT q3–6mo"
+        ],
+        "repair_indications": [
+          "AAA ≥5.5 cm in men, ≥5.0 cm in women",
+          "Symptomatic AAA (pain/tenderness, emboli)",
+          "Rapid expansion >0.5 cm in 6 mo or >1 cm in 1 yr"
+        ],
+        "repair_options": [
+          "Endovascular aneurysm repair (EVAR) — preferred if suitable anatomy",
+          "Open repair — if unsuitable anatomy or younger/low-risk patients"
+        ]
+      },
+      "contraindications": {
+        "elective_surgery": [
+          "Do not repair small asymptomatic AAAs (<5.0–5.5 cm) unless rapid growth"
+        ]
+      },
+      "follow_up": [
+        "Continue smoking cessation, statin, antiplatelet, BP control"
+      ],
+      "discharge": {
+        "instructions": [
+          "Report sudden back/abdominal pain or syncope (rupture warning)",
+          "Adherence to imaging surveillance schedule"
+        ],
+        "follow_up": ["Vascular surgery follow-up"]
+      }
+    },
+    {
+      "id": "aortic_dissection",
+      "name": "Aortic Dissection",
+      "category": ["Vascular"],
+      "clinical_triggers": {
+        "symptoms_any": [
+          "Sudden severe chest/back pain, tearing/ripping",
+          "Syncope",
+          "Stroke symptoms",
+          "Malperfusion (limb/visceral ischemia)"
+        ],
+        "signs_any": [
+          "BP differential between arms",
+          "Pulse deficit",
+          "New diastolic murmur (AR)",
+          "Shock/tamponade signs if rupture"
+        ]
+      },
+      "initial_tests": [
+        "CT angiography chest/abdomen/pelvis (definitive)",
+        "TEE if unstable",
+        "CXR (widened mediastinum, abnormal aortic contour)",
+        "ECG (exclude MI, often nonspecific)"
+      ],
+      "classification": [
+        "Stanford A: involves ascending aorta (surgical emergency)",
+        "Stanford B: confined to descending (medical unless complications)"
+      ],
+      "treatment": {
+        "initial": [
+          "IV β-blocker (esmolol, labetalol) to HR <60",
+          "Add vasodilator (nicardipine, nitroprusside) for SBP <120 if needed",
+          "Analgesia (opioids)"
+        ],
+        "definitive": [
+          "Type A: emergent surgery",
+          "Type B: medical management unless rupture, malperfusion, aneurysmal expansion — then endovascular stent graft"
+        ]
+      },
+      "contraindications": {
+        "beta_blocker_monotherapy": [
+          "Avoid vasodilator without β-blocker (reflex tachycardia worsens dissection)"
+        ]
+      },
+      "follow_up": [
+        "Strict BP control (β-blocker, ACEi/ARB)",
+        "Serial imaging (CTA/MRA at 1, 3, 6, 12 mo, then annually)"
+      ],
+      "discharge": {
+        "instructions": [
+          "Adherence to lifelong BP control",
+          "Immediate ED evaluation for recurrent chest/back pain or neuro deficits"
+        ],
+        "follow_up": ["Vascular/cardiothoracic follow-up"]
+      }
+    }
+  ]
+}

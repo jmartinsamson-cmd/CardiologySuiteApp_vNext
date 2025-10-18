@@ -1,0 +1,320 @@
+{
+  "guidelines": {
+    "acs": {
+      "title": "Acute Coronary Syndrome (UA/NSTEMI/STEMI)",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "High-intensity statin therapy should be initiated or continued in all patients with ACS unless contraindicated.",
+          "reference": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Dual antiplatelet therapy with aspirin and a P2Y12 inhibitor (clopidogrel, prasugrel, or ticagrelor) is recommended for patients with ACS.",
+          "reference": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "ACE inhibitors (or ARBs if ACE inhibitor intolerant) are recommended for all patients with LVEF ≤40% and for those with hypertension, diabetes, or CKD.",
+          "reference": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Primary PCI is the preferred reperfusion strategy in patients with STEMI when it can be performed within 90 minutes of first medical contact.",
+          "reference": "2023 AHA/ACC Guideline for STEMI"
+        },
+        {
+          "class": "Class I",
+          "text": "An early invasive strategy (within 24 hours) is recommended for patients with UA/NSTEMI who have TIMI risk score ≥3 or other high-risk features.",
+          "reference": "2023 AHA/ACC Guideline for UA/NSTEMI"
+        },
+        {
+          "class": "Class I",
+          "text": "Beta-blocker therapy should be initiated in the first 24 hours for patients with STEMI who do not have contraindications.",
+          "reference": "2023 AHA/ACC Guideline for STEMI"
+        },
+        {
+          "class": "Class I",
+          "text": "Supplemental oxygen should be administered only to patients with hypoxemia (SpO2 <94%).",
+          "reference": "2023 AHA/ACC Guideline for ACS"
+        },
+        {
+          "class": "Class IIa",
+          "text": "It is reasonable to continue P2Y12 inhibitor therapy beyond 12 months in patients with ACS who have tolerated DAPT without bleeding complications.",
+          "reference": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Fibrinolysis is reasonable when PCI is not available within 120 minutes of first medical contact in patients with STEMI.",
+          "reference": "2023 AHA/ACC Guideline for STEMI"
+        },
+        {
+          "class": "Class III",
+          "text": "Routine use of oxygen supplementation in patients with ACS who do not have hypoxemia is not recommended.",
+          "reference": "2023 AHA/ACC Guideline for ACS"
+        }
+      ]
+    },
+    "afib": {
+      "title": "Atrial Fibrillation",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "Oral anticoagulation is recommended for patients with AF and CHA₂DS₂-VASc score ≥2 in men or ≥3 in women, unless contraindicated.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Rate control is reasonable as the initial strategy in the majority of patients with AF.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Direct oral anticoagulants (DOACs) are recommended over warfarin for eligible patients with AF (except those with moderate-to-severe mitral stenosis or mechanical heart valve).",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "For patients with AF lasting >48 hours or of unknown duration, anticoagulation for ≥3 weeks before and ≥4 weeks after cardioversion is recommended.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Transesophageal echocardiography (TEE)-guided cardioversion is an alternative to pre-cardioversion anticoagulation for patients with AF >48 hours.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Beta-blockers or non-dihydropyridine calcium channel blockers (diltiazem, verapamil) are recommended for rate control in patients with AF.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Rhythm control is reasonable in symptomatic patients with AF to improve symptoms and quality of life.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Digoxin can be useful for rate control in patients with AF and heart failure with reduced ejection fraction or hypotension.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Amiodarone can be useful for rhythm control in patients with AF, particularly after cardiac surgery.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        },
+        {
+          "class": "Class III",
+          "text": "Routine anticoagulation is not recommended for patients with AF and CHA₂DS₂-VASc score of 0 in men or 1 in women.",
+          "reference": "2023 ACC/AHA/ACCP/HRS Guideline"
+        }
+      ]
+    },
+    "hfref": {
+      "title": "Heart Failure with Reduced Ejection Fraction",
+      "year": "2024",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "ACE inhibitors (or ARBs or ARNI) are recommended for all patients with HFrEF to reduce morbidity and mortality.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Evidence-based beta-blockers are recommended for all patients with HFrEF to reduce morbidity and mortality.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Mineralocorticoid receptor antagonists (MRAs) are recommended in patients with HFrEF who remain symptomatic despite optimal ACE inhibitor and beta-blocker therapy.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "SGLT2 inhibitors are recommended for patients with HFrEF to reduce hospitalizations and cardiovascular death.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        }
+      ]
+    },
+    "hfpef": {
+      "title": "Heart Failure with Preserved Ejection Fraction",
+      "year": "2024",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "SGLT2 inhibitors can be beneficial to decrease HF hospitalizations in patients with HFpEF.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Management of hypertension, diabetes, and obesity is recommended in patients with HFpEF.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "ARBs can be useful to decrease HF hospitalizations in patients with HFpEF.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        },
+        {
+          "class": "Class IIb",
+          "text": "MRAs may be considered to decrease HF hospitalizations in select patients with HFpEF.",
+          "reference": "2024 AHA/ACC/HFSA Heart Failure Guideline"
+        }
+      ]
+    },
+    "htn": {
+      "title": "Hypertension",
+      "year": "2024",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "Lifestyle modifications are recommended for all patients with elevated BP or hypertension.",
+          "reference": "2024 ACC/AHA Hypertension Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Target BP should be <130/80 mmHg for most adults with confirmed hypertension and known CVD or 10-year ASCVD risk ≥10%.",
+          "reference": "2024 ACC/AHA Hypertension Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "First-line antihypertensive medications include thiazide or thiazide-like diuretics, ACE inhibitors, ARBs, or CCBs.",
+          "reference": "2024 ACC/AHA Hypertension Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Combination therapy with 2 first-line agents of different classes is reasonable as initial therapy for patients with stage 2 hypertension.",
+          "reference": "2024 ACC/AHA Hypertension Guideline"
+        }
+      ]
+    },
+    "vtach": {
+      "title": "Ventricular Tachycardia",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "ICD therapy is recommended for secondary prevention in survivors of VT/VF not due to a reversible cause.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Urgent cardioversion is recommended for sustained VT with hemodynamic compromise.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Catheter ablation is reasonable for recurrent sustained monomorphic VT despite antiarrhythmic drug therapy.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        }
+      ]
+    },
+    "tachycardia": {
+      "title": "Supraventricular Tachycardia",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "Vagal maneuvers should be the initial treatment for stable SVT with regular, narrow QRS complexes.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Adenosine is recommended if vagal maneuvers fail to terminate SVT.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Catheter ablation is reasonable for recurrent SVT that is drug-refractory or when the patient prefers definitive therapy.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        }
+      ]
+    },
+    "bradycardia": {
+      "title": "Bradycardia and Conduction Disorders",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "Permanent pacing is recommended for third-degree AV block at any anatomic level associated with symptoms.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "Permanent pacing is recommended for second-degree Mobitz II AV block.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Permanent pacing is reasonable for asymptomatic third-degree AV block at any anatomic level with escape rate <40 bpm.",
+          "reference": "2023 ACC/AHA/HRS Guideline"
+        }
+      ]
+    },
+    "heart_block": {
+      "title": "Heart Block and Conduction Disorders",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "Permanent pacing is indicated for acquired third-degree AV block with symptoms attributable to bradycardia.",
+          "reference": "2023 ACC/AHA/HRS Pacemaker Guidelines"
+        },
+        {
+          "class": "Class I",
+          "text": "Permanent pacing is indicated for Mobitz type II second-degree AV block regardless of symptoms.",
+          "reference": "2023 ACC/AHA/HRS Pacemaker Guidelines"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Permanent pacing is reasonable for marked first-degree AV block (>300 ms) with left ventricular dysfunction and symptoms.",
+          "reference": "2023 ACC/AHA/HRS Pacemaker Guidelines"
+        }
+      ]
+    },
+    "arrhythmia": {
+      "title": "General Arrhythmia Management",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "All patients with arrhythmias should have a 12-lead ECG and assessment for reversible causes.",
+          "reference": "2023 ACC/AHA/HRS Guidelines"
+        },
+        {
+          "class": "Class I",
+          "text": "Electrolyte abnormalities (particularly potassium and magnesium) should be corrected in patients with arrhythmias.",
+          "reference": "2023 ACC/AHA/HRS Guidelines"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Echocardiography is reasonable for patients with new-onset arrhythmias to assess for structural heart disease.",
+          "reference": "2023 ACC/AHA/HRS Guidelines"
+        }
+      ]
+    },
+    "stable_cad": {
+      "title": "Stable Ischemic Heart Disease",
+      "year": "2023",
+      "recommendations": [
+        {
+          "class": "Class I",
+          "text": "All patients with SIHD should receive guideline-directed medical therapy including antiplatelet therapy, ACE inhibitor/ARB, beta-blocker, and statin.",
+          "reference": "2023 AHA/ACC/ACCP Stable CAD Guideline"
+        },
+        {
+          "class": "Class I",
+          "text": "High-intensity statin therapy is recommended for all patients with SIHD unless contraindicated.",
+          "reference": "2023 AHA/ACC/ACCP Stable CAD Guideline"
+        },
+        {
+          "class": "Class IIa",
+          "text": "Cardiac catheterization is reasonable for patients with SIHD who have unacceptable angina despite GDMT.",
+          "reference": "2023 AHA/ACC/ACCP Stable CAD Guideline"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Core App",
+    "path": "src/core/app.js",
+    "limit": "25 KB"
+  },
+  {
+    "name": "Template Renderer",
+    "path": "src/parsers/templateRenderer.js",
+    "limit": "115 KB"
+  },
+  {
+    "name": "Note Parser",
+    "path": "src/parsers/noteParser.js",
+    "limit": "25 KB"
+  },
+  {
+    "name": "Full Note Parser",
+    "path": "src/parsers/noteParser_full.js",
+    "limit": "20 KB"
+  },
+  {
+    "name": "Parser Helpers",
+    "path": "src/utils/parserHelpers.js",
+    "limit": "15 KB"
+  },
+  {
+    "name": "Entity Extraction",
+    "path": "src/parsers/entityExtraction.js",
+    "limit": "22 KB"
+  },
+  {
+    "name": "Guidelines",
+    "path": "src/guidelines/guidelines.js",
+    "limit": "28 KB"
+  },
+  {
+    "name": "Meds Page (lazy loaded)",
+    "path": "pages/meds.js",
+    "limit": "8 KB"
+  },
+  {
+    "name": "Total Initial JS (Critical Path)",
+    "path": [
+      "src/core/app.js",
+      "src/parsers/templateRenderer.js",
+      "src/parsers/noteParser.js",
+      "src/parsers/noteParser_full.js",
+      "src/utils/parserHelpers.js"
+    ],
+    "limit": "200 KB"
+  }
+]

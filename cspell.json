@@ -1,0 +1,39 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "dictionaries": ["medical-terms", "cardiology-suite-custom"],
+  "dictionaryDefinitions": [
+    {
+      "name": "cardiology-suite-custom",
+      "path": "./cspell-cardiology-dict.txt",
+      "description": "Custom Cardiology Suite Medical Dictionary"
+    }
+  ],
+  "ignorePaths": [
+    "node_modules",
+    ".git",
+    "*.min.js",
+    "*.min.css",
+    "dist",
+    "build",
+    "backups",
+    "*.lock",
+    "package-lock.json"
+  ],
+  "enabledLanguageIds": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "css",
+    "scss",
+    "markdown",
+    "json",
+    "jsonc"
+  ],
+  "allowCompoundWords": true,
+  "minWordLength": 3,
+  "maxNumberOfProblems": 100,
+  "numSuggestions": 8
+}

@@ -1,0 +1,130 @@
+name: Quality Gates
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Find unused code
+        id: unused
+        run: |
+          npm run find:unused || true
+          if [ -f .knip/unused-report.md ]; then
+            mkdir -p docs
+            cp .knip/unused-report.md docs/unused-report.md || true
+          fi
+        continue-on-error: true
+
+      - name: Validate data files
+        run: npm run validate:data
+
+      - name: Type check
+        run: npm run type-check
+        continue-on-error: false
+
+      - name: Upload unused code report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unused-code-report
+          path: docs/unused-report.md
+          retention-days: 30
+
+      - name: Upload data validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-validation-report
+          path: data/
+          retention-days: 7
+
+      - name: Comment on PR with quality summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let comment = '## 🔍 Quality Gates Report\\n\\n';
+
+            // Check if unused report exists
+            if (fs.existsSync('docs/unused-report.md')) {
+              comment += '📊 **Unused Code Analysis**: Report available in artifacts\\n';
+            } else {
+              comment += '📊 **Unused Code Analysis**: No issues detected\\n';
+            }
+
+            comment += '\\n✅ Quality gates completed. Review artifacts for detailed reports.\\n';
+            comment += '\\n> This is an automated quality check. Results are advisory and do not block the PR.';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  accessibility-tests:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: |
+          npm install -D @playwright/test axe-playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start development server
+        run: |
+          python3 -m http.server 8080 &
+          sleep 3
+
+      - name: Run accessibility tests
+        run: |
+          if [ -f tests/a11y.spec.ts ]; then
+            npx playwright test tests/a11y.spec.ts
+          else
+            echo "Accessibility tests not found - skipping"
+          fi
+        continue-on-error: true
+
+      - name: Upload accessibility report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: test-results/
+          retention-days: 30
