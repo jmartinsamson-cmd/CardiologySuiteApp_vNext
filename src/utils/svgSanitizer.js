@@ -45,7 +45,7 @@ export function sanitizeSVGViewBox(svg) {
   }
 
   // Check if viewBox contains invalid characters (%, non-numeric values except whitespace, dot, and minus)
-  const hasInvalidChars = /[^0-9\s.\-]/.test(viewBox);
+    const hasInvalidChars = /[^0-9\s.-]/.test(viewBox);
 
   if (!hasInvalidChars) {
     // Mark as sanitized even if valid (so we don't check again)

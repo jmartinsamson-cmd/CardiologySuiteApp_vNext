@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global requestAnimationFrame, requestIdleCallback */
+/* global requestIdleCallback */
 /*
   templateRenderer.js - Clinical Note Template Renderer
   ====================================================

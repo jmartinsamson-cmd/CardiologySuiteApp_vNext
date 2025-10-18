@@ -1,5 +1,4 @@
 /* eslint-env browser */
-/* global requestAnimationFrame */
 // ============================================================================
 // PARSER CHUNKER - Breaks large note parsing into smaller chunks
 // ============================================================================

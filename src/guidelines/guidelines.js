@@ -3,7 +3,6 @@
  * @fileoverview Clinical guidelines and teaching functionality
  * @author Cardiology Suite
  */
-/* global MutationObserver */
 /* eslint-env browser */
 import {
   initDiagnosisSanitizer,

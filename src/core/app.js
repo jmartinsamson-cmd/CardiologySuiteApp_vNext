@@ -927,7 +927,9 @@ async function initializeLabValues() {
       ) {
         try {
           guidelinesModule.unmountGuidelines(guidelinesRoot);
-        } catch {}
+          } catch {
+            // Ignore unmount errors
+          }
       }
       medsRoot.style.display = "none";
       guidelinesRoot.style.display = "none";
