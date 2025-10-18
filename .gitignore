@@ -7,9 +7,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# package-lock.json should NOT be ignored - needed for CI/CD
+# yarn.lock
+# pnpm-lock.yaml
 
 # ================================
 # Vite & Build Outputs
