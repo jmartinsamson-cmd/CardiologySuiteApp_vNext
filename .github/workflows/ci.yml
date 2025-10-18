@@ -39,6 +39,11 @@ jobs:
         env:
           CI: true
 
+      - name: 🏗️ Build app for preview server
+        run: npm run build
+        env:
+          CI: true
+
       # ===================================================================
       # VALIDATION
       # ===================================================================
@@ -84,8 +89,8 @@ jobs:
       # E2E TESTS
       # ===================================================================
 
-      - name: 🎭 Install Playwright browsers
-        run: npx playwright install chromium --with-deps
+      - name: 🎭 Install Playwright (browsers + deps)
+        run: npx playwright install --with-deps
 
       - name: 🧪 Run E2E tests (headless)
         id: e2e

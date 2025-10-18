@@ -29,10 +29,11 @@ export default defineConfig({
 
   // Use Vite preview server (already running or start with npm run preview)
   webServer: {
-    command: `npm run preview`,
+    // build is executed in CI prior to this; here we force preview to our port
+    command: `npm run preview -- --port ${PORT}`,
     url: `${ORIGIN}`, // Playwright waits until this responds
     reuseExistingServer: true,   // Always reuse for faster tests
-    timeout: 20_000,
+    timeout: 60_000,             // give CI more time to boot server
     cwd: "..",                   // relative to repo root
   },
 
