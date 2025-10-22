@@ -15,16 +15,27 @@ import { withBackoff } from "./retry.js";
 import { logAIEvent } from "./telemetry.js";
 
 // --- Configuration & State ---
-let endpoint = (process.env.AZURE_OPENAI_ENDPOINT || process.env.OPENAI_ENDPOINT || '').replace(/\/$/, '');
-const apiKey = process.env.AZURE_OPENAI_API_KEY || process.env.OPENAI_API_KEY || '';
-const apiVersion = process.env.AZURE_OPENAI_API_VERSION || process.env.OPENAI_API_VERSION || '2024-02-15-preview';
+// Lazy initialization to ensure env vars are loaded
+let endpoint = '';
+let apiKey = '';
+let apiVersion = '';
+let configInitialized = false;
 
-// Ensure endpoint is a complete URL
-if (endpoint && !endpoint.startsWith('http')) {
-  endpoint = `https://${endpoint}`;
+function initConfig() {
+  if (configInitialized) return;
+  configInitialized = true;
+  
+  endpoint = (process.env.AZURE_OPENAI_ENDPOINT || process.env.OPENAI_ENDPOINT || '').replace(/\/$/, '');
+  apiKey = process.env.AZURE_OPENAI_API_KEY || process.env.OPENAI_API_KEY || '';
+  apiVersion = process.env.AZURE_OPENAI_API_VERSION || process.env.OPENAI_API_VERSION || '2024-02-15-preview';
+  
+  // Ensure endpoint is a complete URL
+  if (endpoint && !endpoint.startsWith('http')) {
+    endpoint = `https://${endpoint}`;
+  }
+  
+  console.log(`[HPI] Initialized with endpoint: ${endpoint || '(empty)'}, apiKey: ${apiKey ? '***SET***' : '(empty)'}`);
 }
-
-console.log(`[HPI] Initialized with endpoint: ${endpoint || '(empty)'}, apiKey: ${apiKey ? '***SET***' : '(empty)'}`);
 
 /** @type {string} Session cache for working HPI deployment */
 let cachedHpiDeployment = process.env.AZURE_OPENAI_HPI_DEPLOYMENT || '';
@@ -63,6 +74,8 @@ function headers() {
  * @returns {Promise<string>} Deployment name or empty string
  */
 async function resolveHpiDeployment() {
+  initConfig(); // Ensure config is loaded
+  
   // Return cached if we've already found one
   if (cachedHpiDeployment && discoveryAttempted) {
     return cachedHpiDeployment;
@@ -355,6 +368,8 @@ export function getActiveHpiDeployment() {
  * @returns {{ deployment: string, source: 'ai'|'rules'|'unconfigured' }}
  */
 export function getHpiStatus() {
+  initConfig(); // Ensure config is loaded
+  
   if (!endpoint || !apiKey) {
     return { deployment: '', source: 'unconfigured' };
   }
