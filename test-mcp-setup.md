@@ -150,7 +150,7 @@ Should return:
 ┌─────────────────────────────────────────────────────────────┐
 │  5. Azure Search returns relevant documents                 │
 │     - FibFlutterpolicy.pdf (Score: 27.99)                  │
-│     - 2019-ACC-AHA-ACHD.pdf (Score: 25.61)                 │
+│     - 2019-ACC-AHA-Adult-CHD.pdf (Score: 25.61)            │
 │     - afib.pdf (Score: 25.04)                              │
 └────────────────────┬────────────────────────────────────────┘
                      │
