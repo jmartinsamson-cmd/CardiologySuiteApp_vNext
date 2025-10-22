@@ -2,42 +2,50 @@
   {
     "name": "Core App",
     "path": "src/core/app.js",
-    "limit": "25 KB"
+    "limit": "25 KB",
+    "running": false
   },
   {
     "name": "Template Renderer",
     "path": "src/parsers/templateRenderer.js",
-    "limit": "115 KB"
+    "limit": "115 KB",
+    "running": false
   },
   {
     "name": "Note Parser",
     "path": "src/parsers/noteParser.js",
-    "limit": "25 KB"
+    "limit": "25 KB",
+    "running": false
   },
   {
     "name": "Full Note Parser",
     "path": "src/parsers/noteParser_full.js",
-    "limit": "20 KB"
+    "limit": "20 KB",
+    "running": false
   },
   {
     "name": "Parser Helpers",
     "path": "src/utils/parserHelpers.js",
-    "limit": "15 KB"
+    "limit": "15 KB",
+    "running": false
   },
   {
     "name": "Entity Extraction",
     "path": "src/parsers/entityExtraction.js",
-    "limit": "22 KB"
+    "limit": "22 KB",
+    "running": false
   },
   {
     "name": "Guidelines",
     "path": "src/guidelines/guidelines.js",
-    "limit": "28 KB"
+    "limit": "28 KB",
+    "running": false
   },
   {
     "name": "Meds Page (lazy loaded)",
     "path": "pages/meds.js",
-    "limit": "8 KB"
+    "limit": "8 KB",
+    "running": false
   },
   {
     "name": "Total Initial JS (Critical Path)",
@@ -48,6 +56,7 @@
       "src/parsers/noteParser_full.js",
       "src/utils/parserHelpers.js"
     ],
-    "limit": "200 KB"
+    "limit": "200 KB",
+    "running": false
   }
 ]
