@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Q&A - Cardiology Suite</title>
+  <link rel="stylesheet" href="/styles/output.css">
+  <style>
+    .qa-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .source-card {
+      border-left: 3px solid #3b82f6;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      background: #f8fafc;
+    }
+    .confidence-high { color: #059669; }
+    .confidence-medium { color: #d97706; }
+    .confidence-low { color: #dc2626; }
+    .loading {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="qa-container">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">🏥 Medical Q&A</h1>
+      <p class="text-gray-600">Ask cardiology questions answered by indexed clinical guidelines using RAG</p>
+    </header>
+
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <label for="question" class="block text-sm font-medium text-gray-700 mb-2">
+        Your Question
+      </label>
+      <textarea
+        id="question"
+        rows="3"
+        class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        placeholder="e.g., Explain the signs and symptoms of an Acute Myocardial Infarction and how to treat."
+      ></textarea>
+      
+      <div class="mt-4 flex gap-4">
+        <button
+          id="askBtn"
+          class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
+        >
+          Ask Question
+        </button>
+        <button
+          id="clearBtn"
+          class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 transition-colors font-medium"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+
+    <div id="result" class="hidden">
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex justify-between items-start mb-4">
+          <h2 class="text-xl font-bold text-gray-900">Answer</h2>
+          <span id="confidence" class="text-sm font-medium"></span>
+        </div>
+        <div id="answer" class="prose max-w-none text-gray-700"></div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">📚 Sources</h3>
+        <div id="sources"></div>
+        <div class="mt-4 text-sm text-gray-600" id="metadata"></div>
+      </div>
+    </div>
+
+    <div id="examples" class="mt-8 bg-blue-50 rounded-lg p-6">
+      <h3 class="text-lg font-bold text-gray-900 mb-3">💡 Example Questions</h3>
+      <ul class="space-y-2">
+        <li>
+          <button class="example-btn text-left text-blue-600 hover:text-blue-800 hover:underline">
+            Explain the signs and symptoms of an Acute Myocardial Infarction and how to treat.
+          </button>
+        </li>
+        <li>
+          <button class="example-btn text-left text-blue-600 hover:text-blue-800 hover:underline">
+            What are the ACC/AHA guidelines for atrial fibrillation management?
+          </button>
+        </li>
+        <li>
+          <button class="example-btn text-left text-blue-600 hover:text-blue-800 hover:underline">
+            How should I manage a patient with NSTEMI and chronic kidney disease?
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="module">
+    const questionInput = document.getElementById('question');
+    const askBtn = document.getElementById('askBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultDiv = document.getElementById('result');
+    const answerDiv = document.getElementById('answer');
+    const confidenceSpan = document.getElementById('confidence');
+    const sourcesDiv = document.getElementById('sources');
+    const metadataDiv = document.getElementById('metadata');
+
+    const API_BASE = 'http://localhost:8081';
+
+    async function askQuestion(question) {
+      if (!question.trim()) {
+        alert('Please enter a question');
+        return;
+      }
+
+      // Show loading state
+      askBtn.disabled = true;
+      askBtn.innerHTML = '<span class="loading">⏳</span> Searching guidelines...';
+      resultDiv.classList.add('hidden');
+
+      try {
+        const response = await fetch(`${API_BASE}/api/medical-qa`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            question,
+            maxSources: 5,
+            temperature: 0.2,
+          }),
+        });
+
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`HTTP ${response.status}: ${text}`);
+        }
+
+        const data = await response.json();
+
+        if (!data.ok) {
+          throw new Error(data.error || 'API returned error');
+        }
+
+        // Display answer
+        answerDiv.innerHTML = data.answer.replace(/\n/g, '<br>');
+
+        // Display confidence
+        const confidencePct = (data.confidence * 100).toFixed(1);
+        const confidenceClass = 
+          data.confidence >= 0.7 ? 'confidence-high' :
+          data.confidence >= 0.4 ? 'confidence-medium' : 'confidence-low';
+        confidenceSpan.className = `text-sm font-medium ${confidenceClass}`;
+        confidenceSpan.textContent = `Confidence: ${confidencePct}%`;
+
+        // Display sources
+        sourcesDiv.innerHTML = data.sources.map((src, idx) => `
+          <div class="source-card">
+            <div class="font-medium text-gray-900">${idx + 1}. ${src.title}</div>
+            <div class="text-sm text-gray-600 mt-1">
+              Score: ${src.score.toFixed(2)}
+              ${src.url ? ` • <a href="${src.url}" class="text-blue-600 hover:underline" target="_blank">View</a>` : ''}
+            </div>
+          </div>
+        `).join('');
+
+        // Display metadata
+        metadataDiv.textContent = 
+          `Retrieved ${data.retrieval.hitsCount} documents (top score: ${data.retrieval.topScore.toFixed(2)}) • ` +
+          `Response time: ${data.latency}ms`;
+
+        resultDiv.classList.remove('hidden');
+
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+        console.error('Medical Q&A error:', error);
+      } finally {
+        askBtn.disabled = false;
+        askBtn.textContent = 'Ask Question';
+      }
+    }
+
+    // Event listeners
+    askBtn.addEventListener('click', () => {
+      askQuestion(questionInput.value);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      questionInput.value = '';
+      resultDiv.classList.add('hidden');
+    });
+
+    questionInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        askQuestion(questionInput.value);
+      }
+    });
+
+    // Example question buttons
+    document.querySelectorAll('.example-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        questionInput.value = e.target.textContent.trim();
+        askQuestion(questionInput.value);
+      });
+    });
+  </script>
+</body>
+</html>

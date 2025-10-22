@@ -10,6 +10,7 @@ import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 import registerSearchRoutes from "./routes/search.js";
 import registerAnalyzeNoteRoutes from "./routes/analyze-note.js";
 import registerParaphraseHPIRoutes from "./routes/paraphrase-hpi.js";
+import registerMedicalQARoutes from "./routes/medical-qa.js";
 import { initTelemetry } from "./helpers/telemetry.js";
 import { clearCache } from "./helpers/gpt4-analyzer.js";
 import { liveHealthSuccess, liveHealthFailure, liveHealthDuration, metricsText } from "./helpers/metrics.js";
@@ -232,6 +233,9 @@ registerAnalyzeNoteRoutes(app);
 
 // Register paraphrase-hpi route
 registerParaphraseHPIRoutes(app);
+
+// Register medical Q&A route (Prompty pattern with RAG)
+registerMedicalQARoutes(app);
 
 // ---- Cardiology parse (Azure Blob + GPT summary) ----
 // POST /parse  { container: string, blob: string }

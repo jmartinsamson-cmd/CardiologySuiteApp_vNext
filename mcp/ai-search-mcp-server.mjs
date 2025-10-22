@@ -68,6 +68,19 @@ function buildServer() {
           required: ['container', 'blob']
         },
       },
+      {
+        name: 'medicalQA',
+        description: 'Answer medical questions using RAG from indexed cardiology guidelines (Prompty pattern). Returns evidence-based answer with citations.',
+        input_schema: {
+          type: 'object', additionalProperties: false,
+          properties: {
+            question: { type: 'string', description: 'The medical question to answer' },
+            maxSources: { type: 'number', description: 'Maximum guideline sources to retrieve (1-10, default 5)' },
+            temperature: { type: 'number', description: 'GPT temperature 0-1 (default 0.2)' },
+          },
+          required: ['question']
+        },
+      },
     ],
   }));
 
@@ -100,6 +113,21 @@ function buildServer() {
       if (!container || !blob) return { content: [{ type: 'text', text: 'Error: container and blob are required' }] };
       const json = await doFetch('/parse', { method: 'POST', body: JSON.stringify({ container, blob }) });
       return { content: [ { type: 'text', text: `parseAzureNote for ${container}/${blob}` }, { type: 'text', text: JSON.stringify(json, null, 2) } ] };
+    }
+
+    if (name === 'medicalQA') {
+      const question = String(args.question || '').trim();
+      if (!question) return { content: [{ type: 'text', text: 'Error: question is required' }] };
+      const maxSources = args.maxSources !== undefined ? Number(args.maxSources) : undefined;
+      const temperature = args.temperature !== undefined ? Number(args.temperature) : undefined;
+      const body = { question, maxSources, temperature };
+      const json = await doFetch('/api/medical-qa', { method: 'POST', body: JSON.stringify(body) });
+      const confidence = json.confidence ? `${(json.confidence * 100).toFixed(1)}%` : 'N/A';
+      const sourcesText = json.sources?.map((s, i) => `${i + 1}. ${s.title} (score: ${s.score?.toFixed(2)})`).join('\n') || 'No sources';
+      return { content: [
+        { type: 'text', text: `Medical Q&A for: "${question}"\nConfidence: ${confidence}\n\n${json.answer}` },
+        { type: 'text', text: `\n\nSources:\n${sourcesText}` }
+      ] };
     }
 
     return { content: [{ type: 'text', text: `Unknown tool: ${name}` }] };

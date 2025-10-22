@@ -9,3 +9,24 @@ messages:
       Explain the signs and symptoms of an Acute Myocardial Infarction and how
       to treat.
 model: openai/gpt-4o
+
+# IMPLEMENTATION STATUS: ✅ ACTIVE
+# This Prompty template pattern is implemented in:
+# - Backend: /services/ai-search/medical-qa.js (RAG function)
+# - Route: /services/ai-search/routes/medical-qa.js (API endpoints)
+# - Server: /services/ai-search/server.js (registered at startup)
+# - MCP: /mcp/ai-search-mcp-server.mjs (medicalQA tool for Copilot)
+# - Frontend: /pages/medical-qa.html (UI interface)
+# - Tests: /test-medical-qa.js (test suite)
+#
+# API ENDPOINTS:
+# - POST /api/medical-qa        - Answer single question
+# - POST /api/medical-qa/batch  - Answer multiple questions
+#
+# MCP TOOL:
+# - medicalQA(question, maxSources?, temperature?)
+#
+# RAG CONFIGURATION:
+# Uses Azure AI Search index: edu-index-v2 (663 cardiology guideline PDFs)
+# GPT deployment: gpt-4.1-minisamson (Azure OpenAI)
+# STRICT_GROUNDING=1 ensures answers use ONLY indexed documents
