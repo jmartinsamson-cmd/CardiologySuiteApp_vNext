@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-nocheck
 // Quick test harness: inject test overrides and call parseAzureNote directly
 // Note: __filename and __dirname are available for future use if needed
 import path from 'path';

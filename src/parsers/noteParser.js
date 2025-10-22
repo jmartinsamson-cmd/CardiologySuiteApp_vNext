@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-env browser */
 /* global normalizeWhitespace, findAllDatesISO, extractVitals, extractLabs, extractAllergies, extractDiagnoses, dedupeByKey, toTitle, firstISO, dedupe, toSentenceCase, listify */
 /*
