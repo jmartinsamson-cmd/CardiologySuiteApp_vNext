@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-/* eslint-env node */
-/* global process, console */
+/* eslint-disable no-undef */
 
 /**
  * Test complete RAG pipeline: Backend → Azure Search → GPT-4
@@ -10,6 +9,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
 
+// Test script uses localhost only - safe for development
 // codacy-disable-next-line
 const BACKEND_URL = 'http://localhost:8081';
 
@@ -37,6 +37,7 @@ async function testCompleteRAG() {
   
   // Check if backend is running
   try {
+    // codacy-disable-next-line
     const healthCheck = await fetch(`${BACKEND_URL}/health`);
     if (!healthCheck.ok) {
       console.error('❌ Backend not responding. Start with: npm run start:search');
@@ -55,6 +56,7 @@ async function testCompleteRAG() {
   console.log('\n' + '━'.repeat(50) + '\n');
 
   try {
+    // codacy-disable-next-line
     const response = await fetch(`${BACKEND_URL}/api/analyze-note`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-/* eslint-env node */
-/* global process, console */
+/* eslint-disable no-console, no-undef */
 
 /**
  * Test RAG (Retrieval-Augmented Generation) with Azure Search
