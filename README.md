@@ -287,6 +287,22 @@ Protected files include:
 - **Parallel Processing**: Concurrent parser + AI execution (40% faster)
 - **Confidence Scoring**: Quality estimates (0.0-1.0) for AI results
 
+### HPI Model Auto-Discovery
+
+- **Smart Deployment Selection**: Automatically discovers and selects GPT-4o-mini/GPT-4 family chat models from Azure OpenAI
+- **Graceful Fallback**: Falls back to rule-based paraphrasing if Azure OpenAI is unavailable or deployment not found
+- **Session Caching**: Discovered deployment name cached for the session to minimize API calls
+- **Configuration**: Set `AZURE_OPENAI_HPI_DEPLOYMENT` to your preferred deployment name, or leave unset for auto-discovery
+- **Diagnostics**: Health endpoint (`/health`) shows active HPI deployment and source (ai/rules/unconfigured)
+
+**Auto-Discovery Behavior**:
+1. First attempts configured `AZURE_OPENAI_HPI_DEPLOYMENT` environment variable
+2. On 404/failure, queries Azure OpenAI `/deployments` endpoint
+3. Ranks available deployments by preference (gpt-4o-mini, gpt-4o, gpt-4-mini, etc.)
+4. Tests top-ranked deployments with probe request
+5. Caches working deployment for session
+6. Falls back to rule-based paraphrasing if no working deployment found
+
 ### Performance Optimizations
 
 - Parallel execution of parser and AI analysis

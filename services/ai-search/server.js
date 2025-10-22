@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* global process */
+/* global process, console, URL */
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -13,6 +13,7 @@ import registerParaphraseHPIRoutes from "./routes/paraphrase-hpi.js";
 import { initTelemetry } from "./helpers/telemetry.js";
 import { clearCache } from "./helpers/gpt4-analyzer.js";
 import { liveHealthSuccess, liveHealthFailure, liveHealthDuration, metricsText } from "./helpers/metrics.js";
+import { getHpiStatus } from "./helpers/hpi-paraphraser.js";
 
 // Load .env: prefer repository root, fallback to local service folder
 const __filename = fileURLToPath(import.meta.url);
@@ -125,12 +126,17 @@ app.get("/health", async (req, res) => {
   const effectiveMode = qsMode === "live" ? "live" : qsMode === "static" ? "static" : (healthMode === "live" ? "live" : "static");
 
   if (effectiveMode !== "live") {
+    const hpiStatus = getHpiStatus();
     return res.json({
       ok: true,
       mode: "static",
       endpoint,
       index: indexName,
       proxy: summarizeProxyEnv(),
+      hpi: {
+        deployment: hpiStatus.deployment || '(none)',
+        source: hpiStatus.source
+      }
     });
   }
 
@@ -176,10 +182,23 @@ app.get("/health", async (req, res) => {
     }
 
     const ms = Date.now() - t0;
+    const hpiStatus = getHpiStatus();
     // metrics
     liveHealthSuccess.inc();
     liveHealthDuration.observe(ms / 1000);
-    res.json({ ok: true, mode: "live", endpoint, index: indexName, count, sampleId, ms });
+    res.json({ 
+      ok: true, 
+      mode: "live", 
+      endpoint, 
+      index: indexName, 
+      count, 
+      sampleId, 
+      ms,
+      hpi: {
+        deployment: hpiStatus.deployment || '(none)',
+        source: hpiStatus.source
+      }
+    });
   } catch (/** @type {any} */ err) {
     console.error("Health check (live) failed:", err);
     const msg = err && err.message ? err.message : String(err);
