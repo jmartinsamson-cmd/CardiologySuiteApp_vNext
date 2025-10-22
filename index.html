@@ -35,13 +35,23 @@
   <!-- SPA Entry - Single module script loads everything -->
   <script type="module" src="/src/core/app.js"></script>
 
-  <script>
-    // Check if templateRenderer loaded successfully
-    setTimeout(() => {
-      console.log('🔍 Checking templateRenderer:', window.templateRenderer);
-      if (!window.templateRenderer) {
-        console.error('❌ templateRenderer failed to initialize!');
-      } else {
+  <script defer>
+    function whenDefined(getter, cb, timeoutMs = 4000, intervalMs = 50) {
+      const t0 = performance.now();
+      const id = setInterval(() => {
+        const val = getter();
+        if (val) { 
+          clearInterval(id); 
+          cb(val); 
+        } else if (performance.now() - t0 > timeoutMs) { 
+          clearInterval(id); 
+          console.warn('templateRenderer still undefined after timeout'); 
+        }
+      }, intervalMs);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      whenDefined(() => window.templateRenderer || window.TemplateRendererInitialized, (val) => {
         console.log('✅ templateRenderer is ready');
         // Add manual test function for debugging
         window.testParseButton = () => {
@@ -51,8 +61,8 @@
           window.templateRenderer.processNote(text);
         };
         console.log('💡 Type testParseButton() in console to manually trigger parse');
-      }
-    }, 500);
+      });
+    });
   </script>
 </head>
 <body class="theme-dark">

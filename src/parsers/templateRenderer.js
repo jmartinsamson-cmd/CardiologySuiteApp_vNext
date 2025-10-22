@@ -933,16 +933,18 @@ class TemplateRenderer {
       consultHPI += info.symptomDetails + ' ';
     }
 
-    // Vitals if available
-    console.log('🩺 rewriteHPIForConsult: info.vitals =', info.vitals);
-    if (info.vitals) {
+    // Vitals if available - defensive null guards
+    const vitals = info?.vitals || {};
+    console.log('🩺 rewriteHPIForConsult: info.vitals =', info?.vitals);
+    
+    if (vitals && Object.keys(vitals).length > 0) {
       const vitalsParts = [];
-      // Try both uppercase and lowercase keys
-      const BP = info.vitals.BP || info.vitals.bp;
-      const HR = info.vitals.HR || info.vitals.hr;
-      const RR = info.vitals.RR || info.vitals.rr;
-      const temp = info.vitals.temp || info.vitals.temperature;
-      const spo2 = info.vitals.spo2 || info.vitals.SpO2;
+      // Try both uppercase and lowercase keys, plus common aliases
+      const BP = vitals.BP || vitals.bp || vitals.bloodPressure;
+      const HR = vitals.HR || vitals.hr || vitals.pulse;
+      const RR = vitals.RR || vitals.rr || vitals.respiratoryRate;
+      const temp = vitals.temp || vitals.temperature;
+      const spo2 = vitals.spo2 || vitals.SpO2;
       
       if (BP) vitalsParts.push(`BP: ${BP} mmHg`);
       if (HR) vitalsParts.push(`HR: ${HR} bpm`);
@@ -2995,6 +2997,14 @@ class TemplateRenderer {
   // Update UI with current data
   updateUI() {
     console.log('📝 updateUI called');
+    
+    // Check if we have any parsed data to display
+    const ready = this.parsedData && (this.parsedData.sections || this.parsedData.vitals || this.parsedData.labs);
+    if (!ready) {
+      // First load: do nothing quietly (no "Skipping..." logs)
+      return;
+    }
+    
     const output = this.renderTemplate();
     console.log('📝 Generated output length:', output?.length);
     console.log('📝 Output preview:', output?.substring(0, 200));
@@ -3029,15 +3039,14 @@ class TemplateRenderer {
 
   // Populate vitals inputs from parsed data
   populateVitalsUI() {
+    // Silently skip if no data yet (first load)
     if (!this.parsedData || !this.parsedData.sections) {
-      console.warn('📊 Skipping vitals UI: no parsedData.sections');
       return;
     }
 
     // Try to extract vitals from sections
     const vitalsSection = this.normalizedSections.VITALS || this.parsedData.sections.vitals || this.parsedData.sections.VITALS;
     if (!vitalsSection) {
-      console.info('📊 No VITALS section text found in normalized/sections; vitals UI not updated');
       return;
     }
 
@@ -3046,7 +3055,6 @@ class TemplateRenderer {
     if (typeof window.extractVitals === 'function') {
       vitals = window.extractVitals(vitalsSection);
     } else {
-      console.warn('extractVitals helper not available');
       return;
     }
 
@@ -3097,8 +3105,8 @@ class TemplateRenderer {
 
   // Populate labs table from parsed data
   populateLabsUI() {
+    // Silently skip if no data yet (first load)
     if (!this.parsedData || !this.parsedData.sections) {
-      console.warn('🔬 Skipping labs UI: no parsedData.sections');
       return;
     }
 
@@ -3359,7 +3367,7 @@ class TemplateRenderer {
         const settings = JSON.parse(saved);
         this.currentTemplate = settings.currentTemplate || 'cis';
         this.useSmartPhrase = settings.useSmartPhrase || false;
-        this.updateUI();
+        // Don't call updateUI() on init - wait for actual parse
       }
     } catch (error) {
       console.warn('Could not load settings from localStorage:', error);
@@ -3373,13 +3381,23 @@ console.log('🚀 Template renderer script loaded, document ready state:', docum
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     console.log('📝 Initializing template renderer via DOMContentLoaded...');
-    window.templateRenderer = new TemplateRenderer();
-    console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+    try {
+      window.templateRenderer = new TemplateRenderer();
+      window.TemplateRendererInitialized = true;
+      console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+    } catch (e) {
+      console.error('TemplateRenderer init error', e);
+    }
   });
 } else {
   console.log('📝 Initializing template renderer immediately...');
-  window.templateRenderer = new TemplateRenderer();
-  console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+  try {
+    window.templateRenderer = new TemplateRenderer();
+    window.TemplateRendererInitialized = true;
+    console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+  } catch (e) {
+    console.error('TemplateRenderer init error', e);
+  }
 }
 
 // Make available globally
