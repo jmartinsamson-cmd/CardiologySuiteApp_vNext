@@ -12,6 +12,9 @@ on:
       - "config/features.json"
       - "scripts/validate-features.js"
 
+permissions:
+  contents: read
+
 jobs:
   validate-features:
     name: Validate Feature Flags

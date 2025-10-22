@@ -6,6 +6,10 @@ on:
     - cron: "0 9 1-7 * 1" # First Monday of month at 9 AM
   workflow_dispatch: # Allow manual triggering
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   create-guideline-review-issue:
     runs-on: ubuntu-latest

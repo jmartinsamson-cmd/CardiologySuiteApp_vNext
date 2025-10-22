@@ -1,9 +1,20 @@
 // Minimal sanitizer for clinical note input
-// You can expand this to strip dangerous HTML, etc.
+// Properly sanitizes HTML by escaping dangerous characters
+/**
+ * @param {string} input
+ * @returns {string}
+ */
 export function sanitize(input) {
 	if (typeof input !== 'string') return '';
-	// Remove script/style tags and trim whitespace (expand as needed)
-	return input.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-							.replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, '')
-							.trim();
+	
+	// Escape HTML characters to prevent XSS
+	const escaped = input
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#x27;')
+		.replace(/\//g, '&#x2F;');
+	
+	return escaped.trim();
 }

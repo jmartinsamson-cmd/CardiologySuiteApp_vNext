@@ -69,7 +69,8 @@ function loadNotes(files) {
  * @returns {string} - Escaped string
  */
 function escapeBackticks(s) {
-  return s.replace(/`/g, '\\`');
+  // Properly escape backslashes first, then backticks
+  return s.replace(/\\/g, '\\\\').replace(/`/g, '\\`');
 }
 
 /**

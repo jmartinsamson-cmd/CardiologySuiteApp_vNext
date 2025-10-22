@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import process from 'node:process';
 import express from 'express';
 import { fetch } from 'undici';
@@ -177,7 +178,8 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error('[mcp] Fatal error:', err?.stack || err?.message || String(err));
+  // Log error message only, not stack trace to prevent information exposure
+  console.error('[mcp] Fatal error:', err?.message || String(err));
   process.exit(1);
 });
  

@@ -8,10 +8,10 @@ async function validateAndCleanJSON(text) {
 
   // Fix common JSON syntax issues
   cleaned = cleaned
-    // Fix unescaped quotes in strings
+    // Fix unescaped quotes in strings - properly escape backslashes first
     .replace(
       /(?<!\\)"([^"]*?)"/g,
-      (_, content) => `"${content.replace(/"/g, '\\"')}"`,
+      (_, content) => `"${content.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`,
     )
     // Fix trailing commas
     .replace(/,(\s*[}\]])/g, "$1")
@@ -67,6 +67,8 @@ async function validateAndCleanJSON(text) {
 }
 
 // Export function for use in other files
+// eslint-disable-next-line no-undef
 if (typeof module !== "undefined" && module.exports) {
+  // eslint-disable-next-line no-undef
   module.exports = { validateAndCleanJSON };
 }

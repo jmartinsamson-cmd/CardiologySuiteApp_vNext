@@ -164,11 +164,12 @@ Acute inferior STEMI
                 `;
         } catch (error) {
           console.error("Parsing error:", error);
+          // Escape HTML to prevent XSS
+          const escapeHtml = (str) => String(str).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
           resultsDiv.innerHTML = `
                     <div class="error">
                         <h3>❌ Parsing Error</h3>
-                        <p><strong>Error:</strong> ${error.message}</p>
-                        <p><strong>Stack:</strong> ${error.stack}</p>
+                        <p><strong>Error:</strong> ${escapeHtml(error.message)}</p>
                     </div>
                 `;
         }
@@ -205,11 +206,12 @@ Acute inferior STEMI
                 `;
         } catch (error) {
           console.error("Template rendering error:", error);
+          // Escape HTML to prevent XSS
+          const escapeHtml = (str) => String(str).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
           templateDiv.innerHTML = `
                     <div class="error">
                         <h3>❌ Template Rendering Error</h3>
-                        <p><strong>Error:</strong> ${error.message}</p>
-                        <p><strong>Stack:</strong> ${error.stack}</p>
+                        <p><strong>Error:</strong> ${escapeHtml(error.message)}</p>
                     </div>
                 `;
         }
