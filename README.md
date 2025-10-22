@@ -246,6 +246,27 @@ while ((m = PATTERN.exec(text))) { /* Don't do this */ }
 2. Run `npm run validate:data` to check schema compliance
 3. Commit validated JSON—CI will fail on invalid data
 
+#### Layout Protection 🔒
+
+**Critical layout files are protected and validated:**
+
+```bash
+# Validate layout integrity
+npm run validate:layout
+```
+
+Protected files include:
+- `index.html` - CSS loading order
+- `styles/meds.css` - Medications page layout
+- `styles/guidelines.css` - Guidelines page layout
+- `pages/meds.js` - Medications page module
+- `pages/guidelines.js` - Guidelines page module
+
+⚠️ **Before modifying layouts:**
+1. Read `docs/LAYOUT_PROTECTION.md`
+2. Run validation before and after changes
+3. Test all routes: `/`, `#/meds`, `#/guidelines`
+
 ---
 
 ## 🤖 AI Features

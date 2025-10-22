@@ -1,6 +1,14 @@
 /**
  * Medications Page Module
  * Lazy-loaded page for cardiac medications reference
+ * 
+ * ⚠️ LAYOUT LOCKED - DO NOT MODIFY STRUCTURE ⚠️
+ * Last modified: 2025-10-22
+ * This module renders a medications page with:
+ * - Search and filter controls
+ * - Grid layout of medication cards
+ * - Detailed dosing and clinical information
+ * 
  * @module pages/meds
  */
 

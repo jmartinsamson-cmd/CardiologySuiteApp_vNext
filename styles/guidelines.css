@@ -1,4 +1,12 @@
-/* Guidelines Page Specific Styles */
+/**
+ * Guidelines Page Styles
+ * 
+ * ⚠️ LAYOUT LOCKED - DO NOT MODIFY CORE STRUCTURE ⚠️
+ * Last modified: 2025-10-22
+ * This file provides the two-column layout (sidebar + main content),
+ * diagnosis list, search functionality, and tabbed interface
+ * for the guidelines & teaching page (#/guidelines route).
+ */
 
 /* Guidelines Layout */
 #guidelines-layout {

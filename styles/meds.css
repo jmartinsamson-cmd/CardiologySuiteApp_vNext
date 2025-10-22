@@ -1,6 +1,11 @@
 /**
  * Medications Page Styles
  * Scoped to .meds-page to avoid bleeding into other pages
+ * 
+ * ⚠️ LAYOUT LOCKED - DO NOT MODIFY CORE STRUCTURE ⚠️
+ * Last modified: 2025-10-22
+ * This file provides the grid layout, card styling, and search interface
+ * for the medications reference page (#/meds route).
  */
 
 .meds-page {

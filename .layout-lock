@@ -1,0 +1,47 @@
+# Layout Protection - Quick Reference Card
+
+## 🔒 Layout is LOCKED
+
+### Before Any Changes
+
+```bash
+npm run validate:layout
+```
+
+### Protected Files
+- `index.html` (CSS order)
+- `styles/meds.css`
+- `styles/guidelines.css`
+- `pages/meds.js`
+- `pages/guidelines.js`
+
+### After Changes
+
+```bash
+npm run validate:layout
+npm run security:check
+```
+
+### If Validation Fails
+
+1. Check `docs/LAYOUT_PROTECTION.md`
+2. Review recent changes: `git log --oneline -- styles/ pages/`
+3. Hard refresh browser (Ctrl+Shift+R)
+
+### Test Routes
+
+- `/` - Main page
+- `/#/meds` - Medications (grid layout)
+- `/#/guidelines` - Guidelines (sidebar + tabs)
+
+### Quick Validation
+
+✅ All CSS files load?  
+✅ Correct order in index.html?  
+✅ Both pages render correctly?  
+✅ Search functionality works?  
+✅ No console errors?
+
+---
+
+**Full docs:** `docs/LAYOUT_PROTECTION.md`
