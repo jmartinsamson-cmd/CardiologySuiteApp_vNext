@@ -11,8 +11,9 @@
  * @module pages/guidelines
  */
 
-/* global fetch, console */
+/* global fetch, console, window */
 
+/** @type {any} */
 let guidelinesData = null;
 
 /**
@@ -48,10 +49,10 @@ export async function mountGuidelines(rootEl) {
   }
 
   // Load diagnosis data
-  const database = await loadDiagnosisData();
+  const database = /** @type {any} */ (await loadDiagnosisData());
 
   // Get diagnoses list (use global DIAGNOSES if available)
-  const diagnoses = window.DIAGNOSES || [];
+  const diagnoses = /** @type {any} */ (window).DIAGNOSES || [];
 
   // Render page HTML with sidebar
   rootEl.innerHTML = `
@@ -73,7 +74,7 @@ export async function mountGuidelines(rootEl) {
           </div>
         </div>
         <div class="guidelines-dx-list">
-          ${diagnoses.map(dx => `
+          ${diagnoses.map((/** @type {any} */ dx) => `
             <a href="#" class="guidelines-dx-item" data-dx-id="${dx.id}">
               ${dx.name}
             </a>
@@ -125,21 +126,21 @@ export async function mountGuidelines(rootEl) {
 /**
  * Initialize guidelines page interactivity
  * @param {HTMLElement} rootEl - Root element
- * @param {Object} database - Diagnosis database
+ * @param {any} database - Diagnosis database
  */
 function initializeGuidelinesInteractivity(rootEl, database) {
   // Search functionality
-  const searchInput = rootEl.querySelector('#guidelines-search-input');
+  const searchInput = /** @type {HTMLInputElement | null} */ (rootEl.querySelector('#guidelines-search-input'));
   const dxItems = rootEl.querySelectorAll('.guidelines-dx-item');
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      const target = e.target;
+      const target = /** @type {HTMLInputElement} */ (e.target);
       if (!target) return;
       const query = target.value.toLowerCase();
       dxItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(query) ? 'block' : 'none';
+        const text = item.textContent?.toLowerCase() || '';
+        /** @type {HTMLElement} */ (item).style.display = text.includes(query) ? 'block' : 'none';
       });
     });
   }
@@ -148,7 +149,8 @@ function initializeGuidelinesInteractivity(rootEl, database) {
   dxItems.forEach(item => {
     item.addEventListener('click', async (e) => {
       e.preventDefault();
-      const dxId = item.dataset.dxId;
+      const dxId = /** @type {HTMLElement} */ (item).dataset.dxId;
+      if (!dxId) return;
       
       // Update active state
       dxItems.forEach(i => i.classList.remove('active'));
@@ -164,14 +166,14 @@ function initializeGuidelinesInteractivity(rootEl, database) {
  * Display diagnosis details in main content area
  * @param {HTMLElement} rootEl - Root element
  * @param {string} dxId - Diagnosis ID
- * @param {Object} database - Diagnosis database
+ * @param {any} database - Diagnosis database
  */
 async function displayDiagnosisDetails(rootEl, dxId, database) {
   const mainContent = rootEl.querySelector('#guidelines-main');
   if (!mainContent) return;
 
   // Find diagnosis in database
-  const diagnosis = database?.diagnoses?.find(d => d.id === dxId);
+  const diagnosis = /** @type {any} */ (database)?.diagnoses?.find((/** @type {any} */ d) => d.id === dxId);
   
   if (!diagnosis) {
     mainContent.innerHTML = `
@@ -232,7 +234,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
               </h3>
               <div class="content-area">
                 <ul>
-                  ${diagnosis.features.map(f => `<li>${f}</li>`).join('')}
+                  ${diagnosis.features.map((/** @type {any} */ f) => `<li>${f}</li>`).join('')}
                 </ul>
               </div>
             </div>
@@ -250,7 +252,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
               </h3>
               <div class="content-area">
                 <ul>
-                  ${diagnosis.workup.map(w => `<li>${w}</li>`).join('')}
+                  ${diagnosis.workup.map((/** @type {any} */ w) => `<li>${w}</li>`).join('')}
                 </ul>
               </div>
             </div>
@@ -268,7 +270,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
               </h3>
               <div class="content-area">
                 <ul>
-                  ${diagnosis.management.map(m => `<li>${m}</li>`).join('')}
+                  ${diagnosis.management.map((/** @type {any} */ m) => `<li>${m}</li>`).join('')}
                 </ul>
               </div>
             </div>
@@ -286,7 +288,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
               </h3>
               <div class="content-area">
                 <ul>
-                  ${diagnosis.pearls.map(p => `<li class="teaching-point">${p}</li>`).join('')}
+                  ${diagnosis.pearls.map((/** @type {any} */ p) => `<li class="teaching-point">${p}</li>`).join('')}
                 </ul>
               </div>
             </div>
@@ -298,7 +300,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
               <div class="content-area">
                 ${typeof diagnosis.guidelines === 'string' 
                   ? `<p>${diagnosis.guidelines}</p>` 
-                  : diagnosis.guidelines.map(g => `<p class="guideline-recommendation">${g}</p>`).join('')
+                  : diagnosis.guidelines.map((/** @type {any} */ g) => `<p class="guideline-recommendation">${g}</p>`).join('')
                 }
               </div>
             </div>
@@ -314,7 +316,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
+      const targetTab = /** @type {HTMLElement} */ (tab).dataset.tab;
       
       // Update active tab
       tabs.forEach(t => t.classList.remove('active'));
@@ -322,7 +324,7 @@ async function displayDiagnosisDetails(rootEl, dxId, database) {
       
       // Update active panel
       panels.forEach(p => {
-        if (p.dataset.panel === targetTab) {
+        if (/** @type {HTMLElement} */ (p).dataset.panel === targetTab) {
           p.classList.add('active');
         } else {
           p.classList.remove('active');

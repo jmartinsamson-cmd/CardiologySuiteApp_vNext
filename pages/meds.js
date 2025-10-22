@@ -14,6 +14,7 @@
 
 /* global fetch, console */
 
+/** @type {any} */
 let medsData = null;
 
 /**
@@ -43,7 +44,7 @@ async function loadMedicationsData() {
 
 /**
  * Render a single medication card
- * @param {Object} med - Medication object
+ * @param {any} med - Medication object
  * @returns {string} HTML string
  */
 function renderMedicationCard(med) {
@@ -79,7 +80,7 @@ function renderMedicationCard(med) {
   if (med.avoid && med.avoid.length > 0) {
     html += `<div class="med-section med-warnings">`;
     html += `<h4>⚠️ Contraindications/Cautions</h4><ul>`;
-    med.avoid.forEach((item) => {
+    med.avoid.forEach((/** @type {any} */ item) => {
       html += `<li>${item}</li>`;
     });
     html += `</ul></div>`;
@@ -89,7 +90,7 @@ function renderMedicationCard(med) {
   if (med.pearls && med.pearls.length > 0) {
     html += `<div class="med-section med-pearls">`;
     html += `<h4>💡 Clinical Pearls</h4><ul>`;
-    med.pearls.forEach((pearl) => {
+    med.pearls.forEach((/** @type {any} */ pearl) => {
       html += `<li>${pearl}</li>`;
     });
     html += `</ul></div>`;
@@ -104,22 +105,23 @@ function renderMedicationCard(med) {
  * @param {HTMLElement} rootEl - Root container
  */
 function initializeSearch(rootEl) {
-  const searchInput = rootEl.querySelector("#med-search");
-  const filterSelect = rootEl.querySelector("#med-filter");
+  const searchInput = /** @type {HTMLInputElement | null} */ (rootEl.querySelector("#med-search"));
+  const filterSelect = /** @type {HTMLSelectElement | null} */ (rootEl.querySelector("#med-filter"));
   const cards = rootEl.querySelectorAll(".med-card");
 
   function filterCards() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const classFilter = filterSelect.value;
+    const searchTerm = searchInput?.value.toLowerCase() || '';
+    const classFilter = filterSelect?.value || '';
 
     cards.forEach((card) => {
-      const medName = card.querySelector(".med-name").textContent.toLowerCase();
-      const medClass = card.dataset.class;
+      const medNameEl = card.querySelector(".med-name");
+      const medName = medNameEl?.textContent?.toLowerCase() || '';
+      const medClass = /** @type {HTMLElement} */ (card).dataset.class || '';
 
       const matchesSearch = medName.includes(searchTerm);
       const matchesClass = !classFilter || medClass === classFilter;
 
-      card.style.display = matchesSearch && matchesClass ? "block" : "none";
+      /** @type {HTMLElement} */ (card).style.display = matchesSearch && matchesClass ? "block" : "none";
     });
   }
 
@@ -146,10 +148,10 @@ export async function mountMeds(rootEl) {
   }
 
   // Load medications data
-  const data = await loadMedicationsData();
+  const data = /** @type {any} */ (await loadMedicationsData());
 
   // Get unique medication classes for filter
-  const classes = [...new Set(data.medications.map((m) => m.class))].sort();
+  const classes = [...new Set(data.medications.map((/** @type {any} */ m) => m.class))].sort();
 
   // Render page HTML
   let html = `<section class="meds-page">`;
@@ -171,7 +173,7 @@ export async function mountMeds(rootEl) {
 
   // Medication cards
   html += `<div class="meds-grid">`;
-  data.medications.forEach((med) => {
+  data.medications.forEach((/** @type {any} */ med) => {
     html += renderMedicationCard(med);
   });
   html += `</div>`;
