@@ -153,7 +153,9 @@ async function main() {
         await server.connect(transport);
         sessions.set(transport.sessionId, transport);
       } catch (e) {
-        res.status(500).type('text/plain').send(String(e?.message || e));
+        // Send only error message, not full error object to prevent stack trace exposure
+        const errorMessage = e?.message || 'Internal server error';
+        res.status(500).type('text/plain').send(errorMessage);
       }
     });
 
