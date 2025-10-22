@@ -1754,15 +1754,15 @@ function checkFileSize() {
   - ~${sizeKB} KB in memory
   `);
   
-  if (examplesJSON.length > 100000) { // ~100 KB
+  if (examplesJSON.length > 200000) { // ~200 KB
+    console.error(`🚨 Training file is very large (${sizeKB} KB)!
+    This may slow down page loading. Please reduce the number of examples.`);
+  } else if (examplesJSON.length > 100000) { // ~100 KB
     console.warn(`⚠️ Training file is getting large (${sizeKB} KB).
     Consider:
     - Removing old/redundant examples
     - The parser learns quickly - 5-10 diverse examples is usually enough
     - Focus on quality (diverse formats) over quantity`);
-  } else if (examplesJSON.length > 200000) { // ~200 KB
-    console.error(`🚨 Training file is very large (${sizeKB} KB)!
-    This may slow down page loading. Please reduce the number of examples.`);
   }
   
   return { numExamples, sizeKB };
