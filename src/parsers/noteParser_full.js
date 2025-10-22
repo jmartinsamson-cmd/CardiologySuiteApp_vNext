@@ -126,10 +126,13 @@ const MAIN_HEADERS = [
   /^Previous\s*Diagnostic\s*Studies\s*\(with date and results\)\b/i,
   /^Review\s*\/\s*Management\b|^Review\s*and\s*Management\b/i,
   /^Impression\s*and\s*Plan\b/i,
-  /^Impression:\b/i,
-  /^Impression\s*List\s*\/\s*Diagnoses:\b/i,
-  /^Plan:\b/i,
+  // FIX: Make colon optional and don't require end-of-line to capture inline content
+  /^Impression:?\b/i,
+  /^Impression\s*List\s*\/\s*Diagnoses:?\b/i,
+  /^Plan:?\b/i,
   /^Laboratory\s*Results\b/i,
+  // FIX: Add Vitals/Vital Signs header patterns
+  /^Vital\s*Signs?\b|^Vitals?\b|^VS\b/i,
 ];
 
 function segmentSectionsFull(text) {
@@ -172,12 +175,15 @@ function normalizeHeader(h) {
     return "Previous Diagnostic Studies (with date and results)";
   if (/Review\s*\/\s*Management|Review and Management/i.test(t))
     return "Review / Management";
-  if (/^Impression and Plan$/i.test(t)) return "Impression and Plan";
-  if (/^Impression:\s*$/i.test(t)) return "Impression:";
-  if (/Impression List \/ Diagnoses:/i.test(t))
+  // FIX: Remove $ anchor to allow content after header on same line
+  if (/^Impression and Plan\b/i.test(t)) return "Impression and Plan";
+  if (/^Impression:?\b/i.test(t)) return "Impression:";
+  if (/Impression List \/ Diagnoses:?/i.test(t))
     return "Impression List / Diagnoses";
-  if (/^Plan:\s*$/i.test(t)) return "Plan:";
+  if (/^Plan:?\b/i.test(t)) return "Plan:";
   if (/Laboratory Results/i.test(t)) return "Laboratory Results";
+  // FIX: Add normalization for Vitals/Vital Signs headers
+  if (/^Vital\s*Signs?|^Vitals?|^VS\b/i.test(t)) return "Vitals";
   return t;
 }
 

@@ -293,6 +293,22 @@ class TemplateRenderer {
           return;
         }
 
+        // FIX: Special handling for vitals array before checking normalization map
+        if (key === 'vitals' && Array.isArray(value) && value.length > 0) {
+          console.log('🩺 normalizeSections: Processing vitals array');
+          const vitalContent = value.map(item => {
+            if (typeof item === 'object' && item !== null) {
+              return this.formatObject(item);
+            }
+            return String(item);
+          }).join('\n');
+          if (vitalContent && vitalContent.trim()) {
+            normalized['VITALS'] = vitalContent;
+            console.log('✅ Vitals normalized:', vitalContent);
+          }
+          return; // Skip rest of processing for vitals
+        }
+
         const normalizedKey = SECTION_NORMALIZATION[key];
 
         if (normalizedKey) {
@@ -333,12 +349,31 @@ class TemplateRenderer {
         }
       });
 
-      // Generate Assessment & Plan if not present
-      if (!normalized['ASSESSMENT']) {
-        normalized['ASSESSMENT'] = this.generateAssessment(parsedData, normalized);
+      // Generate Assessment & Plan if not present OR if they're too short (likely truncated)
+      // FIX: Check for impressionFreeText and planFreeText from parser
+      if (!normalized['ASSESSMENT'] || normalized['ASSESSMENT'].trim().length < 20) {
+        // Try to use impressionFreeText from parser first
+        if (parsedData.impressionFreeText && parsedData.impressionFreeText.trim()) {
+          console.log('✅ Using impressionFreeText from parser for ASSESSMENT');
+          normalized['ASSESSMENT'] = parsedData.impressionFreeText.trim();
+        } else if (parsedData.diagnoses && Array.isArray(parsedData.diagnoses) && parsedData.diagnoses.length > 0) {
+          console.log('✅ Using diagnoses array for ASSESSMENT');
+          normalized['ASSESSMENT'] = parsedData.diagnoses.join('\n');
+        } else {
+          console.log('🔧 Generating ASSESSMENT from full text analysis');
+          normalized['ASSESSMENT'] = this.generateAssessment(parsedData, normalized);
+        }
       }
-      if (!normalized['PLAN']) {
-        normalized['PLAN'] = this.generatePlan(parsedData, normalized);
+      
+      if (!normalized['PLAN'] || normalized['PLAN'].trim().length < 20) {
+        // Try to use planFreeText from parser first
+        if (parsedData.planFreeText && parsedData.planFreeText.trim()) {
+          console.log('✅ Using planFreeText from parser for PLAN');
+          normalized['PLAN'] = parsedData.planFreeText.trim();
+        } else {
+          console.log('🔧 Generating PLAN from full text analysis');
+          normalized['PLAN'] = this.generatePlan(parsedData, normalized);
+        }
       }
     }
 
@@ -1164,9 +1199,14 @@ class TemplateRenderer {
       sections['Medications'] = medsMatch[1].trim();
     }
 
-    // Extract Vitals from "Vital Signs (Most Recent):" section
-    const vitalsMatch = fullText.match(/Vital Signs \(Most Recent\):\s*(.+?)(?=\nVital Signs \(24h Range\):|Weight:|$)/is);
+    // Extract Vitals from "Vital Signs (Most Recent):" section OR other common formats
+    // FIX: Support multiple vitals header variations
+    const vitalsMatch = fullText.match(/Vital Signs \(Most Recent\):\s*(.+?)(?=\nVital Signs \(24h Range\):|Weight:|Physical Exam|Labs|$)/is) ||
+                        fullText.match(/(?:^|\n)Vitals?:\s*(.+?)(?=\n(?:[A-Z][A-Za-z\s]+:|$))/is) ||
+                        fullText.match(/(?:^|\n)VS:\s*(.+?)(?=\n(?:[A-Z][A-Za-z\s]+:|$))/is) ||
+                        fullText.match(/(?:^|\n)Vital Signs:\s*(.+?)(?=\n(?:[A-Z][A-Za-z\s]+:|$))/is);
     if (vitalsMatch && vitalsMatch[1].trim()) {
+      console.log('✅ Extracted vitals section');
       sections['Vitals'] = vitalsMatch[1].trim();
     }
 
