@@ -1946,64 +1946,29 @@ Net	1487.03 ml
  
 Lines/Drains/Airways 
  
- 	
 Central Venous Catheter Line 	Duration
- 
-
- 	 	 
+  	 
  	 Introducer with Double Lumen 10/13/25 Internal Jugular Right	8 days
  
-
- 
-
- 
- 	
 Drain 	Duration
  
-
- 	 	 
  	     Chest Tube 10/13/25 Left Pericardial 24 Fr.	8 days
  	     Chest Tube 10/13/25 Mediastinal 28 Fr.	8 days
  	     Urethral Catheter 10/17/25 1625	3 days
  
-
- 
-
- 
- 	
 Arterial Line 	Duration
  
-
- 	 	 
  	Arterial Line 10/16/25 2245 Left Radial	4 days
  
-
- 
-
- 
- 	
 Line 	Duration
  
-
- 	 	 
  	     Pacer Wires 10/13/25	8 days
  	     VAD 10/13/25 Left ventricular assist device Impella	8 days
- 
 
- 
-
- 
- 	
 Peripheral Intravenous Line 	Duration
  
-
- 	 	 
  	Peripheral IV Single Lumen 10/13/25 1500 18 G Left Forearm	7 days
  	     Sheath 10/17/25 1549 Right proximal;anterior	3 days
- 
-
- 
-
  
  
 Significant Labs: 
@@ -2156,6 +2121,295 @@ Patient is having SVT episodes with PVC's. Started Esmolol GTT.
 CV surg has explanted Impella to decrease risk of vent arrhythmias.
 Start Primacor for LV dysfunction.
 Will need Levophed if BP decreases. Will follow
+  `,
+
+  `Shortness of breath
+ 
+
+History of Present Illness
+Angela F Celestain is a 63-year-old female with a PMH including chronic systolic heart failure, COPD on home oxygen (4–6 L/min), interstitial lung disease with bronchiectasis, CKD, hypertension, hyperlipidemia, type 2 diabetes mellitus, obesity, prior myocardial infarction, cerebrovascular accident with residual right-sided deficits, and anxiety/depression presented to OLGMC on 10/20/2025 with worsening shortness of breath. She reports the onset of a non-productive cough approximately two weeks ago, for which she was evaluated by Dr. Keys and prescribed a course of steroids and a Z-Pak for presumed walking pneumonia. Despite this, her symptoms gradually worsened, with marked shortness of breath worsening significantly the morning of presentation. She reports using up to three nebulizer treatments daily for relief.
+ 
+The patient recently traveled to Texas and notes symptom progression upon her return. On arrival to the ED, she was on 4 L/min nasal cannula and exhibited diffuse wheezing. She denied fever or chills. She received a prolonged nebulizer treatment and IV Solu-Medrol in the ED, with moderate improvement in symptoms. BNP and troponin were negative. Chest X-ray showed interstitial changes at the bases, consistent with prior imaging, though comparison was limited due to technical issues.
+ 
+Initial labs were notable for RBC 3.80, Hgb 11.7, Hct 36.8, Cr 1.99 (baseline CKD), and glucose 249. UA revealed findings consistent with a possible urinary tract infection: turbid appearance, 4+ glucose, positive leukocyte esterase, 6–10 RBCs, many bacteria, and hyaline casts. Vitals on arrival: T 97.8°F, HR 104, RR 20, BP 100/65, SpO₂ 97% on 4 L nasal cannula. Patient is admitted to hospital medicine services for further management.  
+ 
+
+ROS
+Except as documented, all other systems reviewed and negative 
+ 
+
+Past Medical History
+ 
+
+Past Medical History:
+Diagnosis	Date
+•	Arteriosclerosis of coronary artery	07/12/2022
+•	CHF (congestive heart failure)	07/12/2022
+ 	Formatting of this note might be different from the original. Last echo in 4/2021 with LVEF 75%, severe pulmonary hypertension due to interstitial lung disease  Last Assessment & Plan:  Formatting of this note might be different from the original. Last echo in 4/2021 with LVEF 75%, severe pulmonary hypertension due to interstitial lung disease · Will coordinate with cardiologist with optimization 
+•	Chronic respiratory failure with hypoxia	07/12/2022
+•	COPD, severity to be determined	07/12/2022
+•	Disorder of kidney and ureter	 
+•	Gastroesophageal reflux disease	07/12/2022
+•	Herpes simplex virus (HSV) infection	07/12/2022
+•	Hyperlipidemia	07/12/2022
+•	Hypertension	 
+•	Interstitial lung disease	10/22/2021
+ 	Last Assessment & Plan:  Formatting of this note might be different from the original. On baseline home O2, 3L · Will contact pulmonologist to determine safety for surgery.
+•	Migraine headache	07/12/2022
+•	Myocardial infarction	07/12/2022
+•	NSIP (nonspecific interstitial pneumonia)	 
+•	Obstructive sleep apnea syndrome	07/12/2022
+•	Postmenopausal bleeding	10/22/2021
+ 	Last Assessment & Plan:  Formatting of this note might be different from the original. EMB attempted in clinic today, scant tissue collected. Given risk factors for hyperplasia and malignancy further sampling warranted, however pt poor surgical candidate. Malignancy is high on DDx. Discussed hysteroscopy D&C with spinal anesthesia as to avoid intubation in s/o severe lung disease.  · For long term
+•	Sciatica	07/12/2022
+•	Spondylosis of lumbosacral region	07/12/2022
+•	Status post CVA	09/25/2022
+•	Tension type headache	07/12/2022
+•	Type 2 diabetes mellitus	07/12/2022
+•	Uses continuous positive airway pressure (CPAP) ventilation at home	07/12/2022
+•	Venous insufficiency of lower extremity	07/12/2022
+ 
+ 
+
+Past Surgical History
+ 
+
+Past Surgical History:
+Procedure	Laterality	Date
+•	CESAREAN SECTION	 	 
+•	COLONOSCOPY	 	02/28/2014
+ 	Dr. Steuben
+•	COLONOSCOPY	 	10/18/2017
+ 	Dr. J.P. Herrington
+•	DILATION AND CURETTAGE OF UTERUS	 	 
+•	ESOPHAGOGASTRODUODENOSCOPY	N/A	05/22/2023
+ 	Procedure: EGD;  Surgeon: John Brent Rhodes, MD;  Location: OLGH BRACC ENDOSCOPY;  Service: Gastroenterology;  Laterality: N/A;
+ 
+ 
+
+Social History
+	Denies alcohol, tobacco or illicit drug use. 
+ 
+Screening for Social Drivers for health:
+Patient screened for food insecurity, housing instability, transportation needs, utility difficulties, and interpersonal safety (select all that apply as identified as concern)
+‌Housing or Food
+‌Transportation Needs
+‌Utility Difficulties
+‌Interpersonal safety
+‌None
+  
+ 
+
+Family History
+	Reviewed and negative
+ 
+
+Home Medications
+As documented. 
+
+Prior to Admission medications
+Medication	Sig	Start Date	End Date	Taking?	Authorizing Provider
+albuterol (VENTOLIN HFA) 90 mcg/actuation inhaler	Inhale 2 puffs into the lungs every 6 (six) hours as needed for Wheezing. Rescue	6/16/25	6/16/26	 	Choudhary, Shalini, MD
+azithromycin (Z-PAK) 250 MG tablet	Take 2 tablets by mouth on day 1; Take 1 tablet by mouth on days 2-5	10/2/25	 	 	Darouse, Sarah B, FNP
+blood sugar diagnostic Strp	To check BG 3 times daily, to use with insurance preferred meter	10/31/23	 	 	Choudhary, Shalini, MD
+blood-glucose meter kit	To check BG 3 times daily, to use with insurance preferred meter	10/31/23	 	 	Choudhary, Shalini, MD
+busPIRone (BUSPAR) 15 MG tablet	Take 1 tablet (15 mg total) by mouth 2 (two) times daily.	9/3/25	9/3/26	 	Choudhary, Shalini, MD
+empagliflozin (JARDIANCE) 25 mg tablet	Take 1 tablet (25 mg total) by mouth once daily.	9/8/25	 	 	Choudhary, Shalini, MD
+fluticasone propionate (FLONASE) 50 mcg/actuation nasal spray	1 spray (50 mcg total) by Each Nostril route once daily.	4/24/25	 	 	Choudhary, Shalini, MD
+glimepiride (AMARYL) 1 MG tablet	Take 1 tablet (1 mg total) by mouth 2 (two) times a day.	8/27/25	11/25/25	 	Choudhary, Shalini, MD
+insulin aspart U-100 (NOVOLOG) 100 unit/mL injection	Inject 10 Units into the skin 3 (three) times daily.	6/14/25	6/14/26	 	Nagendran, Manikandan, MD
+lancets Misc	To check BG 3 times daily, to use with insurance preferred meter	10/31/23	 	 	Choudhary, Shalini, MD
+levonorgestreL (MIRENA) 20 mcg/24 hours (7 yrs) 52 mg IUD	52 mg by Intrauterine route.	12/3/21	 	 	Provider, Historical
+linaCLOtide (LINZESS) 72 mcg Cap capsule	Take 1 capsule (72 mcg total) by mouth before breakfast.	4/22/25	 	 	Choudhary, Shalini, MD
+mycophenolate (CELLCEPT) 250 mg Cap	Take 4 capsules (1,000 mg total) by mouth 2 (two) times daily.	4/29/25	 	 	Keys, Timothy C, MD
+pantoprazole (PROTONIX) 40 MG tablet	Take 1 tablet (40 mg total) by mouth Daily.	1/6/25	 	 	Choudhary, Shalini, MD
+potassium chloride (K-TAB) 20 mEq	Take 20 mEq by mouth.	6/19/24	 	 	Provider, Historical
+predniSONE (DELTASONE) 20 MG tablet	Take 1 tablet (20 mg total) by mouth once daily.	9/4/25	7/1/26	 	Keys, Timothy C, MD
+rosuvastatin (CRESTOR) 20 MG tablet	Take 1 tablet (20 mg total) by mouth nightly.	8/19/24	 	 	Choudhary, Shalini, MD
+sacubitriL-valsartan (ENTRESTO) 24-26 mg per tablet	Take 1 tablet by mouth 2 (two) times daily.	 	 	 	Provider, Historical
+spironolactone (ALDACTONE) 25 MG tablet	Take 1 tablet (25 mg total) by mouth once daily.	9/8/25	 	 	Choudhary, Shalini, MD
+torsemide (DEMADEX) 20 MG Tab	Take 1 tablet (20 mg total) by mouth once daily.	6/14/25	9/12/25	 	Nagendran, Manikandan, MD
+ULTICARE PEN NEEDLE 31 gauge x 5/16" Ndle	Inject 1 each into the skin once daily.	5/7/25	 	 	Choudhary, Shalini, MD
+valACYclovir (VALTREX) 500 MG tablet	Take 1 tablet (500 mg total) by mouth 2 (two) times daily.	9/8/25	 	 	Choudhary, Shalini, MD
+verapamiL (CALAN-SR) 120 MG CR tablet	Take 120 mg by mouth once daily.	5/1/23	 	 	Provider, Historical
+vilazodone (VIIBRYD) 20 mg Tab	Take 1 tablet (20 mg total) by mouth once daily.	9/3/25	9/3/26	 	Choudhary, Shalini, MD
+ 
+ 
+
+Physical Exam
+Vital Signs
+Temp:  [97.8 °F (36.6 °C)] 
+Pulse:  [72-104] 
+Resp:  [18-24] 
+BP: (100-106)/(65-81) 
+SpO2:  [97 %-100 %]  
+ 
+PHYSICAL EXAM PER MD
+ 
+
+Labs
+ 
+
+Recent Labs
+ 	10/20/25
+1223
+WBC	9.34
+RBC	3.80*
+HGB	11.7*
+HCT	36.8*
+MCV	96.8*
+MCH	30.8
+MCHC	31.8*
+RDW	15.2
+PLT	191
+ 
+No results for input(s): "PROTIME", "INR", "PTT", "D-DIMER", "FERRITIN", "IRON", "TRANS", "TIBC", "LABIRON", "VITAMINB12", "FOLATE", "LDH", "HAPTOGLOBIN", "RETICCNTAUTO", "RETABS", "PERIPSMEAREV" in the last 72 hours.	 	
+Recent Labs
+ 	10/20/25
+1223
+NA	139
+K	4.0
+CO2	20*
+BUN	13.7
+CREATININE	1.99*
+EGFRNORACEVR	28
+CALCIUM	8.6
+ALBUMIN	3.4
+GLOBULIN	3.3
+ALKPHOS	75
+ALT	50*
+AST	32
+BILITOT	0.8
+BNP	83
+ 
+No results for input(s): "LACTIC" in the last 72 hours.
+No results for input(s): "CPK", "TROPONINI" in the last 72 hours.
+ 
+
+Microbiology Results (last 7 days) 
+ 
+
+ 	Procedure	Component	Value	Units	Date/Time
+ 	Blood Culture [1348113481]	 
+ 	Order Status: Sent	Specimen: Blood	 
+ 	Blood Culture [1348113482]	 
+ 	Order Status: Sent	Specimen: Blood	 
+ 
+
+ 
+ 
+
+Imaging
+Mammo Digital Screening Bilat w/ Tomo (XPD)
+ - MAMMO DIGITAL SCREENING BILAT WITH TOMO (XPD)
+ 
+BILATERAL DIGITAL SCREENING MAMMOGRAM 3D/2D WITH CAD: 9/24/2025
+ 
+HISTORY: Routine screening. Patient has no complaints. No family history of breast cancer.  
+ 
+COMPARISONS: Comparison is made to exams dated:  4/19/2024 mammogram, 3/28/2023 mammogram, 1/15/2021 mammogram, 2/14/2018 mammogram, 1/10/2018 mammogram - Ochsner Lafayette General Breast Center, and 5/31/2012 mammogram - University Hospital.  
+ 
+TECHNIQUE: Digital mammography views were performed with tomosynthesis. Current study was evaluated with a Computer Aided Detection (CAD) system. 
+ 
+BREAST COMPOSITION: There are scattered areas of fibroglandular density.  
+ 
+FINDINGS: 
+No significant masses, calcifications, or other findings are seen in either breast.  
+There has been no significant interval change.
+ 
+IMPRESSION: NEGATIVE
+ 
+There is no mammographic evidence of malignancy. 
+ 
+RECOMMENDATIONS: 
+A routine screening mammogram in one year in the absence of significant clinical findings in the interval is recommended (September 2026).  
+ 
+Megan Daigle M.D.          
+md/penrad:9/25/2025 06:41:39  
+ 
+letter sent: Mammography Normal  
+Mammogram BI-RADS: 1 Negative
+ 
+
+Assessment & Plan
+ASSESSMENT
+Acute on chronic respiratory failure 
+NSIP with suspected exacerbation 
+Acute cystitis with hematuria 
+Congestive heart failure, chronic systolic 
+Type 2 diabetes mellitus without complications 
+Chronic kidney disease
+Hypertension
+Hyperlipidemia
+Obesity
+ 
+History of CVA with right-sided residual deficits, myocardial infarction, COPD on home oxygen (4–6 L/min),
+ 
+PLAN
+Pulmonology has been consulted. Appreciate their assistance and recommendations. 
+	Continue doxycycline for atypical coverage
+	IV steroid
+	Supplemental oxygen p.r.n. to maintain an oxygen saturations greater than or equal to 90%
+	Sputum culture ordered
+	CT scan of chest without contrast when system functioning appropriately
+Blood cultures ordered and pending-follow results
+Accu-Cheks a.c./HS with sliding scale insulin coverage
+Resume home medications as deemed necessary 
+Repeat labs in a.m. 
+Fall precautions
+ 
+VTE Prophylaxis: SCDs
+Patient condition:  Stable
+ 
+I, Nicole White, FNP-C have reviewed and discussed the case with Reshma Bhanushali, MD. Please see the following addendum for further assessment and plan from their attending MD.
+ 
+This note was created with assistance of electronic voice recognition software.  There may be transcription errors as a result of using this technology however minimal; and effort has been made to assure accuracy of the transcription but any obvious areas or admissions should be clarified with the author of the document. 
+ 
+Nicole J White, FNP-C
+Hospital Medicine Team
+10/20/2025
+ 
+ 
+MD Addendum:
+I, Dr. Reshma Bhanushali assumed care of this patient today at 4:00 p.m. 
+For the patient encounter, I performed the substantive portion of the visit, I reviewed the NP Nicole documentation, treatment plan, and medical decision making.  I had face to face time with this patient 
+ 
+A. History:
+Reviewed and noted in detail.  
+Ms. Celestone is a 63-year-old female with systolic heart failure, COPD on home oxygen, interstitial lung disease with bronchiectasis, CKD, hypertension, diabetes mellitus type 2, obesity, prior MI, CVA with residual right-sided deficits and anxiety and depression that presented with worsening shortness a breath and worsening sputum production from her baseline which she describes as yellow green in color.  She recently completed a course of Z-Pak per her pulmonologist however despite this had worsening of her symptoms with marked shortness a breath.  Patient received prolonged nebulizer treatment in the ED and IV Solu-Medrol with some improvement in her symptoms.  BNP and troponin were negative.  Chest x-ray showed interstitial changes at the bases consistent with poor imaging.  Was consistent with possible UTI.  Patient was admitted to hospital medicine service and pulmonology was consulted 
+At the time of my visit she is still boarding in the ED and continues to remain uncomfortable with her shortness a breath 
+ 
+B. Physical exam:
+General: Alert and oriented, no acute distress however does appear uncomfortable 
+Respiratory: Scattered inspiratory crackles bilaterally, slightly increased work of breathing and uncontrolled coughing with oxygen via nasal cannula 
+Musculoskeletal: Generalized weakness
+Neuro: Nonfocal 
+Cardiovascular:  Regular rate and rhythm
+Psych:  Appropriate 
+ 
+C. Medical decision making:
+Acute on chronic hypoxic respiratory failure 
+NSIP with suspected exacerbation 
+Acute cystitis with hematuria 
+Chronic systolic heart failure 
+Diabetes mellitus type 2 
+CKD, hypertension and hyperlipidemia as well as obesity 
+ 
+Patient has been evaluated by pulmonology
+Recommendation to start with doxycycline for atypical coverage, continue 
+-continue with IV steroids 
+Supplemental oxygen to maintain sats over 90% 
+Sputum culture, follow-up on results 
+CT scan of the chest, currently pending since system is down and follow-up on results when available 
+Accu-Cheks AC and HS with sliding scale coverage 
+PRN cough suppressant
+ 
+Discharge Planning and Disposition: No mobility needs. Ambulating well. Good social support system. 
+Anticipated discharge
+ 
+All diagnosis and differential diagnosis have been reviewed; assessment and plan has been documented; I have personally reviewed the labs and test results that are presently available; I have reviewed the patients medication list; I have reviewed the consulting providers response and recommendations. I have reviewed or attempted to review medical records based upon their availability.
+
+All of the patient and family questions have been addressed and answered. Patient's is agreeable to the above stated plan. I will continue to monitor closely and make adjustments to medical management as needed.
   `,
 
 ];
