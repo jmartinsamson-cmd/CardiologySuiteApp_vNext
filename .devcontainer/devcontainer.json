@@ -1,0 +1,77 @@
+{
+  "name": "Cardiology Suite Dev",
+  // Base image with git, zsh, build tools, etc.
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  // Add common CLIs via Features (fast, cached in prebuilds)
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20",
+      "nodeGypDependencies": true
+    }
+  },
+
+  // Automatically install deps the first time the container creates
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+
+  // Re-run installs if package.json changes
+  "updateContentCommand": "bash .devcontainer/scripts/update-content.sh",
+
+  // Helpful port forwards for Vite & your AI Search server
+  "forwardPorts": [5173, 8080, 8081],
+  "portsAttributes": {
+    "5173": { "label": "Vite Dev Server" },
+    "8080": { "label": "App / Preview" },
+    "8081": { "label": "AI Search API" }
+  },
+
+  // Keep it dev-focused inside the container
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  },
+
+  // Mount your local git config & enable persistent pnpm/npm cache inside container
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached",
+    "source=devcontainer-npm-cache,target=/home/node/.npm,type=volume",
+    "source=devcontainer-pnpm-store,target=/home/node/.local/share/pnpm/store,type=volume"
+  ],
+
+  // Recommend / auto-install VS Code extensions inside the container
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "npm.packageManager": "pnpm",
+        "eslint.alwaysShowStatus": true
+      },
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-azurestaticwebapps",
+        "ms-vscode.azurecli",
+        "github.copilot",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+
+  // Optional: surface non-secret defaults (see file below)
+  "containerEnv": {
+    "DOTENV_CONFIG_PATH": "/workspaces/${containerWorkspaceFolderBasename}/.devcontainer/devcontainer.env"
+  },
+
+  // Use non-root so node_modules perms are clean
+  "remoteUser": "node",
+
+  // Optional: speed up Codespaces with a quick marker
+  "onCreateCommand": "echo 'Dev container created'"
+
+  // If you use Docker locally, uncomment to enable docker-in-docker:
+  // "runArgs": ["--init", "--privileged"],
+  // "features": { "ghcr.io/devcontainers/features/docker-in-docker:2": {} }
+}
