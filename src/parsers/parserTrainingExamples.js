@@ -1627,7 +1627,7 @@ function normalizeWhitespace(text) {
     .split('\n')
     .map(line => line.trimEnd()) // Remove trailing spaces from each line
     .join('\n')
-    .replace(/\n{3,}/g, '\n\n') // Replace 3+ blank lines with just 2 (one blank line)
+    .replace(/\n{3,}/g, '\n\n') // Replace 3+ consecutive newlines with 2 (one blank line between content)
     .trim(); // Remove leading/trailing blank lines
 }
 
