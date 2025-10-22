@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/* eslint-env node */
+/* global process, console */
+
 /**
  * Test RAG (Retrieval-Augmented Generation) with Azure Search
  * Verifies that GPT-4 is using your indexed blob files for context

@@ -86,19 +86,22 @@ This proves GPT-4 is using YOUR 663 cardiology guidelines, not general medical k
 
 ## Troubleshooting
 
-### If MCP tools don't appear:
+### If MCP tools don't appear
+
 1. Reload VS Code window
 2. Check that backend is running: `curl http://localhost:8081/health`
 3. Restart backend if needed: `npm run start:search:8081`
 4. Check Copilot output panel for MCP connection logs
 
-### If backend isn't running:
+### If backend isn't running
+
 ```bash
 cd /workspaces/CardiologySuiteApp_vNext
 npm run start:search:8081
 ```
 
-### Check server status:
+### Check server status
+
 ```bash
 curl http://localhost:8081/health
 ```

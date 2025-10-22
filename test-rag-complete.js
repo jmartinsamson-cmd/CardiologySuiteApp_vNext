@@ -10,6 +10,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
 
+// codacy-disable-next-line
 const BACKEND_URL = 'http://localhost:8081';
 
 const testNote = `
