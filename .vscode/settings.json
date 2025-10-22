@@ -129,5 +129,12 @@
     "AZURE_TENANT_ID": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
     "AZURE_SUBSCRIPTION_ID": "6ae15877-96d9-4771-928c-080c755701e4",
     "AZURE_CONFIG_DIR": "/home/codespace/.azure"
+  },
+
+  // Model Context Protocol (MCP) - AI Search integration for Copilot
+  "github.copilot.chat.experimental.contextMode": "enhanced",
+  "github.copilot.advanced": {
+    "debug.overrideEngine": "gpt-4o",
+    "debug.useNodeFetcher": true
   }
 }

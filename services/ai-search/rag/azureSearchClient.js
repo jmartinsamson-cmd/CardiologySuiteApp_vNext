@@ -19,12 +19,19 @@ import 'dotenv/config';
  * @property {number} [score] - Search relevance score
  */
 
-// Azure Search configuration
-const svc = process.env.AZURE_SEARCH_NAME;
-const idx = process.env.AZURE_SEARCH_INDEX || 'cardiology-index';
-const apiKey = process.env.AZURE_SEARCH_ADMIN_KEY;
-const ver = process.env.AZURE_SEARCH_API_VERSION || '2024-07-01';
-const endpoint = svc ? `https://${svc}.search.windows.net` : null;
+/**
+ * Get Azure Search configuration (lazy loading to ensure env vars are available)
+ * @returns {Object} Configuration object
+ */
+function getConfig() {
+  const svc = process.env.AZURE_SEARCH_NAME;
+  const idx = process.env.AZURE_SEARCH_INDEX || 'cardiology-index';
+  const apiKey = process.env.AZURE_SEARCH_ADMIN_KEY;
+  const ver = process.env.AZURE_SEARCH_API_VERSION || '2024-07-01';
+  const endpoint = svc ? `https://${svc}.search.windows.net` : null;
+  
+  return { svc, idx, apiKey, ver, endpoint };
+}
 
 /**
  * Search cardiology guidelines and educational materials
@@ -33,6 +40,8 @@ const endpoint = svc ? `https://${svc}.search.windows.net` : null;
  * @returns {Promise<RetrievedDoc[]>} Retrieved documents with relevance scores
  */
 export async function searchGuidelines(query, top = 5) {
+  const { endpoint, apiKey, idx, ver } = getConfig();
+  
   if (!endpoint || !apiKey) {
     console.warn('[RAG] Azure Search not configured, skipping retrieval');
     return [];
@@ -49,8 +58,8 @@ export async function searchGuidelines(query, top = 5) {
       searchMode: 'any',
       queryType: 'simple',
       top,
-      select: 'id,title,content,sourceId,url,chunkIndex',
-      // Optional: add vectorQueries if you have embeddings configured
+      // Map to actual Azure Blob Storage index fields
+      select: 'id,metadata_storage_name,content,metadata_storage_path,language,keyPhrases',
       vectorQueries: [],
       semanticConfiguration: undefined
     };
@@ -72,14 +81,17 @@ export async function searchGuidelines(query, top = 5) {
     }
 
     const data = await res.json();
+    // Map Azure Blob Storage index fields to expected structure
     const results = (data?.value || []).map((v) => ({
       id: v.id,
-      title: v.title,
-      content: v.content,
-      sourceId: v.sourceId,
-      url: v.url,
-      chunkIndex: v.chunkIndex,
-      score: v['@search.score']
+      title: v.metadata_storage_name || 'Untitled Document', // Use filename as title
+      content: v.content || '',
+      sourceId: v.id, // Use document id as sourceId
+      url: v.metadata_storage_path || '', // Storage path as URL
+      chunkIndex: 0, // Blob storage doesn't chunk by default
+      score: v['@search.score'],
+      language: v.language,
+      keyPhrases: v.keyPhrases || []
     }));
 
     console.log(`[RAG] Retrieved ${results.length} documents for query: "${query.slice(0, 100)}..."`);
@@ -95,6 +107,8 @@ export async function searchGuidelines(query, top = 5) {
  * @returns {Object} Configuration status
  */
 export function getSearchStatus() {
+  const { endpoint, apiKey, idx, ver } = getConfig();
+  
   return {
     configured: !!(endpoint && apiKey),
     endpoint: endpoint || '(not set)',
