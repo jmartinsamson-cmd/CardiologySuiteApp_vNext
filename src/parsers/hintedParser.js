@@ -9,11 +9,13 @@
 /**
  * Parse a clinical note using user-provided hints
  * @param {string} text - Clinical note text
- * @param {object} hints - Format-specific hints (optional, will use learned patterns if not provided)
+ * @param {object|null} [hints=null] - Format-specific hints (optional, will use learned patterns if not provided)
  * @returns {object} Parsed sections with matched aliases info
  */
 function parseWithHints(text, hints = null) {
+  // @ts-ignore - Extending window object for debug flag
   const debug = window.__PARSER_DEBUG__ || false;
+  /** @type {Record<string, any>} */
   const result = {
     vitals: [],
     hpi: '',
@@ -29,7 +31,9 @@ function parseWithHints(text, hints = null) {
 
   // Get patterns: user hints > learned patterns > defaults
   let patterns = hints;
+  // @ts-ignore - Extending window object for getLearnedPatterns
   if (!patterns && typeof window.getLearnedPatterns === 'function') {
+    // @ts-ignore - Extending window object for getLearnedPatterns
     patterns = window.getLearnedPatterns();
     if (patterns && debug) {
       console.log('📚 [HintedParser] Using learned patterns from training examples');
@@ -50,8 +54,11 @@ function parseWithHints(text, hints = null) {
   const lines = text.split(/\n/);
   
   // Track current section
+  /** @type {string|null} */
   let currentSection = null;
+  /** @type {string[]} */
   let currentContent = [];
+  /** @type {Record<string, string>} */
   const sections = {};
 
   // Helper: commit current section
@@ -137,13 +144,15 @@ function parseWithHints(text, hints = null) {
 /**
  * Extract vitals from vitals section text
  * Handles multiple formats: key:value, bullets, inline
+ * @param {string} text - Text containing vitals information
+ * @returns {any[]} Array of vitals objects
  */
 function extractVitalsFromText(text) {
   const vitals = [];
   
   // Use the global extractVitals if available
   if (typeof window.extractVitals === 'function') {
-    return window.extractVitals(text);
+    return window.extractVitals(text, {});
   }
 
   // Fallback: simple extraction
@@ -167,6 +176,8 @@ function extractVitalsFromText(text) {
 
 /**
  * Fallback to generic parser
+ * @param {string} text - Clinical note text
+ * @returns {object} Parsed result from generic parser
  */
 function fallbackToGenericParse(text) {
   // Try parseClinicalNoteFull if available
@@ -213,6 +224,9 @@ function getDefaultPatterns() {
 /**
  * Test function for console debugging
  * Usage: window.__testHintedParse__(note, hints)
+ * @param {string} note - Clinical note text
+ * @param {object|null} [hints=null] - Optional hints
+ * @returns {object|null} Parsed result or null
  */
 function testHintedParse(note, hints = null) {
   if (!note || typeof note !== 'string') {
@@ -223,6 +237,7 @@ function testHintedParse(note, hints = null) {
   console.log('📝 Note length:', note.length);
   console.log('🎯 Hints:', hints);
   
+  /** @type {any} */
   const result = parseWithHints(note, hints);
   
   console.log('\n📊 Results:');
@@ -237,7 +252,9 @@ function testHintedParse(note, hints = null) {
 
 // Expose to window
 if (typeof window !== 'undefined') {
+  // @ts-ignore - Extending window object for browser console access
   window.parseWithHints = parseWithHints;
+  // @ts-ignore - Extending window object for browser console access
   window.__testHintedParse__ = testHintedParse;
 }
 

@@ -1859,13 +1859,15 @@ Vent management per Pulmonary/Critical Care
  * - Trims trailing whitespace from each line
  * - Preserves single blank lines for readability
  * - Removes leading/trailing blank lines
+ * @param {string} text - The text to normalize
+ * @returns {string} - Normalized text
  */
 function normalizeWhitespace(text) {
   if (!text) return text;
   
   return text
     .split('\n')
-    .map(line => line.trimEnd()) // Remove trailing spaces from each line
+    .map((line) => line.trimEnd()) // Remove trailing spaces from each line
     .join('\n')
     .replace(/\n{3,}/g, '\n\n') // Replace 3+ consecutive newlines with 2 (one blank line between content)
     .trim(); // Remove leading/trailing blank lines
@@ -1875,8 +1877,11 @@ function normalizeWhitespace(text) {
  * Auto-detect section headers from training examples
  * Learns patterns by finding lines that look like headers (end with : or are short)
  * Accepts both plain strings and objects with {label, note, enabled} format
+ * @param {Array<string|object>} examples - Training examples (strings or objects)
+ * @returns {object} - Learned patterns with aliases and regex for each category
  */
 function learnPatternsFromExamples(examples) {
+  /** @type {{ vitals: Set<string>, hpi: Set<string>, assessment: Set<string>, plan: Set<string> }} */
   const learned = {
     vitals: new Set(),
     hpi: new Set(),
@@ -1898,8 +1903,10 @@ function learnPatternsFromExamples(examples) {
     if (typeof example === 'string') {
       noteText = normalizeWhitespace(example);
     } else if (example && typeof example === 'object') {
-      if (example.enabled === false) continue; // Skip if explicitly disabled
-      noteText = normalizeWhitespace(example.note);
+      /** @type {any} */
+      const exampleObj = example;
+      if (exampleObj.enabled === false) continue; // Skip if explicitly disabled
+      noteText = normalizeWhitespace(exampleObj.note);
     } else {
       continue;
     }
@@ -1926,7 +1933,9 @@ function learnPatternsFromExamples(examples) {
       // Categorize by keywords
       for (const [category, keywords] of Object.entries(sectionKeywords)) {
         if (keywords.some(kw => cleaned.includes(kw))) {
-          learned[category].add(trimmed);
+          if (category === 'vitals' || category === 'hpi' || category === 'assessment' || category === 'plan') {
+            learned[category].add(trimmed);
+          }
           break;
         }
       }
@@ -1934,6 +1943,7 @@ function learnPatternsFromExamples(examples) {
   }
 
   // Convert Sets to sorted arrays
+  /** @type {Record<string, any>} */
   const patterns = {};
   for (const [category, headers] of Object.entries(learned)) {
     patterns[category] = {
@@ -1947,12 +1957,14 @@ function learnPatternsFromExamples(examples) {
 
 /**
  * Build a regex pattern from header aliases
+ * @param {string[]} aliases - Array of header aliases
+ * @returns {RegExp|null} - Regex pattern or null if no aliases
  */
 function buildRegexFromAliases(aliases) {
   if (!aliases || aliases.length === 0) return null;
   
   // Escape special regex characters and remove trailing colons
-  const escaped = aliases.map(alias => {
+  const escaped = aliases.map((alias) => {
     const cleaned = alias.replace(/:$/, '').trim();
     return cleaned.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   });
@@ -1964,7 +1976,9 @@ function buildRegexFromAliases(aliases) {
 
 /**
  * Get learned patterns (cached)
+ * @returns {object} - Learned patterns
  */
+/** @type {any} */
 let cachedPatterns = null;
 function getLearnedPatterns() {
   if (!cachedPatterns) {
@@ -2010,11 +2024,17 @@ function checkFileSize() {
 
 // Expose to window for global access
 if (typeof window !== 'undefined') {
+  // @ts-ignore - Extending window object for browser console access
   window.TRAINING_EXAMPLES = TRAINING_EXAMPLES;
+  // @ts-ignore - Extending window object for browser console access
   window.getLearnedPatterns = getLearnedPatterns;
+  // @ts-ignore - Extending window object for browser console access
   window.resetLearnedPatterns = resetLearnedPatterns;
+  // @ts-ignore - Extending window object for browser console access
   window.learnPatternsFromExamples = learnPatternsFromExamples;
+  // @ts-ignore - Extending window object for browser console access
   window.normalizeWhitespace = normalizeWhitespace;
+  // @ts-ignore - Extending window object for browser console access
   window.checkParserFileSize = checkFileSize;
   
   // Automatically check size on load
