@@ -99,18 +99,14 @@ export async function processArrayInChunks(array, processor, chunkSize = 50) {
 }
 
 /**
- * Run a task with a time budget
- * If the task exceeds the budget, it will be interrupted
+ * Run task with timeout
  * @param {Function} task - Async task to run
  * @param {number} timeoutMs - Timeout in milliseconds
  * @returns {Promise<{result: any, timedOut: boolean}>}
  */
 export async function runWithTimeout(task, timeoutMs) {
-  let timedOut = false;
-
   const timeoutPromise = new Promise((resolve) => {
     setTimeout(() => {
-      timedOut = true;
       resolve({ result: null, timedOut: true });
     }, timeoutMs);
   });

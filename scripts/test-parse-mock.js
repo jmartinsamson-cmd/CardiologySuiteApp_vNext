@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Quick test harness: inject test overrides and call parseAzureNote directly
+// Note: __filename and __dirname are available for future use if needed
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Ensure ES module resolution works from repo root
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename); // eslint-disable-line no-unused-vars
 
 // Small mock: override blobServiceClient and openai used by azureFileContext
 globalThis.__TEST_OVERRIDES__ = {
@@ -23,7 +24,7 @@ globalThis.__TEST_OVERRIDES__ = {
   openai: {
     chat: {
       completions: {
-        create: async (opts) => {
+        create: async (_opts) => {
           // Return a deterministic summary similar to what the real model would
           return {
             choices: [

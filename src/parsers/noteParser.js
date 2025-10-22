@@ -300,6 +300,8 @@ function summarizeFinding(s) {
   return pe;
 }
 
+// Helper function for normalizing lab flags - kept for potential future use
+// eslint-disable-next-line no-unused-vars
 function flagNormalize(f) {
   if (/h|↑|\*/i.test(f)) return "↑";
   if (/l|↓/i.test(f)) return "↓";

@@ -110,10 +110,10 @@ function parseWithWorker(text, timeout) {
 /**
  * Parse with main thread (async with yielding)
  * @param {string} text - Note text
- * @param {Function} onProgress - Progress callback
+ * @param {Function} _onProgress - Progress callback (reserved for future use)
  * @returns {Promise<Object>}
  */
-async function parseWithMainThread(text, onProgress) {
+async function parseWithMainThread(text, _onProgress) {
   // Use async parser if available
   if (typeof window.parseClinicalNoteFullAsync === 'function') {
     return await window.parseClinicalNoteFullAsync(text);

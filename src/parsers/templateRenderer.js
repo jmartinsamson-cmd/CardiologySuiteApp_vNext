@@ -3048,7 +3048,7 @@ class TemplateRenderer {
     const rows = tbody.querySelectorAll('tr[data-lab-aliases]');
     rows.forEach(row => {
       const aliases = (row.dataset.labAliases || '').toLowerCase().split('|');
-      const labKey = row.dataset.labKey;
+      // labKey available via row.dataset.labKey if needed for future enhancements
 
       // Find matching lab from parsed data
       const matchedLab = labs.find(lab => {
