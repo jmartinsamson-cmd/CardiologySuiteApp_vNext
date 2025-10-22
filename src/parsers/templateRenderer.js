@@ -2300,7 +2300,7 @@ class TemplateRenderer {
       'MEDS': 'N/A - Current medications and dosages to be reconciled and documented.',
       'ALLERGIES': 'N/A - Drug allergies and reactions to be verified and documented.',
       'ROS': this.generateROSFromHPI(cleanHPI),
-      'VITALS': this.extractVitalsFromHPI(cleanHPI) || 'N/A - Vital signs to be documented at time of examination.',
+      'VITALS': this.extractVitalsFromHPI(cleanHPI, this.parsedData?.vitals) || 'N/A - Vital signs to be documented at time of examination.',
       'LABS': this.extractLabsFromHPI(cleanHPI) || 'N/A - Laboratory results pending or to be obtained as clinically indicated.',
       'DIAGNOSTICS': this.extractDiagnosticsFromHPI(cleanHPI),
       'ASSESSMENT': this.generateAssessmentFromHPI(cleanHPI),
@@ -2706,9 +2706,23 @@ class TemplateRenderer {
   }
 
   // Extract vital signs if mentioned in HPI
-  extractVitalsFromHPI(hpi) {
+  extractVitalsFromHPI(hpi, parsedVitals = null) {
     const vitalSigns = [];
 
+    // PRIORITY 1: Use already-parsed vitals from parsedData if available
+    if (parsedVitals && typeof parsedVitals === 'object' && Object.keys(parsedVitals).length > 0) {
+      if (parsedVitals.bp) vitalSigns.push(`BP: ${parsedVitals.bp} mmHg`);
+      if (parsedVitals.hr) vitalSigns.push(`HR: ${parsedVitals.hr} bpm`);
+      if (parsedVitals.rr) vitalSigns.push(`RR: ${parsedVitals.rr}/min`);
+      if (parsedVitals.temp) vitalSigns.push(`Temp: ${parsedVitals.temp}°F`);
+      if (parsedVitals.spo2) vitalSigns.push(`SpO2: ${parsedVitals.spo2}%`);
+      
+      if (vitalSigns.length > 0) {
+        return vitalSigns.join('\n');
+      }
+    }
+
+    // PRIORITY 2: Extract from HPI text if no parsed vitals available
     // Blood pressure - multiple patterns, handles multiple BP readings
     // Note: bpPattern already has 'gi' flags, so it's safe for matchAll
     const bpMatches = [];
