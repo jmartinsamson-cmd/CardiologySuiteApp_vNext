@@ -18,6 +18,7 @@
     "build",
     "backups",
     "*.lock",
+    ".layout-lock",
     "package-lock.json"
   ],
   "enabledLanguageIds": [
