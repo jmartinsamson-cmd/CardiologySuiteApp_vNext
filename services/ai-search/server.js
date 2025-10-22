@@ -39,9 +39,11 @@ const defaultOrigins = [
   "http://localhost:8080",
   "http://localhost:3000",
   "http://localhost:5173",
+  "http://localhost:5500",      // Five Server
   "http://127.0.0.1:8080",
   "http://127.0.0.1:3000",
   "http://127.0.0.1:5173",
+  "http://127.0.0.1:5500",      // Five Server
 ];
 if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
   defaultOrigins.push(`https://${process.env.CODESPACE_NAME}-${process.env.PORT || 8080}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`);
