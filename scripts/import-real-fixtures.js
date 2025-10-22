@@ -42,7 +42,6 @@ function escapeBackticks(s) {
 
 function insertNotesIntoTraining(filePath, notes) {
   const src = readFileSync(filePath, 'utf8');
-  const marker = ']';
   const endIdx = src.lastIndexOf('];');
   if (endIdx === -1) {
     console.error('Could not find TRAINING_EXAMPLES array end ( "];"). Aborting.');

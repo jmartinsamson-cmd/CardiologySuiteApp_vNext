@@ -21,6 +21,11 @@
 */
 
 /* ============================= Entry Point ============================= */
+/**
+ * Parse a clinical note with full template awareness
+ * @param {string} text - The clinical note text to parse
+ * @returns {object} Parsed note with all sections
+ */
 function parseClinicalNoteFull(text) {
   // Cap input length to prevent performance issues
   const MAX_INPUT_LENGTH = 200000;
@@ -74,7 +79,8 @@ function parseClinicalNoteFull(text) {
       "Impression List / Diagnoses",
       "Diagnoses",
       "Impression and Plan",
-    ]),
+    ]) || "",
+    sections,
   );
   const impressionFreeText = pick(sections, ["Impression:"])?.trim();
   const planFreeText = pick(sections, ["Plan:"])?.trim();
@@ -135,10 +141,17 @@ const MAIN_HEADERS = [
   /^Vital\s*Signs?\b|^Vitals?\b|^VS\b/i,
 ];
 
+/**
+ * Segment clinical note into sections
+ * @param {string} text - Clinical note text
+ * @returns {Record<string, string>} - Map of section names to content
+ */
 function segmentSectionsFull(text) {
   const lines = text.split(/\n/);
+  /** @type {Record<string, string>} */
   const map = { __full: text };
   let current = "__preamble";
+  /** @type {string[]} */
   let buf = [];
   const commit = () => {
     if (!buf.length) return;
@@ -161,6 +174,11 @@ function segmentSectionsFull(text) {
   return map;
 }
 
+/**
+ * Normalize section header name
+ * @param {string} h - Header text
+ * @returns {string} - Normalized header name
+ */
 function normalizeHeader(h) {
   const t = h.replace(/\s+/g, " ").trim();
   if (/Chief Complaint/i.test(t)) return "Chief Complaint";
@@ -187,17 +205,32 @@ function normalizeHeader(h) {
   return t;
 }
 
+/**
+ * Pick first matching value from map
+ * @param {Record<string, any>} map - Map to search
+ * @param {string[]} names - Names to try
+ * @returns {any} - First matching value
+ */
 function pick(map, names) {
   for (const n of names) if (map[n]) return map[n];
 }
 
 /* ============================== Extractors ============================== */
 // normalize is a local alias for normalizeWhitespace from parserHelpers.js
+/**
+ * @param {string} s - String to normalize
+ * @returns {string} - Normalized string
+ */
 function normalize(s) {
   return normalizeWhitespace(s);
 }
 
 // findAllDatesISO is now provided by parserHelpers.js
+/**
+ * Quick demographics extraction
+ * @param {string} text - Text to extract from
+ * @returns {[number|undefined, string|undefined]} - [age, sex]
+ */
 function quickDemoMeta(text) {
   const ageMatch = /\b(\d{1,3})\s*-?\s*(yo|y\/o|years?\s*old)\b/i.exec(text);
   const sexMatch = /\b(male|female|man|woman|m|f)\b/i.exec(text);
@@ -206,6 +239,12 @@ function quickDemoMeta(text) {
   const sexChar = sex ? sex.charAt(0).toUpperCase() : undefined;
   return [age ? +age : undefined, sexChar];
 }
+
+/**
+ * Convert block to list
+ * @param {string} block - Text block
+ * @returns {string[]|undefined} - List of items
+ */
 function listify(block) {
   if (!block) return undefined;
   return block
@@ -228,8 +267,13 @@ const PRIOR_LINES = [
   { key: "CABG", rx: /\bCABG\b/i },
 ];
 
+/**
+ * Extract prior study lines
+ * @param {string} block - Text block
+ * @returns {any[]} - Deduplicated studies
+ */
 function extractPriorStudyLines(block) {
-  const lines = block.split(/\n/).map((s) => s.trim());
+  const lines = block.split(/\n/).map((/** @type {string} */ s) => s.trim());
   const out = [];
   for (const line of lines) {
     if (!line) continue;
@@ -244,12 +288,19 @@ function extractPriorStudyLines(block) {
   }
   return window.dedupeByKey(
     out,
-    (x) => x.modality + "|" + (x.date || "") + "|" + (x.result || ""),
+    (/** @type {any} */ x) => x.modality + "|" + (x.date || "") + "|" + (x.result || ""),
   );
 }
 
+/**
+ * Extract review/management sections
+ * @param {string} block - Text block
+ * @returns {Record<string, any>} - Extracted sections
+ */
 function extractReviewManagement(block) {
+  /** @type {Record<string, any>} */
   const rm = {};
+  /** @type {Record<string, any>} */
   const parts = splitSubsections(block, [
     "Deselected Results",
     "Laboratory Results",
@@ -261,18 +312,18 @@ function extractReviewManagement(block) {
     "Condition",
   ]);
   rm.deselectedResults = parts["Deselected Results"];
-  rm.laboratoryResults = extractLabs(parts["Laboratory Results"] || "");
+  rm.laboratoryResults = extractLabs(parts["Laboratory Results"] || "", "");
   rm.radiologyStudies = extractImaging(parts["CXR or Radiology Studies"] || "");
   rm.cardiologyResults = extractImaging(parts["Cardiology Results"] || "");
   rm.diagnosticFindings = (parts["Diagnostic Findings"] || "")
     .split(/\n+/)
-    .map((s) => s.trim())
+    .map((/** @type {string} */ s) => s.trim())
     .filter(Boolean);
   rm.ekgInstruction = parts["EKG"]?.trim();
   rm.condition =
     (parts["Condition"] || "")
       .split(/[,\s]+/)
-      .find((x) => /Stable|Fair|Guarded|Serious|Critical/i.test(x)) ||
+      .find((/** @type {string} */ x) => /Stable|Fair|Guarded|Serious|Critical/i.test(x)) ||
     undefined;
 
   // Cardiac Monitor -- try to parse a mini EKG line
@@ -295,6 +346,11 @@ function extractReviewManagement(block) {
 
 // Imaging & ECG (shared with whole-note scan)
 
+/**
+ * Extract imaging studies from text
+ * @param {string} text - Text to extract from
+ * @returns {any[]} - Deduplicated imaging studies
+ */
 function extractImaging(text) {
   // Use non-greedy match and limit length to prevent catastrophic backtracking
   const re =
@@ -324,10 +380,15 @@ function extractImaging(text) {
   }
   return window.dedupeByKey(
     out,
-    (x) => x.type + "|" + (x.date || "") + "|" + (x.findings || ""),
+    (/** @type {any} */ x) => x.type + "|" + (x.date || "") + "|" + (x.findings || ""),
   );
 }
 
+/**
+ * Detect imaging type from line
+ * @param {string} line - Line to analyze
+ * @returns {string} - Imaging type
+ */
 function detectImagingType(line) {
   const s = line.toLowerCase();
   if (/(\btee\b|transesophageal)/.test(s)) return "TEE";
@@ -344,10 +405,15 @@ function detectImagingType(line) {
 
 // ECG
 
+/**
+ * Extract ECG data from text
+ * @param {string} text - Text to extract from
+ * @returns {any[]} - ECG entries
+ */
 function extractECG(text) {
   const lines = text
     .split(/\r?\n/)
-    .map((s) => s.trim())
+    .map((/** @type {string} */ s) => s.trim())
     .filter(Boolean);
   const out = [];
   for (const line of lines) {
@@ -399,10 +465,18 @@ function extractECG(text) {
 // Use them directly from window (already exported globally)
 
 // Missing functions that need to be added
+/**
+ * Split block into subsections
+ * @param {string} block - Text block
+ * @param {string[]} subsectionNames - Subsection names
+ * @returns {Record<string, string>} - Subsections map
+ */
 function splitSubsections(block, subsectionNames) {
+  /** @type {Record<string, string>} */
   const parts = {};
   const lines = block.split(/\n/);
   let current = "";
+  /** @type {string[]} */
   let buf = [];
 
   const commit = () => {
@@ -414,7 +488,7 @@ function splitSubsections(block, subsectionNames) {
 
   for (const line of lines) {
     const trimmed = line.trim();
-    const found = subsectionNames.find((name) =>
+    const found = subsectionNames.find((/** @type {string} */ name) =>
       new RegExp(`^${name}\\b`, "i").test(trimmed),
     );
     if (found) {

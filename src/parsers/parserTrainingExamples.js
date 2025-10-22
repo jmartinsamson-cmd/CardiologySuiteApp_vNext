@@ -1472,28 +1472,14 @@ Lines/Drains/Airways
  
  	
 Arterial Line 	Duration
- 
-
- 	 	 
+  
  	Arterial Line 10/21/25 0230 Left Brachial	<1 day
  
-
- 
-
- 
- 	
 Peripheral Intravenous Line 	Duration
  
-
- 	 	 
  	Peripheral IV 10/20/25 0948 18 G Right Antecubital	<1 day
  	Peripheral IV Single Lumen 10/20/25 1950 20 G Anterior;Distal;Left Upper Arm	<1 day
  	Peripheral IV Single Lumen 10/21/25 0000 20 G Long PIVC Anterior;Left Forearm	<1 day
- 
-
- 
-
- 
  
 Significant Labs: 
 Chemistries:
@@ -1686,51 +1672,21 @@ Lines/Drains/Airways
  	
 Peripherally Inserted Central Catheter Line 	Duration
  
-
- 	 	 
  	PICC Triple Lumen 10/13/25 1109 right brachial	<1 day
  
-
- 
-
- 
- 	
 Drain 	Duration
  
-
- 	 	 
  	     Gastrostomy/Enterostomy 10/30/24 1200 Gastrostomy-jejunostomy feeding	348 days
  	     Urethral Catheter 10/09/25 1330 Non-latex	3 days
  
-
- 
-
- 
- 	
 Airway 	Duration
  
-
- 	 	 
  	Adult Surgical Airway 10/01/25 1110 Shiley Cuffed 6.0/ 75mm	12 days
  
-
- 
-
- 
- 	
 Peripheral Intravenous Line 	Duration
  
-
- 	 	 
  	Peripheral IV Single Lumen 10/09/25 0755 20 G 2 1/4 in Left;Posterior Wrist	4 days
  	Peripheral IV Single Lumen 10/12/25 2300 20 G Right Other	<1 day
- 
-
- 
-
- 
- 
- 
  
 Significant Labs: 
 Chemistries:
@@ -2045,8 +2001,7 @@ Neurological:
 Psychiatric:    
    Mood and Affect: Mood normal. 
 
- 
- 
+
 Current Schedule Inpatient Medications:
 •	fentaNYL	 	 	 
 •	NORepinephrine 8 mg	 	 	 
@@ -2125,7 +2080,6 @@ Will need Levophed if BP decreases. Will follow
 
   `Shortness of breath
  
-
 History of Present Illness
 Angela F Celestain is a 63-year-old female with a PMH including chronic systolic heart failure, COPD on home oxygen (4–6 L/min), interstitial lung disease with bronchiectasis, CKD, hypertension, hyperlipidemia, type 2 diabetes mellitus, obesity, prior myocardial infarction, cerebrovascular accident with residual right-sided deficits, and anxiety/depression presented to OLGMC on 10/20/2025 with worsening shortness of breath. She reports the onset of a non-productive cough approximately two weeks ago, for which she was evaluated by Dr. Keys and prescribed a course of steroids and a Z-Pak for presumed walking pneumonia. Despite this, her symptoms gradually worsened, with marked shortness of breath worsening significantly the morning of presentation. She reports using up to three nebulizer treatments daily for relief.
  
@@ -2170,10 +2124,8 @@ Diagnosis	Date
 •	Venous insufficiency of lower extremity	07/12/2022
  
  
-
 Past Surgical History
  
-
 Past Surgical History:
 Procedure	Laterality	Date
 •	CESAREAN SECTION	 	 
@@ -2186,7 +2138,6 @@ Procedure	Laterality	Date
  	Procedure: EGD;  Surgeon: John Brent Rhodes, MD;  Location: OLGH BRACC ENDOSCOPY;  Service: Gastroenterology;  Laterality: N/A;
  
  
-
 Social History
 	Denies alcohol, tobacco or illicit drug use. 
  
@@ -2294,9 +2245,6 @@ Microbiology Results (last 7 days)
  	Order Status: Sent	Specimen: Blood	 
  	Blood Culture [1348113482]	 
  	Order Status: Sent	Specimen: Blood	 
- 
-
- 
  
 
 Imaging
