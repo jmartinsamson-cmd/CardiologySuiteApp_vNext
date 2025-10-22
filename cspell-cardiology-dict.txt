@@ -1644,18 +1644,21 @@ eosinophilia
 Fenofibrate
 Fenofibric
 FFP
+FHIR
 Fibricor
 Fundoscopic
 Gemfibrozil
 gentamicin
 hemopericardium
 HMG
+HMR
 hypercholesterolemia
 Inconsolata
 Isordil
 Lipofen
 Lopid
 Lovaza
+LRU
 macroglossia
 mediastinal
 Menlo
@@ -1685,4 +1688,5 @@ trigeminy
 Triglide
 Trilipix
 truncal
+TTL
 unsynchronized

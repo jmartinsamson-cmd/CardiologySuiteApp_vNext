@@ -2406,7 +2406,7 @@ class TemplateRenderer {
       { pattern: /acs|acute coronary syndrome/i, name: 'Acute coronary syndrome' },
       { pattern: /cad|coronary artery disease/i, name: 'Coronary artery disease' },
       { pattern: /htn|hypertension/i, name: 'Hypertension' },
-      { pattern: /valv(?:e|ular)\s+disease/i, name: 'Valvular heart disease' },
+      { pattern: /valvular\s+disease/i, name: 'Valvular heart disease' },
       { pattern: /\baortic\s+stenosis\b/i, name: 'Aortic stenosis' },
       { pattern: /\baortic\s+regurgitation\b/i, name: 'Aortic regurgitation' },
       { pattern: /\bmitral\s+stenosis\b/i, name: 'Mitral stenosis' },

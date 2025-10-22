@@ -42,7 +42,7 @@
   padding: 0.75rem 1rem;
   border: 1px solid var(--border, #374151);
   border-radius: 8px;
-  background: var(--panel, #1f2937);
+  background: rgba(59, 130, 246, 0.08);
   color: var(--ink, #f3f4f6);
   font-size: 1rem;
   transition: border-color 0.3s ease;
@@ -57,16 +57,22 @@
 .med-filter-select:focus {
   outline: none;
   border-color: var(--cardio-primary, #dc2626);
+  background: rgba(59, 130, 246, 0.12);
 }
 
 .med-filter-select {
   min-width: 180px;
   cursor: pointer;
+  font-weight: 500;
+  /* Force black text for better readability per user request */
+  color: #000;
 }
 
 .med-filter-select option {
-  background: var(--panel, #1f2937);
-  color: var(--ink, #f3f4f6);
+  background: var(--bg, #1a1f2e);
+  /* Force black option text; also fixes prior malformed var() with inline comment */
+  color: #000;
+  padding: 0.5rem;
 }
 
 .meds-grid {
