@@ -19,6 +19,8 @@
     "gen:note": "node --loader ts-node/esm scripts/generateNote.ts",
     "parse": "node scripts/parse.js",
     "parse:samples": "node scripts/parse-samples.js",
+    "check:training": "node scripts/check-training-size.js",
+    "print:patterns": "node scripts/print-learned-patterns.js",
   "analyze:note": "node scripts/analyze-note.js",
     "test:unit": "node tests/parser-pipeline.unit.spec.js",
     "test:parser": "node tests/parsing.smart.spec.js",

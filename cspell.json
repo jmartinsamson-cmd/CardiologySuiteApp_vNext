@@ -1,7 +1,10 @@
 {
   "version": "0.2",
   "language": "en",
-  "dictionaries": ["medical-terms", "cardiology-suite-custom"],
+  "dictionaries": [
+    "medical-terms",
+    "cardiology-suite-custom"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "cardiology-suite-custom",
@@ -36,5 +39,15 @@
   "allowCompoundWords": true,
   "minWordLength": 3,
   "maxNumberOfProblems": 100,
-  "numSuggestions": 8
+  "numSuggestions": 8,
+  "words": [
+    "Daya",
+    "MPV",
+    "OLGH",
+    "POV",
+    "Prouet",
+    "PVD",
+    "RDW",
+    "Samantapudi"
+  ]
 }

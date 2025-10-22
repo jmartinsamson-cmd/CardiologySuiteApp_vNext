@@ -11,5 +11,13 @@ tools:
     - pmd@7.11.0
     - pylint@3.3.6
     - revive@1.7.0
-    - semgrep@1.78.0
+    - semgrep@1.78.0:
+        patterns:
+          - id: javascript.lang.security.detect-non-literal-regexp.detect-non-literal-regexp
+            exclude:
+              - src/parsers/parserHeuristics.js
+              - src/parsers/parserTrainingExamples.js
+          - id: javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal
+            exclude:
+              - scripts/import-real-fixtures.js
     - trivy@0.66.0

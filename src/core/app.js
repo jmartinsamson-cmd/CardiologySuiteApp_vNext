@@ -9,6 +9,9 @@ import "../parsers/noteParser.js";
 import "../parsers/noteParser_full.js";
 import "../parsers/aiAnalyzer.js";
 import "../parsers/templateRenderer.js";
+// Import training examples and hinted parser for user-trainable parsing
+import "../parsers/parserTrainingExamples.js";
+import "../parsers/hintedParser.js";
 
 // Basic application initialization
 document.addEventListener("DOMContentLoaded", function () {
