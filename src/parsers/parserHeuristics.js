@@ -98,6 +98,7 @@ class ParserHeuristics {
         .map(alias => alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) // Escape special chars
         .join('|');
       
+      // Security: Pattern is safely escaped above - all regex special chars are sanitized
       processed[section] = {
         aliases: cleanAliases,
         regex: new RegExp(`^(?:${pattern})`, 'i'),

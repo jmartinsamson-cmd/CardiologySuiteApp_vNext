@@ -5,24 +5,51 @@
  * to src/parsers/parserTrainingExamples.js as template string entries.
  */
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { basename, resolve } from 'path';
 
-const realDir = join(process.cwd(), 'tests', 'fixtures', 'real');
-const trainingFile = join(process.cwd(), 'src', 'parsers', 'parserTrainingExamples.js');
+const realDir = resolve(process.cwd(), 'tests', 'fixtures', 'real');
+const trainingFile = resolve(process.cwd(), 'src', 'parsers', 'parserTrainingExamples.js');
 
+/**
+ * Safely join paths and validate the result stays within baseDir
+ * @param {string} baseDir - Base directory
+ * @param {string} filename - Filename to join
+ * @returns {string} - Safe resolved path
+ */
+function safePath(baseDir, filename) {
+  // Sanitize filename to prevent path traversal
+  const safe = basename(filename);
+  const fullPath = resolve(baseDir, safe);
+  
+  // Ensure the resolved path is within baseDir
+  if (!fullPath.startsWith(baseDir)) {
+    throw new Error(`Path traversal attempt detected: ${filename}`);
+  }
+  
+  return fullPath;
+}
+
+/**
+ * @param {string} dir - Directory path
+ * @returns {string[]} - List of JSON files
+ */
 function listJsonFiles(dir) {
   try {
     return readdirSync(dir).filter(f => f.endsWith('.json'));
   } catch (e) {
-    console.error('Could not read directory', dir, e.message);
-    process.exit(1);
+    console.error('Could not read directory', dir, e instanceof Error ? e.message : String(e));
+    return [];
   }
 }
 
+/**
+ * @param {string[]} files - List of filenames
+ * @returns {Array<{file: string, text: string}>} - Loaded notes
+ */
 function loadNotes(files) {
   const notes = [];
   for (const f of files) {
-    const full = join(realDir, f);
+    const full = safePath(realDir, f);
     try {
       const json = JSON.parse(readFileSync(full, 'utf8'));
       const input = (json && json.input) || '';
@@ -30,16 +57,24 @@ function loadNotes(files) {
         notes.push({ file: f, text: input });
       }
     } catch (e) {
-      console.warn('Skip invalid JSON:', f, e.message);
+      console.warn('Skip invalid JSON:', f, e instanceof Error ? e.message : String(e));
     }
   }
   return notes;
 }
 
+/**
+ * @param {string} s - String to escape
+ * @returns {string} - Escaped string
+ */
 function escapeBackticks(s) {
   return s.replace(/`/g, '\\`');
 }
 
+/**
+ * @param {string} filePath - Training file path
+ * @param {Array<{file: string, text: string}>} notes - Notes to insert
+ */
 function insertNotesIntoTraining(filePath, notes) {
   const src = readFileSync(filePath, 'utf8');
   const endIdx = src.lastIndexOf('];');
@@ -51,7 +86,7 @@ function insertNotesIntoTraining(filePath, notes) {
   const head = src.slice(0, endIdx);
   const tail = src.slice(endIdx);
 
-  const blocks = notes.map(n => `
+  const blocks = notes.map((/** @type {{file: string, text: string}} */ n) => `
   /* Imported from tests/fixtures/real/${n.file} */
   \`
 ${escapeBackticks(n.text).trim()}
