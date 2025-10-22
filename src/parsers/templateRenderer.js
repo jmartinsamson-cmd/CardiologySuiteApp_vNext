@@ -933,6 +933,19 @@ class TemplateRenderer {
       consultHPI += info.symptomDetails + ' ';
     }
 
+    // Vitals if available
+    if (info.vitals) {
+      const vitalsParts = [];
+      if (info.vitals.BP) vitalsParts.push(`BP: ${info.vitals.BP} mmHg`);
+      if (info.vitals.HR) vitalsParts.push(`HR: ${info.vitals.HR} bpm`);
+      if (info.vitals.RR) vitalsParts.push(`RR: ${info.vitals.RR}/min`);
+      if (info.vitals.temp) vitalsParts.push(`Temp: ${info.vitals.temp}°F`);
+      if (info.vitals.spo2) vitalsParts.push(`SpO2: ${info.vitals.spo2}%`);
+      if (vitalsParts.length > 0) {
+        consultHPI += `On presentation, vitals: ${vitalsParts.join(', ')}. `;
+      }
+    }
+
     // Diagnostic findings
     if (info.diagnosticFindings && info.diagnosticFindings.length > 0) {
       consultHPI += `Initial workup revealed ${info.diagnosticFindings.join(', ')}. `;
@@ -965,7 +978,8 @@ class TemplateRenderer {
       symptomDetails: null,
       diagnosticFindings: [],
       consultReason: null,
-      hospitalCourse: null
+      hospitalCourse: null,
+      vitals: null
     };
 
     // Extract age
@@ -1078,6 +1092,11 @@ class TemplateRenderer {
     const courseMatch = hpiText.match(/Hospital Course:([\s\S]+?)(?=\n\n|$)/i);
     if (courseMatch) {
       info.hospitalCourse = courseMatch[1].trim();
+    }
+
+    // Extract vitals from parsedData if available
+    if (parsedData && parsedData.vitals && Object.keys(parsedData.vitals).length > 0) {
+      info.vitals = parsedData.vitals;
     }
 
     return info;
@@ -1923,7 +1942,7 @@ class TemplateRenderer {
           const sectionKeys = parsedData && parsedData.sections ? Object.keys(parsedData.sections) : [];
           console.log('🧩 Parsed object keys:', Object.keys(parsedData || {}));
           console.log('🧩 Parsed.sections keys:', sectionKeys);
-        } catch (/** @type {any} */ _err) {
+        } catch {
           // ignore
         }
 
