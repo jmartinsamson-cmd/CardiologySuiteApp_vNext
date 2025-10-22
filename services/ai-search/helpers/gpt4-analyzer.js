@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* global process */
+/* global process, console */
 
 /**
  * Azure OpenAI GPT-4 Analyzer
@@ -316,6 +316,170 @@ function generatePlanItems(note) {
   items.push('Patient education on warning signs and when to seek care');
 
   return items;
+}
+
+/**
+ * Analyze note using RAG (Retrieval-Augmented Generation)
+ * Retrieves evidence from Azure Search, then grounds GPT-4 response
+ * @param {string} note - Clinical note text
+ * @param {any} [parsed] - Optional parsed note data for building query
+ * @returns {Promise<{assessment: string[], plan: string[], confidence?: number, evidenceDocs?: Array<{title?: string, sourceId?: string, url?: string}>, source: string}>}
+ */
+export async function analyzeNoteWithRAG(note, parsed) {
+  const { buildClinicalQuery, retrieveEvidence, concatEvidence } = await import('../rag/retrieveMaterials.js');
+  
+  // Build clinical query from parsed note or extract from raw note
+  const query = parsed ? buildClinicalQuery(parsed) : extractKeyTerms(note);
+  
+  // Retrieve evidence documents
+  const evidenceDocs = query ? await retrieveEvidence(query) : [];
+  
+  // Concatenate evidence into context string
+  const context = concatEvidence(evidenceDocs);
+  
+  const client = getOpenAIClient();
+  if (!client || !context) {
+    // Fallback to rule-based if no AI or no evidence
+    console.log('[RAG] Falling back to rule-based analysis (no OpenAI or no evidence)');
+    const result = await analyzeWithRules(note, []);
+    return {
+      ...result,
+      evidenceDocs: [],
+      source: 'rules'
+    };
+  }
+
+  try {
+    // Generate assessment and plan with grounded context
+    const result = await analyzeWithRAGContext(note, context, evidenceDocs);
+    return {
+      ...result,
+      evidenceDocs: evidenceDocs.map(e => ({ title: e.title, sourceId: e.sourceId, url: e.url })),
+      source: 'ai+rag'
+    };
+  } catch (/** @type {any} */ err) {
+    console.error('[RAG] Analysis failed, falling back to rules:', err.message);
+    const result = await analyzeWithRules(note, []);
+    return {
+      ...result,
+      evidenceDocs: evidenceDocs.map(e => ({ title: e.title, sourceId: e.sourceId, url: e.url })),
+      source: 'rules'
+    };
+  }
+}
+
+/**
+ * Analyze note with RAG context grounding
+ * @param {string} note - Clinical note
+ * @param {string} context - Retrieved evidence context
+ * @param {Array<{title?: string, snippet: string}>} evidenceDocs - Evidence documents for logging
+ * @returns {Promise<{assessment: string[], plan: string[], confidence: number}>}
+ */
+async function analyzeWithRAGContext(note, context, evidenceDocs) {
+  const client = getOpenAIClient();
+  if (!client) {
+    throw new Error("OpenAI client not initialized");
+  }
+
+  const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini";
+  const strictGrounding = process.env.STRICT_GROUNDING === '1';
+
+  const systemPrompt = strictGrounding
+    ? `You are a cardiology clinician assistant. Use ONLY the provided guideline context below. If information is missing, explicitly state what's missing and cannot be assessed without additional data.
+
+Guidelines Context:
+${context}
+
+Return ONLY valid JSON in this exact format:
+{
+  "assessment": ["point 1", "point 2", ...],
+  "plan": ["item 1", "item 2", ...],
+  "confidence": 0.85
+}
+
+For each assessment point and plan item, cite the guideline title when justifying recommendations (e.g., "per AFib Anticoagulation guideline").`
+    : `You are a cardiology clinician assistant. Prefer the provided guideline context when applicable, and cite guidelines when justifying recommendations.
+
+Guidelines Context:
+${context}
+
+Return ONLY valid JSON in this exact format:
+{
+  "assessment": ["point 1", "point 2", ...],
+  "plan": ["item 1", "item 2", ...],
+  "confidence": 0.85
+}`;
+
+  // De-identify note before sending to AI
+  const { deidentify } = await import('../rag/textUtils.js');
+  const sanitizedNote = deidentify(note);
+
+  const userPrompt = `Patient clinical note:
+${sanitizedNote}
+
+Task: Provide an Assessment (3-6 concise bullet points) and a Plan (actionable, guideline-concordant recommendations). Quote guideline titles when justifying.`;
+
+  console.log(`[RAG] Analyzing with ${evidenceDocs.length} evidence documents, strict=${strictGrounding}`);
+
+  const t0 = Date.now();
+  const completion = await withBackoff(() => client.chat.completions.create({
+    model: deployment,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt }
+    ],
+    temperature: 0.3, // Lower temperature for consistent medical advice
+    max_tokens: 1500,
+    response_format: { type: "json_object" }
+  }));
+
+  const responseText = completion.choices[0]?.message?.content;
+  if (!responseText) {
+    throw new Error("Empty response from GPT-4");
+  }
+
+  const parsed = JSON.parse(responseText);
+  const latencyMs = Date.now() - t0;
+  
+  try {
+    logAIEvent("RAG ok", { feature: "RAG", provider: "gpt-4+rag", latencyMs, evidenceDocs: evidenceDocs.length });
+    recordAnalysisLatency(latencyMs, { provider: "gpt-4+rag" });
+  } catch (/** @type {any} */ err) {
+    if (process.env.DEBUG_TELEMETRY === "true") {
+      console.log("[rag] telemetry emit failed:", err?.message || err);
+    }
+  }
+
+  return {
+    assessment: Array.isArray(parsed.assessment) ? parsed.assessment : [],
+    plan: Array.isArray(parsed.plan) ? parsed.plan : [],
+    confidence: typeof parsed.confidence === 'number' ? parsed.confidence : 0.80
+  };
+}
+
+/**
+ * Extract key terms from raw note (simple fallback)
+ * @param {string} note
+ * @returns {string}
+ */
+function extractKeyTerms(note) {
+  const terms = [];
+  const lowerNote = note.toLowerCase();
+  
+  const conditions = [
+    'heart failure', 'hfref', 'hfpef',
+    'atrial fibrillation', 'afib',
+    'coronary artery disease', 'cad',
+    'hypertension', 'htn'
+  ];
+  
+  conditions.forEach(condition => {
+    if (lowerNote.includes(condition)) {
+      terms.push(condition);
+    }
+  });
+  
+  return terms.join(' | ');
 }
 
 /**

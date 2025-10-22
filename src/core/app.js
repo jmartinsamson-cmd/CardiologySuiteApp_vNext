@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ DOM loaded, initializing app...");
 
   try {
+    // Initialize RAG configuration globals for UI diagnostics
+    /** @type {any} */ (window).__AZURE_SEARCH_INDEX = 'cardiology-index';
+    /** @type {any} */ (window).__RAG_TOP_K = 5;
+    /** @type {any} */ (window).__STRICT_GROUNDING = false; // Set to true if using strict mode
+    
     // Load feature flags and show/hide conditional nav items
     loadFeatureFlags();
 

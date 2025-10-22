@@ -69,7 +69,9 @@ export async function enrichWithAIAnalysis(baseResult, originalNote) {
       ...baseResult,
       assessment: Array.isArray(aiData.assessment) ? aiData.assessment : undefined,
       plan: Array.isArray(aiData.plan) ? aiData.plan : undefined,
-      citations: Array.isArray(aiData.citations) ? aiData.citations : undefined
+      citations: Array.isArray(aiData.citations) ? aiData.citations : undefined,
+      evidenceDocs: Array.isArray(aiData.evidenceDocs) ? aiData.evidenceDocs : undefined,
+      source: aiData.source || undefined
     };
     
     return enriched;

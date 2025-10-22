@@ -135,9 +135,27 @@ DEBUG_SEARCH=true npm run start:search
 Required in `services/ai-search/.env`:
 
 ```env
+# Azure Search (for RAG knowledge base retrieval)
 AZURE_SEARCH_ENDPOINT=https://your-service.search.windows.net
-AZURE_SEARCH_INDEX=your-index-name
+AZURE_SEARCH_INDEX=cardiology-index
 AZURE_SEARCH_QUERY_KEY=your-query-key
+AZURE_SEARCH_NAME=your-service-name
+AZURE_SEARCH_ADMIN_KEY=your-admin-key
+AZURE_SEARCH_API_VERSION=2024-07-01
+
+# Azure OpenAI (for AI-powered analysis)
+AZURE_OPENAI_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
+AZURE_OPENAI_API_KEY=your-api-key
+AZURE_OPENAI_DEPLOYMENT=gpt-4.1-mini
+AZURE_OPENAI_HPI_DEPLOYMENT=gpt-4.1-mini
+AZURE_OPENAI_API_VERSION=2025-01-01-preview
+
+# RAG Configuration
+RAG_TOP_K=5              # Number of evidence documents to retrieve
+RAG_MAX_CHARS=12000      # Maximum characters of context for model grounding
+STRICT_GROUNDING=1       # 1 = model uses ONLY provided docs, 0 = prefer provided docs
+
+# Server
 PORT=8081
 ```
 
@@ -172,7 +190,44 @@ curl -X POST http://localhost:8081/search \
 5. Add GraphQL endpoint option
 6. Azure Application Insights integration for production telemetry
 
-## Latest Enhancements (v2.0)
+## Latest Enhancements (v3.0)
+
+### RAG (Retrieval-Augmented Generation) ✅ **NEW**
+- **Automatic Evidence Retrieval**: Extracts diagnoses, meds, labs from notes → queries Azure Search
+- **Grounded Analysis**: GPT-4 uses YOUR educational materials indexed in `cardiology-index`
+- **Provenance Tracking**: Returns `evidenceDocs` array with titles, sourceIds, URLs
+- **Safe Fallbacks**: Gracefully degrades to rule-based analysis if Search/OpenAI unavailable
+- **PHI De-identification**: Removes dates, phone numbers, emails, SSN, MRN before AI processing
+- **Strict Grounding Mode**: `STRICT_GROUNDING=1` enforces "only use provided docs" language
+
+#### RAG Pipeline Flow
+1. **Parse Note** → Extract diagnoses, medications, labs
+2. **Build Query** → Construct search query from clinical entities
+3. **Retrieve Evidence** → Query Azure Search, deduplicate, truncate to `RAG_MAX_CHARS`
+4. **Ground Model** → Inject evidence into GPT-4 system prompt with citation instructions
+5. **Generate A/P** → AI produces assessment + plan citing guideline titles
+6. **Return Provenance** → Response includes `evidenceDocs` for UI display
+
+#### Configuration
+- **RAG_TOP_K=5**: Retrieve top 5 documents per query
+- **RAG_MAX_CHARS=12000**: Maximum context characters (prevents token overflow)
+- **STRICT_GROUNDING=1**: Require citations, state when info missing
+- **STRICT_GROUNDING=0**: Prefer guidelines but allow general medical knowledge
+
+#### Response Format
+```json
+{
+  "ok": true,
+  "assessment": ["87F with AFib on apixaban, CHA2DS2-VASc score indicates need for anticoagulation per AFib Anticoagulation guideline"],
+  "plan": ["Continue apixaban 5mg BID", "..."],
+  "evidenceDocs": [
+    {"title": "AFib Anticoagulation guideline", "sourceId": "afib-anticoag", "url": "https://..."},
+    {"title": "Heart Failure Management", "sourceId": "hf-gdmt", "url": "https://..."}
+  ],
+  "source": "ai+rag",  // or "rules" if fallback
+  "confidence": 0.85
+}
+```
 
 ### Azure OpenAI GPT-4 Integration ✅
 - Clinical note analysis with contextual insights

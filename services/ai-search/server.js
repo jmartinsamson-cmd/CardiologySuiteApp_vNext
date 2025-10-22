@@ -225,8 +225,8 @@ app.get("/metrics", async (_req, res) => {
 // Register modular search routes
 registerSearchRoutes(app, client, { endpoint, indexName, apiKey });
 
-// Register analyze-note route
-registerAnalyzeNoteRoutes(app, client);
+// Register analyze-note route (now uses RAG, no longer needs direct client access)
+registerAnalyzeNoteRoutes(app);
 
 // Register paraphrase-hpi route
 registerParaphraseHPIRoutes(app);

@@ -1575,6 +1575,14 @@ class TemplateRenderer {
         output += '\n';
       }
       
+      // Add RAG provenance if evidence documents are available
+      if (this.parsedData.evidenceDocs && Array.isArray(this.parsedData.evidenceDocs) && this.parsedData.evidenceDocs.length > 0) {
+        const ev = this.parsedData.evidenceDocs;
+        const titles = ev.slice(0, 3).map(e => e?.title).filter(Boolean);
+        const more = ev.length > 3 ? `, +${ev.length - 3} more` : '';
+        output += `Based on: ${titles.join(', ')}${more} (Azure Search)\n\n`;
+      }
+      
       if (this.parsedData.citations && Array.isArray(this.parsedData.citations) && this.parsedData.citations.length > 0) {
         output += 'Supporting Guidelines:\n';
         this.parsedData.citations.forEach((cite, i) => {
@@ -1915,7 +1923,7 @@ class TemplateRenderer {
           const sectionKeys = parsedData && parsedData.sections ? Object.keys(parsedData.sections) : [];
           console.log('🧩 Parsed object keys:', Object.keys(parsedData || {}));
           console.log('🧩 Parsed.sections keys:', sectionKeys);
-        } catch (_) {
+        } catch (/** @type {any} */ _err) {
           // ignore
         }
 
@@ -2823,6 +2831,13 @@ class TemplateRenderer {
         <summary>Structured vitals/labs JSON</summary>
         <pre id="structured-json-out" style="white-space: pre-wrap; font-size: 0.8rem; background: var(--bg-secondary); padding: 6px; border-radius: 4px; border: 1px solid var(--border-color);"></pre>
       </details>
+      <details id="rag-diagnostics" style="margin-top: 8px;">
+        <summary>RAG Diagnostics (Evidence Retrieval)</summary>
+        <div id="rag-diagnostics-content" style="font-size: 0.85rem; background: var(--bg-secondary); padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); color: var(--text-secondary);">
+          <div id="rag-config-info" style="margin-bottom: 6px;"></div>
+          <div id="rag-evidence-info"></div>
+        </div>
+      </details>
     `;
 
     // Insert before guidelines section to keep guidelines at the bottom
@@ -2962,6 +2977,7 @@ class TemplateRenderer {
     // Populate vitals and labs from parsed data
     this.populateVitalsUI();
     this.populateLabsUI();
+    this.populateRAGDiagnostics();
   }
 
   // Populate vitals inputs from parsed data
@@ -3101,6 +3117,47 @@ class TemplateRenderer {
     });
 
     console.log(`✅ Labs populated to table (updated ${updatedCount} row(s))`);
+  }
+
+  // Populate RAG diagnostics panel
+  populateRAGDiagnostics() {
+    const configInfo = document.getElementById('rag-config-info');
+    const evidenceInfo = document.getElementById('rag-evidence-info');
+    
+    if (!configInfo || !evidenceInfo) {
+      return;
+    }
+
+    // Get RAG configuration from window globals (mirrored from env)
+    const ragTopK = parseInt(
+      (typeof window !== 'undefined' && window.__RAG_TOP_K) || '5', 
+      10
+    );
+    const ragIndex = 
+      (typeof window !== 'undefined' && window.__AZURE_SEARCH_INDEX) || 
+      'cardiology-index';
+    const strict = 
+      (typeof window !== 'undefined' && !!window.__STRICT_GROUNDING);
+
+    // Display RAG configuration
+    configInfo.innerHTML = `
+      <div><strong>RAG:</strong> ${ragIndex}, topK=${ragTopK}</div>
+      <div><strong>STRICT_GROUNDING:</strong> ${strict ? 'ON' : 'OFF'}</div>
+    `;
+
+    // Display evidence documents
+    const ev = Array.isArray(this.parsedData?.evidenceDocs) ? this.parsedData.evidenceDocs : [];
+    if (ev.length > 0) {
+      const titles = ev.slice(0, 3).map(x => x?.title || '(untitled)');
+      evidenceInfo.innerHTML = `<div><strong>Evidence (first 3):</strong> ${titles.join(' | ')}</div>`;
+    } else {
+      evidenceInfo.innerHTML = '<div><strong>Evidence:</strong> none (fallback or no hits)</div>';
+    }
+
+    // Also display source if available
+    if (this.parsedData?.source) {
+      evidenceInfo.innerHTML += `<div style="margin-top: 4px;"><strong>Analysis Source:</strong> ${this.parsedData.source}</div>`;
+    }
   }
 
   // Paraphrase HPI using GPT-4o-mini with fail-soft to rules
