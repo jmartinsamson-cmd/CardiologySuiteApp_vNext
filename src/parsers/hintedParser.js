@@ -215,8 +215,12 @@ function getDefaultPatterns() {
  * Usage: window.__testHintedParse__(note, hints)
  */
 function testHintedParse(note, hints = null) {
+  if (!note || typeof note !== 'string') {
+    console.error('Invalid note provided');
+    return null;
+  }
   console.log('🧪 [TestHintedParse] Starting...');
-  console.log('📝 Note length:', note?.length);
+  console.log('📝 Note length:', note.length);
   console.log('🎯 Hints:', hints);
   
   const result = parseWithHints(note, hints);
