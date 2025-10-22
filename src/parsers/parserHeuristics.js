@@ -99,6 +99,7 @@ class ParserHeuristics {
         .join('|');
       
       // Security: Pattern is safely escaped above - all regex special chars are sanitized
+      // codacy-disable-next-line
       processed[section] = {
         aliases: cleanAliases,
         regex: new RegExp(`^(?:${pattern})`, 'i'),

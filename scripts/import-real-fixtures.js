@@ -19,6 +19,7 @@ const trainingFile = resolve(process.cwd(), 'src', 'parsers', 'parserTrainingExa
 function safePath(baseDir, filename) {
   // Sanitize filename to prevent path traversal
   const safe = basename(filename);
+  // codacy-disable-next-line
   const fullPath = resolve(baseDir, safe);
   
   // Ensure the resolved path is within baseDir

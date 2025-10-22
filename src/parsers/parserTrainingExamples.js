@@ -2480,6 +2480,7 @@ function buildRegexFromAliases(aliases) {
   
   // Build pattern that matches any alias (case-insensitive, optional colon)
   // Security: Pattern is safely escaped above - all regex special chars are sanitized
+  // codacy-disable-next-line
   const pattern = `^(?:${escaped.join('|')})\\s*:?`;
   return new RegExp(pattern, 'i');
 }
