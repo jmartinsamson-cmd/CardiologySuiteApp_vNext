@@ -37,8 +37,8 @@ async function testCompleteRAG() {
   
   // Check if backend is running
   try {
-    // codacy-disable-next-line
-    const healthCheck = await fetch(`${BACKEND_URL}/health`);
+    // codacy-disable-line
+    const healthCheck = await fetch(`${BACKEND_URL}/health`); // codacy-disable-line
     if (!healthCheck.ok) {
       console.error('❌ Backend not responding. Start with: npm run start:search');
       process.exit(1);
@@ -56,8 +56,8 @@ async function testCompleteRAG() {
   console.log('\n' + '━'.repeat(50) + '\n');
 
   try {
-    // codacy-disable-next-line
-    const response = await fetch(`${BACKEND_URL}/api/analyze-note`, {
+    // codacy-disable-line
+    const response = await fetch(`${BACKEND_URL}/api/analyze-note`, { // codacy-disable-line
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
