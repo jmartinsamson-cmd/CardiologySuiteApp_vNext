@@ -1,13 +1,13 @@
 # 🫀 CardiologySuiteApp vNext
 
-**Modern Clinical Decision Support System with AI-Enhanced Features**
+## Modern Clinical Decision Support System with AI-Enhanced Features
 
 > A privacy-first, AI-powered clinical decision support platform designed for healthcare professionals in cardiology. Built with modern web technologies, featuring intelligent clinical note parsing, evidence-based decision trees, and comprehensive cardiology reference tools.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](package.json)
-[![Code Quality](https://img.shields.io/badge/ESLint-passing-success)]()
-[![PWA Ready](https://img.shields.io/badge/PWA-ready-purple)]()
+[![Code Quality](https://img.shields.io/badge/ESLint-passing-success)](https://eslint.org/)
+[![PWA Ready](https://img.shields.io/badge/PWA-ready-purple)](https://web.dev/progressive-web-apps/)
 
 ---
 
@@ -22,7 +22,7 @@
 
 ### 🏥 Clinical Decision Support
 
-- **Interactive Decision Trees**: 
+- **Interactive Decision Trees**:
   - Acute Coronary Syndrome (ACS) pathways
   - Chest pain evaluation protocols
   - Evidence-based management guidelines
@@ -105,7 +105,7 @@ npm run start:search
 
 ### Modern Modular Design
 
-```
+```text
 CardiologySuiteApp_vNext/
 ├── src/
 │   ├── core/                    # Application core (99% size reduction from legacy)
@@ -256,6 +256,7 @@ npm run validate:layout
 ```
 
 Protected files include:
+
 - `index.html` - CSS loading order
 - `styles/meds.css` - Medications page layout
 - `styles/guidelines.css` - Guidelines page layout
@@ -263,6 +264,7 @@ Protected files include:
 - `pages/guidelines.js` - Guidelines page module
 
 ⚠️ **Before modifying layouts:**
+
 1. Read `docs/LAYOUT_PROTECTION.md`
 2. Run validation before and after changes
 3. Test all routes: `/`, `#/meds`, `#/guidelines`
@@ -299,12 +301,14 @@ Protected files include:
 ### Enhanced Note Parser
 
 **4-Step Workflow**:
+
 1. **Paste** - Input free-text clinical notes
 2. **Parse** - AI-powered extraction of structured data
 3. **Review** - Validate and edit parsed information
 4. **Export** - Multiple format options (text, JSON, clinical summaries)
 
 **Capabilities**:
+
 - Vital signs extraction with flag detection
 - Laboratory value parsing with reference ranges
 - Medication list extraction
@@ -314,6 +318,7 @@ Protected files include:
 ### Clinical Decision Trees
 
 **ACS Decision Tree**:
+
 - Risk stratification (HEART score, TIMI score)
 - ECG interpretation guidance
 - Troponin protocol recommendations
@@ -321,6 +326,7 @@ Protected files include:
 - Evidence-based treatment pathways
 
 **Interactive Features**:
+
 - Step-by-step guided workflows
 - Contextual clinical recommendations
 - State management for complex scenarios
@@ -454,6 +460,7 @@ The CardiologySuiteApp vNext is a **clinical decision support tool** designed to
 - **Clinical Judgment Required**: Always apply clinical judgment and consult current guidelines
 
 By using this software, you acknowledge that:
+
 - You are a qualified healthcare professional
 - You understand the limitations of clinical decision support tools
 - You will not rely solely on this tool for patient care decisions
@@ -530,7 +537,7 @@ Please report security vulnerabilities privately via GitHub Security Advisories 
 
 ---
 
-**Built with ❤️ for healthcare professionals**
+Built with ❤️ for healthcare professionals
 
 **Version**: 0.7.0 vNext | **Status**: Production Ready 🚢 | **Last Updated**: October 2025
 

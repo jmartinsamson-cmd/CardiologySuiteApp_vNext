@@ -67,10 +67,11 @@ try {
   }
 
   // Check CSS order is preserved
+  /** @type {Array<{file: string, index: number}>} */
   const cssOrder = [];
   REQUIRED_CSS_FILES.forEach(cssFile => {
     const match = indexContent.match(new RegExp(`href="${cssFile.replace('/', '\\/')}"`));
-    if (match) {
+    if (match && match.index !== undefined) {
       cssOrder.push({ file: cssFile, index: match.index });
     }
   });
@@ -88,7 +89,8 @@ try {
   }
 
 } catch (error) {
-  console.error(`  ❌ Error reading index.html: ${error.message}`);
+  const err = /** @type {Error} */ (error);
+  console.error(`  ❌ Error reading index.html: ${err.message}`);
   hasErrors = true;
 }
 
@@ -114,7 +116,8 @@ cssChecks.forEach(({ file, classes }) => {
       }
     });
   } catch (error) {
-    console.error(`  ❌ Error reading ${file}: ${error.message}`);
+    const err = /** @type {Error} */ (error);
+    console.error(`  ❌ Error reading ${file}: ${err.message}`);
     hasErrors = true;
   }
 });
@@ -142,7 +145,8 @@ jsChecks.forEach(({ file, exports }) => {
       }
     });
   } catch (error) {
-    console.error(`  ❌ Error reading ${file}: ${error.message}`);
+    const err = /** @type {Error} */ (error);
+    console.error(`  ❌ Error reading ${file}: ${err.message}`);
     hasErrors = true;
   }
 });

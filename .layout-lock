@@ -9,6 +9,7 @@ npm run validate:layout
 ```
 
 ### Protected Files
+
 - `index.html` (CSS order)
 - `styles/meds.css`
 - `styles/guidelines.css`
