@@ -677,6 +677,745 @@ All diagnosis and differential diagnosis have been reviewed; assessment and plan
 All of the patient and family questions have been addressed and answered. Patient's is agreeable to the above stated plan. I will continue to monitor closely and make adjustments to medical management as needed.
  
 `,
+
+  /* Imported from tests/fixtures/real/example-note-001.json */
+  `
+HISTORY OF PRESENT ILLNESS:
+68yo M h/o CAD s/p PCI 2020, DM2, HTN presents with 3 days progressive DOE and LE edema. Denies CP, palpitations. Reports med compliance. Last echo 2024 showed EF 35%.
+
+PHYSICAL EXAMINATION:
+Vitals: BP 145/88, HR 92, RR 18, O2sat 94% RA, Temp 98.2F
+Gen: NAD, comfortable at rest
+CV: RRR, 2/6 systolic murmur at apex, JVP elevated to 10cm
+Resp: Bibasilar crackles, no wheeze
+Ext: 2+ pitting edema bilateral LE to knees
+
+LABS:
+BNP 1250 (prev 450)
+Troponin <0.01
+Cr 1.3 (baseline 1.1)
+Hgb 11.2
+
+ASSESSMENT:
+1. Acute decompensated heart failure (HFrEF) - volume overload
+2. CAD - stable, no ACS
+3. CKD stage 3 - worsening, likely prerenal
+4. Diabetes - well controlled
+
+PLAN:
+1. Increase furosemide to 40mg BID
+2. Daily weights, strict I/O
+3. Repeat BMP tomorrow
+4. Hold lisinopril until Cr improves
+5. Cardiology f/u 1 week
+6. Consider IV diuresis if no response to PO
+  `,
+
+
+  /* Imported from tests/fixtures/real/note-cabg-icu.json */
+  `
+70 year old male, with significant past medical history of hypertension, type 2 diabetes mellitus, HFrEF, ESRD s/p transplant now on HD, Enterococcus infective endocarditis, CAD s/p two-vessel CABG with aortic valve replacement and ligation of left atrial appendage, and prostate cancer s/p prostatectomy, who was admitted to the ICU post CABG on 9/11/2025. Stepped down on 9/18/25. Worsening respiratory distress noted on 9/23/25 and imaging demonstrated worsening volume overload. Pulmonology was consulted for further evaluation. Transferred back to ICU 9/25/25 for close monitoring. 
+ 
+
+9/11/25: admitted to ICU post CABG, AVR, and left atrial appendage ligation
+9/15/25: HD initiated
+9/18/25: stepped down from ICU
+9/24/25: Pulm consulted for right pleural effusion and increased work of breathing
+ 
+ 
+Interval History:
+Currently intubated RR18, TV 450, PEEP 5, FIO@ 30%.  Occ opens eyes on command and moves all 4 extremities.  Receiving dialysis today.  Left chest tube remains in place with limited output.
+ 
+Scheduled Medications: 
+•	album human 25%	 12.5 g	Intravenous	Once
+•	albumin human 25%	 12.5 g	Intravenous	Once
+•	albumin human 25%	 25 g	Intravenous	Once
+•	albuterol-ipratropium	 3 mL	Nebulization	Q6H
+•	amiodarone	 200 mg	Per NG tube	Daily
+•	amLODIPine	 10 mg	Per OG tube	Daily
+•	ampicillin IV (PEDS and ADULTS)	 2 g	Intravenous	Q12H
+•	aspirin	 81 mg	Per OG tube	Daily
+•	atorvastatin	 40 mg	Per OG tube	QHS
+•	calcitRIOL	 0.5 mcg	Per OG tube	Daily
+•	cefTRIAXone (Rocephin) IV (PEDS and ADULTS)	 2 g	Intravenous	Q12H
+•	docusate	 100 mg	Per G Tube	BID
+•	enoxparin	 30 mg	Subcutaneous	Q24H (prophylaxis, 1700)
+•	famotidine (PF)	 20 mg	Intravenous	Daily
+•	folic acid	 1 mg	Per OG tube	Daily
+•	insulin glargine U-100	 20 Units	Subcutaneous	BID
+•	metoprolol tartrate	 25 mg	Per OG tube	BID
+•	predniSONE	 7 mg	Per OG tube	Daily
+•	sodium chloride 3%	 4 mL	Nebulization	Q6H
+•	tacrolimus	 3 mg	Per OG tube	BID
+ 
+ 
+PRN Medications: 
+ 
+Current Facility-Administered Medications: 
+•  0.9%  NaCl infusion (for blood administration), , Intravenous, Q24H PRN
+•  acetaminophen, 650 mg, Per OG tube, Q6H PRN
+•  albumin human 25%, 25 g, Intravenous, Q20 Min PRN
+•  albumin human 5%, 12.5 g, Intravenous, PRN
+•  calcium carbonate, 500 mg, Per OG tube, TID PRN
+•  calcium gluconate IVPB, 1 g, Intravenous, PRN
+•  calcium gluconate IVPB, 2 g, Intravenous, PRN
+•  calcium gluconate IVPB, 3 g, Intravenous, PRN
+•  dextrose 50%, 12.5 g, Intravenous, PRN
+•  dextrose 50%, 25 g, Intravenous, PRN
+•  glucagon (human recombinant), 1 mg, Intramuscular, PRN
+•  glucose, 16 g, Per OG tube, PRN
+•  glucose, 24 g, Per OG tube, PRN
+•  guaiFENesin 100 mg/5 ml, 200 mg, Per OG tube, Q4H PRN
+•  hydrALAZINE, 10 mg, Intravenous, Q6H PRN
+•  insulin aspart U-100, 0-10 Units, Subcutaneous, Q6H PRN
+•  lactulose 10 gram/15 ml, 20 g, Per OG tube, Q6H PRN
+•  loperamide, 2 mg, Per OG tube, Continuous PRN
+•  magnesium sulfate 2 g IVPB, 2 g, Intravenous, PRN
+•  magnesium sulfate 2 g IVPB, 2 g, Intravenous, PRN
+•  metoclopramide, 5 mg, Intravenous, Q12H PRN
+•  naloxone, 0.02 mg, Intravenous, PRN
+•  ondansetron, 4 mg, Intravenous, Q4H PRN
+•  potassium chloride in water, 20 mEq, Intravenous, PRN
+•  potassium chloride in water, 40 mEq, Intravenous, PRN
+•  potassium chloride in water, 60 mEq, Intravenous, PRN
+•  [COMPLETED] CTA Chest Non-Coronary (PE Studies), , , Once **AND** sodium chloride 0.9%, 1,000 mL, Intravenous, Daily PRN
+•  sodium chloride 0.9%, 10 mL, Intravenous, PRN
+•  sodium phosphate 15 mmol in D5W 250 mL IVPB, 15 mmol, Intravenous, PRN
+•  sodium phosphate 20.1 mmol in D5W 250 mL IVPB, 20.1 mmol, Intravenous, PRN
+•  sodium phosphate 30 mmol in D5W 250 mL IVPB, 30 mmol, Intravenous, PRN
+ 
+ 
+Infusions:  
+•	loperamide	 2 mg	Per OG tube	Continuous PRN	 	 
+•	NORepinephrine bitartrate-D5W	 0-3 mcg/kg/min	Intravenous	Continuous	 	Stopped at 09/29/25 1238
+•	propofoL	 0-50 mcg/kg/min	Intravenous	Continuous	4.6 mL/hr at 09/27/25 0600	10 mcg/kg/min at 09/27/25 0600
+ 
+ 
+ 
+Fluid Balance: 
+ 
+Intake/Output Summary (Last 24 hours) at 10/1/2025 0905
+Last data filed at 10/1/2025 0530
+Gross per 24 hour
+Intake	1961 ml
+Output	2500 ml
+Net	-539 ml
+ 
+ 
+ 
+Vital Signs: 
+Vitals:
+ 	10/01/25 0824
+BP:	 
+Pulse:	74
+Resp:	(!) 22
+Temp:	 
+ 
+ 
+ 
+Physical Exam
+Vitals and nursing note reviewed. 
+Constitutional:  
+   General: He is not in acute distress.
+   Appearance: Normal appearance. He is ill-appearing. He is not toxic-appearing. 
+HENT: 
+   Head: Normocephalic and atraumatic. 
+   Right Ear: External ear normal. 
+   Left Ear: External ear normal. 
+   Nose: Nose normal. 
+   Mouth/Throat: 
+   Pharynx: No posterior oropharyngeal erythema. 
+   Comments: Unable to visualize posterior oropharynx secondary to endotracheal tube
+Eyes: 
+   General: No scleral icterus.
+   Conjunctiva/sclera: Conjunctivae normal. 
+   Pupils: Pupils are equal, round, and reactive to light. 
+Neck: 
+   Vascular: No carotid bruit. 
+Cardiovascular: 
+   Rate and Rhythm: Normal rate and regular rhythm. 
+   Pulses: Normal pulses. 
+   Heart sounds: Normal heart sounds. No murmur heard.
+   No friction rub. No gallop. 
+Pulmonary: 
+   Effort: Pulmonary effort is normal. No respiratory distress. 
+   Breath sounds: Normal breath sounds. No wheezing, rhonchi or rales. 
+   Comments: Intubated, on mechanical ventilation
+Abdominal: 
+   General: Abdomen is flat. Bowel sounds are normal. There is no distension. 
+   Palpations: Abdomen is soft. 
+   Tenderness: There is no abdominal tenderness. There is no guarding or rebound. 
+Musculoskeletal:    
+   General: No swelling or deformity. 
+   Cervical back: Neck supple. No rigidity or tenderness. 
+Skin:
+   General: Skin is warm and dry. 
+   Capillary Refill: Capillary refill takes less than 2 seconds. 
+   Findings: No erythema or rash. 
+Neurological: 
+   Comments: Unable to fully assess neurologic status and orientation.  Does  follow commands and is currently not sedated.  Withdraws to pain at lower extremities and minimally to command.  Occ opens eyes 
+Psychiatric: 
+   Comments: Unable to fully assess as patient is intubated and nonverbal 
+
+ 
+ 
+ 
+Ventilator Settings
+Vent Mode: A/C (10/01/25 0523)
+Ventilator Initiated: Yes (09/25/25 2300)
+Set Rate: 18 BPM (10/01/25 0523)
+Vt Set: 450 mL (10/01/25 0523)
+Pressure Support: 8 cmH20 (09/27/25 0803)
+PEEP/CPAP: 5 cmH20 (10/01/25 0523)
+Oxygen Concentration (%): 30 (10/01/25 0523)
+Peak Airway Pressure: 20 cmH20 (10/01/25 0523)
+Plateau Pressure: 21 cmH20 (09/29/25 1809)
+Total Ve: 8.9 L/m (10/01/25 0523)
+F/VT Ratio<105 (RSBI): (!) 45.05 (10/01/25 0523)
+ 
+ 
+Laboratory Studies: 
+Recent Labs
+Lab	10/01/25
+0508
+PH	7.490*
+PCO2	40.0
+PO2	116.0*
+HCO3	30.5*
+ 
+Recent Labs
+Lab	10/01/25
+0351
+WBC	12.09*
+RBC	3.89*
+HGB	10.6*
+HCT	35.8*
+PLT	184
+MCV	92.0
+MCH	27.2
+MCHC	29.6*
+ 
+Recent Labs
+Lab	10/01/25
+0351
+NA	136
+K	5.0
+CL	98
+CO2	25
+BUN	45.2*
+CREATININE	3.89*
+CALCIUM	8.5*
+MG	2.20
+ 
+ 
+ 
+Microbiology Data: 
+Microbiology Results (last 7 days) 
+ 
+ 	Procedure	Component	Value	Units	Date/Time
+ 	Blood Culture [1336834478]  (Normal)	Collected: 09/26/25 1240
+ 	Order Status: Completed	Specimen: Blood, Venous	Updated: 09/30/25 1601
+ 	 	Blood Culture	No Growth At 96 Hours
+ 	Blood Culture [1336834479]  (Normal)	Collected: 09/26/25 1240
+ 	Order Status: Completed	Specimen: Blood, Venous	Updated: 09/30/25 1601
+ 	 	Blood Culture	No Growth At 96 Hours
+ 	Respiratory Culture [1336829459]	Collected: 09/26/25 1018
+ 	Order Status: Completed	Specimen: Respiratory from Endotracheal Aspirate	Updated: 09/28/25 0813
+ 	 	Respiratory Culture	Rare normal respiratory flora
+ 	 	GRAM STAIN	Quality 1+
+ 	 	 	No bacteria seen
+ 	Fungal Culture [1329582542]  (Normal)	Collected: 09/11/25 0816
+ 	Order Status: Completed	Specimen: Tissue from Heart Valve	Updated: 09/25/25 0900
+ 	 	Fungal Culture	No Fungus Isolated at 2 Weeks
+ 
+ 
+ 
+ 
+Imaging: 
+X-Ray Chest 1 View
+Narrative: EXAMINATION:
+XR CHEST 1 VIEW
+ 
+CLINICAL HISTORY:
+CT maintenance;
+ 
+TECHNIQUE:
+One view
+ 
+COMPARISON:
+September 27, 2025.
+ 
+FINDINGS:
+Cardiopericardial silhouette appearance similar.  Sternotomy changes.  Supporting tubes and lines in similar location.  Bilateral pleural effusions and lower lung zones atelectasis.  No overt pulmonary edema.  No pneumothorax.
+Impression: No significant interval change.
+ 
+Electronically signed by:Mian Ibrahim
+Date:                                        09/28/2025
+Time:                                       08:22
+  `,
+
+
+  /* Imported from tests/fixtures/real/note-gerd-diabetes.json */
+  `
+Chief Complaint
+Patient presents with
+•	Vomiting
+ 	 	Pt had 1 episode of vomiting around 5 pm and states he feels like his chest is burning. Denies nausea/pain at this time
+ 
+43-year-old black male presents emergency department complaining of 1 episode of vomiting and since then he has had some midepigastric burning going up the middle of his chest the back of his throat
+
+ 
+Review of patient's allergies indicates:
+No Known Allergies
+Past Medical History:
+Diagnosis	Date
+•	Known health problems: none	 
+ 
+Past Surgical History:
+Procedure	Laterality	Date
+•	none 	N/A	 
+•	REPAIR, TENDON, BICEPS, DISTAL	Right	9/14/2023
+ 
+Family History
+Problem	Relation	Name	Age of Onset
+•	Diabetes	Mother	 	 
+•	Hypertension	Father	 	 
+•	Diabetes	Father	 	 
+ 
+[Social History]
+
+[Social History]
+Tobacco Use
+•	Smoking status:	Every Day
+ 	 	Current packs/day:	0.50
+ 	 	Average packs/day:	0.5 packs/day for 17.0 years (8.5 ttl pk-yrs)
+•	Smokeless tobacco:	Never
+Substance Use Topics
+•	Alcohol use:	Yes
+ 	 	Comment: occ
+•	Drug use:	Never
+
+Review of Systems 
+Constitutional: Negative.  Negative for activity change, appetite change, chills, diaphoresis, fatigue, fever and unexpected weight change. 
+HENT: Negative.  Negative for congestion, dental problem, drooling, ear discharge, ear pain, facial swelling, hearing loss, mouth sores, nosebleeds, postnasal drip, rhinorrhea, sinus pressure, sinus pain, sneezing, sore throat, tinnitus, trouble swallowing and voice change.  
+Eyes: Negative.  Negative for photophobia, pain, discharge, redness, itching and visual disturbance. 
+Respiratory: Negative.  Negative for apnea, cough, choking, chest tightness, shortness of breath, wheezing and stridor.  
+Cardiovascular: Negative.  Negative for chest pain, palpitations and leg swelling. 
+Gastrointestinal:  Positive for abdominal pain. Negative for abdominal distention, anal bleeding, blood in stool, constipation, diarrhea, nausea, rectal pain and vomiting. 
+Endocrine: Negative.  Negative for cold intolerance, heat intolerance, polydipsia, polyphagia and polyuria. 
+Genitourinary: Negative.  Negative for decreased urine volume, difficulty urinating, dysuria, enuresis, flank pain, frequency, genital sores, hematuria, penile discharge, penile pain, penile swelling, scrotal swelling, testicular pain and urgency. 
+Musculoskeletal: Negative.  Negative for arthralgias, back pain, gait problem, joint swelling, myalgias, neck pain and neck stiffness. 
+Skin: Negative.  Negative for color change, pallor, rash and wound. 
+Allergic/Immunologic: Negative.  Negative for environmental allergies, food allergies and immunocompromised state. 
+Neurological: Negative.  Negative for dizziness, tremors, seizures, syncope, facial asymmetry, speech difficulty, weakness, light-headedness, numbness and headaches. 
+Hematological: Negative.  Negative for adenopathy. Does not bruise/bleed easily. 
+Psychiatric/Behavioral: Negative.  Negative for agitation, behavioral problems, confusion, decreased concentration, dysphoric mood, hallucinations, self-injury, sleep disturbance and suicidal ideas. The patient is not nervous/anxious and is not hyperactive.  
+All other systems reviewed and are negative.
+
+ 
+Physical Exam
+ 
+Initial Vitals [10/01/25 2218]
+BP	Pulse	Resp	Temp	SpO2
+(!) 163/85	89	18	97.7 °F (36.5 °C)	98 %
+ 
+Physical Exam
+ 
+Nursing note and vitals reviewed.
+Constitutional: He appears well-developed and well-nourished. 
+HENT: 
+Head: Normocephalic and atraumatic. 
+Eyes: Conjunctivae and EOM are normal. Pupils are equal, round, and reactive to light. 
+Neck: Neck supple. 
+Normal range of motion.
+Cardiovascular:  Normal rate and regular rhythm.         
+Pulmonary/Chest: Breath sounds normal. 
+Abdominal: Abdomen is soft. Bowel sounds are normal. There is abdominal tenderness in the epigastric area. 
+Musculoskeletal:    
+   General: Normal range of motion. 
+   Cervical back: Normal range of motion and neck supple. 
+ 
+Neurological: He is alert and oriented to person, place, and time. 
+Skin: Skin is warm and dry. Capillary refill takes less than 2 seconds. 
+Psychiatric: He has a normal mood and affect. His behavior is normal. Judgment and thought content normal. 
+
+ 
+ 
+ED Course
+Procedures
+Labs Reviewed
+COMPREHENSIVE METABOLIC PANEL - Abnormal
+    Result	Value	
+ 	Sodium	138 	 
+ 	Potassium	3.9 	 
+ 	Chloride	105 	 
+ 	CO2	19 (*)	 
+ 	Glucose	240 (*)	 
+ 	Blood Urea Nitrogen	11.0 	 
+ 	Creatinine	1.11 	 
+ 	Calcium	9.9 	 
+ 	Protein Total	7.5 	 
+ 	Albumin	3.4 (*)	 
+ 	Globulin	4.1 (*)	 
+ 	Albumin/Globulin Ratio	0.8 (*)	 
+ 	Bilirubin Total	0.4 	 
+ 	ALP	40 	 
+ 	ALT	17 	 
+ 	AST	14 	 
+ 	eGFR	>60 	 
+ 	Anion Gap	14.0 	 
+ 	BUN/Creatinine Ratio	10 	 
+CBC WITH DIFFERENTIAL - Abnormal
+ 	WBC	5.93 	 
+ 	RBC	5.15 	 
+ 	Hgb	14.7 	 
+ 	Hct	43.9 	 
+ 	MCV	85.2 	 
+ 	MCH	28.5 	 
+ 	MCHC	33.5 	 
+ 	RDW	14.6 	 
+ 	Platelet	149 	 
+ 	MPV	11.9 (*)	 
+ 	Neut %	43.5 	 
+ 	Lymph %	41.0 	 
+ 	Mono %	10.5 	 
+ 	Eos %	3.2 	 
+ 	Basophil %	0.8 	 
+ 	Imm Grans %	1.0 	 
+ 	Neut #	2.58 	 
+ 	Lymph #	2.43 	 
+ 	Mono #	0.62 	 
+ 	Eos #	0.19 	 
+ 	Baso #	0.05 	 
+ 	Imm Gran #	0.06 (*)	 
+ 	NRBC%	0.0 	 
+AMYLASE - Normal
+ 	Amylase Level	44 	 
+LIPASE - Normal
+ 	Lipase Level	29 	 
+ 
+ 
+ 
+Imaging Results 
+None
+ 
+ 
+ 
+Medications
+aluminum-magnesium hydroxide-simethicone 200-200-20 mg/5 mL suspension 30 mL (30 mLs Oral Given 10/1/25 2223)
+  And
+LIDOcaine viscous HCl 2% oral solution 15 mL (15 mLs Oral Given 10/1/25 2223)
+ 
+Medical Decision Making
+43-year-old black gentleman with midepigastric tenderness and burning up his chest after vomiting.  Differential diagnosis includes not limited to reflux with esophagitis, peptic ulcer disease, pancreatitis, gastritis.  Was given a GI cocktail phone arrival and this greatly reduced his symptoms and he feels markedly improved for completeness sake a CBC CMP amylase and lipase were done his blood work is relatively benign with the exception of having a blood sugar over 200.  Discussed this with him and he is unaware that he has ever had a high blood sugar.  The fact that his blood sugars greater than 200 meets criteria for diabetes I will print him on some information discussed at length find a primary care physician and I will begin metformin twice a day and discussed with him the importance of following up and having blood work done and a full workup
+ 
+Problems Addressed:
+Gastroesophageal reflux disease with esophagitis without hemorrhage: acute illness or injury
+New onset type 2 diabetes mellitus: acute illness or injury that poses a threat to life or bodily functions
+ 
+Amount and/or Complexity of Data Reviewed
+Labs: ordered. Decision-making details documented in ED Course.
+
+Risk
+OTC drugs.
+Prescription drug management.
+Diagnosis or treatment significantly limited by social determinants of health.
+  `,
+
+
+  /* Imported from tests/fixtures/real/note-hf-decompensated.json */
+  `
+HPI: 
+53 year old man with history of HFrEF, NIDDM, CKD stage 3B, morbid obesity and hypertension presents for 2 week history of progressively worsening SOB and abdominal swelling. Endorses weight gain but unable to quantify. Denies fever, CP, vomiting or diarrhea. ECHO done 6/26/25 showed LVEF 35-40%. Admits to running out of most of his medications several months ago, including Entresto and synthroid. Compliant with Lasix. Endorses not following cardiac or diabetic diet. Diastolic reading are high but overall VS stable. Requiring 2L/NC to keep sats > 95%. Initial labs include BUN 22.5, creatinine 2.45 (baseline around 2.0). BNP 6,231. Troponin normal. Chest x-ray shows cardiac enlargement with central vascular congestion.  Admitted to hospital medicine service for further evaluation and management of acute on chronic heart failure.  
+ 
+Cardiology was consulted.  IV diuresis was continued. Will consult nephrology also. 
+ 
+Interval Hx: 
+Seen and examined. LE edema improving. Still complaining of abdominal distension. Continues on room air. Reportedly had 3.9 sec pause on telemetry today. 
+ 
+Case was discussed with patient's nurse and case manager on the floor.
+ 
+Objective/physical exam:
+General: In no acute distress, afebrile
+Chest: Clear to auscultation bilaterally
+Heart: RRR, +S1, S2, no appreciable murmur
+Abdomen: Soft, nontender, BS +
+MSK: Warm, no lower extremity edema, no clubbing or cyanosis
+Neurologic: Alert and oriented x4, Cranial nerve II-XII intact, Strength 5/5 in all 4 extremities
+ 
+VITAL SIGNS: 24 HRS MIN & MAX	LAST
+Temp  Min: 97.5 °F (36.4 °C)  Max: 115.9 °F (46.6 °C)	97.5 °F (36.4 °C)
+BP  Min: 112/75  Max: 191/108	(!) 148/109
+Pulse  Min: 76  Max: 98 	76
+Resp  Min: 17  Max: 17	17
+SpO2  Min: 90 %  Max: 100 %	(!) 93 %
+ 
+I have reviewed the following labs:
+Recent Labs
+Lab	10/01/25
+0807	10/02/25
+0712	10/03/25
+0447
+WBC	7.04	6.77	6.99
+RBC	5.33	5.57	5.53
+HGB	16.1	16.6	16.6
+HCT	52.7*	54.1*	53.5*
+MCV	98.9*	97.1*	96.7*
+MCH	30.2	29.8	30.0
+MCHC	30.6*	30.7*	31.0*
+RDW	15.0	14.6	14.4
+PLT	233	230	235
+MPV	9.7	9.1	9.5
+ 
+Recent Labs
+Lab	10/01/25
+0822	10/01/25
+2133	10/02/25
+0712	10/03/25
+0448
+NA	143	141	140	138
+K	5.1	4.3	4.1	4.4
+CL	99	96*	97*	95*
+CO2	37*	37*	37*	33*
+BUN	33.0*	37.7*	33.5*	37.3*
+CREATININE	2.35*	2.84*	2.41*	2.30*
+GLU	295*	296*	311*	297*
+CALCIUM	9.4	9.1	9.3	8.9
+MG	 -- 	1.70	1.80	1.90
+ALBUMIN	2.2*	 -- 	2.2*	2.4*
+PROT	7.1	 -- 	6.7	7.0
+ALKPHOS	75	 -- 	83	85
+ALT	14	 -- 	11	13
+AST	21	 -- 	19	24
+BILITOT	0.4	 -- 	0.5	0.5
+ 
+Microbiology Results (last 7 days) 
+ 
+ 	** No results found for the last 168 hours. **
+ 
+ 
+ 
+ 
+See below for Radiology
+ 
+Assessment/Plan:
+# Acute on chronic decompensated systolic and diastolic heart failure
+# Acute hypoxemic respiratory failure due to above - resolved
+# AKI on CKD stage IIIB - improving
+# Morbid obesity
+# HTN urgency
+# Likely OSA
+# Poorly controlled T2DM (A1c 12.1)
+# Hypothyroidism
+ 
+- continue IV lasix 40 mg BID. Cardiology following. Monitor I's and o's electrolytes. Appreciate input 
+               - given low albumin maybe bumex better than lasix but will defer to cardiology
+- Dr. Daya informed regarding his 4 sec pause on tele
+- will consult nephrology as patient has not followed up with one outpatient
+- increase glargine 25 units at night, lispro 6 units TIDAC with ISS
+- switched metoprolol to coreg 6.25 mg BID
+- continue nifedipine
+- other GDMT limited due to CKD
+- will need outpatient sleep study; patient unable to have that scheduled after last discharge
+- labs in AM
+- telemetry monitoring
+- Strict I&Os and daily weight
+- Monitor and replete lytes, keep K+ >4.0 and Mg >2.0
+- continue to hold entresto
+ 
+ 
+VTE prophylaxis: lovenox
+ 
+Patient condition:  Fair
+ 
+Anticipated discharge and Disposition:   
+ 
+ 
+All diagnosis and differential diagnosis have been reviewed; assessment and plan has been documented; I have personally reviewed the labs and test results that are presently available; I have reviewed the patients medication list; I have reviewed the consulting providers response and recommendations. I have reviewed or attempted to review medical records based upon their availability
+ 
+All of the patient's questions have been  addressed and answered. Patient's is agreeable to the above stated plan. I will continue to monitor closely and make adjustments to medical management as needed.
+ 
+_____________________________________________________________________
+ 
+Malnutrition Status:
+Nutrition consulted. Most recent weight and BMI monitored- 
+ 
+Measurements:
+Wt Readings from Last 1 Encounters:
+10/03/25	115.9 kg (255 lb 8.2 oz)
+Body mass index is 41.24 kg/m².
+ 
+Patient has been screened and assessed by RD.
+ 
+Malnutrition Type:
+Context:  
+Level: other (see comments) (Does not meet criteria)
+ 
+Malnutrition Characteristic Summary:
+Weight Loss (Malnutrition): other (see comments) (Does not meet criteria)
+Energy Intake (Malnutrition): other (see comments) (Does not meet criteria)
+Fluid Accumulation (Malnutrition): moderate
+ 
+Interventions/Recommendations (treatment strategy):
+ 
+Scheduled Med:
+•	atorvastatin	 80 mg	Oral	QHS
+•	carvediloL	 6.25 mg	Oral	BID
+•	enoxparin	 40 mg	Subcutaneous	Daily
+•	insulin glargine U-100	 10 Units	Subcutaneous	QHS
+•	levothyroxine	 88 mcg	Oral	Before breakfast
+•	NIFEdipine	 30 mg	Oral	Daily
+•	polyethylene glycol	 17 g	Oral	Daily
+•	senna-docusate	 2 tablet	Oral	BID
+ 
+Continuous Infusions:
+ 
+PRN Meds:
+ 
+Current Facility-Administered Medications: 
+•  acetaminophen, 1,000 mg, Oral, Q6H PRN
+•  aluminum-magnesium hydroxide-simethicone, 30 mL, Oral, QID PRN
+•  bisacodyL, 10 mg, Rectal, Daily PRN
+•  dextrose 50%, 12.5 g, Intravenous, PRN
+•  dextrose 50%, 25 g, Intravenous, PRN
+•  glucagon (human recombinant), 1 mg, Intramuscular, PRN
+•  glucose, 16 g, Oral, PRN
+•  glucose, 24 g, Oral, PRN
+•  hydrALAZINE, 10 mg, Intravenous, Q6H PRN
+•  insulin aspart U-100, 0-10 Units, Subcutaneous, QID (AC + HS) PRN
+•  melatonin, 6 mg, Oral, Nightly PRN
+•  naloxone, 0.02 mg, Intravenous, PRN
+•  ondansetron, 4 mg, Intravenous, Q4H PRN
+•  prochlorperazine, 5 mg, Intravenous, Q6H PRN
+•  senna-docusate, 1 tablet, Oral, BID PRN
+•  sodium chloride 0.9%, 10 mL, Intravenous, PRN 
+ 
+Radiology:
+I have personally reviewed the following imaging and agree with the radiologist. 
+ 
+X-Ray Chest AP Portable
+Narrative: EXAMINATION:
+Chest one view
+ 
+CLINICAL HISTORY:
+Shortness of breath
+ 
+COMPARISON:
+06/28/2025
+ 
+FINDINGS:
+There is stable cardiac enlargement.  There is central vascular congestion noted.  No consolidation or confluent airspace disease.  No visible pneumothorax or pleural effusion
+Impression: Cardiac enlargement with central vascular congestion.
+  `,
+
+  `64 year old male with history of Paroxysmal AFib and Orthostatic hypotension who presents from Allentown CC
+
+Interval History:
+Patient seen and examined; chart, nursing notes, and telemetry reviewed.
+
+Mr. Doe is a pleasant 64M with a history of paroxysmal afib managed on Eliquis and Metoprolol, who initially presented to PMC 2 days ago after experiencing 2 syncopal episodes while sitting. These episodes, which lasted only a few seconds, were associated with lightheadedness and occurred without diaphoresis or prior chest pain. Notably, the patient has a history of orthostatic hypotension and has experienced similar episodes in the past.
+
+Yesterday, patient successfully underwent a repeat DCCV for atrial fibrillation and the patient converted to normal sinus rhythm. patient has been monitored on telemetry, showing no further episodes of atrial fibrillation or atrial flutter. A carotid doppler was conducted and showed significant stenosis in left internal carotid artery necessitating vascular consultation. patient was evaluated by Dr. Miller from the Vascular Surgery service who recommends carotid stenting, which patient is scheduled for next week.
+ 
+Yesterday evening he had no anginal chest pain, no dyspnea on exertion, no orthopnea, and no pnd. He was tolerating oral intake without difficulty, and he was in no respiratory distress. Vital signs and hemodynamics as documented in the EMR have been stable and reassuring and his physical exam has been unremarkable. Telemetry has revealed NSR. No acute labs were drawn overnight. Imaging includes Echocardiogram (2025-01-13), CT head (2025-01-11), and CXR (2025-01-11).
+
+Vitals - 
+|Vital Sign | 01/13/25 0600| 01/13/25 1030| 01/13/25 1300| 01/13/25 1600|
+|------------|----------|---------|---------|----------|
+|BP | 117/73 | 119/75 | 123/72 | 121/71 |
+|HR | 68 | 62 | 71 | 69 |
+|RR | 17 | 17 | 17 | 18 |
+|SpO2 | 96% on RA | 98% on RA | 96% on RA | 98% on RA |
+|Temp |97.9 F |98.1 F |97.8 F |97.7 F |
+
+Laboratory Data
+|Labs (units) |01/11 | 01/12| 01/13|
+|------|---------|-------|----------|
+|WBC (K/uL) |6.8 |7.1 |6.9 |
+|Hgb (g/dL) |13.2 |13.5 |13.4 |
+|Hct (%) |39.6 |40.4 |40.1 |
+|Platelet (K/uL) |178 |185 |181 |
+|Sodium (mEq/L) |139 |140 |139 |
+|Potassium (mEq/L) |4.1 |4.0 |4.2 |
+|Chloride (mEq/L) |103 |104 |103 |
+|Bicarb (mEq/L) |24 |25 |24 |
+|BUN (mg/dL) |18 |17 |18 |
+|Creatinine (mg/dL) |1.0 |1.0 |1.0 |
+|Glucose (mg/dL) |102 |98 |105 |
+|Calcium (mg/dL) |9.2 |9.4 |9.3 |
+|Magnesium (mg/dL) |2.1 |2.0 |2.1 |
+|TSH (mIU/L) |2.34 | | |
+|Free T4 (ng/dL) |1.12 | | |
+|Troponin (ng/mL) |<0.01 |<0.01 |<0.01 |
+|BNP (pg/mL) |52 | | |
+
+Imaging/Results:
+
+CT head without contrast (01/11/2025): No acute intracranial abnormality. No evidence of hemorrhage, mass effect, or midline shift. Age-appropriate cerebral volume loss.
+
+Echocardiogram (01/13/2025): Normal left ventricular systolic function with LVEF 55-60%. Mild left atrial enlargement. No significant valvular abnormalities. No pericardial effusion.
+
+Carotid Doppler (01/12/2025): 
+- Right ICA: <50% stenosis
+- Left ICA: 70-79% stenosis
+- Right vertebral artery: Antegrade flow
+- Left vertebral artery: Antegrade flow
+
+CXR (01/11/2025): Clear lungs. Normal cardiac silhouette. No acute cardiopulmonary process.
+
+Home Medications (confirmed with patient and pharmacy):
+1. Eliquis 5mg PO BID
+2. Metoprolol succinate 50mg PO daily
+3. Atorvastatin 40mg PO daily
+4. Aspirin 81mg PO daily (patient takes in addition to Eliquis)
+5. Lisinopril 10mg PO daily
+6. Omeprazole 20mg PO daily
+
+Active Medications:
+1. Eliquis 5mg PO BID
+2. Metoprolol succinate 50mg PO daily
+3. Atorvastatin 40mg PO daily
+4. Aspirin 81mg PO daily
+5. Lisinopril 10mg PO daily (held this AM due to concern for orthostatic hypotension)
+6. Omeprazole 20mg PO daily
+7. Heparin 5000 units SQ Q8H (DVT prophylaxis while hospitalized)
+
+Assessment/Plan:
+
+64M with paroxysmal AFib s/p successful DCCV now in NSR, syncopal episodes likely secondary to orthostatic hypotension, found to have significant left ICA stenosis.
+
+1. Syncope: Most likely secondary to orthostatic hypotension given patient's history and presentation. Alternative considerations included arrhythmia (less likely given afib rate controlled and patient now in NSR post-DCCV), structural cardiac disease (ruled out by echo), and carotid stenosis (may contribute but less likely primary cause). 
+   - Continue current beta blocker dosing
+   - Holding lisinopril for now given orthostatic concerns
+   - Encourage adequate hydration
+   - Patient educated on slow positional changes
+   - Physical therapy consult for gait/transfer assessment
+
+2. Paroxysmal Atrial Fibrillation: Patient underwent successful DCCV yesterday and has maintained NSR on telemetry.
+   - Continue Eliquis 5mg BID for stroke prevention (CHA2DS2-VASc = 2)
+   - Continue Metoprolol succinate 50mg daily for rate control
+   - Telemetry monitoring - will discontinue if remains in NSR today
+   - Patient counseled on importance of medication compliance
+
+3. Carotid Stenosis: Left ICA with 70-79% stenosis, asymptomatic.
+   - Vascular surgery evaluated - plan for left carotid artery stenting as outpatient next week
+   - Continue aspirin 81mg and atorvastatin 40mg
+   - Patient will follow up with Dr. Miller in vascular surgery clinic
+
+4. Prophylaxis:
+   - DVT: Therapeutic anticoagulation with Eliquis
+   - GI: Omeprazole 20mg daily
+   - Fall precautions given syncope history
+
+Anticipated discharge and Disposition:
+Planning discharge to home today if patient remains stable. Patient lives with wife who is able to assist. Home health services not needed at this time. Patient has follow-up arranged with:
+- Primary care physician Dr. Johnson in 1 week
+- Cardiology Dr. Smith in 2 weeks
+- Vascular surgery Dr. Miller in 1 week for pre-procedure evaluation
+
+Discharge instructions provided regarding medication changes (holding lisinopril), importance of slow positional changes, hydration, and warning signs requiring immediate medical attention.
+  `,
+
 ];
 
 /**
