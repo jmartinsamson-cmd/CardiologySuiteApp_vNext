@@ -1,4 +1,4 @@
-# Layout Protection - Quick Reference Card
+# Layout Protection - Quick Reference
 
 ## 🔒 Layout is LOCKED
 
@@ -42,6 +42,8 @@ npm run security:check
 ✅ Both pages render correctly?  
 ✅ Search functionality works?  
 ✅ No console errors?
+
+---
 
 ---
 
