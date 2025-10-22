@@ -302,10 +302,113 @@ function isAllowedLab(name) {
 function extractLabs(full, sections) {
   const source = (sections && sections["Labs"]) || (sections && sections["Laboratory Results"]) || full;
 
+  console.log('🔬 extractLabs called');
+  console.log('  📏 Source length:', source.length);
+  console.log('  📝 First 200 chars:', source.substring(0, 200));
+  
   const labs = [];
-  const lines = source.split(/\n/).map(s => normalizeLabText(s)).filter(Boolean);
+  const lines = source.split(/\n/).filter(Boolean);  // Don't normalize yet - preserve tabs
 
-  for (const line of lines) {
+  // NEW: Detect and parse multi-column table format (EPIC style)
+  // Format: "Lab	08/26/25 1026	08/27/25 0834..."
+  //         "NA	135*	 -- 	136	136	138"
+  // We want the LAST (most recent) numeric value
+  let tableProcessed = false;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    // Check if this is a multi-column table header (contains "Lab" followed by dates with tabs)
+    // Look for patterns like "Lab	08/26/25" or "Recent Labs" followed by date columns
+    if (/Lab\s+\d{1,2}\/\d{1,2}\/\d{2,4}/.test(line) || 
+        (/Recent Labs/i.test(line) && i + 1 < lines.length && /Lab\s+\d{1,2}\/\d{1,2}\/\d{2,4}/.test(lines[i + 1]))) {
+      
+      console.log('📊 Detected multi-column lab table format at line', i);
+      
+      // If "Recent Labs" header, skip to actual column header
+      let headerIndex = i;
+      if (/Recent Labs/i.test(line)) {
+        headerIndex = i + 1;
+        i++; // Skip the "Recent Labs" line
+      }
+      
+      // Process subsequent lines as table rows
+      for (let j = headerIndex + 1; j < lines.length; j++) {
+        const dataLine = lines[j];
+        
+        // Stop if we hit an empty line, spacing marker, or new section header
+        if (!dataLine.trim() || 
+            /^[\s<>-]+$/.test(dataLine) ||
+            /^(Recent Labs|Chemistries|CBC|Coags|Imaging|Physical|Significant)/i.test(dataLine)) {
+          console.log(`📊 Table ended at line ${j}`);
+          break;
+        }
+        
+        // Split by tabs first (most reliable), then fall back to multiple spaces
+        let parts = dataLine.split('\t').map(p => p.trim()).filter(p => p);
+        if (parts.length < 2) {
+          // Try multiple spaces
+          parts = dataLine.split(/\s{2,}/).map(p => p.trim()).filter(p => p);
+        }
+        if (parts.length < 2) continue; // Need at least lab name and one value
+        
+        const labName = parts[0];
+        
+        // Skip if not a recognized lab
+        if (!isAllowedLab(labName)) {
+          console.log(`  ⏭️ Skipping unrecognized lab: ${labName}`);
+          continue;
+        }
+        
+        // Extract all numeric values (skip "--", " -- ", and empty cells)
+        const values = parts.slice(1).filter(p => p && p !== '--' && p !== ' -- ' && /\d/.test(p));
+        if (values.length === 0) {
+          console.log(`  ⏭️ No values found for ${labName}`);
+          continue;
+        }
+        
+        // Get the LAST (most recent) value
+        const lastValue = values[values.length - 1];
+        
+        // Parse value and flag (handle formats like "135*", "1.55*", "9.2")
+        const valueMatch = lastValue.match(/([<>]?\d+(?:\.\d+)?)(\*|High|Low|H|L)?/);
+        if (valueMatch) {
+          const numericValue = Number(valueMatch[1]);
+          const flag = valueMatch[2];
+          
+          const lab = {
+            name: labName.trim(),
+            value: Number.isNaN(numericValue) ? valueMatch[1] : numericValue,
+            raw: dataLine
+          };
+          
+          const flagIndicator = coerceFlag(flag);
+          if (flagIndicator) {
+            lab.value = `${lab.value} ${flagIndicator}`;
+          }
+          
+          labs.push(lab);
+          console.log(`  ✅ Extracted ${labName}: ${lab.value} from values [${values.join(', ')}]`);
+        }
+      }
+      
+      tableProcessed = true;
+      // Skip to after the table
+      i = i + 20; // Skip ahead to avoid re-processing
+      continue;
+    }
+  }
+  
+  // If we found table data, return it now
+  if (tableProcessed && labs.length > 0) {
+    console.log(`📊 Multi-column table extraction complete: ${labs.length} labs found`);
+    return dedupeByKey(labs, (x) => `${x.name}|${x.value}`);
+  }
+  
+  // Fall back to line-by-line parsing for non-table formats
+  console.log('📋 Using line-by-line lab parsing (no table detected)');
+  const normalizedLines = lines.map(s => normalizeLabText(s));
+
+  for (const line of normalizedLines) {
     // Skip non-lab headers
     if (NON_LAB_HEADERS.test(line)) {
       continue;
@@ -313,6 +416,11 @@ function extractLabs(full, sections) {
 
     // Skip date-like lines (MM/DD/YYYY)
     if (/^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(line)) {
+      continue;
+    }
+    
+    // Skip table header lines
+    if (/^Lab[\s\t]+\d{1,2}\/\d{1,2}\/\d{2,4}/.test(line)) {
       continue;
     }
 

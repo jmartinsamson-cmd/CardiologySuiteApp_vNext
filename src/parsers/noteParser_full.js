@@ -82,9 +82,9 @@ function parseClinicalNoteFull(text) {
   const metaDates = Array.from(findAllDatesISO(clean));
   const [age, sex] = quickDemoMeta(clean);
 
-  // Vitals (scan whole note once)
+  // Vitals (scan whole note once, pass sections for better extraction)
   console.log('🔍 Step 8: Extracting vitals...');
-  const vitals = extractVitals(clean);
+  const vitals = extractVitals(clean, sections);
   console.log('🔍 Step 9: Building return object...');
 
   const result = {

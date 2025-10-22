@@ -2250,10 +2250,14 @@ class TemplateRenderer {
     // Additional heuristic: treat short, single-paragraph inputs with no other section headers as HPI-only
     const noSectionShortParagraph = otherSectionCount === 0 && wordCount >= 12 && wordCount <= 400;
 
+    // NEW: If it starts with HPI: but has multiple other sections (like a full note), treat as full note
+    const startsWithHPI = lowerText.startsWith('hpi:') || lowerText.startsWith('history of present illness');
+    const hasMultipleSections = otherSectionCount >= 3; // Changed from 2 to be more conservative
+
     const isHPIOnly = (
       (otherSectionCount <= 1 && hpiKeywordCount >= 2) ||
       (wordCount < 120 && hpiKeywordCount >= 1 && otherSectionCount === 0) ||
-      (lowerText.startsWith('hpi:') || lowerText.startsWith('history of present illness')) ||
+      (startsWithHPI && !hasMultipleSections) || // Only HPI-only if starts with HPI AND doesn't have multiple sections
       noSectionShortParagraph
     );
 
@@ -2261,6 +2265,8 @@ class TemplateRenderer {
       wordCount,
       otherSectionCount,
       hpiKeywordCount,
+      startsWithHPI,
+      hasMultipleSections,
       isHPIOnly
     });
 
