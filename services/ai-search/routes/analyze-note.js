@@ -169,7 +169,7 @@ async function performClinicalSearch(client, terms) {
   try {
     const searchOptions = {
       top: 5,
-      select: ["title", "content", "url", "category"],
+      select: ["title", "content", "url"],
       includeTotalCount: false
     };
     
@@ -184,6 +184,11 @@ async function performClinicalSearch(client, terms) {
     
     return results;
   } catch (err) {
+    // Handle 404 index not found gracefully
+    if (err?.statusCode === 404 || err?.code === 'ResourceNotFound') {
+      console.log("[analyze-note] Search index not found (404) - returning empty results. Create index with: npm run search:index:put");
+      return [];
+    }
     console.error("[analyze-note] Search failed:", err);
     return [];
   }

@@ -39,8 +39,10 @@ export default function registerParaphraseHPIRoutes(app) {
       const userPrompt = `Paraphrase the following HPI:\n\n${hpi}`;
 
       // Call OpenAI with backoff retry
-      // For Azure OpenAI, pass the deployment name as the model
-      const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini";
+      // For Azure OpenAI, use the HPI-specific deployment name (configurable)
+      const deployment = process.env.AZURE_OPENAI_HPI_DEPLOYMENT || process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini";
+      console.log(`[paraphrase-hpi] Using deployment: ${deployment}`);
+      
       const startTime = Date.now();
       const completion = await withBackoff(
         async () => {
