@@ -114,5 +114,20 @@
       "envManager": "ms-python.python:system",
       "packageManager": "ms-python.python:pip"
     }
-  ]
+  ],
+
+  // Azure AI Foundry - Authentication configuration
+  "azure.tenant": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
+  "azure.cloud": "AzureCloud",
+  "aifoundry.subscriptionId": "6ae15877-96d9-4771-928c-080c755701e4",
+  "aifoundry.tenantId": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
+  "azure.authenticationMode": "AzureCLI",
+  "azure.resourceFilter": ["86fd6795-dcf9-4164-935b-72cf98b01b3d/6ae15877-96d9-4771-928c-080c755701e4"],
+  
+  // Terminal environment variables for Azure
+  "terminal.integrated.env.linux": {
+    "AZURE_TENANT_ID": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
+    "AZURE_SUBSCRIPTION_ID": "6ae15877-96d9-4771-928c-080c755701e4",
+    "AZURE_CONFIG_DIR": "/home/codespace/.azure"
+  }
 }
