@@ -4,10 +4,11 @@
 /**
  * Test complete RAG pipeline: Backend → Azure Search → GPT-4
  * Tests the analyze-note endpoint with RAG enabled
+ * 
+ * Note: Uses Node 18+ built-in fetch (no need for node-fetch package)
  */
 
 import 'dotenv/config';
-import fetch from 'node-fetch';
 
 // Test script uses localhost only - safe for development
 // codacy-disable-next-line
