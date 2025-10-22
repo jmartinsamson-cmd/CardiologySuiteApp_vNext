@@ -88,7 +88,7 @@ export async function searchGuidelines(query, top = 5) {
       content: v.content || '',
       sourceId: v.id, // Use document id as sourceId
       url: v.metadata_storage_path || '', // Storage path as URL
-      chunkIndex: 0, // Blob storage doesn't chunk by default
+      chunkIndex: 0, // Single-document index (no chunking configured)
       score: v['@search.score'],
       language: v.language,
       keyPhrases: v.keyPhrases || []
