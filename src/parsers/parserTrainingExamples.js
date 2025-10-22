@@ -1416,6 +1416,201 @@ Planning discharge to home today if patient remains stable. Patient lives with w
 Discharge instructions provided regarding medication changes (holding lisinopril), importance of slow positional changes, hydration, and warning signs requiring immediate medical attention.
   `,
 
+  `Brief HPI/Hospital Course: 
+Patient is a 39 yo male, unknown to CIS, who presented to the ED today with c/o SOB x1 month. Patient reports he was told around the time symptoms began, during a health screening, that he was in afib, however due to insurance issues he has not followed up with PCP or cardiology. Additionally patient reports being prescribed Metoprolol and ASA when he was seen in an outlying facility in July following involvement in MVC. States he has been noncompliant with these medications. On arrival patient was found to be in Afib w/ RVR rate of 196. Adenosine 6mg-->12mg given with no effect on rate, IV lopressor x 4 doses reduced heart rate to 120s, he was started on Cardizem gtt at that time. ED workup revealed ProBNP 7,149, HS troponin 36, Cr 1.31. Patient admitted to cardiology service for further care. 
+ 
+Hospital Course: 
+10.21.25 Due to his condition the patient was admitted to the ICU for management of possible cardiogenic shock in AFib with RVR this AM. Reportedly worsening SOB overnight with hypotension. Dobutamine, Levophed, and Heparin gtts infusing. Afib w/ RVR persists with rate in 130s. Will give dose of IV digoxin. Will undergo R/LHC today. 
+ 
+PMH: denies 
+PSH: denies 
+Family History: unknown 
+Social History: Current everyday smoker, denies ETOH use; reports previous use of Mojo as recently has July, denies current use. 
+ 
+Previous Cardiac Diagnostics: 
+TTE 10.20.25
+Left Ventricle: The left ventricle is severely dilated. Increased wall thickness. Severe global hypokinesis is present. There is severely reduced systolic function with a visually estimated ejection fraction of 15 - 20%.
+Right Ventricle: The right ventricle is dilated measuring 3.6 cm. Systolic function is severely reduced.
+Left Atrium: The left atrium is severely dilated.
+Right Atrium: The right atrium is severely dilated.
+Mitral Valve: Mildly thickened leaflets. There is moderate regurgitation.
+Tricuspid Valve: There is moderate regurgitation.
+Pulmonic Valve: There is mild regurgitation.
+IVC/SVC: Elevated venous pressure at 15 mmHg.
+ 
+Review of Systems 
+Constitutional: Positive for malaise/fatigue. 
+Cardiovascular:  Positive for dyspnea on exertion, irregular heartbeat and palpitations. Negative for chest pain. 
+Respiratory:  Positive for shortness of breath.  
+
+Objective:
+ 
+Vital Signs (Most Recent):
+Temp: 97.5 °F (36.4 °C) (10/21/25 0715)
+Pulse: (!) 129 (10/21/25 0854)
+Resp: 19 (10/21/25 0745)
+BP: (!) 123/59 (10/21/25 0854)
+SpO2: 99 % (10/21/25 0745)	Vital Signs (24h Range):
+Temp:  [97.5 °F (36.4 °C)-97.9 °F (36.6 °C)] 97.5 °F (36.4 °C)
+Pulse:  [75-226] 129
+Resp:  [13-46] 19
+SpO2:  [63 %-100 %] 99 %
+BP: (90-176)/(59-119) 123/59
+Arterial Line BP: (83-131)/(51-78) 130/61
+Weight: 106.4 kg (234 lb 9.1 oz)
+Body mass index is 30.95 kg/m².
+SpO2: 99 %
+ 
+Intake/Output Summary (Last 24 hours) at 10/21/2025 0901
+Last data filed at 10/21/2025 0730
+Gross per 24 hour
+Intake	2260.38 ml
+Output	650 ml
+Net	1610.38 ml
+ 
+Lines/Drains/Airways 
+ 
+ 	
+Arterial Line 	Duration
+ 
+
+ 	 	 
+ 	Arterial Line 10/21/25 0230 Left Brachial	<1 day
+ 
+
+ 
+
+ 
+ 	
+Peripheral Intravenous Line 	Duration
+ 
+
+ 	 	 
+ 	Peripheral IV 10/20/25 0948 18 G Right Antecubital	<1 day
+ 	Peripheral IV Single Lumen 10/20/25 1950 20 G Anterior;Distal;Left Upper Arm	<1 day
+ 	Peripheral IV Single Lumen 10/21/25 0000 20 G Long PIVC Anterior;Left Forearm	<1 day
+ 
+
+ 
+
+ 
+ 
+Significant Labs: 
+Chemistries:
+Recent Labs
+Lab	10/20/25
+1006	10/21/25
+0203	10/21/25
+0533
+NA	136	135*	132*
+K	3.9	4.2	4.2
+CL	101	102	101
+CO2	23	7*	9*
+BUN	13.7	19.7	22.9*
+CREATININE	1.31*	1.96*	2.04*
+CALCIUM	9.0	8.3*	7.6*
+PROT	7.8	6.8	5.7*
+BILITOT	1.7*	3.0*	2.5*
+ALKPHOS	133	125	111
+ALT	19	210*	860*
+AST	65*	391*	1,801*
+MG	 -- 	2.60	 -- 
+
+ 
+CBC/Anemia Labs:	Coags: 
+Recent Labs
+Lab	10/20/25
+1006	10/21/25
+0107
+WBC	11.96*	17.74*
+HGB	16.9	18.1*
+HCT	48.7	59.4*
+PLT	289	213
+MCV	94.9*	105.7*
+RDW	16.3	17.3*
+	
+Recent Labs
+Lab	10/20/25
+1006	10/21/25
+0108
+INR	1.1	1.6*
+APTT	26.4	20.1*
+
+ 
+Telemetry:  Afib w/ RVR
+ 
+Physical Exam
+Vitals and nursing note reviewed. 
+Constitutional:  
+   Appearance: He is ill-appearing. 
+HENT: 
+   Head: Atraumatic. 
+Cardiovascular: 
+   Rate and Rhythm: Tachycardia present. Rhythm irregular. 
+   Pulses: Normal pulses. 
+Pulmonary: 
+   Effort: Respiratory distress present. 
+Musculoskeletal: 
+   Cervical back: Neck supple. 
+   Right lower leg: No edema. 
+   Left lower leg: No edema. 
+Skin:
+   General: Skin is warm and dry. 
+Neurological: 
+   General: No focal deficit present. 
+   Mental Status: He is alert and oriented to person, place, and time. Mental status is at baseline. 
+
+Current Schedule Inpatient Medications:
+•	aspirin	 81 mg	Oral	Daily
+•	digoxin	 250 mcg	Intravenous	Once
+•	folic acid	 1 mg	Oral	Daily
+•	metoprolol tartrate	 25 mg	Oral	BID
+•	piperacillin-tazobactam (Zosyn) IV (PEDS and ADULTS) (extended infusion is not appropriate)	 4.5 g	Intravenous	Q8H
+•	thiamine (B-1) injection	 100 mg	Intravenous	Daily
+•	vancomycin (VANCOCIN) 1,000 mg in D5W 250 mL IVPB (admixture device)	 1,000 mg	Intravenous	Once
+ 	Followed by
+•	vancomycin (VANCOCIN) 1,000 mg in D5W 250 mL IVPB (admixture device)	 1,000 mg	Intravenous	Once
+ 
+Continuous Infusions:
+•	dilTIAZem	 0-15 mg/hr	Intravenous	Continuous	 	Stopped at 10/20/25 2254
+•	DOBUTamine IV infusion (titrating)	 0-20 mcg/kg/min (Dosing Weight)	Intravenous	Continuous	16.3 mL/hr at 10/21/25 0700	10 mcg/kg/min at 10/21/25 0700
+•	heparin (porcine) in D5W	 0-40 Units/kg/hr	Intravenous	Continuous	19.6 mL/hr at 10/21/25 0700	18 Units/kg/hr at 10/21/25 0700
+•	NORepinephrine bitartrate-D5W	 0-3 mcg/kg/min (Dosing Weight)	Intravenous	Continuous	20.4 mL/hr at 10/21/25 0700	0.1 mcg/kg/min at 10/21/25 0700
+•	sodium bicarbonate 150 mEq in D5W 1,000 mL infusion	 	Intravenous	Continuous	75 mL/hr at 10/21/25 0700	Rate Verify at 10/21/25 0700
+ 
+ 
+Assessment:
+ 
+Atrial fibrillation, unspecified, w/ RVR
+  -CHADsVASc - 1 Points - 0.6% Stroke Risk per Year
+Suspected cardiogenic vs septic shock
+  -R/LHC 10.21.25
+  -Lactic acid 13.3
+  -TTE 10.20.25 EF 15-20%
+  -Dobutamine and Levophed 
+Cardiomyopathy
+SOB
+Elevated Troponin, d/t afib w/ RVR
+  -HS troponin 36->30->32->35->74->95
+Elevated BNP
+  -NT-ProBNP 7,149
+  -TTE 10.20.25 EF 15-20%
+AKI 
+Ischemic hepatitis congestive hepatopathy 
+Metabolic acidosis 
+ 
+Plan:
+ 
+Cardizem gtt discontinued
+Continue Heparin gtt per protocol
+Give digoxin 250mcg IV once 
+Will plan for R/LHC today
+Risk, benefits and alternatives reviewed and discussed with the patient and their family and they wish to proceed with above procedure. 
+Consent obtained and placed on chart
+NPO since midnight
+Will consider possible TEE w/ DCCV pending heart cath findings
+  `,
+
 ];
 
 /**
