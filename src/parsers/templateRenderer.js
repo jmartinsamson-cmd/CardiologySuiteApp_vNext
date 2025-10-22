@@ -1910,6 +1910,15 @@ class TemplateRenderer {
           throw new Error('Parser returned null/undefined');
         }
 
+        // Debug: quick summary of parsed structure
+        try {
+          const sectionKeys = parsedData && parsedData.sections ? Object.keys(parsedData.sections) : [];
+          console.log('🧩 Parsed object keys:', Object.keys(parsedData || {}));
+          console.log('🧩 Parsed.sections keys:', sectionKeys);
+        } catch (_) {
+          // ignore
+        }
+
         // STAGE 2.5: Enrich with AI Analysis (fail-soft)
         if (typeof window.enrichWithAIAnalysis === 'function') {
           console.log('🤖 Enriching with AI analysis...');
@@ -2952,12 +2961,14 @@ class TemplateRenderer {
   // Populate vitals inputs from parsed data
   populateVitalsUI() {
     if (!this.parsedData || !this.parsedData.sections) {
+      console.warn('📊 Skipping vitals UI: no parsedData.sections');
       return;
     }
 
     // Try to extract vitals from sections
     const vitalsSection = this.normalizedSections.VITALS || this.parsedData.sections.vitals || this.parsedData.sections.VITALS;
     if (!vitalsSection) {
+      console.info('📊 No VITALS section text found in normalized/sections; vitals UI not updated');
       return;
     }
 
@@ -2970,7 +2981,7 @@ class TemplateRenderer {
       return;
     }
 
-    console.log('📊 Extracted vitals:', vitals);
+  console.log('📊 Extracted vitals:', vitals);
 
     // Map vitals to input fields
     if (vitals.bp) {
@@ -3018,12 +3029,14 @@ class TemplateRenderer {
   // Populate labs table from parsed data
   populateLabsUI() {
     if (!this.parsedData || !this.parsedData.sections) {
+      console.warn('🔬 Skipping labs UI: no parsedData.sections');
       return;
     }
 
     // Try to extract labs from sections
     const labsSection = this.normalizedSections.LABS || this.parsedData.sections.labs || this.parsedData.sections.LABS;
     if (!labsSection) {
+      console.info('🔬 No LABS section text found in normalized/sections; labs UI not updated');
       return;
     }
 
@@ -3036,7 +3049,7 @@ class TemplateRenderer {
       return;
     }
 
-    console.log('🔬 Extracted labs:', labs);
+  console.log('🔬 Extracted labs:', labs);
 
     // Get lab table body
     const tbody = document.getElementById('tbl-labs');
@@ -3047,6 +3060,7 @@ class TemplateRenderer {
 
     // Map extracted labs to table rows by alias matching
     const rows = tbody.querySelectorAll('tr[data-lab-aliases]');
+    let updatedCount = 0;
     rows.forEach(row => {
       const aliases = (row.dataset.labAliases || '').toLowerCase().split('|');
       // labKey available via row.dataset.labKey if needed for future enhancements
@@ -3063,6 +3077,7 @@ class TemplateRenderer {
           const labValue = `${matchedLab.value}${matchedLab.unit ? ' ' + matchedLab.unit : ''}`;
           valueCell.textContent = labValue;
           valueCell.classList.remove('lab-value-empty');
+          updatedCount++;
 
           // Check if value is out of range and add styling
           if (matchedLab.flag === 'H' || matchedLab.flag === 'high') {
@@ -3079,7 +3094,7 @@ class TemplateRenderer {
       }
     });
 
-    console.log('✅ Labs populated to table');
+    console.log(`✅ Labs populated to table (updated ${updatedCount} row(s))`);
   }
 
   // Paraphrase HPI using GPT-4o-mini with fail-soft to rules

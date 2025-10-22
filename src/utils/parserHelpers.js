@@ -181,7 +181,8 @@ function extractVitals(full, sections) {
   const VITAL_ALIASES = {
     temperature: [/\btemp(erature)?\b[:-]?\s*(\d{2,3}(?:\.\d)?)\s*(f|c)?\b/i],
     heartRate: [/\b(hr|heart\s*rate|pulse)\b[:-]?\s*(\d{2,3})\b/i],
-    respiratoryRate: [/\b(rr|resp(iratory)?\s*rate)\b[:-]?\s*(\d{1,2})\b/i],
+    // Accept both "RR"/"respiratory rate" and shorthand "Resp" forms
+    respiratoryRate: [/\b(rr|resp(iratory)?\s*rate)\b[:-]?\s*(\d{1,2})\b/i, /\b(resp)\b[:-]?\s*(\d{1,2})\b/i],
     bloodPressure: [/\b(bp|blood\s*pressure)\b[:-]?\s*(\d{2,3})\s*[/-]\s*(\d{2,3})\b/i],
     weight: [/\b(wt|weight)\b[:-]?\s*(\d{2,3}(?:\.\d)?)\s*(kg|lb|lbs)?\b/i],
     height: [/\b(ht|height)\b[:-]?\s*(\d(?:'|ft)\s*\d{1,2}(?:"|in)?)\b/i, /\b(ht|height)\b[:-]?\s*(\d{3})\s*cm\b/i],
@@ -312,6 +313,26 @@ function extractLabs(full, sections) {
 
     // Skip date-like lines (MM/DD/YYYY)
     if (/^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(line)) {
+      continue;
+    }
+
+    // NEW: Accept space-separated form e.g. "Sodium 139" or "eGFR >60"
+    const LAB_SPACE = new RegExp(String.raw`^(?<name>[A-Za-z][A-Za-z0-9+\-\s().]{1,40}?)\s+(?<value>[<>]?\d+(?:\.\d+)?)(?:\s*(?<unit>${UNIT}))?(?:\s*(?<flag>High|Low|H|L|↑|↓|\*))?`, 'i');
+    const s = LAB_SPACE.exec(line);
+    if (s && s.groups && s.groups.name && isAllowedLab(s.groups.name)) {
+      const { name, value, unit, flag } = s.groups;
+      const numericValue = Number(value);
+      const lab = {
+        name: name.trim(),
+        value: Number.isNaN(numericValue) ? value : numericValue,
+        unit: unit?.trim() || undefined,
+        raw: line,
+      };
+      const flagIndicator = coerceFlag(flag);
+      if (flagIndicator) {
+        lab.value = `${lab.value} ${flagIndicator}`;
+      }
+      labs.push(lab);
       continue;
     }
 
