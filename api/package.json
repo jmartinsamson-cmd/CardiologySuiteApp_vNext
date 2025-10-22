@@ -1,0 +1,17 @@
+{
+  "name": "cardiology-suite-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Cardiology Suite",
+  "type": "module",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.0.0"
+  }
+}
