@@ -1611,6 +1611,246 @@ NPO since midnight
 Will consider possible TEE w/ DCCV pending heart cath findings
   `,
 
+  `HPI: Mr. Hebert is a 68 y/o male who is known to CIS, Dr. Lindsey, with the past medical history hypertension, hyperlipidemia, MI, CVA, BPH, PAF, BPH, coronary artery disease, cardiac arrest, renal cyst, CAD.  Who presented to the emergency room on 10/09/2025 from Magnolia Estates nursing home due to oral bleeding which began in the morning.  Patient also had bloody sputum.  Patient's neurological baseline is a GCS of 3 with a trach and vent dependent.  Patient was found to be in AFib RVR in the emergency room.  ER workup revealed elevated BNP of 5423, initial high sensitivity troponin 5, UA suggestive of UTI, EKG showed atrial fibrillation with a rate of 130, no ST segment elevations normal T-waves, normal axis.  Chest x-ray suggestive of pneumonia versus infiltrate.  There is blunting of the right costophrenic angle.  Patient started on Cardizem drip.  Patient admitted to the ICU for acquiring mg dose Cardizem as well as chronic trach and vent if patient.  CIS was been consulted for further evaluation and management of atrial fibrillation with RVR.
+ 
+ 10.13.25: Re-consulted for possible TTE/TEE  at the request of Infectious Disease
+ 
+PMH: Arthritis, AF, BPH, Cardiac Arrest, CAD, Renal Cyst, Diverticulosis, Hyperlipidemia, Hypertension, MI, Obesity, Lever Steatosis, Stroke
+PSH: Pacemaker, LHC, Colonoscopy, EGD, Colon Excision, Tracheostomy
+Family History: Mother - HTN; Sister - HTN; Brother - HTN 
+Social History: Tobacco - Negative, Alcohol - Negative, Substance Abuse - Negative
+
+Previous Cardiac Diagnostics: 
+Echocardiogram (10.22.24):
+Left Ventricle: The left ventricle is normal in size. Mildly increased wall thickness. There is normal systolic function with a visually estimated ejection fraction of 65%. Grade I diastolic dysfunction.
+Right Ventricle: Normal right ventricular cavity size. Systolic function is normal.
+Aortic Valve: There is mild aortic valve sclerosis.
+Mitral Valve: There is mild (1+) regurgitation.
+Tricuspid Valve: There is mild (1+) regurgitation.
+The estimated pulmonary artery systolic pressure is 21 mmHg.
+AICD/pacemaker lead noted.  No evidence of vegetation noted.
+No evidence of valvular endocarditis noted.  If clinical suspicion is high would recommend transesophageal echocardiogram.
+ 
+Echocardiogram (5.3.24):
+EF 65%
+RV with Normal RV Function.
+MR- Mild. TR- Mild. 
+Pericardial Effusion- None. Anterior Fat Pad Noted. 
+ 
+ECHO (1.15.24):
+TDS. No Definity contrast available for use. Left Ventricle: The left ventricle is normal in size. Moderately increased wall thickness. Normal wall motion. There is normal systolic function. Ejection fraction by visual approximation is 55%. Right Ventricle: Normal right ventricular cavity size. Systolic function is borderline low. Left Atrium: Left atrium is severely dilated. Right Atrium: Right atrium is mildly dilated. Mitral Valve: There is bileaflet sclerosis. There is mild regurgitation. IVC/SVC: Normal venous pressure at 3 mmHg.
+ 
+Venous US LUE (12.26.23):
+There was no evidence of deep vein thrombosis in the left upper extremity. 
+A superficial thrombosis was identified in the left cephalic vein. 
+ 
+Carotid US (12.19.23):
+The right internal carotid artery demonstrated less than 50% stenosis.
+The left internal carotid artery demonstrated less than 50% stenosis.
+The bilateral vertebral arteries were patent with antegrade flow.
+Bilateral internal carotid arteries demonstrated decreased velocities starting from the common carotid arteries. 
+ 
+LHC (5.25.18): 
+LM: Normal. Normal size and bifurcation. LAD: Abnormal. Large, mild atherosclerotic plaque, moderately large diagonals. Mid LAD 30% stenosis. The lesion was tubular and eccentric. LCX: abnormal and Large, mild atherosclerotic plaque, large OM with mild narrowing.OM 1 35% stenosis. RCA: normal. Large and no significant disease. 
+ 
+ 
+Review of Systems 
+Reason unable to perform ROS: acquity of illness. 
+
+Objective:
+ 
+Vital Signs (Most Recent):
+Temp: 98.5 °F (36.9 °C) (10/13/25 0800)
+Pulse: 75 (10/13/25 1145)
+Resp: 20 (10/13/25 1145)
+BP: (!) 170/106 (10/13/25 1130)
+SpO2: 100 % (10/13/25 1145)	Vital Signs (24h Range):
+Temp:  [97.9 °F (36.6 °C)-99.3 °F (37.4 °C)] 98.5 °F (36.9 °C)
+Pulse:  [67-147] 75
+Resp:  [10-38] 20
+SpO2:  [93 %-100 %] 100 %
+BP: (119-170)/(83-117) 170/106
+Weight: 66.8 kg (147 lb 4.3 oz)
+Body mass index is 23.07 kg/m².
+SpO2: 100 %
+ 
+Intake/Output Summary (Last 24 hours) at 10/13/2025 1231
+Last data filed at 10/13/2025 1000
+Gross per 24 hour
+Intake	2153.42 ml
+Output	1345 ml
+Net	808.42 ml
+ 
+Lines/Drains/Airways 
+ 
+ 	
+Peripherally Inserted Central Catheter Line 	Duration
+ 
+
+ 	 	 
+ 	PICC Triple Lumen 10/13/25 1109 right brachial	<1 day
+ 
+
+ 
+
+ 
+ 	
+Drain 	Duration
+ 
+
+ 	 	 
+ 	     Gastrostomy/Enterostomy 10/30/24 1200 Gastrostomy-jejunostomy feeding	348 days
+ 	     Urethral Catheter 10/09/25 1330 Non-latex	3 days
+ 
+
+ 
+
+ 
+ 	
+Airway 	Duration
+ 
+
+ 	 	 
+ 	Adult Surgical Airway 10/01/25 1110 Shiley Cuffed 6.0/ 75mm	12 days
+ 
+
+ 
+
+ 
+ 	
+Peripheral Intravenous Line 	Duration
+ 
+
+ 	 	 
+ 	Peripheral IV Single Lumen 10/09/25 0755 20 G 2 1/4 in Left;Posterior Wrist	4 days
+ 	Peripheral IV Single Lumen 10/12/25 2300 20 G Right Other	<1 day
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Significant Labs: 
+Chemistries:
+Recent Labs
+Lab	10/10/25
+1319	10/11/25
+0317	10/12/25
+0444	10/13/25
+0301	10/13/25
+0528
+NA	141	141	141	141	140
+K	3.0*	3.0*	3.0*	2.4*	3.5
+CL	108*	111*	111*	122*	112*
+CO2	22*	19*	21*	11*	19*
+BUN	14.2	14.5	10.7	7.1*	9.6
+CREATININE	0.53*	0.55*	0.52*	0.32*	0.46*
+CALCIUM	8.2*	8.6*	8.5*	5.0*	8.3*
+PROT	7.1	7.3	7.2	4.0*	6.9
+BILITOT	1.2	1.1	1.3	0.7	1.1
+ALKPHOS	70	69	66	36*	61
+ALT	8	7	7	<5	6
+AST	16	18	15	10*	21
+MG	2.10	2.20	2.00	1.20*	2.00
+PHOS	2.9	3.2	2.6	1.6*	2.8
+
+ 
+CBC/Anemia Labs:	Coags: 
+Recent Labs
+Lab	10/11/25
+0317	10/12/25
+0444	10/13/25
+0427
+WBC	5.70	7.24	4.56
+HGB	8.7*	8.3*	8.2*
+HCT	28.7*	28.8*	27.2*
+PLT	250	245	239
+MCV	82.0	85.5	83.2
+RDW	17.2*	17.2*	16.9
+	
+Recent Labs
+Lab	10/09/25
+0804
+INR	1.4*
+
+ 
+Telemetry:  Persistent A-fib, rate controlled
+ 
+Physical Exam
+Vitals and nursing note reviewed. 
+Cardiovascular: 
+   Rate and Rhythm: Normal rate. Rhythm irregular. 
+   Pulses: Normal pulses. 
+   Heart sounds: Normal heart sounds. 
+Pulmonary: 
+   Effort: Pulmonary effort is normal. 
+   Breath sounds: Normal breath sounds. 
+   Comments: Trach, on ventilator
+Neurological: 
+   Mental Status: Mental status is at baseline. 
+   Comments: GCS 3 
+
+ 
+ 
+Current Schedule Inpatient Medications:
+•	apixaban	 5 mg	Per G Tube	BID
+•	famotidine (PF)	 20 mg	Intravenous	Daily
+•	meropenem IV (PEDS and ADULTS)	 1 g	Intravenous	Q8H
+•	metoprolol tartrate	 50 mg	Per G Tube	BID
+•	mupirocin	 	Nasal	BID
+ 
+Continuous Infusions:
+•	0.9% NaCl	 	Intravenous	Continuous	50 mL/hr at 10/13/25 1000	Rate Verify at 10/13/25 1000
+ 
+ 
+Assessment:
+Sepsis
+-- Positive Respiratory Culture for Pseudomonas (resistant to all antibiotics), Serratia, Proteus and Klebsiella (ESBL) 
+--History of positive blood cultures for Staph Epi and Enterococcus
+--Latest blood cultures negative
+Pneumonia 
+-- Positive Respiratory Culture for Pseudomonas (resistant to all antibiotics), Serratia, Proteus and Klebsiella (ESBL) 
+-- On Cefepime and Merrem
+Chronic Hypoxemic Respiratory Failure requiring Tracheostomy/Ventilation
+Persistent AF (controlled)
+  - CHA2DS2VASC Score 4 (4.8% Stroke Risk per Year) 
+  - BNP 5423
+  - Initial HS Troponin 5
+  -  On Eliquis
+UTI (Chronic)
+CAD
+  - LHC (5.25.18): LM: Normal. Normal size and bifurcation. LAD: Abnormal. Large, mild atherosclerotic plaque, moderately large diagonals. Mid LAD 30% stenosis. The lesion was tubular and eccentric. LCX: abnormal and Large, mild atherosclerotic plaque, large OM with mild narrowing.OM 1 35% stenosis. RCA: normal. Large and no significant disease.  
+  - ECHO (10.22.24) - LVEF 65%; DD I
+SSS
+  - Dual Chamber ICD
+HTN 
+Hyperlipidemia
+Anemia - Stable 
+History of Hemorrhagic CVA (12/2023)
+  - Residual Left Sided Deficits
+  - S/P Peg Tube and Trach 
+Arthritis
+Dysphagia
+  - s/p PEG 
+History of Seizure Disorder
+Liver Steatosis
+Diverticulosis
+BPH
+Depression
+Obesity 
+Severe PCM 
+No Known History of GIB
+ 
+ 
+Plan:
+Obtain TTE today
+Will evaluate for TEE tomorrow
+Antibiotics per Infectious disease
+Vent management per Pulmonary/Critical Care
+  `,
+
 ];
 
 /**
