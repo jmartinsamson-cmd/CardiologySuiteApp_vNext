@@ -934,13 +934,23 @@ class TemplateRenderer {
     }
 
     // Vitals if available
+    console.log('🩺 rewriteHPIForConsult: info.vitals =', info.vitals);
     if (info.vitals) {
       const vitalsParts = [];
-      if (info.vitals.BP) vitalsParts.push(`BP: ${info.vitals.BP} mmHg`);
-      if (info.vitals.HR) vitalsParts.push(`HR: ${info.vitals.HR} bpm`);
-      if (info.vitals.RR) vitalsParts.push(`RR: ${info.vitals.RR}/min`);
-      if (info.vitals.temp) vitalsParts.push(`Temp: ${info.vitals.temp}°F`);
-      if (info.vitals.spo2) vitalsParts.push(`SpO2: ${info.vitals.spo2}%`);
+      // Try both uppercase and lowercase keys
+      const BP = info.vitals.BP || info.vitals.bp;
+      const HR = info.vitals.HR || info.vitals.hr;
+      const RR = info.vitals.RR || info.vitals.rr;
+      const temp = info.vitals.temp || info.vitals.temperature;
+      const spo2 = info.vitals.spo2 || info.vitals.SpO2;
+      
+      if (BP) vitalsParts.push(`BP: ${BP} mmHg`);
+      if (HR) vitalsParts.push(`HR: ${HR} bpm`);
+      if (RR) vitalsParts.push(`RR: ${RR}/min`);
+      if (temp) vitalsParts.push(`Temp: ${temp}°F`);
+      if (spo2) vitalsParts.push(`SpO2: ${spo2}%`);
+      
+      console.log('🩺 rewriteHPIForConsult: vitalsParts =', vitalsParts);
       if (vitalsParts.length > 0) {
         consultHPI += `On presentation, vitals: ${vitalsParts.join(', ')}. `;
       }
@@ -1096,7 +1106,11 @@ class TemplateRenderer {
 
     // Extract vitals from parsedData if available
     if (parsedData && parsedData.vitals && Object.keys(parsedData.vitals).length > 0) {
+      console.log('🩺 extractHPIInfo: Found vitals in parsedData:', parsedData.vitals);
       info.vitals = parsedData.vitals;
+    } else {
+      console.log('🩺 extractHPIInfo: No vitals found. parsedData:', parsedData ? 'exists' : 'null', 
+                  'parsedData.vitals:', parsedData?.vitals);
     }
 
     return info;
