@@ -1851,6 +1851,313 @@ Antibiotics per Infectious disease
 Vent management per Pulmonary/Critical Care
   `,
 
+  `HPI: 64 year old, unknown to CIS, who presented to UHC on 10.7.25 with c/o of SOB and sharp chest pain. He stated that he has been coughing up black sputum for the past few days. He has a hx of HTN, tobacco dependence, chronic cough, headaches, GERD and hx of gastric ulcer. Upon workup, his HS troponin was 19,413, pro BNP was 12,028. EKG revealed NSR with ST wave abnormalities in the inferolateral leads, CTA of the chest/abd revealed AAA of 5.4 cm with extension to the common iliac arteries bilaterally with a large ulcerating plaque in the common iliac artery on the left. Echo revealed an EF of 24%. CIS was consulted for ACS.
+ 
+Hospital Course:
+10/9/25: LHC done yesterday- seen by CVSx and turned down but family spoke with Dr. Allam and asked for 2nd opinion and he will evaluate today. Reports an episode of CP this am. Case discussed with Dr. Ruiz; if turned down for surgery may consider high risk PCI.
+10.10.25: NAD, AFVSS. Denies CP/SOB/palps. Heparin gtt continues. 
+10.11.25: NAD. VSS. Denies CP, SOB and Palps. Heparin Drip per Protocol.
+10.12.25: NAD. VSS. Denies CP, SOB and Palps. Remains on Heparin Drip per Protocol. Plans for CABG/Impella Tomorrow with CV Surgery.
+10.13.25: NAD, AFVSS. S/p 2v CABG/impella today. CT x2 in place. Bicarb gtt infusing. SR in 70s monitor. Nurse at bedside. 
+10.14.25: POD #1 s/p 2v CABG/impella. NAD, marginal hypotension, not requiring pressors, otherwise VSS. Patient extubated yesterday afternoon, tolerating well. +CT x2. Heparin gtt and insulin gtt infusing. 
+10.15.25: POD #2, WBC elevated, H&H stable, PLTs stable. Impella remains in place.
+10.16.25: POD #3: Had AF with RVR yesterday afternoon. Overnight he had what appeared to be VT. Patient performed Vagal maneuvers and converted with no further intervention required.
+10.17.25: POD #4: Patient had VT arrest yesterday, received multiple shocks. Also had recurrence of VT overnight that required defibrillation. Impella at P6 for support. Still on Amiodarone, Epi, and Lasix drips.
+10.18.25: NAD. POD #5. Impella Axillary Right/P6. Amiodarone 0.5mcg/kg/min, Hep per Protocol
+10.19.25: NAD. POD #6. Axillary Impella P6, Amiodarone 0.5mg/min. Heparin per Protocol. PLT 141, H&H 8.4/25.4. Na 135, K 3.4, BUN/Crea 58.9/2.83
+10.20.25:POD #7. Axillary Impella remains at P6. Remains on Amio and Heparin. Renal indices stable but elevated. Having some ectopy and NSVT overnight.
+10.21.25: Having runs of SVT this AM, initially resolved spontaneously but had repeat event that terminated after 6 and 12mg of Adenosine. Dr. Allam removed Impella at Bedside. Patient had to be placed on BiPAP this AM. 
+ 
+PMH: Acute systolic HF, HTN, Tobacco dependence, chronic cough, headaches, GERD and hx of gastric ulcer. 
+PSH: Unknown
+Family History: Unknown
+Social History: Tobacco dependence
+ 
+Previous Cardiac Diagnostics:
+CABG 10.13.25
+Right axillary artery cutdown with placement of graft and Impella 5.5 catheter under fluoroscopy and echo guidance.
+Coronary artery bypass grafting x2, left internal mammary artery to the LAD, saphenous venous graft to OM2.
+Endoscopic venous harvesting left greater saphenous vein.
+Ligation of left atrial appendage.
+Placement of right common femoral artery line.
+ 
+Limited TTE 10.13.25
+Limited study to assess Impella placement. Impella inflow cannula appears to measure at least 5.4cm from the aortic annulus.
+Left Ventricle: There is severely reduced systolic function with a visually estimated ejection fraction of 20 - 25%.
+ 
+Limited TTE 10.12.25
+Limited echo for LVEF.
+Left Ventricle: The left ventricle is severely dilated. Increased wall thickness. Regional wall motion abnormalities and Global hypokinesis is present. There is severely reduced systolic function with a visually estimated ejection fraction of 20 - 25%.
+ 
+Carotid US 10.9.25
+The right internal carotid artery is patent with less than 50% stenosis.
+The left internal carotid artery is patent with no evidence of stenosis.
+Bilateral vertebral arteries are patent with antegrade flow.
+ 
+LHC 10.8.25
+Findings
+Left main normal
+LAD 100% occluded with rest of the vessel filling from left-to-left collaterals
+Right coronary artery 100% occluded with left-to-right collaterals filling the rest of the artery
+Circumflex has got a 80% stenosis in the mid section before the OM2.  It gives rise to a robust OM1
+ 
+TTE 10.8.25
+Left Ventricle: The left ventricle is moderately dilated. Severely increased ventricular mass. Mildly increased wall thickness. There is severe eccentric hypertrophy. Regional wall motion abnormalities is present. See diagram for wall motion findings.  Anteroseptal, inferoseptal and apical akinesis. There is severely reduced systolic function. Quantitated ejection fraction is 24%. Light spontaneous echo contrast visualized. Grade II diastolic dysfunction.
+Right Ventricle: The right ventricle is normal in size. Systolic function is normal.
+Left Atrium: The left atrium is severely dilated measuring 67 mL/m2.
+Right Atrium: The right atrium is mildly dilated.
+Aortic Valve: The aortic valve is a trileaflet valve. There is no stenosis. There is no significant regurgitation.
+Mitral Valve: The mitral valve is structurally normal. There is no stenosis. There is mild regurgitation.
+Tricuspid Valve: There is trace regurgitation.
+Pulmonic Valve: There is mild regurgitation.
+Aorta: The aortic root is normal in size measuring 3.1 cm.
+Pulmonary Artery: No pulmonary hypertension. The estimated pulmonary artery systolic pressure is 27 mmHg.
+IVC/SVC: Intermediate venous pressure at 8 mmHg.
+ 
+Review of Systems 
+Constitutional: Positive for malaise/fatigue. Negative for fever. 
+Cardiovascular:  Positive for chest pain (Compression/Incisional). Negative for irregular heartbeat and palpitations. 
+Respiratory:  Negative for shortness of breath.  
+
+Objective:
+ 
+Vital Signs (Most Recent):
+Temp: 97.7 °F (36.5 °C) (10/21/25 0800)
+Pulse: (!) 137 (10/21/25 1023)
+Resp: (!) 23 (10/21/25 1023)
+BP: 100/78 (10/21/25 1023)
+SpO2: 98 % (10/21/25 1023)	Vital Signs (24h Range):
+Temp:  [97.6 °F (36.4 °C)-98.2 °F (36.8 °C)] 97.7 °F (36.5 °C)
+Pulse:  [67-279] 137
+Resp:  [16-34] 23
+SpO2:  [84 %-100 %] 98 %
+BP: (84-139)/(64-94) 100/78
+Arterial Line BP: (70-175)/(44-83) 129/66
+Weight: 66.1 kg (145 lb 12.8 oz)
+Body mass index is 21.53 kg/m².
+SpO2: 98 %
+ 
+Intake/Output Summary (Last 24 hours) at 10/21/2025 1100
+Last data filed at 10/21/2025 1052
+Gross per 24 hour
+Intake	3072.03 ml
+Output	1585 ml
+Net	1487.03 ml
+ 
+Lines/Drains/Airways 
+ 
+ 	
+Central Venous Catheter Line 	Duration
+ 
+
+ 	 	 
+ 	 Introducer with Double Lumen 10/13/25 Internal Jugular Right	8 days
+ 
+
+ 
+
+ 
+ 	
+Drain 	Duration
+ 
+
+ 	 	 
+ 	     Chest Tube 10/13/25 Left Pericardial 24 Fr.	8 days
+ 	     Chest Tube 10/13/25 Mediastinal 28 Fr.	8 days
+ 	     Urethral Catheter 10/17/25 1625	3 days
+ 
+
+ 
+
+ 
+ 	
+Arterial Line 	Duration
+ 
+
+ 	 	 
+ 	Arterial Line 10/16/25 2245 Left Radial	4 days
+ 
+
+ 
+
+ 
+ 	
+Line 	Duration
+ 
+
+ 	 	 
+ 	     Pacer Wires 10/13/25	8 days
+ 	     VAD 10/13/25 Left ventricular assist device Impella	8 days
+ 
+
+ 
+
+ 
+ 	
+Peripheral Intravenous Line 	Duration
+ 
+
+ 	 	 
+ 	Peripheral IV Single Lumen 10/13/25 1500 18 G Left Forearm	7 days
+ 	     Sheath 10/17/25 1549 Right proximal;anterior	3 days
+ 
+
+ 
+
+ 
+ 
+Significant Labs: 
+Chemistries:
+Recent Labs
+Lab	10/17/25
+0305	10/17/25
+1734	10/18/25
+0102	10/19/25
+0220	10/20/25
+0252	10/20/25
+1846	10/21/25
+0305
+NA	135*	  < >	134*	135*	134*	135*	135*
+K	4.1	  < >	4.0	3.4*	3.9	3.8	3.8
+CL	101	  < >	103	101	102	103	102
+CO2	24	  < >	24	23	23	22*	22*
+BUN	55.8*	  < >	57.8*	58.9*	57.5*	49.9*	44.0*
+CREATININE	2.28*	  < >	2.79*	2.83*	2.71*	2.58*	2.37*
+CALCIUM	8.0*	  < >	8.4*	8.4*	8.6*	8.6*	8.4*
+PROT	 -- 	 -- 	 -- 	5.2*	5.6*	5.4*	5.4*
+BILITOT	 -- 	 -- 	 -- 	0.9	0.9	0.8	0.9
+ALKPHOS	 -- 	 -- 	 -- 	90	103	96	109
+ALT	 -- 	 -- 	 -- 	34	48*	41	41
+AST	 -- 	 -- 	 -- 	49*	60*	49*	47*
+MG	2.70*	  < >	2.80*	2.40	2.10	1.90	2.20
+PHOS	4.5	 -- 	3.1	3.5	 -- 	 -- 	 -- 
+ < > = values in this interval not displayed.
+
+ 
+CBC/Anemia Labs:	Coags: 
+Recent Labs
+Lab	10/19/25
+0220	10/20/25
+0252	10/21/25
+0305
+WBC	13.40*	15.99*	17.73*
+HGB	8.4*	9.1*	9.0*
+HCT	25.4*	27.7*	27.1*
+PLT	141	161	163
+MCV	86.7	86.0	85.8
+RDW	15.4	14.9	15.0
+	No results for input(s): "PT", "INR", "APTT" in the last 168 hours.
+ 
+ 
+PAP: (28-36)/(12-14) 28/12
+PAP (Mean):  [19 mmHg-23 mmHg] 19 mmHg
+CO:  [4 L/min-8 L/min] 8 L/min
+CI:  [2.2 L/min/m2-4.5 L/min/m2] 4.5 L/min/m2
+ 
+Telemetry: SR
+ 
+Physical Exam
+Constitutional:  
+   General: He is not in acute distress.
+   Appearance: He is ill-appearing. 
+HENT: 
+   Head: Normocephalic. 
+Eyes: 
+   Extraocular Movements: Extraocular movements intact. 
+Cardiovascular: 
+   Rate and Rhythm: Regular rhythm. Bradycardia present. 
+Pulmonary: 
+   Effort: Pulmonary effort is normal. No respiratory distress. 
+   Breath sounds: Normal breath sounds. 
+   Comments: NC O2
+Skin:
+   General: Skin is warm. 
+   Coloration: Skin is pale. 
+   Comments: Midline Sternotomy Dressing C/D/I. + CTs 
+Neurological: 
+   Mental Status: He is alert. 
+   Comments: Generalized Weakness 
+Psychiatric:    
+   Mood and Affect: Mood normal. 
+
+ 
+ 
+Current Schedule Inpatient Medications:
+•	fentaNYL	 	 	 
+•	NORepinephrine 8 mg	 	 	 
+•	adenosine	 	 	 
+•	adenosine	 	 	 
+•	aspirin	 81 mg	Oral	Daily
+•	atorvastatin	 80 mg	Oral	QHS
+•	budesonide	 0.25 mg	Nebulization	Daily
+•	ceFEPime IV (PEDS and ADULTS)	 1 g	Intravenous	Q12H
+•	docusate sodium	 100 mg	Oral	BID
+•	famotidine (PF)	 20 mg	Intravenous	Daily
+•	fentaNYL	 50 mcg	Intravenous	Once
+•	folic acid	 1 mg	Oral	Daily
+•	heparin (porcine) 4,000 Units in 0.9% NaCl 1,000 mL	 	Intra-arterial	Once
+•	levalbuterol	 0.31 mg	Nebulization	Q8H
+•	magnesium sulfate 2 g IVPB	 2 g	Intravenous	Once
+•	sucralfate	 1 g	Oral	QID (AC & HS)
+•	vancomycin (VANCOCIN) IV (PEDS and ADULTS)	 20 mg/kg	Intravenous	Once
+ 
+Continuous Infusions:
+•	amiodarone in dextrose 5%	 0.5 mg/min	Intravenous	Continuous	16.7 mL/hr at 10/21/25 0632	0.5 mg/min at 10/21/25 0632
+•	EPINEPHrine	 0-2 mcg/kg/min	Intravenous	Continuous	 	Stopped at 10/18/25 0546
+•	heparin (porcine) in 5 % dex	 7 Units/kg/hr (Adjusted)	Intravenous	Continuous	17 mL/hr at 10/21/25 0829	1,700 Units/hr at 10/21/25 0829
+•	LIDOcaine	 1 mg/min	Intravenous	Continuous	 	Stopped at 10/17/25 2357
+•	loperamide	 2 mg	Oral	Continuous PRN	 	 
+•	milrinone	 0.5 mcg/kg/min	Intravenous	Continuous	9.9 mL/hr at 10/21/25 1052	0.5 mcg/kg/min at 10/21/25 1052
+•	sodium bicarbonate 25 mEq in D5W 1,000 mL infusion	 	Intravenous	Continuous	10 mL/hr at 10/21/25 0632	Rate Verify at 10/21/25 0632
+ 
+Assessment:
+Cardiogenic Shock (Post Cardiotomy)
+  - Requiring Chemical and Mechanical Support (Impella)
+  - Hx of HTN
+VT recurrent requiring multiple Defibrillations and Amiodarone Infusion
+  - Off Lidocaine
+NSTEMI Type I
+  - LHC 10.8.25 MVCAD
+MVCAD
+  - 2v CABG (LIMA to LAD, SVG to OM2)/Impella 5.5 (10.13.25) 
+  - LHC 10.8.25 LAD 100% occluded with rest of the vessel filling from left-to-left collaterals; Right coronary artery 100% occluded with left-to-right collaterals filling the rest of the artery; Circumflex has got a 80% stenosis in the mid section before the OM2.  It gives rise to a robust OM1
+Post-op AF - Now in and Out of AF/CVR/SVR and SB
+  - CHADsVASc - 3 Points - 3.2% Stroke Risk per Year
+ICMO/EF 24%
+Acute Systolic HF/EF 24% - Improving 
+  - ECHO (10.8.25) - LVEF 24%
+PAD
+AAA 5.1 cm
+  - CTA Chest/Abd (10.7.25) - Large ulcerating plaque noted in the common iliac artery on the left
+Tobacco Dependence
+Chronic Cough
+GERD
+Hx of Gastric Ulcer
+Leukocytosis 
+Anemia 
+AKI - BUN/Crea 57.8/2.79
+ 
+Plan:
+Continue IV Amiodarone 0.5mg/min
+Start Primacor 
+Continue TVP for now, will tentatively plan for removal tomorrow
+Prognosis remains Guarded
+Keep Hgb > 9.0; 
+Will Continue to Follow
+Labs in AM: CBC, CMP and Mg
+ 
+Brandt J Sanders, AGACNP-BC
+Cardiology
+OCHSNER LAFAYETTE GENERAL MEDICAL HOSPITAL
+ 
+Physician addendum:
+ 
+Patient is having SVT episodes with PVC's. Started Esmolol GTT.
+CV surg has explanted Impella to decrease risk of vent arrhythmias.
+Start Primacor for LV dysfunction.
+Will need Levophed if BP decreases. Will follow
+  `,
+
 ];
 
 /**
