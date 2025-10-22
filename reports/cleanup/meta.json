@@ -1,0 +1,136 @@
+{
+  "inputs": {
+    "src/utils/debugInstrumentation.js": {
+      "bytes": 17471,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/utils/parserHelpers.js": {
+      "bytes": 21520,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/parsers/noteParser.js": {
+      "bytes": 22086,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/parsers/noteParser_full.js": {
+      "bytes": 15231,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/parsers/aiAnalyzer.js": {
+      "bytes": 3259,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/parsers/templateRenderer.js": {
+      "bytes": 132984,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/core/app.js": {
+      "bytes": 30560,
+      "imports": [
+        {
+          "path": "src/utils/debugInstrumentation.js",
+          "kind": "import-statement",
+          "original": "../utils/debugInstrumentation.js"
+        },
+        {
+          "path": "src/utils/parserHelpers.js",
+          "kind": "import-statement",
+          "original": "../utils/parserHelpers.js"
+        },
+        {
+          "path": "src/parsers/noteParser.js",
+          "kind": "import-statement",
+          "original": "../parsers/noteParser.js"
+        },
+        {
+          "path": "src/parsers/noteParser_full.js",
+          "kind": "import-statement",
+          "original": "../parsers/noteParser_full.js"
+        },
+        {
+          "path": "src/parsers/aiAnalyzer.js",
+          "kind": "import-statement",
+          "original": "../parsers/aiAnalyzer.js"
+        },
+        {
+          "path": "src/parsers/templateRenderer.js",
+          "kind": "import-statement",
+          "original": "../parsers/templateRenderer.js"
+        },
+        {
+          "path": "/pages/meds.js",
+          "kind": "dynamic-import",
+          "external": true
+        },
+        {
+          "path": "/pages/guidelines.js",
+          "kind": "dynamic-import",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/index.ts": {
+      "bytes": 88,
+      "imports": [
+        {
+          "path": "src/core/app.js",
+          "kind": "import-statement",
+          "original": "./core/app.js"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "reports/cleanup/bundle.js": {
+      "imports": [
+        {
+          "path": "/pages/meds.js",
+          "kind": "dynamic-import",
+          "external": true
+        },
+        {
+          "path": "/pages/guidelines.js",
+          "kind": "dynamic-import",
+          "external": true
+        }
+      ],
+      "exports": [],
+      "entryPoint": "src/index.ts",
+      "inputs": {
+        "src/utils/debugInstrumentation.js": {
+          "bytesInOutput": 13478
+        },
+        "src/utils/parserHelpers.js": {
+          "bytesInOutput": 14951
+        },
+        "src/parsers/noteParser.js": {
+          "bytesInOutput": 17771
+        },
+        "src/parsers/noteParser_full.js": {
+          "bytesInOutput": 12422
+        },
+        "src/parsers/aiAnalyzer.js": {
+          "bytesInOutput": 2067
+        },
+        "src/parsers/templateRenderer.js": {
+          "bytesInOutput": 116428
+        },
+        "src/core/app.js": {
+          "bytesInOutput": 26643
+        },
+        "src/index.ts": {
+          "bytesInOutput": 0
+        }
+      },
+      "bytes": 203979
+    }
+  }
+}

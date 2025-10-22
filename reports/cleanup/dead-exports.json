@@ -1,0 +1,299 @@
+{
+  "unused": [
+    {
+      "file": "src/education/index.js",
+      "export": "EducationModule",
+      "kind": "ClassDeclaration"
+    },
+    {
+      "file": "src/education/index.js",
+      "export": "educationModule",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/education/router-integration.example.js",
+      "export": "integrationGuide",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/parsers/aiAnalyzer.js",
+      "export": "enrichWithAIAnalysis",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/aiAnalyzer.js",
+      "export": "checkAIAnalyzerAvailability",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/cardiology/index.js",
+      "export": "default",
+      "kind": "ExportAssignment"
+    },
+    {
+      "file": "src/parsers/clinicalSafety.js",
+      "export": "validateClinicalSafety",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/clinicalSafety.js",
+      "export": "generateEvidenceBasedPlan",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/entityExtraction.js",
+      "export": "extractClinicalContext",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/entityExtraction.js",
+      "export": "disambiguateDiagnoses",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/evidenceBasedPlan.js",
+      "export": "generateEvidenceBasedPlan",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/evidenceBasedPlan.js",
+      "export": "getGuidelineReference",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/evidenceBasedPlan.js",
+      "export": "listAvailableGuidelines",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/evidenceBasedPlan.js",
+      "export": "CLINICAL_GUIDELINES",
+      "kind": "ReExport"
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "export": "MAIN_HEADERS",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "export": "PRIOR_LINES",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "export": "LAB_LINE_FULL",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "export": "parseClinicalNoteFull",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "export": "default",
+      "kind": "ExportAssignment"
+    },
+    {
+      "file": "src/parsers/parserChunker.js",
+      "export": "parseWithYield",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/parserChunker.js",
+      "export": "parseNoteChunked",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/smartParser.js",
+      "export": "fallbackParse",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/parsers/smartParser.js",
+      "export": "default",
+      "kind": "ExportAssignment"
+    },
+    {
+      "file": "src/parsers/synonyms.js",
+      "export": "SECTION_SYNONYMS",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "src/parsers/synonyms.js",
+      "export": "buildSynonymLookup",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/server/ai-search/azureFileContext.js",
+      "export": "streamToString",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/server/ai-search/azureFileContext.js",
+      "export": "default",
+      "kind": "ExportAssignment"
+    },
+    {
+      "file": "src/utils/diagnosisSanitizer.js",
+      "export": "default",
+      "kind": "ExportAssignment"
+    },
+    {
+      "file": "src/utils/regex.ts",
+      "export": "withGlobal",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/sanitizer.js",
+      "export": "sanitize",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "yieldIfNeeded",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "withYielding",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "processArrayInChunks",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "runWithTimeout",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "scheduleUIUpdate",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "export": "batchUIUpdates",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/svgSanitizer.js",
+      "export": "sanitizeSVGViewBox",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/svgSanitizer.js",
+      "export": "sanitizeAllSVGs",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/svgSanitizer.js",
+      "export": "installSVGSanitizer",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "src/utils/svgSanitizer.js",
+      "export": "initSVGSanitizer",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/citation-viewer.js",
+      "export": "createCitationModal",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/citation-viewer.js",
+      "export": "showCitationModal",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/citation-viewer.js",
+      "export": "closeCitationModal",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/citation-viewer.js",
+      "export": "initCitationModal",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/gpt4-analyzer.js",
+      "export": "getOpenAIClient",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/gpt4-analyzer.js",
+      "export": "analyzeNoteWithGPT4",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/hpi-paraphraser.js",
+      "export": "getActiveHpiDeployment",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/helpers/metrics.js",
+      "export": "registry",
+      "kind": "FirstStatement"
+    },
+    {
+      "file": "services/ai-search/rag/azureSearchClient.js",
+      "export": "getSearchStatus",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/retrieveMaterials.js",
+      "export": "retrieveEvidence",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/retrieveMaterials.js",
+      "export": "concatEvidence",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/retrieveMaterials.js",
+      "export": "buildClinicalQuery",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/textUtils.js",
+      "export": "deidentify",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/textUtils.js",
+      "export": "truncate",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/rag/textUtils.js",
+      "export": "extractKeyTerms",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/routes/analyze-note.js",
+      "export": "registerAnalyzeNoteRoutes",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/routes/paraphrase-hpi.js",
+      "export": "registerParaphraseHPIRoutes",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/routes/search.js",
+      "export": "registerSearchRoutes",
+      "kind": "FunctionDeclaration"
+    },
+    {
+      "file": "services/ai-search/test-enhancements.js",
+      "export": "runTests",
+      "kind": "ReExport"
+    }
+  ]
+}

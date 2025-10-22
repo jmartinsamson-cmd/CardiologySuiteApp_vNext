@@ -44,6 +44,18 @@ jobs:
         run: npm run type-check
         continue-on-error: false
 
+      - name: Generate cleanup summary (non-blocking)
+        run: npm run clean:report
+        continue-on-error: true
+
+      - name: Upload cleanup report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cleanup-report
+          path: reports/cleanup/
+          retention-days: 7
+
       - name: Upload unused code report
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,0 +1,14 @@
+{
+  "dependencies": [],
+  "devDependencies": [
+    "@axe-core/playwright",
+    "@eslint/js",
+    "@types/node",
+    "htmlhint",
+    "json-server",
+    "rollup-plugin-visualizer",
+    "undici"
+  ],
+  "missing": {},
+  "using": {}
+}

@@ -1,0 +1,757 @@
+{
+  "generatedAt": "2025-10-22T14:40:32.508Z",
+  "candidates": [
+    {
+      "file": "src/education/index.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "EducationModule"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "educationModule"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "EducationModule"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "educationModule"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/education/router-integration.example.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "integrationGuide"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "integrationGuide"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/aiAnalyzer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "enrichWithAIAnalysis"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "checkAIAnalyzerAvailability"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "enrichWithAIAnalysis"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "checkAIAnalyzerAvailability"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/cardiology/index.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "default"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "default"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/clinicalSafety.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "validateClinicalSafety"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "generateEvidenceBasedPlan"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "validateClinicalSafety"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "generateEvidenceBasedPlan"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/entityExtraction.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "extractClinicalContext"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "disambiguateDiagnoses"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "extractClinicalContext"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "disambiguateDiagnoses"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/evidenceBasedPlan.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "generateEvidenceBasedPlan"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "getGuidelineReference"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "listAvailableGuidelines"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "CLINICAL_GUIDELINES"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "generateEvidenceBasedPlan"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "getGuidelineReference"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "listAvailableGuidelines"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "CLINICAL_GUIDELINES"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/noteParser_full_async.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "MAIN_HEADERS"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "PRIOR_LINES"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "LAB_LINE_FULL"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "parseClinicalNoteFull"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "default"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "MAIN_HEADERS"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "PRIOR_LINES"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "LAB_LINE_FULL"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "parseClinicalNoteFull"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "default"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/parserChunker.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "parseWithYield"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "parseNoteChunked"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "parseWithYield"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "parseNoteChunked"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/smartParser.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "fallbackParse"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "default"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "fallbackParse"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "default"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/parsers/synonyms.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "SECTION_SYNONYMS"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "buildSynonymLookup"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "SECTION_SYNONYMS"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "buildSynonymLookup"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/server/ai-search/azureFileContext.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "streamToString"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "default"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "streamToString"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "default"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/utils/diagnosisSanitizer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "default"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "default"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/utils/regex.ts",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "withGlobal"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "withGlobal"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/utils/sanitizer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "sanitize"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "sanitize"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/utils/scheduler.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "yieldIfNeeded"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "withYielding"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "processArrayInChunks"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "runWithTimeout"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "scheduleUIUpdate"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "batchUIUpdates"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "yieldIfNeeded"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "withYielding"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "processArrayInChunks"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "runWithTimeout"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "scheduleUIUpdate"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "batchUIUpdates"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "src/utils/svgSanitizer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "sanitizeSVGViewBox"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "sanitizeAllSVGs"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "installSVGSanitizer"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "initSVGSanitizer"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "sanitizeSVGViewBox"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "sanitizeAllSVGs"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "installSVGSanitizer"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "initSVGSanitizer"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/helpers/citation-viewer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "createCitationModal"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "showCitationModal"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "closeCitationModal"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "initCitationModal"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "createCitationModal"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "showCitationModal"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "closeCitationModal"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "initCitationModal"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/helpers/gpt4-analyzer.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "getOpenAIClient"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "analyzeNoteWithGPT4"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "getOpenAIClient"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "analyzeNoteWithGPT4"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/helpers/hpi-paraphraser.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "getActiveHpiDeployment"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "getActiveHpiDeployment"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/helpers/metrics.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "registry"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "registry"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/rag/azureSearchClient.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "getSearchStatus"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "getSearchStatus"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/rag/retrieveMaterials.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "retrieveEvidence"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "concatEvidence"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "buildClinicalQuery"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "retrieveEvidence"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "concatEvidence"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "buildClinicalQuery"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/rag/textUtils.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "deidentify"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "truncate"
+        },
+        {
+          "tool": "ts-prune",
+          "detail": "extractKeyTerms"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "deidentify"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "truncate"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "extractKeyTerms"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/routes/analyze-note.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "registerAnalyzeNoteRoutes"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "registerAnalyzeNoteRoutes"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/routes/paraphrase-hpi.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "registerParaphraseHPIRoutes"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "registerParaphraseHPIRoutes"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/routes/search.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "registerSearchRoutes"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "registerSearchRoutes"
+        }
+      ],
+      "toolCount": 2
+    },
+    {
+      "file": "services/ai-search/test-enhancements.js",
+      "tools": [
+        "ts-prune",
+        "ts-morph"
+      ],
+      "details": [
+        {
+          "tool": "ts-prune",
+          "detail": "runTests"
+        },
+        {
+          "tool": "ts-morph",
+          "detail": "runTests"
+        }
+      ],
+      "toolCount": 2
+    }
+  ]
+}

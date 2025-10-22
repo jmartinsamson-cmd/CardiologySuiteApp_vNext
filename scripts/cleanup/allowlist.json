@@ -1,0 +1,13 @@
+{
+  "modules": [
+    "services/ai-search/server.js",
+    "services/ai-search/test-enhancements-standalone.js",
+    "scripts/cleanup/sonarjs-stub.mjs"
+  ],
+  "exports": [],
+  "assets": [
+    "public/favicon.ico",
+    "public/site.webmanifest",
+    "public/manifest.json"
+  ]
+}

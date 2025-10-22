@@ -2,6 +2,15 @@ import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 
+let sonarjs;
+try {
+  const plugin = await import("eslint-plugin-sonarjs");
+  sonarjs = plugin.default ?? plugin;
+} catch (error) {
+  const fallback = await import("./scripts/cleanup/sonarjs-stub.mjs");
+  sonarjs = fallback.default ?? fallback;
+}
+
 export default [
   {
     ignores: ["node_modules/**", "dist/**"],
@@ -44,9 +53,13 @@ export default [
         Node: "readonly",
       },
     },
+    plugins: {
+      sonarjs,
+    },
     rules: {
       // Allow unused args if intentionally ignored via leading underscore
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "sonarjs/no-dead-store": "warn",
     },
   },
   {
@@ -65,8 +78,12 @@ export default [
         Buffer: "readonly",
       },
     },
+    plugins: {
+      sonarjs,
+    },
     rules: {
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "sonarjs/no-dead-store": "warn",
     },
   },
   // TypeScript in src (browser globals)
@@ -111,13 +128,15 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tsPlugin,
+      sonarjs,
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": [
-        "warn",
+        "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      "sonarjs/no-dead-store": "warn",
     },
   },
   // TypeScript in scripts (Node globals)
@@ -142,13 +161,15 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tsPlugin,
+      sonarjs,
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": [
-        "warn",
+        "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      "sonarjs/no-dead-store": "warn",
     },
   },
 ];
