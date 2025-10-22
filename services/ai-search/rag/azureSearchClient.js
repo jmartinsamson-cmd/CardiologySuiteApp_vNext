@@ -36,10 +36,12 @@ function getConfig() {
 /**
  * Search cardiology guidelines and educational materials
  * @param {string} query - Clinical query (diagnoses, meds, labs)
- * @param {number} [top=5] - Number of results to retrieve
+ * @param {{ topK?: number } | number} [options=5] - Options object with topK, or number for backward compatibility
  * @returns {Promise<RetrievedDoc[]>} Retrieved documents with relevance scores
  */
-export async function searchGuidelines(query, top = 5) {
+export async function searchGuidelines(query, options = 5) {
+  // Support both old signature (query, number) and new signature (query, {topK})
+  const top = typeof options === 'number' ? options : (options?.topK || 5);
   const { endpoint, apiKey, idx, ver } = getConfig();
   
   if (!endpoint || !apiKey) {

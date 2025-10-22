@@ -4,26 +4,38 @@ import dotenv from "dotenv";
 import OpenAI from "openai";
 import { searchGuidelines } from "./rag/azureSearchClient.js";
 
-// Load .env for Azure OpenAI credentials
-dotenv.config();
-
-const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
-const apiKey = process.env.AZURE_OPENAI_API_KEY;
-const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini";
-const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2024-10-21-preview";
-
-if (!endpoint || !apiKey || !deployment) {
-  throw new Error("Missing Azure OpenAI environment variables");
+// Load .env for Azure OpenAI credentials (if not already loaded)
+if (!process.env.AZURE_OPENAI_ENDPOINT) {
+  dotenv.config();
 }
 
-const openai = new OpenAI({
-  apiKey,
-  baseURL: `${endpoint}/openai/deployments/${deployment}`,
-  defaultHeaders: {
-    "api-key": apiKey,
-    "azure-openai-api-version": apiVersion,
-  },
-});
+let openai = null;
+
+/**
+ * Get or initialize OpenAI client (lazy initialization)
+ * @returns {OpenAI} OpenAI client instance
+ */
+function getOpenAIClient() {
+  if (openai) return openai;
+  
+  const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+  const apiKey = process.env.AZURE_OPENAI_API_KEY;
+  const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4.1-minisamson";
+  const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2025-01-01-preview";
+
+  if (!endpoint || !apiKey || !deployment) {
+    throw new Error("Missing Azure OpenAI environment variables");
+  }
+
+  openai = new OpenAI({
+    apiKey,
+    baseURL: `${endpoint}/openai/deployments/${deployment}`,
+    defaultQuery: { "api-version": apiVersion },
+    defaultHeaders: { "api-key": apiKey },
+  });
+  
+  return openai;
+}
 
 /**
  * Answer a medical question using RAG from indexed cardiology guidelines
@@ -87,7 +99,10 @@ Answer format:
 - Reference the specific sources used`;
 
   try {
-    const response = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4.1-minisamson";
+    
+    const response = await client.chat.completions.create({
       model: deployment,
       messages: [
         { role: "system", content: systemPrompt },

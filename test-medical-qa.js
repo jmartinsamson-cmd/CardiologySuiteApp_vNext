@@ -56,7 +56,7 @@ async function testAPIEndpoint() {
   console.log('TEST 2: Single Question (HTTP API)');
   console.log('='.repeat(80));
   
-  const baseUrl = process.env.AI_SEARCH_BASE_URL || 'http://localhost:8081';
+  const baseUrl = process.env.AI_SEARCH_BASE_URL || 'http://localhost:8080';
   const question = testQuestions[1];
   
   console.log('\n📝 Question:', question);
@@ -106,7 +106,7 @@ async function testBatchEndpoint() {
   console.log('TEST 3: Batch Questions (HTTP API)');
   console.log('='.repeat(80));
   
-  const baseUrl = process.env.AI_SEARCH_BASE_URL || 'http://localhost:8081';
+  const baseUrl = process.env.AI_SEARCH_BASE_URL || 'http://localhost:8080';
   const questions = testQuestions.slice(0, 2); // First 2 questions
   
   console.log('\n📝 Questions:');

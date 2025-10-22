@@ -28,7 +28,8 @@ const envCandidates = [
 ];
 const envPath = envCandidates.find(p => fs.existsSync(p)) || envCandidates[0];
 console.log("[ai-search] Loading .env from:", envPath, "exists=", fs.existsSync(envPath));
-dotenv.config({ path: envPath });
+// Force reload with override to fix dotenv v17 auto-injection issues
+dotenv.config({ path: envPath, override: true });
 
 // Initialize telemetry (no-op if not configured)
 initTelemetry();
@@ -62,6 +63,10 @@ app.use(cors({
 app.use(express.json());
 
 // ---- ENV VARS ----
+// Debug: Check what env vars are actually loaded
+console.log("[ai-search] DEBUG - AZURE_SEARCH_ENDPOINT raw:", JSON.stringify(process.env.AZURE_SEARCH_ENDPOINT));
+console.log("[ai-search] DEBUG - All AZURE_SEARCH keys:", Object.keys(process.env).filter(k => k.startsWith('AZURE_SEARCH')));
+
 const endpoint = process.env.AZURE_SEARCH_ENDPOINT;
 const indexName = process.env.AZURE_SEARCH_INDEX;
 const apiKey = process.env.AZURE_SEARCH_QUERY_KEY;
