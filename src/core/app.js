@@ -19,6 +19,8 @@ import "../parsers/templateRenderer.js";
 // Import training examples and hinted parser for user-trainable parsing
 import "../parsers/parserTrainingExamples.js";
 import "../parsers/hintedParser.js";
+// Import evidence-based plan generator bridge
+import "../parsers/evidenceBasedPlanBridge.js";
 
 // Basic application initialization
 addListener(document, "DOMContentLoaded", function () {

@@ -821,6 +821,20 @@ class TemplateRenderer {
     const fullText = parsedData.fullText || '';
     const assessment = normalizedSections['ASSESSMENT'] || '';
 
+    // Try to generate evidence-based plan first (TypeScript integration)
+    if (typeof globalThis.generateEvidenceBasedPlan === 'function') {
+      try {
+        const evidencePlan = globalThis.generateEvidenceBasedPlan(parsedData);
+        if (evidencePlan) {
+          plans.push('=== Evidence-Based Clinical Plan ===');
+          plans.push(evidencePlan);
+          plans.push('\n=== Additional Clinical Considerations ===');
+        }
+      } catch (error) {
+        debugWarn('Evidence-based plan generation failed:', error);
+      }
+    }
+
     // Diagnostic review
     if (/echo|echocardiogram|TTE/i.test(fullText) && /reviewed|review/i.test(fullText)) {
       plans.push('Echo reviewed');

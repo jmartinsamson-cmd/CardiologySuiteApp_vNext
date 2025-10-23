@@ -1,0 +1,23 @@
+Chief Complaint: Chest pain
+
+History of Present Illness:
+68-year-old male presents with acute onset chest pain x 2 hours. 
+Pain described as crushing, substernal, radiating to left arm.
+Associated with nausea and diaphoresis.
+
+Past Medical History: Diabetes, Hypertension
+
+Vital Signs:
+BP: 180/110, HR: 85, RR: 18, Temp: 98.6F, O2Sat: 98% RA
+
+Labs:
+Troponin: 15.2 ng/mL (H)
+Potassium: 4.2 mEq/L
+Creatinine: 1.1 mg/dL
+
+Assessment:
+STEMI - acute ST elevation myocardial infarction
+Hypertension
+
+Plan:
+Standard STEMI protocol initiated.
