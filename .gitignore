@@ -135,6 +135,7 @@ temp/
 # ================================
 generated_note.html
 *.generated.*
+eslint-results.sarif
 
 # ================================
 # TypeScript
