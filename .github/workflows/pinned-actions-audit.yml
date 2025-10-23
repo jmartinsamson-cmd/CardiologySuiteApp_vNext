@@ -1,0 +1,77 @@
+name: Pinned Actions Audit
+
+on:
+  schedule:
+    - cron: "30 3 * * 0" # Weekly Sunday 03:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Audit and update action SHAs
+        id: audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/audit-actions-pins.mjs
+
+      - name: Create branch and commit changes
+        if: steps.audit.outputs.changed == 'true'
+        env:
+          BRANCH_NAME: chore/update-action-shas-${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH_NAME"
+          git add .github/workflows/*.yml audit-actions-summary.md || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(actions): update pinned SHAs to latest for major versions"
+            git push --set-upstream origin "$BRANCH_NAME"
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Open pull request
+        if: steps.audit.outputs.changed == 'true'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const branch = `chore/update-action-shas-${{ github.run_id }}`;
+            const body = [
+              'Automated update of pinned GitHub Action SHAs to the latest for their major versions.',
+              '',
+              'This helps keep security patches up-to-date while avoiding breaking changes from major upgrades.',
+              '',
+              'See audit summary in `audit-actions-summary.md` (attached in branch) if present.'
+            ].join('\n');
+
+            try {
+              const pr = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: 'chore(actions): update pinned SHAs',
+                head: branch,
+                base: context.ref.replace('refs/heads/',''),
+                body
+              });
+              core.setOutput('pr', pr.data.html_url);
+            } catch (e) {
+              if (e?.status === 422) {
+                core.warning('PR possibly already exists or no changes.');
+              } else {
+                throw e;
+              }
+            }
