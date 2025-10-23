@@ -63,6 +63,16 @@ export async function scrapeItemPage(listItem: ListItem): Promise<RawItem | null
       body = body.slice(0, 3000) + '...';
     }
 
+    // Helper function to safely check if URL hostname matches expected domain
+    const isValidDomain = (url: string, expectedDomain: string): boolean => {
+      try {
+        const urlObj = new URL(url, 'https://www.acc.org'); // Resolve relative URLs
+        return urlObj.hostname === expectedDomain || urlObj.hostname.endsWith(`.${expectedDomain}`);
+      } catch {
+        return false; // Invalid URL
+      }
+    };
+
     // Extract relevant links (DOI, PDF, ClinicalTrials.gov, etc.)
     const links: Array<{ label: string; url: string }> = [];
     $('a').each((_: number, elem: any) => {
@@ -71,11 +81,11 @@ export async function scrapeItemPage(listItem: ListItem): Promise<RawItem | null
       const text = $link.text().toLowerCase();
 
       if (href) {
-        if (href.includes('doi.org') || text.includes('doi')) {
+        if (isValidDomain(href, 'doi.org') || text.includes('doi')) {
           links.push({ label: 'DOI', url: href });
         } else if (href.endsWith('.pdf') || text.includes('pdf')) {
           links.push({ label: 'PDF', url: href });
-        } else if (href.includes('clinicaltrials.gov')) {
+        } else if (isValidDomain(href, 'clinicaltrials.gov')) {
           links.push({ label: 'ClinicalTrials.gov', url: href });
         } else if (text.includes('full text') || text.includes('read more')) {
           links.push({ label: 'Full text', url: href });

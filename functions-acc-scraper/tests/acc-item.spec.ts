@@ -78,8 +78,19 @@ describe('acc-item scraper', () => {
     const item = await scrapeItemPage(listItem);
 
     expect(item.links.length).toBeGreaterThan(0);
-    expect(item.links.some(l => l.url.includes('doi.org'))).toBe(true);
-    expect(item.links.some(l => l.url.includes('clinicaltrials.gov'))).toBe(true);
+    // Use proper URL hostname validation instead of unsafe substring check
+    expect(item.links.some(l => {
+      try {
+        const url = new URL(l.url, 'https://www.acc.org');
+        return url.hostname === 'doi.org' || url.hostname.endsWith('.doi.org');
+      } catch { return false; }
+    })).toBe(true);
+    expect(item.links.some(l => {
+      try {
+        const url = new URL(l.url, 'https://www.acc.org');
+        return url.hostname === 'clinicaltrials.gov' || url.hostname.endsWith('.clinicaltrials.gov');
+      } catch { return false; }
+    })).toBe(true);
   });
 
   it('should handle missing optional fields', async () => {
