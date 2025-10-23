@@ -3,6 +3,7 @@
  * Usage: npm run dry-run [-- --write]
  */
 
+/*global process*/
 import { config } from 'dotenv';
 config(); // Load .env explicitly
 import { scrapeAndNormalize } from '../src/lib/orchestrator.js';
