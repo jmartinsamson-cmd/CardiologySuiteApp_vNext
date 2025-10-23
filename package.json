@@ -37,6 +37,7 @@
     "test:a11y": "playwright test tests/a11y-mpa.spec.ts --config=tests/playwright.config.ts",
     "test:diff": "node scripts/test-diff.js",
     "test:ai-enhancements": "node services/ai-search/test-enhancements-standalone.js",
+    "test:ai-enhancements:parsers": "node tests/ai-enhancements.test.js",
     "test:ai-enhancements:telemetry": "DEBUG_TELEMETRY=true node services/ai-search/test-enhancements-standalone.js",
     "lint": "eslint \"src/**/*.{js,ts}\" \"scripts/**/*.{js,ts}\" --no-error-on-unmatched-pattern",
     "lint:fix": "eslint \"src/**/*.{js,ts}\" \"scripts/**/*.{js,ts}\" --fix --no-error-on-unmatched-pattern",

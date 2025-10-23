@@ -88,6 +88,11 @@ jobs:
         run: npm run test:parser
         continue-on-error: false
 
+      - name: 🤖 Run AI enhancement parsers tests
+        id: ai_parsers
+        run: npm run test:ai-enhancements:parsers
+        continue-on-error: false
+
       # ===================================================================
       # E2E TESTS
       # ===================================================================
@@ -145,6 +150,7 @@ jobs:
           echo "| Lint | ${{ steps.lint.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Type Check | ${{ steps.typecheck.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Unit Tests | ${{ steps.unit.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| AI Enhancements | ${{ steps.ai_parsers.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| E2E Tests | ${{ steps.e2e.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Bundle Size | ${{ steps.size.outcome == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
