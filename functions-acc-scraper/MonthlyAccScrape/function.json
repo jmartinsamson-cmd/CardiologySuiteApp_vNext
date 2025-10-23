@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "name": "timer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 0 12 1 * *"
+    }
+  ],
+  "scriptFile": "../dist/MonthlyAccScrape/index.js"
+}

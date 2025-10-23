@@ -1,0 +1,3 @@
+# PDF Backup List - Thu Oct 23 12:28:16 AM UTC 2025
+# Original location | Blob URL
+src/assets/pdfs/general/reference/hypertension-notes.pdf | https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/general/reference/hypertension-notes.pdf

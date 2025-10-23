@@ -984,12 +984,12 @@
       "pdfs": [
         {
           "title": "Congestive Heart Failure Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
           "description": "Comprehensive guide to CHF pathophysiology, diagnosis, and management (6.6 MB)"
         },
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
@@ -1194,7 +1194,7 @@
       "pdfs": [
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
@@ -1736,12 +1736,12 @@
       "pdfs": [
         {
           "title": "Congestive Heart Failure Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
           "description": "Comprehensive guide to CHF pathophysiology, diagnosis, and management (6.6 MB)"
         },
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
@@ -1796,12 +1796,12 @@
       "pdfs": [
         {
           "title": "Congestive Heart Failure Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/congestive-heart-failure-notes.pdf",
           "description": "Comprehensive guide to CHF pathophysiology, diagnosis, and management (6.6 MB)"
         },
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
@@ -2049,7 +2049,7 @@
       "pdfs": [
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
@@ -3061,7 +3061,7 @@
       "pdfs": [
         {
           "title": "Cardiomyopathy Clinical Notes",
-          "path": "https://cardiologysuitepub.blob.core.windows.net/edu-content/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
+          "path": "/src/assets/pdfs/cardiology/heart-failure/cardiomyopathy-notes.pdf",
           "description": "Comprehensive guide to cardiomyopathy types, diagnosis, and management (4.7 MB)"
         }
       ]
