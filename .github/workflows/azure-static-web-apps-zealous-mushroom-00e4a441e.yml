@@ -32,6 +32,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Type check (no emit)
+        run: npm run type-check
+
+      - name: Install API dependencies (basic check)
+        run: npm --prefix api install --no-audit --no-fund
+
       - name: Build CSS
         run: npm run build:css
 
