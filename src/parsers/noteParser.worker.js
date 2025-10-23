@@ -15,12 +15,13 @@
 // Import parser functions (they need to be self-contained)
 // Note: Web Workers can't access window object or DOM
 
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 self.addEventListener("message", async (event) => {
   const { type, text, parserId } = event.data;
 
   if (type === "PARSE_NOTE") {
     try {
-      console.log(`[Worker] Starting parse for ${text.length} characters`);
+      debugLog(`[Worker] Starting parse for ${text.length} characters`);
 
       // For now, send back a message that we need the parser in the main thread
       // This is a limitation - we'll use a different approach
@@ -30,7 +31,7 @@ self.addEventListener("message", async (event) => {
         parserId,
       });
     } catch (error) {
-      console.error("[Worker] Parse error:", error);
+      debugError("[Worker] Parse error:", error);
       self.postMessage({
         type: "ERROR",
         error: error.message,
@@ -40,4 +41,4 @@ self.addEventListener("message", async (event) => {
   }
 });
 
-console.log("[Worker] Note parser worker initialized (placeholder)");
+debugLog("[Worker] Note parser worker initialized (placeholder)");

@@ -107,6 +107,12 @@ export default [
         SVGSVGElement: "readonly",
         MutationObserver: "readonly",
         Node: "readonly",
+        // DOM TypeScript types
+        EventTarget: "readonly",
+        EventListener: "readonly",
+        Event: "readonly",
+        Element: "readonly",
+        AddEventListenerOptions: "readonly",
       },
     },
     plugins: {
@@ -118,6 +124,8 @@ export default [
         "warn",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // Disable no-undef for TypeScript files - TypeScript handles this
+      "no-undef": "off",
     },
   },
   // TypeScript in scripts (Node globals)

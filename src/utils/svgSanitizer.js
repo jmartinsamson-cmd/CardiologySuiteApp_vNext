@@ -1,3 +1,5 @@
+import { debugLog, debugWarn, debugError } from "./logger.js";
+
 /**
  * SVG ViewBox Sanitizer (Loop-Safe)
  *
@@ -58,7 +60,7 @@ export function sanitizeSVGViewBox(svg) {
     const parts = viewBox.trim().split(/\s+/);
 
     if (parts.length !== 4) {
-      console.warn('[SVG Sanitizer] Invalid viewBox format:', viewBox);
+      debugWarn('[SVG Sanitizer] Invalid viewBox format:', viewBox);
       sanitizedSVGs.add(svg);
       return false;
     }
@@ -81,7 +83,7 @@ export function sanitizeSVGViewBox(svg) {
       }
 
       // Fallback to 0 for invalid values
-      console.warn('[SVG Sanitizer] Invalid viewBox value:', part);
+      debugWarn('[SVG Sanitizer] Invalid viewBox value:', part);
       return '0';
     });
 
@@ -98,10 +100,10 @@ export function sanitizeSVGViewBox(svg) {
 
     svg.setAttribute('viewBox', newViewBox);
 
-    console.info(`[SVG Sanitizer] Fixed viewBox: "${viewBox}" -> "${newViewBox}"`);
+    debugLog(`[SVG Sanitizer] Fixed viewBox: "${viewBox}" -> "${newViewBox}"`);
     return true;
   } catch (err) {
-    console.error('[SVG Sanitizer] Error sanitizing viewBox:', err);
+    debugError('[SVG Sanitizer] Error sanitizing viewBox:', err);
     sanitizedSVGs.add(svg); // Mark as processed to avoid retrying
     return false;
   }
@@ -176,7 +178,7 @@ export function sanitizeAllSVGs(root = document) {
 
   if (svgs.length > 0) {
     queueSVGs(svgs);
-    console.info(`[SVG Sanitizer] Queued ${svgs.length} SVG element(s) for processing`);
+    debugLog(`[SVG Sanitizer] Queued ${svgs.length} SVG element(s) for processing`);
   }
 
   return svgs.length;
@@ -226,7 +228,7 @@ export function installSVGSanitizer(root = document.body) {
     attributes: false,
   });
 
-  console.info('[SVG Sanitizer] MutationObserver installed (loop-safe, batched)');
+  debugLog('[SVG Sanitizer] MutationObserver installed (loop-safe, batched)');
   return observer;
 }
 

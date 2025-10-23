@@ -1,3 +1,5 @@
+import { debugLog, debugWarn } from "./logger.js";
+
 /**
  * Jank Monitor (Temporary)
  *
@@ -24,7 +26,7 @@
      */
     start() {
       if (JankMonitor.isRunning) {
-        console.warn(LOG_PREFIX, 'Already running');
+        debugWarn(LOG_PREFIX, 'Already running');
         return;
       }
 
@@ -33,7 +35,7 @@
       JankMonitor.longTaskCount = 0;
       JankMonitor.maxJankDuration = 0;
 
-      console.info(LOG_PREFIX, `Started (threshold: ${JANK_THRESHOLD}ms)`);
+      debugLog(LOG_PREFIX, `Started (threshold: ${JANK_THRESHOLD}ms)`);
 
       // Use requestAnimationFrame to detect frame drops
       JankMonitor.checkFrame();
@@ -47,7 +49,7 @@
                 JankMonitor.longTaskCount++;
                 JankMonitor.maxJankDuration = Math.max(JankMonitor.maxJankDuration, entry.duration);
 
-                console.warn(
+                debugWarn(
                   LOG_PREFIX,
                   `Long task detected: ${entry.duration.toFixed(2)}ms`,
                   `(${entry.name})`,
@@ -58,9 +60,9 @@
           });
 
           JankMonitor.perfObserver.observe({ entryTypes: ['longtask', 'measure'] });
-          console.info(LOG_PREFIX, 'PerformanceObserver enabled');
+          debugLog(LOG_PREFIX, 'PerformanceObserver enabled');
         } catch (err) {
-          console.warn(LOG_PREFIX, 'PerformanceObserver not supported:', err.message);
+          debugWarn(LOG_PREFIX, 'PerformanceObserver not supported:', err.message);
         }
       }
     },
@@ -81,7 +83,7 @@
         JankMonitor.longTaskCount++;
         JankMonitor.maxJankDuration = Math.max(JankMonitor.maxJankDuration, frameDuration);
 
-        console.warn(
+        debugWarn(
           LOG_PREFIX,
           `Long frame detected: ${frameDuration.toFixed(2)}ms`,
           `(${Math.round(1000 / frameDuration)} FPS)`
@@ -100,7 +102,7 @@
      */
     stop() {
       if (!JankMonitor.isRunning) {
-        console.warn(LOG_PREFIX, 'Not running');
+        debugWarn(LOG_PREFIX, 'Not running');
         return;
       }
 
@@ -119,7 +121,7 @@
       // Write to window for automated tests
       window.__JANK_STATS__ = stats;
 
-      console.info(
+      debugLog(
         LOG_PREFIX,
         'Stopped',
         `\nLong tasks detected: ${stats.longTaskCount}`,
@@ -127,9 +129,9 @@
       );
 
       if (stats.longTaskCount === 0) {
-        console.info(LOG_PREFIX, '✅ No jank detected!');
+        debugLog(LOG_PREFIX, '✅ No jank detected!');
       } else {
-        console.warn(LOG_PREFIX, `⚠️  ${stats.longTaskCount} long task(s) detected`);
+        debugWarn(LOG_PREFIX, `⚠️  ${stats.longTaskCount} long task(s) detected`);
       }
 
       return stats;
@@ -157,7 +159,7 @@
                       window.location.hostname === '[::1]';
 
   if (!isLocalhost) {
-    console.info(LOG_PREFIX, 'Disabled (not localhost)');
+    debugLog(LOG_PREFIX, 'Disabled (not localhost)');
     return;
   }
 
@@ -169,7 +171,7 @@
       // Auto-stop after 30 seconds
       setTimeout(() => {
         if (JankMonitor.isRunning) {
-          console.info(LOG_PREFIX, 'Auto-stopping after 30 seconds');
+          debugLog(LOG_PREFIX, 'Auto-stopping after 30 seconds');
           JankMonitor.stop();
         }
       }, 30000);
@@ -180,12 +182,12 @@
     // Auto-stop after 30 seconds
     setTimeout(() => {
       if (JankMonitor.isRunning) {
-        console.info(LOG_PREFIX, 'Auto-stopping after 30 seconds');
+        debugLog(LOG_PREFIX, 'Auto-stopping after 30 seconds');
         JankMonitor.stop();
       }
     }, 30000);
   }
 
-  console.info(LOG_PREFIX, 'Loaded (will auto-start and stop after 30s)');
+  debugLog(LOG_PREFIX, 'Loaded (will auto-start and stop after 30s)');
 
 })(window);

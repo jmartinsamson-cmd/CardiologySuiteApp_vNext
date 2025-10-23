@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import { debugLog, debugWarn, debugError } from "./logger.js";
+
 /*
   parserHelpers.js — Shared Parser Utility Functions
   -------------------------------------------------------------------
@@ -302,9 +304,9 @@ function isAllowedLab(name) {
 function extractLabs(full, sections) {
   const source = (sections && sections["Labs"]) || (sections && sections["Laboratory Results"]) || full;
 
-  console.log('🔬 extractLabs called');
-  console.log('  📏 Source length:', source.length);
-  console.log('  📝 First 200 chars:', source.substring(0, 200));
+  debugLog('🔬 extractLabs called');
+  debugLog('  📏 Source length:', source.length);
+  debugLog('  📝 First 200 chars:', source.substring(0, 200));
   
   const labs = [];
   const lines = source.split(/\n/).filter(Boolean);  // Don't normalize yet - preserve tabs
@@ -322,7 +324,7 @@ function extractLabs(full, sections) {
     if (/Lab\s+\d{1,2}\/\d{1,2}\/\d{2,4}/.test(line) || 
         (/Recent Labs/i.test(line) && i + 1 < lines.length && /Lab\s+\d{1,2}\/\d{1,2}\/\d{2,4}/.test(lines[i + 1]))) {
       
-      console.log('📊 Detected multi-column lab table format at line', i);
+      debugLog('📊 Detected multi-column lab table format at line', i);
       
       // If "Recent Labs" header, skip to actual column header
       let headerIndex = i;
@@ -339,7 +341,7 @@ function extractLabs(full, sections) {
         if (!dataLine.trim() || 
             /^[\s<>-]+$/.test(dataLine) ||
             /^(Recent Labs|Chemistries|CBC|Coags|Imaging|Physical|Significant)/i.test(dataLine)) {
-          console.log(`📊 Table ended at line ${j}`);
+          debugLog(`📊 Table ended at line ${j}`);
           break;
         }
         
@@ -355,14 +357,14 @@ function extractLabs(full, sections) {
         
         // Skip if not a recognized lab
         if (!isAllowedLab(labName)) {
-          console.log(`  ⏭️ Skipping unrecognized lab: ${labName}`);
+          debugLog(`  ⏭️ Skipping unrecognized lab: ${labName}`);
           continue;
         }
         
         // Extract all numeric values (skip "--", " -- ", and empty cells)
         const values = parts.slice(1).filter(p => p && p !== '--' && p !== ' -- ' && /\d/.test(p));
         if (values.length === 0) {
-          console.log(`  ⏭️ No values found for ${labName}`);
+          debugLog(`  ⏭️ No values found for ${labName}`);
           continue;
         }
         
@@ -387,7 +389,7 @@ function extractLabs(full, sections) {
           }
           
           labs.push(lab);
-          console.log(`  ✅ Extracted ${labName}: ${lab.value} from values [${values.join(', ')}]`);
+          debugLog(`  ✅ Extracted ${labName}: ${lab.value} from values [${values.join(', ')}]`);
         }
       }
       
@@ -400,12 +402,12 @@ function extractLabs(full, sections) {
   
   // If we found table data, return it now
   if (tableProcessed && labs.length > 0) {
-    console.log(`📊 Multi-column table extraction complete: ${labs.length} labs found`);
+    debugLog(`📊 Multi-column table extraction complete: ${labs.length} labs found`);
     return dedupeByKey(labs, (x) => `${x.name}|${x.value}`);
   }
   
   // Fall back to line-by-line parsing for non-table formats
-  console.log('📋 Using line-by-line lab parsing (no table detected)');
+  debugLog('📋 Using line-by-line lab parsing (no table detected)');
   const normalizedLines = lines.map(s => normalizeLabText(s));
 
   for (const line of normalizedLines) {

@@ -15,6 +15,7 @@
 */
 
 import { yieldToMain } from '../utils/scheduler.js';
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 
 const MAX_INPUT_LENGTH = 200000; // 200k char limit
 
@@ -58,7 +59,7 @@ export async function parseClinicalNoteFull(text) {
 
   // Cap input length
   if (text && text.length > MAX_INPUT_LENGTH) {
-    console.warn(`Input truncated from ${text.length} to ${MAX_INPUT_LENGTH} chars`);
+    debugWarn(`Input truncated from ${text.length} to ${MAX_INPUT_LENGTH} chars`);
     text = text.slice(0, MAX_INPUT_LENGTH);
   }
 
@@ -327,7 +328,7 @@ async function extractImagingAsync(text) {
   const matches = Array.from(text.matchAll(re)).slice(0, MAX_MATCHES);
 
   if (matches.length >= MAX_MATCHES) {
-    console.warn(`extractImaging: Limited to ${MAX_MATCHES} matches`);
+    debugWarn(`extractImaging: Limited to ${MAX_MATCHES} matches`);
   }
 
   let iterations = 0;

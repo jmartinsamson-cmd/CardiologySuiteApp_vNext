@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import { debugLog, debugError } from "../utils/logger.js";
+
 /**
  * hintedParser.js - Hinted Parser Layer for User-Trained Format Recognition
  * ===========================================================================
@@ -36,18 +38,18 @@ function parseWithHints(text, hints = null) {
     // @ts-ignore - Extending window object for getLearnedPatterns
     patterns = window.getLearnedPatterns();
     if (patterns && debug) {
-      console.log('📚 [HintedParser] Using learned patterns from training examples');
+      debugLog('📚 [HintedParser] Using learned patterns from training examples');
     }
   }
   if (!patterns) {
     patterns = getDefaultPatterns();
     if (debug) {
-      console.log('📖 [HintedParser] Using default patterns');
+      debugLog('📖 [HintedParser] Using default patterns');
     }
   }
   
   if (debug) {
-    console.log('🔍 [HintedParser] Using patterns:', patterns);
+    debugLog('🔍 [HintedParser] Using patterns:', patterns);
   }
 
   // Split into lines for processing
@@ -66,7 +68,7 @@ function parseWithHints(text, hints = null) {
     if (currentSection && currentContent.length > 0) {
       sections[currentSection] = currentContent.join('\n').trim();
       if (debug) {
-        console.log(`✅ [HintedParser] Captured ${currentSection}: ${sections[currentSection].substring(0, 50)}...`);
+        debugLog(`✅ [HintedParser] Captured ${currentSection}: ${sections[currentSection].substring(0, 50)}...`);
       }
       currentContent = [];
     }
@@ -93,7 +95,7 @@ function parseWithHints(text, hints = null) {
         result.matchedAliases[sectionName] = trimmed;
         
         if (debug) {
-          console.log(`🎯 [HintedParser] Matched ${sectionName} header: "${trimmed}"`);
+          debugLog(`🎯 [HintedParser] Matched ${sectionName} header: "${trimmed}"`);
         }
 
         // Check if content follows on same line after colon
@@ -133,7 +135,7 @@ function parseWithHints(text, hints = null) {
   // Fallback: if main sections empty, try generic extraction
   if (!result.hpi && !result.assessment && !result.plan) {
     if (debug) {
-      console.log('⚠️ [HintedParser] No sections matched, falling back to generic parse');
+      debugLog('⚠️ [HintedParser] No sections matched, falling back to generic parse');
     }
     return fallbackToGenericParse(text);
   }
@@ -230,22 +232,22 @@ function getDefaultPatterns() {
  */
 function testHintedParse(note, hints = null) {
   if (!note || typeof note !== 'string') {
-    console.error('Invalid note provided');
+    debugError('Invalid note provided');
     return null;
   }
-  console.log('🧪 [TestHintedParse] Starting...');
-  console.log('📝 Note length:', note.length);
-  console.log('🎯 Hints:', hints);
+  debugLog('🧪 [TestHintedParse] Starting...');
+  debugLog('📝 Note length:', note.length);
+  debugLog('🎯 Hints:', hints);
   
   /** @type {any} */
   const result = parseWithHints(note, hints);
   
-  console.log('\n📊 Results:');
-  console.log('  Vitals:', result.vitals?.length || 0, 'items');
-  console.log('  HPI:', result.hpi?.length || 0, 'chars');
-  console.log('  Assessment:', result.assessment?.length || 0, 'chars');
-  console.log('  Plan:', result.plan?.length || 0, 'chars');
-  console.log('  Matched Aliases:', result.matchedAliases);
+  debugLog('\n📊 Results:');
+  debugLog('  Vitals:', result.vitals?.length || 0, 'items');
+  debugLog('  HPI:', result.hpi?.length || 0, 'chars');
+  debugLog('  Assessment:', result.assessment?.length || 0, 'chars');
+  debugLog('  Plan:', result.plan?.length || 0, 'chars');
+  debugLog('  Matched Aliases:', result.matchedAliases);
   
   return result;
 }

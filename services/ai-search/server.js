@@ -36,17 +36,23 @@ initTelemetry();
 
 const app = express();
 
-// ---- CORS (strict allowlist) ----
-const defaultOrigins = [
-  "http://localhost:8080",
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "http://localhost:5500",      // Five Server
-  "http://127.0.0.1:8080",
-  "http://127.0.0.1:3000",
-  "http://127.0.0.1:5173",
-  "http://127.0.0.1:5500",      // Five Server
-];
+// ---- CORS (environment-based allowlist) ----
+// Allow environment variable to override defaults (comma-separated list)
+const defaultOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
+  : [
+      "http://localhost:8080",
+      "http://localhost:3000",
+      "http://localhost:5173",  // Vite default
+      "http://localhost:5500",  // Five Server
+      "http://localhost:4280",  // SWA CLI
+      "http://127.0.0.1:8080",
+      "http://127.0.0.1:3000",
+      "http://127.0.0.1:5173",
+      "http://127.0.0.1:5500",
+      "http://127.0.0.1:4280",
+    ];
+
 if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
   defaultOrigins.push(`https://${process.env.CODESPACE_NAME}-${process.env.PORT || 8080}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`);
 }

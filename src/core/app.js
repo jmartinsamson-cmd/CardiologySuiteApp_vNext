@@ -1,6 +1,13 @@
 /* eslint-env browser */
 // Cardiology Suite Application
-console.log("🚀 Initializing Cardiology Suite...");
+import { debugLog } from "../utils/logger.js";
+debugLog("🚀 Initializing Cardiology Suite...");
+
+// Import configuration and utilities
+import { config } from "../../config/environment.js";
+import { fetchJSON } from "../utils/network.js";
+import { debugWarn, debugError } from "../utils/logger.js";
+import { addListener, cleanupListeners } from "../utils/eventManager.js";
 
 // Import required modules
 import "../utils/debugInstrumentation.js";
@@ -14,8 +21,8 @@ import "../parsers/parserTrainingExamples.js";
 import "../parsers/hintedParser.js";
 
 // Basic application initialization
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("✅ DOM loaded, initializing app...");
+addListener(document, "DOMContentLoaded", function () {
+  debugLog("✅ DOM loaded, initializing app...");
 
   try {
     // Initialize RAG configuration globals for UI diagnostics
@@ -109,45 +116,39 @@ function getSearchApiBase() {
   if (origin.includes("-8080.app.github.dev")) {
     return origin.replace("-8080.app.github.dev", "-8081.app.github.dev");
   }
-  // Fallback to localhost for local dev
-  return "http://localhost:8081";
+  // Use environment config instead of hardcoded localhost
+  return config.aiSearchBase;
 }
 
 async function checkSearchHealth() {
   const base = getSearchApiBase();
   try {
-    const r = await fetch(`${base}/health`, { cache: "no-store" });
-    const j = await r.json();
-    if (j && j.ok) {
-      console.log("✅ AI Search /health:", j);
+    const data = await fetchJSON(`${base}/health`, { cache: "no-store" });
+    if (data && data.ok) {
+      debugLog("✅ AI Search /health:", data);
     } else {
-      console.warn("⚠️ AI Search /health returned:", j);
+      debugWarn("⚠️ AI Search /health returned:", data);
     }
-    return j;
-  } catch (e) {
-    console.error("❌ AI Search /health failed:", e);
-    throw e;
+    return data;
+  } catch (error) {
+    debugError("❌ AI Search /health failed:", error);
+    throw error;
   }
 }
 
 async function runSearch(query = "*", top = 5) {
   const base = getSearchApiBase();
   try {
-    const r = await fetch(`${base}/search`, {
+    const data = await fetchJSON(`${base}/search`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ query, top }),
     });
-    const j = await r.json();
-    if (r.ok) {
-      console.log(`🔍 AI Search results for "${query}":`, j);
-    } else {
-      console.warn("⚠️ AI Search /search error:", j);
-    }
-    return j;
-  } catch (e) {
-    console.error("❌ AI Search /search failed:", e);
-    throw e;
+    debugLog(`🔍 AI Search results for "${query}":`, data);
+    return data;
+  } catch (error) {
+    debugError("❌ AI Search /search failed:", error);
+    throw error;
   }
 }
 
@@ -460,19 +461,15 @@ async function loadDiagnosisData() {
   if (diagnosisDatabase) return diagnosisDatabase;
 
   try {
-    const response = await fetch("./data/cardiology_diagnoses/cardiology.json");
-    if (!response.ok) {
-      throw new Error(`Failed to load diagnosis data: ${response.status}`);
-    }
-    diagnosisDatabase = await response.json();
-    console.log(
+    diagnosisDatabase = await fetchJSON("./data/cardiology_diagnoses/cardiology.json");
+    debugLog(
       "✅ Loaded diagnosis database with",
       diagnosisDatabase.diagnoses.length,
       "diagnoses",
     );
     return diagnosisDatabase;
   } catch (error) {
-    console.error("❌ Error loading diagnosis data:", error);
+    debugError("❌ Error loading diagnosis data:", error);
     return null;
   }
 }
@@ -707,8 +704,7 @@ async function setActiveDiagnosis(diagnosis) {
  */
 async function initializeLabValues() {
   try {
-    const response = await fetch("./data/labs_reference/labs_reference.json");
-    const labData = await response.json();
+    const labData = await fetchJSON("./data/labs_reference/labs_reference.json");
 
     const tbody = document.getElementById("tbl-labs");
     if (!tbody) return;

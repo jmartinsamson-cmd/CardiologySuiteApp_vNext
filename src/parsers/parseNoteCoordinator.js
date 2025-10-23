@@ -1,4 +1,6 @@
 // @ts-nocheck
+import { debugLog, debugWarn } from "../utils/logger.js";
+
 /**
  * Parse Note Coordinator
  *
@@ -39,30 +41,30 @@ async function parseNoteOptimal(text, options = {}) {
     onProgress = null
   } = options;
 
-  console.log('🚀 Parse Coordinator: Starting parse');
+  debugLog('🚀 Parse Coordinator: Starting parse');
 
   // Try worker first if enabled and available
   if (useWorker && typeof Worker !== 'undefined' && window.parserWorkerAvailable) {
     try {
       if (onProgress) onProgress('worker');
-      console.log('⚙️  Attempting Web Worker parse...');
+      debugLog('⚙️  Attempting Web Worker parse...');
 
       const result = await parseWithWorker(text, workerTimeout);
 
-      console.log('✅ Web Worker parse succeeded');
+      debugLog('✅ Web Worker parse succeeded');
       return result;
     } catch (err) {
-      console.warn('⚠️  Web Worker parse failed, falling back to main thread:', err.message);
+      debugWarn('⚠️  Web Worker parse failed, falling back to main thread:', err.message);
     }
   }
 
   // Fallback: Chunked main-thread parsing
   if (onProgress) onProgress('main-thread');
-  console.log('🔄 Using main-thread async parse...');
+  debugLog('🔄 Using main-thread async parse...');
 
   const result = await parseWithMainThread(text, onProgress);
 
-  console.log('✅ Main-thread parse succeeded');
+  debugLog('✅ Main-thread parse succeeded');
   return result;
 }
 
@@ -122,12 +124,12 @@ async function parseWithMainThread(text, _onProgress) {
 
   // Fallback to sync parser wrapped with yields
   if (typeof window.parseClinicalNoteFull === 'function') {
-    console.warn('Using sync parser (no async version available)');
+    debugWarn('Using sync parser (no async version available)');
 
     // Truncate if too long
     if (text.length > 200000) {
       text = text.slice(0, 200000);
-      console.warn('Input truncated to 200k chars');
+      debugWarn('Input truncated to 200k chars');
     }
 
     // Run in chunks with yields
