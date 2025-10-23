@@ -151,9 +151,10 @@ export const SIGNAL_WORDS = {
 
 /**
  * Create reverse lookup from synonym to canonical name
+ * @returns {Record<string, string>}
  */
-export function buildSynonymLookup() {
-  const lookup = {};
+function buildSynonymLookup() {
+  const lookup = /** @type {Record<string, string>} */ ({});
   for (const [canonical, synonyms] of Object.entries(SECTION_SYNONYMS)) {
     for (const syn of synonyms) {
       lookup[syn.toLowerCase()] = canonical;
@@ -165,6 +166,10 @@ export function buildSynonymLookup() {
 /**
  * Score how well a text matches a canonical section
  * Returns { canonical, score, matchedSynonym }
+ */
+/**
+ * @param {string} headerText
+ * @param {string} [sectionBody]
  */
 export function scoreMatch(headerText, sectionBody = "") {
   const normalized = headerText
