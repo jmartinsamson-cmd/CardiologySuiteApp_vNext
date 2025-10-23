@@ -15,7 +15,8 @@ permissions:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    # Run deploy on push, and on PRs only when PRs are from same-repo (not forks) and not closed
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed' && !github.event.pull_request.head.repo.fork)
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -49,7 +50,8 @@ jobs:
           AZURE_SEARCH_API_VERSION: ${{ secrets.AZURE_SEARCH_API_VERSION }}
 
   close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    # Close preview environments only for non-fork PRs
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && !github.event.pull_request.head.repo.fork
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:

@@ -49,13 +49,16 @@ jobs:
 
       - name: Upload analysis results to GitHub
         id: upload_sarif
+        # Skip upload on forked PRs where code scanning upload isn't permitted
+        if: github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork
         uses: github/codeql-action/upload-sarif@42213152a85ae7569bdb6bec7bcd74cd691bfe41 # v3.30.9
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+        continue-on-error: true
 
       - name: Upload ESLint SARIF artifact (on failure)
-        if: ${{ failure() || steps.upload_sarif.outcome != 'success' }}
+        if: ${{ always() && steps.upload_sarif.outcome != 'success' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: eslint-results.sarif
