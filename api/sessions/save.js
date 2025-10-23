@@ -9,53 +9,39 @@
 
 import { saveClinicalSession } from '../table-storage-config.js';
 
-export default async function handler(context, req) {
+export default async function handler(request, context) {
   // Only allow POST
-  if ((req.method || req?.method) !== 'POST') {
-    context.res = {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
-    return;
+  if ((request.method || request?.method) !== 'POST') {
+    return { status: 405, jsonBody: { error: 'Method not allowed' } };
   }
 
   try {
-    const body = (typeof req.json === 'function') ? await req.json() : (req.body || {});
+    const body = (typeof request.json === 'function') ? await request.json() : (request.body || {});
     const { userId, sessionData } = body;
 
     if (!userId || !sessionData) {
-      context.res = {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Missing userId or sessionData' })
-      };
-      return;
+      return { status: 400, jsonBody: { error: 'Missing userId or sessionData' } };
     }
 
     const result = await saveClinicalSession(userId, sessionData);
 
-    context.res = {
+    return {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      jsonBody: {
         success: true,
         sessionId: result.rowKey,
         message: 'Session saved successfully'
-      })
+      }
     };
-    return;
 
   } catch (error) {
     context.log('[API] Error saving session:', error);
-    context.res = {
+    return {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      jsonBody: {
         error: 'Failed to save session',
         message: error.message
-      })
+      }
     };
-    return;
   }
 }

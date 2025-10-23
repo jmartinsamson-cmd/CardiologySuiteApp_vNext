@@ -9,51 +9,37 @@
 
 import { trackEvent } from '../table-storage-config.js';
 
-export default async function handler(context, req) {
-  if ((req.method || req?.method) !== 'POST') {
-    context.res = {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
-    return;
+export default async function handler(request, context) {
+  if ((request.method || request?.method) !== 'POST') {
+    return { status: 405, jsonBody: { error: 'Method not allowed' } };
   }
 
   try {
-    const body = (typeof req.json === 'function') ? await req.json() : (req.body || {});
+    const body = (typeof request.json === 'function') ? await request.json() : (request.body || {});
     const { eventType, metadata = {} } = body;
 
     if (!eventType) {
-      context.res = {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Missing eventType' })
-      };
-      return;
+      return { status: 400, jsonBody: { error: 'Missing eventType' } };
     }
 
     const result = await trackEvent(eventType, metadata);
 
-    context.res = {
+    return {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      jsonBody: {
         success: true,
         eventId: result.rowKey
-      })
+      }
     };
-    return;
 
   } catch (error) {
     context.log('[API] Error tracking event:', error);
-    context.res = {
+    return {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      jsonBody: {
         error: 'Failed to track event',
         message: error.message
-      })
+      }
     };
-    return;
   }
 }
