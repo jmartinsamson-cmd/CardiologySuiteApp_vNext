@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* global process */
 /**
  * Azure Static Web Apps API - Save Clinical Session
  * POST /api/sessions/save
@@ -10,46 +9,53 @@
 
 import { saveClinicalSession } from '../table-storage-config.js';
 
-export default async function handler(req, context) {
+export default async function handler(context, req) {
   // Only allow POST
-  if (req.method !== 'POST') {
-    return {
+  if ((req.method || req?.method) !== 'POST') {
+    context.res = {
       status: 405,
-      jsonBody: { error: 'Method not allowed' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Method not allowed' })
     };
+    return;
   }
 
   try {
-    const { userId, sessionData } = await req.json();
+    const body = (typeof req.json === 'function') ? await req.json() : (req.body || {});
+    const { userId, sessionData } = body;
 
     if (!userId || !sessionData) {
-      return {
+      context.res = {
         status: 400,
-        jsonBody: { error: 'Missing userId or sessionData' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Missing userId or sessionData' })
       };
+      return;
     }
 
-    // Save to Cosmos DB
     const result = await saveClinicalSession(userId, sessionData);
 
-    return {
+    context.res = {
       status: 200,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         success: true,
-        sessionId: result.id,
+        sessionId: result.rowKey,
         message: 'Session saved successfully'
-      }
+      })
     };
+    return;
 
   } catch (error) {
     context.log('[API] Error saving session:', error);
-    
-    return {
+    context.res = {
       status: 500,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         error: 'Failed to save session',
         message: error.message
-      }
+      })
     };
+    return;
   }
 }

@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* global process */
 /**
  * Azure Static Web Apps API - User Preferences
  * GET /api/preferences?userId=xxx
@@ -8,64 +7,77 @@
 
 import { getUserPreferences, saveUserPreferences } from '../table-storage-config.js';
 
-export default async function handler(req, context) {
+export default async function handler(context, req) {
   try {
-    if (req.method === 'GET') {
+    if ((req.method || req?.method) === 'GET') {
       // Get preferences
-      const url = new URL(req.url);
+      const fullUrl = req.url || (req.originalUrl || '');
+  const url = new globalThis.URL(fullUrl, 'https://placeholder.local');
       const userId = url.searchParams.get('userId');
 
       if (!userId) {
-        return {
+        context.res = {
           status: 400,
-          jsonBody: { error: 'Missing userId parameter' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Missing userId parameter' })
         };
+        return;
       }
 
       const preferences = await getUserPreferences(userId);
 
-      return {
+      context.res = {
         status: 200,
-        jsonBody: preferences || { userId, preferences: {} }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(preferences || { userId, preferences: {} })
       };
+      return;
 
-    } else if (req.method === 'POST') {
+    } else if ((req.method || req?.method) === 'POST') {
       // Save preferences
-      const { userId, preferences } = await req.json();
+      const body = (typeof req.json === 'function') ? await req.json() : (req.body || {});
+      const { userId, preferences } = body;
 
       if (!userId || !preferences) {
-        return {
+        context.res = {
           status: 400,
-          jsonBody: { error: 'Missing userId or preferences' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: 'Missing userId or preferences' })
         };
+        return;
       }
 
       const result = await saveUserPreferences(userId, preferences);
 
-      return {
+      context.res = {
         status: 200,
-        jsonBody: {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           success: true,
           preferences: result
-        }
+        })
       };
+      return;
 
     } else {
-      return {
+      context.res = {
         status: 405,
-        jsonBody: { error: 'Method not allowed' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Method not allowed' })
       };
+      return;
     }
 
   } catch (error) {
     context.log('[API] Error with preferences:', error);
-    
-    return {
+    context.res = {
       status: 500,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         error: 'Failed to process preferences',
         message: error.message
-      }
+      })
     };
+    return;
   }
 }

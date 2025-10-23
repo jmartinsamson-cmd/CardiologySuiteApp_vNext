@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* global process */
 /**
  * Azure Static Web Apps API - Track Analytics Event
  * POST /api/analytics/track
@@ -10,44 +9,51 @@
 
 import { trackEvent } from '../table-storage-config.js';
 
-export default async function handler(req, context) {
-  if (req.method !== 'POST') {
-    return {
+export default async function handler(context, req) {
+  if ((req.method || req?.method) !== 'POST') {
+    context.res = {
       status: 405,
-      jsonBody: { error: 'Method not allowed' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Method not allowed' })
     };
+    return;
   }
 
   try {
-    const { eventType, metadata = {} } = await req.json();
+    const body = (typeof req.json === 'function') ? await req.json() : (req.body || {});
+    const { eventType, metadata = {} } = body;
 
     if (!eventType) {
-      return {
+      context.res = {
         status: 400,
-        jsonBody: { error: 'Missing eventType' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Missing eventType' })
       };
+      return;
     }
 
-    // Track event in Cosmos DB
     const result = await trackEvent(eventType, metadata);
 
-    return {
+    context.res = {
       status: 200,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         success: true,
-        eventId: result.id
-      }
+        eventId: result.rowKey
+      })
     };
+    return;
 
   } catch (error) {
     context.log('[API] Error tracking event:', error);
-    
-    return {
+    context.res = {
       status: 500,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         error: 'Failed to track event',
         message: error.message
-      }
+      })
     };
+    return;
   }
 }
