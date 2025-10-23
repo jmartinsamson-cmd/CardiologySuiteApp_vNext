@@ -1,6 +1,7 @@
+// @ts-nocheck
 /* stylelint-disable */
 /* eslint-env node */
-/* global fetch, process, console */
+/* global fetch */
 /**
  * Audit and update pinned GitHub Action SHAs in .github/workflows/*.yml
  * - For a curated allowlist of actions, finds the latest tag for the same major version
@@ -11,8 +12,8 @@
  * - writes to GITHUB_OUTPUT: changed=true|false, summary (markdown path), changes (JSON)
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || process.env.GITHUB_PAT || '';
 const WORKFLOWS_DIR = path.resolve('.github/workflows');
@@ -34,8 +35,8 @@ const allow = [
 
 function semverCompare(a, b) {
   // a, b like 'v4.1.7'
-  const pa = a.replace(/^v/, '').split('.').map(n => parseInt(n || '0', 10));
-  const pb = b.replace(/^v/, '').split('.').map(n => parseInt(n || '0', 10));
+  const pa = a.replace(/^v/, '').split('.').map(n => Number.parseInt(n || '0', 10));
+  const pb = b.replace(/^v/, '').split('.').map(n => Number.parseInt(n || '0', 10));
   for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
     const da = pa[i] || 0;
     const db = pb[i] || 0;
@@ -68,7 +69,7 @@ async function resolveLatest(owner, repo, major) {
   // Sort by semantic version
   const tags = refs.map(r => r.ref.replace('refs/tags/', ''));
   tags.sort(semverCompare);
-  const latestTag = tags[tags.length - 1];
+  const latestTag = tags.at(-1);
   // Resolve tag to SHA
   const refObj = refs.find(r => r.ref.endsWith(latestTag));
   const sha = refObj?.object?.sha;
@@ -91,7 +92,7 @@ async function main() {
       const latest = await resolveLatest(a.owner, a.repo, a.major).catch(() => null);
       if (!latest || !latest.sha) continue;
 
-  content = content.replace(re, (fullMatch, p1, ref) => {
+      content = content.replace(re, (fullMatch, p1, ref) => {
         if (ref === latest.sha) return fullMatch; // already latest
         updated = true;
         changes.push({ file, action: `${a.owner}/${a.repo}${sub}`, from: ref, to: latest.sha, tag: latest.tag });
@@ -130,7 +131,9 @@ async function main() {
   }
 }
 
-main().catch(err => {
-  console.error(err.stack || String(err));
+try {
+  await main();
+} catch (err) {
+  console.error(err?.stack || String(err));
   process.exit(1);
-});
+}

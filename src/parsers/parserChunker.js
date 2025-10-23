@@ -29,7 +29,14 @@ async function parseWithYield(
   // For large notes, wrap in promise with yield
   return new Promise((resolve, reject) => {
     // Give browser time to update UI
-    const delay = textLength > 20000 ? 300 : textLength > 10000 ? 200 : 100;
+    let delay;
+    if (textLength > 20000) {
+      delay = 300;
+    } else if (textLength > 10000) {
+      delay = 200;
+    } else {
+      delay = 100;
+    }
 
     if (progressCallback) {
       progressCallback(
@@ -68,7 +75,7 @@ async function parseNoteChunked(text) {
 
     // Stage 2: Parse with our wrapper
     const result = await parseWithYield(
-      window.parseClinicalNoteFull || window.parseClinicalNote,
+      (globalThis.parseClinicalNoteFull || globalThis.parseClinicalNote),
       text,
       (msg) => console.log(msg),
     );
@@ -80,7 +87,7 @@ async function parseNoteChunked(text) {
   }
 
   // For smaller notes, use standard parsing
-  return window.parseClinicalNoteFull
-    ? window.parseClinicalNoteFull(text)
-    : window.parseClinicalNote(text);
+  return globalThis.parseClinicalNoteFull
+    ? globalThis.parseClinicalNoteFull(text)
+    : globalThis.parseClinicalNote(text);
 }

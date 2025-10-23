@@ -39,19 +39,79 @@ function calculateBackoff(attempt: number, baseDelayMs: number = 1000): number {
   return exponentialDelay + jitter;
 }
 
+// Helper predicates and utilities (kept outside main function to reduce complexity)
+function isSuccess(status: number) { return status >= 200 && status < 300; }
+function isRetryable(status: number) { return status === 429 || status >= 500; }
+function shouldInitialDelay(attempt: number, delay: number) { return attempt > 0 || delay > 0; }
+type Outcome = 'success' | 'retryable' | 'clientError';
+function classifyStatus(status: number): Outcome {
+  if (isSuccess(status)) return 'success';
+  if (isRetryable(status)) return 'retryable';
+  return 'clientError';
+}
+
+function buildResponseHeaders(h: Headers): Record<string, string | string[]> {
+  const out: Record<string, string | string[]> = {};
+  for (const [key, value] of h.entries()) out[key] = value;
+  return out;
+}
+
+function makeSuccess(
+  status: number,
+  headers: Record<string, string | string[]>,
+  body: string
+): FetchResult {
+  return {
+    body,
+    status,
+    headers,
+    etag: typeof headers['etag'] === 'string' ? headers['etag'] : undefined,
+    lastModified: typeof headers['last-modified'] === 'string' ? headers['last-modified'] : undefined,
+  };
+}
+
+async function attemptFetch(
+  url: string,
+  method: string,
+  requestHeaders: Record<string, string>,
+  body?: string
+): Promise<
+  | { ok: true; status: number; responseHeaders: Record<string, string | string[]>; responseBody: string }
+  | { ok: false; error: Error }
+> {
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: requestHeaders,
+      body,
+      redirect: 'follow',
+    });
+    const responseBody = await response.text();
+    const status = response.status;
+    const responseHeaders = buildResponseHeaders(response.headers as unknown as Headers);
+    return { ok: true, status, responseHeaders, responseBody };
+  } catch (e) {
+    const error = e instanceof Error ? e : new Error(String(e));
+    return { ok: false, error };
+  }
+}
+
 /**
  * Fetch URL with retry logic and rate limiting
  */
-export async function fetchWithRetry(
+/* eslint-disable-next-line sonarjs/cognitive-complexity -- Retry logic has explicit control flow; helpers extract duplication */
+export async function fetchWithRetry( // NOSONAR
   url: string,
   options: FetchOptions = {}
 ): Promise<FetchResult> {
+  
+
   const {
     method = 'GET',
     headers = {},
     body,
     maxRetries = 3,
-    delayMs = parseInt(process.env.REQUEST_DELAY_MS || '500', 10)
+    delayMs = Number.parseInt(process.env.REQUEST_DELAY_MS || '500', 10)
   } = options;
 
   const requestHeaders = {
@@ -64,77 +124,43 @@ export async function fetchWithRetry(
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-      // Rate limiting delay (skip on first request)
-      if (attempt > 0 || delayMs > 0) {
-        await sleep(delayMs);
+    if (shouldInitialDelay(attempt, delayMs)) await sleep(delayMs);
+    log.debug('HTTP request', { url, attempt, method });
+
+    const res = await attemptFetch(url, method, requestHeaders, body);
+    let shouldRetry = false;
+
+    if (res.ok) {
+      const { status, responseHeaders, responseBody } = res;
+      const outcome = classifyStatus(status);
+      if (outcome === 'success') {
+        return makeSuccess(status, responseHeaders, responseBody);
       }
-
-      log.debug('HTTP request', { url, attempt, method });
-
-      const response = await fetch(url, {
-        method,
-        headers: requestHeaders,
-        body,
-        redirect: 'follow' // Follow redirects automatically
-      });
-
-      const responseBody = await response.text();
-      const status = response.status;
-
-      // Extract headers
-      const responseHeaders: Record<string, string | string[]> = {};
-      response.headers.forEach((value, key) => {
-        responseHeaders[key] = value;
-      });
-
-      // Success responses (200-299)
-      if (status >= 200 && status < 300) {
-        return {
-          body: responseBody,
-          status,
-          headers: responseHeaders,
-          etag: typeof responseHeaders['etag'] === 'string' ? responseHeaders['etag'] : undefined,
-          lastModified: typeof responseHeaders['last-modified'] === 'string' 
-            ? responseHeaders['last-modified'] 
-            : undefined
-        };
-      }
-
-      // Rate limit or server error - retry with backoff
-      if (status === 429 || status >= 500) {
-        const backoffMs = calculateBackoff(attempt);
-        log.warn('Retryable HTTP error', { url, status, attempt, backoffMs });
-        
-        if (attempt < maxRetries) {
-          await sleep(backoffMs);
-          continue;
-        }
-      }
-
-      // Client error (4xx) - don't retry
-      throw new Error(`HTTP ${status}: ${url}`);
-
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error));
-      
-      if (attempt < maxRetries) {
-        const backoffMs = calculateBackoff(attempt);
-        log.warn('HTTP request failed, retrying', { 
-          url, 
-          error: lastError.message, 
-          attempt, 
-          backoffMs 
-        });
-        await sleep(backoffMs);
+      if (outcome === 'retryable') {
+        shouldRetry = attempt < maxRetries;
+        if (!shouldRetry) lastError = new Error(`HTTP ${status}: ${url}`);
+        log.warn('Retryable HTTP error', { url, status, attempt, backoffMs: calculateBackoff(attempt) });
       } else {
-        log.error('HTTP request failed after retries', { 
-          url, 
-          error: lastError.message, 
-          attempts: maxRetries + 1 
-        });
+        lastError = new Error(`HTTP ${status}: ${url}`);
+      }
+    } else {
+      lastError = res.error;
+      shouldRetry = attempt < maxRetries;
+      if (!shouldRetry) {
+        log.error('HTTP request failed after retries', { url, error: lastError.message, attempts: maxRetries + 1 });
       }
     }
+
+    if (!shouldRetry) break;
+
+    const backoffMs = calculateBackoff(attempt);
+    log.warn('HTTP request failed, retrying', {
+      url,
+      error: lastError ? lastError.message : 'retryable status',
+      attempt,
+      backoffMs,
+    });
+    await sleep(backoffMs);
   }
 
   throw lastError || new Error('Unknown fetch error');

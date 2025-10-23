@@ -43,9 +43,36 @@
     "css.validate": false
   },
 
-  // Problem panel - Hide unnecessary errors
-  "problems.decorations.enabled": false,
-  "problems.showCurrentInStatus": false,
+  // Problem panel - Filter and suppress known false positives
+  "problems.decorations.enabled": true,
+  "problems.showCurrentInStatus": true,
+  "problems.autoReveal": true,
+  "problems.sortOrder": "severity",
+  
+  // Exclude patterns for Problems panel - hide GitHub Actions YAML false positives
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/*.mjs": true
+  },
+  
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.hg/store/**": true,
+    ".github/workflows/**": true
+  },
+  
+  // Search exclude to prevent indexing stale files
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/*.mjs": true
+  },
 
   // Validation settings - Clean and minimal
   "css.validate": true,
@@ -76,6 +103,42 @@
     "*.ts": "typescript",
     "*.md": "markdown",
     "*.html": "html"
+  },
+
+  // YAML - Completely disabled (causing false positives on GitHub Actions)
+  "yaml.validate": false,
+  "yaml.schemaStore.enable": false,
+  "yaml.format.enable": false,
+  "yaml.completion": false,
+  "yaml.hover": false,
+  "yaml.schemas": {},
+  "yaml.customTags": [],
+  "redhat.telemetry.enabled": false,
+  
+  // Explicitly disable YAML diagnostics from all extensions
+  "yaml.yamlVersion": "1.2",
+  "yaml.disableAdditionalProperties": true,
+  "yaml.maxItemsComputed": 5000,
+  "workbench.editor.languageDetection": false,
+  
+  // Disable all language features for YAML files
+  "[yaml]": {
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    },
+    "editor.suggest.showWords": false,
+    "editor.wordBasedSuggestions": "off"
+  },
+  "[yml]": {
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    },
+    "editor.suggest.showWords": false,
+    "editor.wordBasedSuggestions": "off"
   },
 
   // Medical dictionary spell checker

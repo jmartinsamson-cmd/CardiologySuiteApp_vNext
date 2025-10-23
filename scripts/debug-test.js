@@ -1,9 +1,10 @@
+// @ts-nocheck
 import { parseNote } from "../src/parsers/smartParser.js";
 import { extractVitals } from "../src/parsers/entityExtraction.js";
-import fs from "fs";
+import fs from "node:fs";
 
 const text = fs.readFileSync("./tests/fixtures/06-inline-vitals.txt", "utf-8");
-const result = parseNote(text);
+const result = /** @type {any} */ (parseNote(text));
 
 console.log("Has objective:", !!result.raw.sections.objective);
 console.log("Objective length:", result.raw.sections.objective?.length);

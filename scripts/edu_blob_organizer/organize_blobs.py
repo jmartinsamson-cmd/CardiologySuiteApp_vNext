@@ -2,7 +2,7 @@
 import csv
 import argparse
 import json
-from typing import Dict
+from typing import Dict, Optional, Tuple, Any
 from datetime import datetime, timezone
 
 from azure.core.exceptions import ResourceExistsError
@@ -70,7 +70,7 @@ def adls_rename(
     src_path.rename_destination(f"/{dst_name}", overwrite=overwrite)
 
 
-def main():
+def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Organize cardiology education blobs with tags and folders."
     )
@@ -120,21 +120,22 @@ def main():
         default=None,
         help="Process at most N files (useful for cautious first runs)",
     )
+    return parser
 
-    args = parser.parse_args()
 
+def _init_clients(
+    args,
+) -> Tuple[BlobServiceClient, Optional[Any], bool]:
     blob_service, adls_client = get_blob_and_adls_clients(
         connection_string=args.connection_string,
         account_url=args.account_url,
         sas_token=args.sas_token,
     )
-
     hns = is_hns_enabled(blob_service)
-    use_adls = args.use_adls or hns
+    return blob_service, adls_client, hns
 
-    container = args.container
-    prefix = args.prefix or ""
 
+def _print_banner(container: str, prefix: str, hns: bool, use_adls: bool, args):
     print("[INFO] Connected to storage account")
     print(f"[INFO] Container: {container}")
     print(f"[INFO] Prefix: '{prefix}'")
@@ -145,6 +146,115 @@ def main():
     if args.max_files:
         print(f"[INFO] Max files: {args.max_files}")
     print("[INFO] Scanning blobs...")
+
+
+def _determine_action(dry_run: bool, tag_only: bool, use_adls: bool) -> str:
+    if dry_run:
+        return "dry-run"
+    if tag_only:
+        return "tag-only"
+    return "rename" if use_adls else "copy+delete"
+
+
+def _apply_changes(
+    blob_service: BlobServiceClient,
+    adls_client: Optional[Any],
+    container: str,
+    src_name: str,
+    dst_name: str,
+    tags: Dict[str, str],
+    *,
+    dry_run: bool,
+    tag_only: bool,
+    use_adls: bool,
+    overwrite: bool,
+) -> None:
+    if dry_run:
+        return
+
+    if tag_only:
+        src_blob = blob_service.get_blob_client(container=container, blob=src_name)
+        set_blob_tags(src_blob, tags)
+        return
+
+    if use_adls and adls_client is not None and DataLakeServiceClient is not None:
+        adls_rename(adls_client, container, src_name, dst_name, overwrite=overwrite)
+        dst_blob = blob_service.get_blob_client(container=container, blob=dst_name)
+        set_blob_tags(dst_blob, tags)
+        return
+
+    # Fallback: copy + delete
+    copy_and_delete(blob_service, container, src_name, dst_name)
+    dst_blob = blob_service.get_blob_client(container=container, blob=dst_name)
+    set_blob_tags(dst_blob, tags)
+
+
+def _process_blob(
+    b,
+    args,
+    blob_service: BlobServiceClient,
+    adls_client: Optional[Any],
+    use_adls: bool,
+    writer: csv.DictWriter,
+):
+    # Skip virtual directories
+    if b.name.endswith("/"):
+        return False
+
+    filename = b.name.split("/")[-1]
+
+    tags = classify(
+        filename=filename,
+        blob_client=blob_service,
+        container=args.container,
+        name=b.name,
+        use_openai=bool(get_openai_client() if args.use_openai else None),
+        use_docint=bool(get_docint_client() if args.use_docint else None),
+        openai_client=get_openai_client() if args.use_openai else None,
+        docint_client=get_docint_client() if args.use_docint else None,
+    )
+    dst = detect_destination_path(tags, filename)
+    action = _determine_action(args.dry_run, args.tag_only, use_adls)
+
+    _apply_changes(
+        blob_service,
+        adls_client,
+        args.container,
+        b.name,
+        dst,
+        tags,
+        dry_run=args.dry_run,
+        tag_only=args.tag_only,
+        use_adls=use_adls,
+        overwrite=args.overwrite,
+    )
+
+    writer.writerow(
+        {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "source_path": b.name,
+            "destination_path": dst,
+            "action": action,
+            "status": "ok",
+            "error": "",
+            "tags_json": json.dumps(tags, ensure_ascii=False),
+        }
+    )
+    print(f"[OK] {b.name} -> {dst} :: {tags}")
+    return True
+
+
+def main():
+    parser = _build_arg_parser()
+    args = parser.parse_args()
+
+    blob_service, adls_client, hns = _init_clients(args)
+    use_adls = args.use_adls or hns
+
+    container = args.container
+    prefix = args.prefix or ""
+
+    _print_banner(container, prefix, hns, use_adls, args)
 
     # Open CSV audit
     fieldnames = [
@@ -163,83 +273,20 @@ def main():
         container_client = blob_service.get_container_client(container)
         blobs = container_client.list_blobs(name_starts_with=prefix)
 
-        # Optional providers
-        openai_client = get_openai_client() if args.use_openai else None
-        docint_client = get_docint_client() if args.use_docint else None
-
         processed = 0
         for b in blobs:
-            # Skip virtual directories
-            if b.name.endswith("/"):
-                continue
-            filename = b.name.split("/")[-1]
-
             try:
-                tags = classify(
-                    filename=filename,
-                    blob_client=blob_service,
-                    container=container,
-                    name=b.name,
-                    use_openai=bool(openai_client),
-                    use_docint=bool(docint_client),
-                    openai_client=openai_client,
-                    docint_client=docint_client,
+                did = _process_blob(
+                    b,
+                    args,
+                    blob_service,
+                    adls_client,
+                    use_adls,
+                    writer,
                 )
-                dst = detect_destination_path(tags, filename)
-                if args.dry_run:
-                    action = "dry-run"
-                elif args.tag_only:
-                    action = "tag-only"
-                else:
-                    action = "rename" if use_adls else "copy+delete"
 
-                if not args.dry_run:
-                    if args.tag_only:
-                        # Set tags on source blob only
-                        src_blob = blob_service.get_blob_client(
-                            container=container, blob=b.name
-                        )
-                        set_blob_tags(src_blob, tags)
-                    else:
-                        if (
-                            use_adls
-                            and adls_client is not None
-                            and DataLakeServiceClient is not None
-                        ):
-                            adls_rename(
-                                adls_client,
-                                container,
-                                b.name,
-                                dst,
-                                overwrite=args.overwrite,
-                            )
-                            # After rename, set tags via blob endpoint on the new path
-                            dst_blob = blob_service.get_blob_client(
-                                container=container, blob=dst
-                            )
-                            set_blob_tags(dst_blob, tags)
-                        else:
-                            # Copy + delete path
-                            copy_and_delete(blob_service, container, b.name, dst)
-                            dst_blob = blob_service.get_blob_client(
-                                container=container, blob=dst
-                            )
-                            set_blob_tags(dst_blob, tags)
-
-                writer.writerow(
-                    {
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
-                        "source_path": b.name,
-                        "destination_path": dst,
-                        "action": action,
-                        "status": "ok",
-                        "error": "",
-                        "tags_json": json.dumps(tags, ensure_ascii=False),
-                    }
-                )
-                print(f"[OK] {b.name} -> {dst} :: {tags}")
-
-                processed += 1
+                if did:
+                    processed += 1
                 if args.max_files and processed >= args.max_files:
                     print(
                         f"[INFO] Reached max-files limit ({args.max_files}). Stopping."

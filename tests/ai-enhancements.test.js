@@ -5,6 +5,7 @@
  */
 
 /* eslint-env node */
+/* global console */
 
 import { extractClinicalContext, disambiguateDiagnoses } from '../src/parsers/entityExtraction.js';
 import { validateClinicalSafety, generateEvidenceBasedPlan } from '../src/parsers/clinicalSafety.js';
@@ -66,9 +67,9 @@ function testDisambiguation() {
   
   console.log('Original diagnoses:', diagnoses.length);
   console.log('After disambiguation:', disambiguated.length);
-  disambiguated.forEach(d => {
+  for (const d of disambiguated) {
     console.log(`  - ${d.diagnosis} (confidence: ${d.confidence.toFixed(2)})`);
-  });
+  }
   
   // Should prioritize acute over chronic and remove negated fever
   return disambiguated.length < diagnoses.length &&
@@ -101,10 +102,10 @@ function testSafetyValidation() {
   const warnings = validateClinicalSafety(parsed);
   
   console.log(`Safety warnings detected: ${warnings.length}`);
-  warnings.forEach(w => {
+  for (const w of warnings) {
     console.log(`  [${w.severity}] ${w.message}`);
     console.log(`    → ${w.action}`);
-  });
+  }
   
   // Should detect: anticoag+bleeding, renal dosing, hyperkalemia, bradycardia
   return warnings.length >= 3 && 
@@ -187,7 +188,9 @@ function testFullWorkflow() {
   
   const warnings = validateClinicalSafety(parsed);
   console.log(`✓ Safety checks: ${warnings.length} warnings`);
-  warnings.forEach(w => console.log(`  [${w.severity}] ${w.message.substring(0, 60)}...`));
+  for (const w of warnings) {
+    console.log(`  [${w.severity}] ${w.message.substring(0, 60)}...`);
+  }
   
   // Step 5: Generate evidence-based plan
   const plan = generateEvidenceBasedPlan(parsed);
@@ -213,7 +216,7 @@ const tests = [
 let passed = 0;
 let failed = 0;
 
-tests.forEach(test => {
+for (const test of tests) {
   try {
     const result = test.fn();
     if (result) {
@@ -228,7 +231,7 @@ tests.forEach(test => {
     console.error(error.message);
     failed++;
   }
-});
+}
 
 console.log('\n╔═══════════════════════════════════════════════════════════╗');
 console.log(`║   Results: ${passed} passed, ${failed} failed                          ║`);
