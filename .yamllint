@@ -1,0 +1,35 @@
+# yamllint configuration for GitHub Actions workflows
+# Suppress schema validation errors that are false positives
+
+extends: default
+
+rules:
+  # GitHub Actions use dynamic context expressions that validators don't understand
+  truthy:
+    allowed-values: ["true", "false", "yes", "no", "on", "off"]
+    check-keys: false
+
+  # Allow long lines for GitHub Actions syntax
+  line-length:
+    max: 200
+    level: warning
+
+  # GitHub Actions commonly use complex key expressions
+  key-duplicates: enable
+
+  # Allow empty values in workflows (e.g., for matrix strategies)
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+
+  # Document start not required
+  document-start: disable
+
+  # Comments can be anywhere
+  comments:
+    min-spaces-from-content: 1
+
+  # Indentation is flexible for readability
+  indentation:
+    spaces: 2
+    indent-sequences: true

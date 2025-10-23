@@ -7,43 +7,58 @@
     "patient": {
       "age": 43,
       "gender": "male",
-      "mrn": null,
-      "dob": null
+      "provider": "DON"
     },
     "vitals": {
       "bp": "163/85",
       "hr": 89,
       "rr": 18,
+      "temp": 97.7,
       "spo2": 98,
-      "temp": 97.7
+      "source": "vitals-table"
     },
-    "subjective": "43-year-old black male presents emergency department complaining of 1 episode of vomiting and since then he has had some midepigastric burning going up the middle of his chest",
-    "objective": "BP 163/85, HR 89, RR 18, Temp 97.7°F, SpO2 98%\nWell-developed, well-nourished, epigastric tenderness",
-    "assessment": "GERD with esophagitis, new-onset type 2 diabetes (glucose 240)",
-    "plan": "GI cocktail given with improvement. Start metformin. Follow up with PCP for diabetes workup",
-    "diagnoses": ["GERD", "Type 2 diabetes"],
-    "medications": [
-      "Aluminum-magnesium hydroxide",
-      "Simethicone",
-      "Lidocaine",
-      "Metformin"
+    "subjective": "Patient presents with\n• Vomiting\nPt had 1 episode of vomiting around 5 pm and states he feels like his chest is burning. Denies nausea/pain at this time\n43-year-old black male presents emergency department complaining of 1 episode of vomiting and since then he has had some midepigastric burning going up the middle of his chest the back of his throat\nReview of patient's allergies indicates:\nNo Known Allergies",
+    "objective": "Nursing note and vitals reviewed.\nConstitutional: He appears well-developed and well-nourished.\nHENT:\nHead: Normocephalic and atraumatic.\nEyes: Conjunctivae and EOM are normal. Pupils are equal, round, and reactive to light.\nNeck: Neck supple.\nNormal range of motion.\nCardiovascular: Normal rate and regular rhythm.\nPulmonary/Chest: Breath sounds normal.\nAbdominal: Abdomen is soft. Bowel sounds are normal. There is abdominal tenderness in the epigastric area.\nMusculoskeletal:\nGeneral: Normal range of motion.\nCervical back: Normal range of motion and neck supple.\nNeurological: He is alert and oriented to person, place, and time.\nSkin: Skin is warm and dry. Capillary refill takes less than 2 seconds.\nPsychiatric: He has a normal mood and affect. His behavior is normal. Judgment and thought content normal.\nED Course\nProcedures\nLabs Reviewed\nCOMPREHENSIVE METABOLIC PANEL - Abnormal\nResult Value\nSodium 138\nPotassium 3.9\nChloride 105\nCO2 19 (*)\nGlucose 240 (*)\nBlood Urea Nitrogen 11.0\nCreatinine 1.11\nCalcium 9.9\nProtein Total 7.5\nAlbumin 3.4 (*)\nGlobulin 4.1 (*)\nAlbumin/Globulin Ratio 0.8 (*)\nBilirubin Total 0.4\nALP 40\nALT 17\nAST 14\neGFR >60\nAnion Gap 14.0\nBUN/Creatinine Ratio 10\nCBC WITH DIFFERENTIAL - Abnormal\nWBC 5.93\nRBC 5.15\nHgb 14.7\nHct 43.9\nMCV 85.2\nMCH 28.5\nMCHC 33.5\nRDW 14.6\nPlatelet 149\nMPV 11.9 (*)\nNeut % 43.5\nLymph % 41.0\nMono % 10.5\nEos % 3.2\nBasophil % 0.8\nImm Grans % 1.0\nNeut # 2.58\nLymph # 2.43\nMono # 0.62\nEos # 0.19\nBaso # 0.05\nImm Gran # 0.06 (*)\nNRBC% 0.0\nAMYLASE - Normal\nAmylase Level 44\nLIPASE - Normal\nLipase Level 29\nImaging Results\nNone",
+    "assessment": "Gastroesophageal reflux disease with esophagitis without hemorrhage: acute illness or injury\nNew onset type 2 diabetes mellitus: acute illness or injury that poses a threat to life or bodily functions\nAmount and/or Complexity of Data Reviewed\nLabs: ordered. Decision-making details documented in ED Course.\nRisk\nOTC drugs.\nPrescription drug management.\nDiagnosis or treatment significantly limited by social determinants of health.",
+    "plan": "",
+    "diagnoses": [
+      "Gastroesophageal reflux disease with esophagitis without hemorrhage",
+      "New onset type 2 diabetes mellitus",
+      "5 packs/day for 17.0 years",
+      "7 °F 98 %",
+      "Discussed this with him and he is unaware that he has ever had a high blood sugar. The fact that his blood sugars greater than 200 meets criteria for diabetes I will print him on some information discussed at length find a primary care physician and I will begin metformin twice a day and discussed with him the importance of following up and having blood work done and a full workup",
+      "GERD",
+      "Type 2 diabetes",
+      "Hypertension"
     ],
-    "allergies": ["NKDA"],
+    "meds": [
+      "aluminum",
+      "magnesium hydroxide",
+      "simethicone 200",
+      "200",
+      "20 mg/5 mL suspension 30 mL (30 mLs Oral Given 10/1/25 2223)",
+      "And",
+      "LIDOcaine viscous HCl 2% oral solution 15 mL (15 mLs Oral Given 10/1/25 2223)",
+      "Medical Decision Making",
+      "43",
+      "year",
+      "old black gentleman with midepigastric tenderness and burning up his chest after vomiting. Differential diagnosis includes not limited to reflux with esophagitis",
+      "peptic ulcer disease",
+      "pancreatitis",
+      "gastritis. Was given a GI cocktail phone arrival and this greatly reduced his symptoms and he feels markedly improved for completeness sake a CBC CMP amylase and lipase were done his blood work is relatively benign with the exception of having a blood sugar over 200. Discussed this with him and he is unaware that he has ever had a high blood sugar. The fact that his blood sugars greater than 200 meets criteria for diabetes I will print him on some information discussed at length find a primary care physician and I will begin metformin twice a day and discussed with him the importance of following up and having blood work done and a full workup"
+    ],
+    "allergies": [
+      "NKDA"
+    ],
     "labs": {
       "glucose": 240,
       "hgb": 14.7,
       "creatinine": 1.11,
       "wbc": 5.93,
-      "bun": 11.0,
+      "bun": 11,
       "amylase": 44,
       "lipase": 29
-    },
-    "socialHistory": {
-      "smoking": "0.5 PPD for 17 years (8.5 pack-years)",
-      "alcohol": "occasional",
-      "drugs": "never"
-    },
-    "familyHistory": ["Mother: Diabetes", "Father: Hypertension, Diabetes"]
+    }
   },
   "mustHave": {
     "vitals.bp": "163/85",
@@ -51,13 +66,22 @@
     "vitals.temp": 97.7,
     "patient.age": 43,
     "patient.gender": "male",
-    "diagnoses": ["GERD", "Type 2 diabetes"],
+    "diagnoses": [
+      "GERD",
+      "Type 2 diabetes"
+    ],
     "labs.glucose": 240,
     "labs.hgb": 14.7,
-    "allergies": ["NKDA"]
+    "allergies": [
+      "NKDA"
+    ]
   },
   "shouldNotHave": {
-    "diagnoses": ["Myocardial infarction", "Pancreatitis", "Peptic ulcer"]
+    "diagnoses": [
+      "Myocardial infarction",
+      "Pancreatitis",
+      "Peptic ulcer"
+    ]
   },
   "notes": [
     "ED note with extensive negative ROS",

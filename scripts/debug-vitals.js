@@ -1,10 +1,11 @@
+// @ts-nocheck
 import { parseNote } from "../src/parsers/smartParser.js";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 
 const fixture = JSON.parse(
   readFileSync("./tests/fixtures/real/note-pneumonia-trach.json", "utf-8"),
 );
-const result = parseNote(fixture.input);
+const result = /** @type {any} */ (parseNote(fixture.input));
 
 console.log("\n📋 Sections detected:");
 for (const [key, value] of Object.entries(result.raw.sections)) {

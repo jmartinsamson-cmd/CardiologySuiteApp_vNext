@@ -172,63 +172,68 @@ function buildSynonymLookup() {
  * @param {string} [sectionBody]
  */
 export function scoreMatch(headerText, sectionBody = "") {
-  const normalized = headerText
-    .toLowerCase()
-    .trim()
-    .replace(/[:\-_]/g, " ")
-    .replace(/\s+/g, " ");
+  // Extracted helpers to reduce cognitive complexity
+  /** @type {(text: string) => string} */
+  const normalizeHeader = (text) => {
+    const base = text.toLowerCase().trim();
+    // Use split/join to normalize delimiters and whitespace without relying on replaceAll lib support
+    const withDelims = base.split(/[:\-_]/g).join(" ");
+    const collapsed = withDelims.split(/\s+/g).join(" ");
+    return collapsed;
+  };
+
+  const normalized = normalizeHeader(headerText);
   const lookup = buildSynonymLookup();
 
-  // Direct synonym match
+  // 1) Direct synonym match
   if (lookup[normalized]) {
-    return {
-      canonical: lookup[normalized],
-      score: 1.0,
-      matchedSynonym: normalized,
-    };
+    return { canonical: lookup[normalized], score: 1, matchedSynonym: normalized };
   }
 
-  // Partial match - check if any synonym is contained
-  let bestMatch = null;
-  let bestScore = 0;
-
-  for (const [canonical, synonyms] of Object.entries(SECTION_SYNONYMS)) {
-    for (const syn of synonyms) {
-      if (
-        normalized.includes(syn.toLowerCase()) ||
-        syn.toLowerCase().includes(normalized)
-      ) {
-        const score =
-          Math.min(normalized.length, syn.length) /
-          Math.max(normalized.length, syn.length);
-        if (score > bestScore) {
-          bestScore = score;
-          bestMatch = { canonical, score, matchedSynonym: syn };
+  // 2) Partial/or approximate match against known synonyms
+  /** @type {(norm: string) => ({canonical: string, score: number, matchedSynonym: string} | null)} */
+  const findBestSynonymMatch = (norm) => {
+    /** @type {{canonical: string, score: number, matchedSynonym: string} | null} */
+    let best = null;
+    let bestScore = 0;
+    for (const [canonical, synonyms] of Object.entries(SECTION_SYNONYMS)) {
+      for (const syn of synonyms) {
+        const synLower = syn.toLowerCase();
+        if (norm.includes(synLower) || synLower.includes(norm)) {
+          const score = Math.min(norm.length, synLower.length) / Math.max(norm.length, synLower.length);
+          if (score > bestScore) {
+            bestScore = score;
+            best = { canonical, score, matchedSynonym: syn };
+          }
         }
       }
     }
-  }
+    return best;
+  };
 
-  // Signal word detection if no header match
-  if (!bestMatch && sectionBody) {
+  const bestMatch = findBestSynonymMatch(normalized);
+  if (bestMatch) return bestMatch;
+
+  // 3) Fallback: detect by signal words in body
+  /** @type {(body?: string) => ({canonical: string, score: number, matchedSynonym: string} | null)} */
+  const detectBySignals = (body) => {
+    if (!body) return null;
+    const bodyLower = body.toLowerCase();
+    /** @type {{canonical: string, score: number, matchedSynonym: string} | null} */
+    let best = null;
+    let bestScore = 0;
     for (const [canonical, signals] of Object.entries(SIGNAL_WORDS)) {
-      const bodyLower = sectionBody.toLowerCase();
-      const matchCount = signals.filter((sig) =>
-        bodyLower.includes(sig),
-      ).length;
+      const matchCount = signals.filter((sig) => bodyLower.includes(sig)).length;
       if (matchCount >= 2) {
-        const score = 0.6 + matchCount * 0.05; // Lower confidence for signal-based
+        const score = Math.min(0.6 + matchCount * 0.05, 0.8); // Lower confidence for signal-based
         if (score > bestScore) {
           bestScore = score;
-          bestMatch = {
-            canonical,
-            score: Math.min(score, 0.8),
-            matchedSynonym: "signal-words",
-          };
+          best = { canonical, score, matchedSynonym: "signal-words" };
         }
       }
     }
-  }
+    return best;
+  };
 
-  return bestMatch || { canonical: null, score: 0, matchedSynonym: null };
+  return detectBySignals(sectionBody) || { canonical: null, score: 0, matchedSynonym: null };
 }
