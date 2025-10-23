@@ -2,7 +2,7 @@
  * HTTP client with retry logic, ETag caching, and rate limiting
  */
 
-import { request } from 'undici';
+import { fetch } from 'undici';
 import { log } from './log.js';
 
 const USER_AGENT = 'ACC-Scraper/1.0 (Medical Education; +https://github.com/cardiology-suite)';
@@ -72,20 +72,21 @@ export async function fetchWithRetry(
 
       log.debug('HTTP request', { url, attempt, method });
 
-      const response = await request(url, {
-        method: method as HttpMethod,
+      const response = await fetch(url, {
+        method,
         headers: requestHeaders,
-        body
+        body,
+        redirect: 'follow' // Follow redirects automatically
       });
 
-      const responseBody = await response.body.text();
-      const status = response.statusCode;
+      const responseBody = await response.text();
+      const status = response.status;
 
       // Extract headers
       const responseHeaders: Record<string, string | string[]> = {};
-      for (const [key, value] of Object.entries(response.headers)) {
-        if (value) responseHeaders[key] = value;
-      }
+      response.headers.forEach((value, key) => {
+        responseHeaders[key] = value;
+      });
 
       // Success responses (200-299)
       if (status >= 200 && status < 300) {

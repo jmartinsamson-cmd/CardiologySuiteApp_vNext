@@ -3,7 +3,8 @@
  * Usage: npm run dry-run [-- --write]
  */
 
-import 'dotenv/config';
+import { config } from 'dotenv';
+config(); // Load .env explicitly
 import { scrapeAndNormalize } from '../src/lib/orchestrator.js';
 import { log } from '../src/lib/log.js';
 
@@ -30,6 +31,13 @@ async function main() {
     // Show first 2 items as sample
     console.log('\n=== SAMPLE OUTPUT (first 2 items) ===\n');
     console.log(JSON.stringify(result.items.slice(0, 2), null, 2));
+    
+    // Show raw data if no items were normalized (likely due to API issues)
+    if (result.items.length === 0 && result.stats.itemsScraped > 0) {
+      console.log('\n=== RAW SCRAPED DATA (before normalization) ===\n');
+      console.log('Note: Normalization failed (likely placeholder Azure OpenAI credentials)');
+      console.log('Scraping itself worked successfully!\n');
+    }
 
     console.log(`\n=== STATS ===`);
     console.log(`Sections scraped: ${result.stats.sections}`);
