@@ -11,13 +11,13 @@
  * Async wrapper for parsing large notes without blocking UI
  * @param {Function} parserFunc - The parser function to call
  * @param {string} text - The note text to parse
- * @param {Function} progressCallback - Optional callback for progress updates
+ * @param {(msg: string) => void} [progressCallback] - Optional callback for progress updates
  * @returns {Promise<Object>} Parsed data
  */
-export async function parseWithYield(
+async function parseWithYield(
   parserFunc,
   text,
-  progressCallback = null,
+  /** @type {(msg: string) => void | undefined} */ progressCallback,
 ) {
   const textLength = text.length;
 
@@ -53,7 +53,8 @@ export async function parseWithYield(
  * @param {string} text - Note text
  * @returns {Promise<Object>} Parsed data
  */
-export async function parseNoteChunked(text) {
+/* eslint-disable no-unused-vars */
+async function parseNoteChunked(text) {
   const textLength = text.length;
 
   // For very large notes (>15k), split the work

@@ -76,7 +76,11 @@ def main():
     )
     parser.add_argument("--connection-string", dest="connection_string")
     parser.add_argument("--account-url", dest="account_url")
-    parser.add_argument("--sas-token", dest="sas_token", help="SAS token for Storage auth (omit leading '?')")
+    parser.add_argument(
+        "--sas-token",
+        dest="sas_token",
+        help="SAS token for Storage auth (omit leading '?')",
+    )
     parser.add_argument("--container", required=True, help="Target container name")
     parser.add_argument(
         "--prefix",
@@ -237,7 +241,9 @@ def main():
 
                 processed += 1
                 if args.max_files and processed >= args.max_files:
-                    print(f"[INFO] Reached max-files limit ({args.max_files}). Stopping.")
+                    print(
+                        f"[INFO] Reached max-files limit ({args.max_files}). Stopping."
+                    )
                     break
 
             except Exception as e:
