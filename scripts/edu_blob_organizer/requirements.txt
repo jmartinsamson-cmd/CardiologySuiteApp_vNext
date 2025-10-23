@@ -1,0 +1,13 @@
+azure-identity>=1.16.0
+azure-storage-blob>=12.20.0
+azure-storage-file-datalake>=12.15.0
+azure-core>=1.30.0
+python-dateutil>=2.8.2
+pandas>=2.2.2
+openpyxl>=3.1.5
+# Optional: Azure Document Intelligence (Form Recognizer)
+azure-ai-formrecognizer>=3.3.3
+# Optional: Azure OpenAI (via OpenAI SDK when pointed at Azure endpoint)
+openai>=1.44.0
+# PDF text extraction fallback (local)
+pdfminer.six>=20231228
