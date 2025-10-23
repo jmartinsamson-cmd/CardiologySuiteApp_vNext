@@ -1,0 +1,99 @@
+# Repository structure
+
+```
+/workspaces/CardiologySuiteApp_vNext
+├── .claude
+├── .codacy
+├── .devcontainer
+├── .env
+├── .env.backup
+├── .eslintrc.json
+├── .gitattributes
+├── .github
+├── .gitignore
+├── .htmlhintrc
+├── .layout-lock
+├── .markdownlint.json
+├── .security-checksums.json
+├── .size-limit.json
+├── .stylelintignore
+├── .stylelintrc.json
+├── .venv
+├── .vscode
+├── AI_BACKEND_SETUP.md
+├── AImodule
+├── AZURE_SEARCH_IMPLEMENTATION.md
+├── CNAME
+├── CONTRIBUTING.md
+├── DEPLOYMENT.md
+├── DEPLOYMENT_CLOUDFLARE.md
+├── ENV_PROTECTION.md
+├── FINAL_CHECKLIST.md
+├── LICENSE
+├── MIGRATION_TO_NEW_REPO.md
+├── PARSER_FIXES_SUMMARY.md
+├── PARSER_TRAINING_QUICK_REF.md
+├── PDF-MIGRATION-GUIDE.md
+├── PUSH_INSTRUCTIONS.md
+├── QUICK_AZURE_SETUP.md
+├── QUICK_START.md
+├── README.md
+├── REPO_PREPARATION_SUMMARY.md
+├── VISUAL_PRESERVATION_GUIDE.md
+├── api
+├── archive
+├── cardiology-suite.code-workspace
+├── config
+├── cspell-cardiology-dict.txt
+├── cspell.json
+├── data
+├── dead-code-removal.patch
+├── docs
+├── dry_run_audit.csv
+├── education_final.csv
+├── education_final_root.csv
+├── education_organize_audit.csv
+├── education_organize_production.csv
+├── education_organize_production_verbose.csv
+├── eslint-results.sarif
+├── eslint.config.cjs
+├── eslint.config.js
+├── functions-acc-scraper
+├── icons
+├── index.html
+├── infra
+├── jsconfig.json
+├── knip-output.json
+├── knip-report.json
+├── lighthouserc.json
+├── manifest.json
+├── mcp
+├── migrate-to-vnext.sh
+├── organize_output.log
+├── package-lock.json
+├── package.json
+├── pages
+├── pdf-backup-list-20251023-002816.txt
+├── pdf-backup-list.txt
+├── repo-map.txt
+├── scripts
+├── services
+├── src
+├── staticwebapp.config.json
+├── styles
+├── sw.js
+├── tailwind.config.js
+├── test-azure-ai.js
+├── test-mcp-setup.md
+├── test-medical-qa.js
+├── test-rag-complete.js
+├── test-rag-search.js
+├── tests
+├── tsconfig.json
+├── types
+└── vite.config.js
+
+directory: 22 file: 68
+
+ignored: directory (3)
+```

@@ -59,6 +59,7 @@
     "watch:css": "tailwindcss -i ./styles/globals.css -o ./dist/styles.min.css --watch",
     "build:prod": "npm run build:css && echo 'Production build complete'",
     "mcp:ai-search": "node mcp/ai-search-mcp-server.mjs",
+  "docs:structure": "mkdir -p docs && npx --yes tree-cli --ignore node_modules,dist,build,.git,.trash -a --noreport -o docs/.tree.tmp && printf '# Repository structure\\n\\n```\\n' > docs/structure.md && cat docs/.tree.tmp >> docs/structure.md && echo '```' >> docs/structure.md && rm -f docs/.tree.tmp",
     "search:index:create": "az search index create --resource-group $AZURE_RG --service-name $AZURE_SEARCH_NAME --name cardiology-index --definition infra/search/cardiology-index.json",
     "search:index:put": "node scripts/create-search-index.mjs",
     "search:push:samples": "node scripts/push_search_docs.mjs",
