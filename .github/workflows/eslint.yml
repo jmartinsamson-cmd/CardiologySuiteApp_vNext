@@ -11,12 +11,13 @@ name: ESLint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop", "release/*" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: [ "main", "develop", "release/*" ]
   schedule:
-    - cron: '18 12 * * 5'
+    - cron: '18 12 * * 5'    # weekly Friday
+    - cron: '18 00 * * 2'    # additional Tuesday run
 
 jobs:
   eslint:
@@ -47,7 +48,16 @@ jobs:
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
+        id: upload_sarif
         uses: github/codeql-action/upload-sarif@42213152a85ae7569bdb6bec7bcd74cd691bfe41 # v3.30.9
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+
+      - name: Upload ESLint SARIF artifact (on failure)
+        if: ${{ failure() || steps.upload_sarif.outcome != 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: eslint-results.sarif
+          path: eslint-results.sarif
+          retention-days: 7
