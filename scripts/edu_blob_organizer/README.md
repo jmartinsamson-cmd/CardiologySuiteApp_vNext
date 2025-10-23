@@ -25,7 +25,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Configure auth
+  --prefix incoming/ \
+  --dry-run
 
 Choose one of the following:
 
@@ -33,7 +34,8 @@ Choose one of the following:
 - Set environment variable `AZURE_STORAGE_CONNECTION_STRING` or pass `--connection-string`.
 
 2) DefaultAzureCredential
-- Set `--account-url` (e.g., `https://<account>.blob.core.windows.net`) and ensure one of the DefaultAzureCredential sources is available (Azure CLI login, Managed Identity, Service Principal env vars, etc.).
+  --container education \
+  --prefix incoming/
 
 For ADLS Gen2 rename performance, also pass `--use-adls` or allow auto-detect.
 
@@ -41,6 +43,7 @@ Optional services:
 - Azure OpenAI (improves classification): set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and optionally `AZURE_OPENAI_DEPLOYMENT` then use `--use-openai`.
 - Azure Document Intelligence (text extraction from PDFs): set `AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT`, `AZURE_DOCUMENT_INTELLIGENCE_KEY` then use `--use-docint`.
 
+  --container education \
 ## Run
 
 Dry run preview (no writes):
@@ -49,6 +52,7 @@ Dry run preview (no writes):
 python organize_blobs.py \
   --container education \
   --prefix incoming/ \
+  --container education \
   --dry-run
 ```
 
@@ -57,6 +61,35 @@ With connection string explicitly:
 ```bash
 python organize_blobs.py \
   --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+
+Tag-only mode (set Blob Index Tags but do not move files):
+
+```bash
+python organize_blobs.py \
+  --account-url https://<account>.blob.core.windows.net \
+  --container education \
+  --tag-only
+```
+
+Limit number of files processed (e.g., first 25):
+
+```bash
+python organize_blobs.py \
+  --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+  --container education \
+  --prefix incoming/ \
+  --max-files 25
+```
+
+Authenticate using SAS instead of DefaultAzureCredential:
+
+```bash
+python organize_blobs.py \
+  --account-url https://<account>.blob.core.windows.net \
+  --sas-token "$AZURE_STORAGE_SAS" \
+  --container education \
+  --prefix incoming/
+```
   --container education \
   --prefix incoming/
 ```
@@ -102,12 +135,16 @@ python organize_blobs.py --container education --audit-log ./education_organize_
 - Moves use server-side rename for ADLS Gen2 where available, otherwise copy+delete.
 - Blob Index Tags are applied to the destination blob.
 - Content extraction is conservative (size-limited); when in doubt, the tool prefers `needs_review=yes` to avoid misclassification.
+ - `--tag-only` will set tags on the source blob without moving it.
+ - Use `--max-files` to do cautious first passes.
+ - You can provide a SAS token via `--sas-token` for environments without Azure CLI or Managed Identity.
 
 ## Troubleshooting
 
 - Permission errors: ensure your identity has Storage Blob Data Contributor on the container.
 - ADLS rename 409/40901: path exists; use `--overwrite` to replace or review naming collisions.
 - OpenAI/Doc Intelligence errors: run without `--use-openai`/`--use-docint`.
+ - If using SAS, ensure it includes required permissions (r, w, c, d, t) for reading, writing, creating, deleting, and tagging.
 
 ## License
 

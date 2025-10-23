@@ -48,7 +48,7 @@ def copy_and_delete(
 
 
 def adls_rename(
-    adls_client: DataLakeServiceClient,
+    adls_client,
     filesystem: str,
     src_name: str,
     dst_name: str,
@@ -76,6 +76,7 @@ def main():
     )
     parser.add_argument("--connection-string", dest="connection_string")
     parser.add_argument("--account-url", dest="account_url")
+    parser.add_argument("--sas-token", dest="sas_token", help="SAS token for Storage auth (omit leading '?')")
     parser.add_argument("--container", required=True, help="Target container name")
     parser.add_argument(
         "--prefix",
@@ -84,6 +85,11 @@ def main():
     )
     parser.add_argument(
         "--dry-run", action="store_true", help="Preview actions without writing"
+    )
+    parser.add_argument(
+        "--tag-only",
+        action="store_true",
+        help="Only set tags on the source blob (no move/rename)",
     )
     parser.add_argument(
         "--use-adls",
@@ -104,12 +110,19 @@ def main():
         help="Use Document Intelligence for text extraction if configured",
     )
     parser.add_argument("--audit-log", default="education_organize_audit.csv")
+    parser.add_argument(
+        "--max-files",
+        type=int,
+        default=None,
+        help="Process at most N files (useful for cautious first runs)",
+    )
 
     args = parser.parse_args()
 
     blob_service, adls_client = get_blob_and_adls_clients(
         connection_string=args.connection_string,
         account_url=args.account_url,
+        sas_token=args.sas_token,
     )
 
     hns = is_hns_enabled(blob_service)
@@ -118,13 +131,16 @@ def main():
     container = args.container
     prefix = args.prefix or ""
 
-    print(f"[INFO] Connected to storage account")
+    print("[INFO] Connected to storage account")
     print(f"[INFO] Container: {container}")
     print(f"[INFO] Prefix: '{prefix}'")
     print(f"[INFO] HNS enabled: {hns}")
     print(f"[INFO] Use ADLS: {use_adls}")
     print(f"[INFO] Dry run: {args.dry_run}")
-    print(f"[INFO] Scanning blobs...")
+    print(f"[INFO] Tag only: {args.tag_only}")
+    if args.max_files:
+        print(f"[INFO] Max files: {args.max_files}")
+    print("[INFO] Scanning blobs...")
 
     # Open CSV audit
     fieldnames = [
@@ -147,6 +163,7 @@ def main():
         openai_client = get_openai_client() if args.use_openai else None
         docint_client = get_docint_client() if args.use_docint else None
 
+        processed = 0
         for b in blobs:
             # Skip virtual directories
             if b.name.endswith("/"):
@@ -165,37 +182,45 @@ def main():
                     docint_client=docint_client,
                 )
                 dst = detect_destination_path(tags, filename)
-                action = (
-                    "dry-run"
-                    if args.dry_run
-                    else ("rename" if use_adls else "copy+delete")
-                )
+                if args.dry_run:
+                    action = "dry-run"
+                elif args.tag_only:
+                    action = "tag-only"
+                else:
+                    action = "rename" if use_adls else "copy+delete"
 
                 if not args.dry_run:
-                    if (
-                        use_adls
-                        and adls_client is not None
-                        and DataLakeServiceClient is not None
-                    ):
-                        adls_rename(
-                            adls_client,
-                            container,
-                            b.name,
-                            dst,
-                            overwrite=args.overwrite,
+                    if args.tag_only:
+                        # Set tags on source blob only
+                        src_blob = blob_service.get_blob_client(
+                            container=container, blob=b.name
                         )
-                        # After rename, set tags via blob endpoint on the new path
-                        dst_blob = blob_service.get_blob_client(
-                            container=container, blob=dst
-                        )
-                        set_blob_tags(dst_blob, tags)
+                        set_blob_tags(src_blob, tags)
                     else:
-                        # Copy + delete path
-                        copy_and_delete(blob_service, container, b.name, dst)
-                        dst_blob = blob_service.get_blob_client(
-                            container=container, blob=dst
-                        )
-                        set_blob_tags(dst_blob, tags)
+                        if (
+                            use_adls
+                            and adls_client is not None
+                            and DataLakeServiceClient is not None
+                        ):
+                            adls_rename(
+                                adls_client,
+                                container,
+                                b.name,
+                                dst,
+                                overwrite=args.overwrite,
+                            )
+                            # After rename, set tags via blob endpoint on the new path
+                            dst_blob = blob_service.get_blob_client(
+                                container=container, blob=dst
+                            )
+                            set_blob_tags(dst_blob, tags)
+                        else:
+                            # Copy + delete path
+                            copy_and_delete(blob_service, container, b.name, dst)
+                            dst_blob = blob_service.get_blob_client(
+                                container=container, blob=dst
+                            )
+                            set_blob_tags(dst_blob, tags)
 
                 writer.writerow(
                     {
@@ -209,6 +234,11 @@ def main():
                     }
                 )
                 print(f"[OK] {b.name} -> {dst} :: {tags}")
+
+                processed += 1
+                if args.max_files and processed >= args.max_files:
+                    print(f"[INFO] Reached max-files limit ({args.max_files}). Stopping.")
+                    break
 
             except Exception as e:
                 writer.writerow(

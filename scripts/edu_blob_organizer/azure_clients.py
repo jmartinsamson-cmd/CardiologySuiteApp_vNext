@@ -8,10 +8,11 @@ from azure.storage.filedatalake import DataLakeServiceClient
 def get_blob_and_adls_clients(
     connection_string: Optional[str] = None,
     account_url: Optional[str] = None,
+    sas_token: Optional[str] = None,
 ) -> Tuple[BlobServiceClient, Optional[DataLakeServiceClient]]:
     """
     Create BlobServiceClient and DataLakeServiceClient (if possible) using either
-    a connection string or DefaultAzureCredential with account_url.
+    a connection string, an account_url + SAS token, or DefaultAzureCredential with account_url.
     Returns (blob_client, adls_client_or_none)
     """
     if not connection_string and not account_url:
@@ -27,9 +28,15 @@ def get_blob_and_adls_clients(
             # Try to form URL from the blob client
             account_name = blob_client.account_name
             account_url_derived = f"https://{account_name}.dfs.core.windows.net"
-            adls_client = DataLakeServiceClient(
-                account_url_derived, credential=DefaultAzureCredential()
-            )
+            # Prefer SAS when provided, else DefaultAzureCredential
+            if sas_token:
+                adls_client = DataLakeServiceClient(
+                    account_url_derived, credential=sas_token
+                )
+            else:
+                adls_client = DataLakeServiceClient(
+                    account_url_derived, credential=DefaultAzureCredential()
+                )
         except Exception:
             adls_client = None
         return blob_client, adls_client
@@ -40,7 +47,11 @@ def get_blob_and_adls_clients(
             "Either connection_string or account_url must be provided or available via env."
         )
 
-    credential = DefaultAzureCredential()
+    # Construct blob client using SAS when provided; else DefaultAzureCredential
+    if sas_token:
+        credential = sas_token
+    else:
+        credential = DefaultAzureCredential()
     blob_client = BlobServiceClient(account_url=account_url, credential=credential)
 
     # Try ADLS (dfs endpoint)
