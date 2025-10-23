@@ -38,7 +38,12 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --no-audit --no-fund
+          fi
 
       - name: Run ESLint
         env:
@@ -46,6 +51,16 @@ jobs:
         run: |
           npx eslint . --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
         continue-on-error: true
+
+      - name: Ensure SARIF exists
+        run: |
+          if [ ! -s eslint-results.sarif ]; then
+            printf '%s\n' '{' \
+              '  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",' \
+              '  "version": "2.1.0",' \
+              '  "runs": []' \
+              '}' > eslint-results.sarif
+          fi
 
       - name: Upload analysis results to GitHub
         id: upload_sarif
@@ -58,7 +73,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload ESLint SARIF artifact (on failure)
-        if: ${{ always() && steps.upload_sarif.outcome != 'success' }}
+        if: ${{ always() && (steps.upload_sarif.outcome != 'success' || github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: eslint-results.sarif
