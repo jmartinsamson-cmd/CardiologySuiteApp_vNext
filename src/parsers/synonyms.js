@@ -3,7 +3,7 @@
  * Maps canonical section names to arrays of accepted variants
  */
 
-export const SECTION_SYNONYMS = {
+const SECTION_SYNONYMS = {
   subjective: [
     "subjective",
     "hpi",
