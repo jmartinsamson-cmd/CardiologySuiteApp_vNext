@@ -93,7 +93,5 @@
 ├── types
 └── vite.config.js
 
-directory: 22 file: 68
 
-ignored: directory (3)
 ```
