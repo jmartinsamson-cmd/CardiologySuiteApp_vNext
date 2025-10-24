@@ -16,6 +16,31 @@ export var LogLevel;
     LogLevel[LogLevel["INFO"] = 2] = "INFO";
     LogLevel[LogLevel["DEBUG"] = 3] = "DEBUG";
 })(LogLevel || (LogLevel = {}));
+function safeEnv(key, fallback = 'info') {
+    // why: browser has no `process`; support Vite/webpack + global override
+    try {
+        const g = globalThis;
+        const fromGlobal = g.__APP_LOG_LEVEL || g.LOG_LEVEL;
+        const fromImportMeta = typeof import.meta !== 'undefined' && import.meta?.env?.VITE_LOG_LEVEL;
+        const fromProcess = typeof process !== 'undefined' && process?.env?.[key];
+        return (fromGlobal || fromImportMeta || fromProcess || fallback);
+    }
+    catch {
+        return fallback;
+    }
+}
+/**
+ * Normalize log level string to enum
+ */
+function normalizeLevel(level) {
+    switch (level.toUpperCase()) {
+        case 'ERROR': return LogLevel.ERROR;
+        case 'WARN': return LogLevel.WARN;
+        case 'INFO': return LogLevel.INFO;
+        case 'DEBUG': return LogLevel.DEBUG;
+        default: return LogLevel.INFO;
+    }
+}
 // PHI/PII patterns to redact
 const PHI_PATTERNS = [
     // Social Security Numbers
@@ -53,14 +78,7 @@ export function clearRequestId() {
  * Get current log level from environment
  */
 function getLogLevel() {
-    const level = process.env.LOG_LEVEL || 'INFO';
-    switch (level.toUpperCase()) {
-        case 'ERROR': return LogLevel.ERROR;
-        case 'WARN': return LogLevel.WARN;
-        case 'INFO': return LogLevel.INFO;
-        case 'DEBUG': return LogLevel.DEBUG;
-        default: return LogLevel.INFO;
-    }
+    return normalizeLevel(safeEnv('LOG_LEVEL', 'info'));
 }
 /**
  * Redact PHI/PII from messages and metadata
@@ -132,7 +150,7 @@ function writeLog(level, levelName, message, meta, error) {
     }
     const entry = formatLogEntry(levelName, message, meta, error);
     // In development, use console with colors
-    if (process.env.NODE_ENV !== 'production') {
+    if (safeEnv('NODE_ENV', 'development') !== 'production') {
         const color = {
             ERROR: '\x1b[31m', // Red
             WARN: '\x1b[33m', // Yellow

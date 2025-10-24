@@ -51,12 +51,6 @@
   <!-- SPA Entry - Single module script loads everything -->
   <script type="module" src="/src/core/app.js"></script>
 
-  <script type="module">
-    // why: ensure symbol exists before first use
-    import * as TR from '/src/parsers/templateRenderer.js';
-    window.templateRenderer = TR.templateRenderer || TR.default || TR;
-  </script>
-
   <script defer>
     function whenDefined(getter, cb, timeoutMs = 4000, intervalMs = 50) {
       const t0 = performance.now();
