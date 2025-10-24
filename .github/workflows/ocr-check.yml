@@ -1,0 +1,167 @@
+name: ocr-check
+
+on:
+  push:
+    branches: [main, chore/**, feat/**]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+jobs:
+  ocr:
+    name: ocr-check
+    runs-on: ubuntu-latest
+
+    env:
+      RESOURCE_GROUP: ${{ secrets.AZURE_RG }}
+      STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+      STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
+      TEST_BLOB_NAME: ${{ vars.TEST_BLOB_NAME }}
+      AZURE_VISION_ENDPOINT: https://eastus.api.cognitive.microsoft.com
+      AZURE_VISION_KEY: ${{ secrets.AZURE_VISION_KEY }}
+      MIN_CHARS: "50"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: OCR → tag → move
+        id: run
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+
+          if ([string]::IsNullOrWhiteSpace($env:TEST_BLOB_NAME)) { throw "vars.TEST_BLOB_NAME is required" }
+
+          # --- Build SAS (1h) ---
+          $acctKey = az storage account keys list -g $env:RESOURCE_GROUP -n $env:STORAGE_ACCOUNT --query [0].value -o tsv
+          $exp = (Get-Date).ToUniversalTime().AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ")
+          $sas = az storage blob generate-sas --account-name $env:STORAGE_ACCOUNT --account-key $acctKey `
+            --container-name $env:STORAGE_CONTAINER --name $env:TEST_BLOB_NAME --permissions r --https-only --expiry $exp -o tsv
+          $blobUrl = "https://$($env:STORAGE_ACCOUNT).blob.core.windows.net/$($env:STORAGE_CONTAINER)/$($env:TEST_BLOB_NAME)?$sas"
+
+          # --- Form Recognizer (Read model) ---
+          $hdr = @{ "Ocp-Apim-Subscription-Key"=$env:AZURE_VISION_KEY; "Content-Type"="application/json" }
+          $start = Invoke-WebRequest -Method Post -Uri "$($env:AZURE_VISION_ENDPOINT)/formrecognizer/documentModels/prebuilt-read:analyze?api-version=2023-07-31" -Headers $hdr -Body (@{urlSource=$blobUrl}|ConvertTo-Json)
+          $op = $start.Headers["Operation-Location"][0]; if (-not $op) { throw "No Operation-Location" }
+
+          $deadline=(Get-Date).AddSeconds(60); $res=$null
+          do { Start-Sleep 2; $r=Invoke-RestMethod -Uri $op -Headers $hdr; if ($r.status -eq 'succeeded') { $res=$r; break } } while ((Get-Date) -lt $deadline)
+          if (-not $res) { throw "OCR timeout after 60s" }
+
+          $lines=@(); foreach($pg in $res.analyzeResult.pages){ foreach($l in $pg.lines){ if($l.content){ $lines+=$l.content } } }
+          $chars=($lines|% Length|Measure-Object -Sum).Sum
+          $pass = [int]$chars -ge [int]$env:MIN_CHARS
+
+          # --- Generate summary ---
+          $summary = @"
+          # OCR Check Results
+
+          **Status:** $($pass ? 'PASS' : 'FAIL')
+          **Blob:** $env:STORAGE_CONTAINER/$env:TEST_BLOB_NAME
+          **Lines extracted:** $($lines.Count)
+          **Characters extracted:** $chars
+          **Minimum required:** $env:MIN_CHARS
+
+          ## Sample Content:
+          $(($lines | Select-Object -First 5 | ForEach-Object { "- $_" }) -join "`n")
+
+          $(if ($pass) { "**Next:** Blob will be tagged and moved to organized/ocr-ok/" } else { "**Issue:** Insufficient text extracted from document" })
+          "@
+
+          # --- Write summary to file ---
+          $summary | Out-File -FilePath ocr_summary.md -Encoding UTF8
+
+          # --- Set outputs ---
+          "lines=$($lines.Count)" >> $env:GITHUB_OUTPUT
+          "chars=$chars" >> $env:GITHUB_OUTPUT
+          "pass=$pass" >> $env:GITHUB_OUTPUT
+
+          if (-not $pass) { throw "OCR validation failed: $chars chars < $env:MIN_CHARS minimum" }
+
+      - name: Tag & move blob (on success)
+        if: steps.run.outputs.pass == 'True'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+
+          $lines = ${{ steps.run.outputs.lines }}
+          $chars = ${{ steps.run.outputs.chars }}
+
+          # --- Build SAS ---
+          $acctKey = az storage account keys list -g ${{ env.RESOURCE_GROUP }} -n ${{ env.STORAGE_ACCOUNT }} --query [0].value -o tsv
+          $exp = (Get-Date).ToUniversalTime().AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ")
+          $sas = az storage blob generate-sas --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey `
+            --container-name ${{ env.STORAGE_CONTAINER }} --name ${{ env.TEST_BLOB_NAME }} --permissions r --https-only --expiry $exp -o tsv
+          $srcUrl = "https://${{ env.STORAGE_ACCOUNT }}.blob.core.windows.net/${{ env.STORAGE_CONTAINER }}/${{ env.TEST_BLOB_NAME }}?$sas"
+
+          # --- Tag source blob ---
+          az storage blob tagging update --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey `
+            --container-name ${{ env.STORAGE_CONTAINER }} --name ${{ env.TEST_BLOB_NAME }} `
+            --tags "ai-ocr=pass" "ai-lines=$lines" "ai-chars=$chars"
+
+          # --- Ensure dest container ---
+          az storage container create --name organized --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey
+
+          # --- Move blob ---
+          $destBlob = "ocr-ok/$([IO.Path]::GetFileName('${{ env.TEST_BLOB_NAME }}'))"
+          az storage blob copy start --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey `
+            --destination-container organized --destination-blob $destBlob --source-uri $srcUrl
+
+          # --- Wait for copy ---
+          $deadline=(Get-Date).AddSeconds(60)
+          do {
+            Start-Sleep 2
+            $stat = az storage blob show --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey `
+              --container-name organized --name $destBlob --query properties.copy.status -o tsv
+            if ($stat -eq "success") { break }
+            if ($stat -in @("aborted","failed")) { throw "Copy $stat" }
+          } while ((Get-Date) -lt $deadline)
+
+          # --- Delete source ---
+          az storage blob delete --account-name ${{ env.STORAGE_ACCOUNT }} --account-key $acctKey `
+            --container-name ${{ env.STORAGE_CONTAINER }} --name ${{ env.TEST_BLOB_NAME }}
+
+      - name: Upload OCR summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocr-summary
+          path: ocr_summary.md
+          retention-days: 7
+
+      - name: Comment on PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('ocr_summary.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, chore/**, feat/** ]
+  pull_request:
+    branches: [ main ]
