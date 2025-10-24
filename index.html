@@ -29,11 +29,68 @@
   
   <link rel="manifest" href="manifest.json" />
   
+  <!-- why: Codespaces/GitHub Dev tunnels block manifest with CORS; disable in development envs -->
+  <script>
+    (function () {
+      // Browser safety: remove manifest in development environments to prevent CORS issues
+      const isDevEnv = location.hostname.endsWith('.app.github.dev') ||
+                      location.hostname.includes('localhost') ||
+                      location.hostname.includes('127.0.0.1') ||
+                      location.hostname.includes('0.0.0.0') ||
+                      location.port !== '';
+      if (isDevEnv) {
+        const el = document.querySelector('link[rel="manifest"]');
+        if (el) el.remove();
+
+        // Additionally, ensure no stale Service Workers/cache interfere in dev
+        try {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then((regs) => {
+              regs.forEach((reg) => {
+                reg.unregister().then(() => {
+                  console.log('[dev] Unregistered service worker:', reg.scope);
+                });
+              });
+            });
+          }
+          if (globalThis.caches && globalThis.caches.keys) {
+            caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+          }
+        } catch (e) {
+          console.warn('[dev] SW/cache cleanup skipped:', e);
+        }
+      }
+    })();
+  </script>
+  
   <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dc2626' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dc2626' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E" />
   
   <!-- SPA Entry - Single module script loads everything -->
-  <script type="module" src="/src/core/app.js"></script>
+  <script type="module">
+    // Force fresh import with timestamp to bypass cache
+    const timestamp = new Date().getTime();
+    import(`/src/core/app.js?t=${timestamp}`);
+  </script>
+  
+  <!-- Debug error display -->
+  <script>
+    window.addEventListener('error', function(e) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:10px;z-index:99999;font-family:monospace;font-size:12px;';
+      errorDiv.innerHTML = `<strong>ERROR:</strong> ${e.message}<br><small>${e.filename}:${e.lineno}</small>`;
+      document.body.appendChild(errorDiv);
+      console.error('GLOBAL ERROR:', e);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style.cssText = 'position:fixed;top:50px;left:0;right:0;background:orange;color:black;padding:10px;z-index:99999;font-family:monospace;font-size:12px;';
+      errorDiv.innerHTML = `<strong>PROMISE REJECTION:</strong> ${e.reason}`;
+      document.body.appendChild(errorDiv);
+      console.error('UNHANDLED REJECTION:', e.reason);
+    });
+  </script>
 
   <script defer>
     function whenDefined(getter, cb, timeoutMs = 4000, intervalMs = 50) {
@@ -50,15 +107,15 @@
       }, intervalMs);
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      whenDefined(() => window.templateRenderer || window.TemplateRendererInitialized, (val) => {
+    globalThis.addEventListener('DOMContentLoaded', () => {
+      whenDefined(() => globalThis.templateRenderer || globalThis.TemplateRendererInitialized, (val) => {
         console.log('✅ templateRenderer is ready');
         // Add manual test function for debugging
-        window.testParseButton = () => {
+        globalThis.testParseButton = () => {
           console.log('🧪 Manual test triggered');
           const text = document.getElementById('vs-paste').value;
           console.log('🧪 Text:', text.substring(0, 100));
-          window.templateRenderer.processNote(text);
+          globalThis.templateRenderer.processNote(text);
         };
         console.log('💡 Type testParseButton() in console to manually trigger parse');
       });
@@ -71,7 +128,7 @@
   <!-- Fixed Header -->
   <header id="banner">
     <div class="brand">Cardiology Suite</div>
-    <nav class="header-nav">
+    <nav class="header-nav" aria-label="Main navigation">
       <a href="index.html" class="nav-tab active" data-page="main">
         <svg viewBox="0 0 24 24" width="16" height="16">
           <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -88,7 +145,7 @@
         Guidelines & Teaching
       </a>
       <!-- Medications tab - only visible if feature flag enabled -->
-      <a href="#/meds" class="nav-tab" data-page="meds" id="meds-nav-tab" style="display: none;">
+      <a href="#/meds" class="nav-tab hidden" data-page="meds" id="meds-nav-tab">
         <svg viewBox="0 0 24 24" width="16" height="16">
           <path fill="currentColor" d="M10.5 13H8v-3h2.5V7.5h3V10H16v3h-2.5v2.5h-3V13zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
         </svg>
@@ -125,7 +182,9 @@
         </div>
       </div>
       <div class="dx-list">
-        <!-- Diagnoses will be populated here -->
+        <output class="dx-empty" id="dx-loading-state" aria-live="polite">
+          Loading diagnoses…
+        </output>
       </div>
     </aside>
 

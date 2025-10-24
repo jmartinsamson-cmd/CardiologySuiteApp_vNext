@@ -45,6 +45,8 @@
     "test:ai-enhancements:parsers": "node tests/ai-enhancements.test.js",
     "test:smoke": "node scripts/api-smoke-test.js",
     "test:smoke:ci": "node scripts/api-smoke-test.js --junit test-results/smoke-results.xml --iterations 3",
+    "test:uptime": "node scripts/uptime-health-check.js",
+    "report:uptime": "node scripts/uptime-report.js",
     "verify": "make verify-fast",
     "verify:full": "make verify",
     "lint": "eslint .",

@@ -46,7 +46,7 @@
 
 **New variables in `.env`**:
 ```env
-AZURE_SEARCH_NAME=cardiologysuite-search
+AZURE_SEARCH_NAME=cardiologysuite-search-pro
 AZURE_SEARCH_ADMIN_KEY=***REDACTED***
 AZURE_OPENAI_HPI_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-small

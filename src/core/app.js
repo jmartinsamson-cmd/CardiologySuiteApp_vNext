@@ -1,13 +1,12 @@
 /* eslint-env browser */
 // Cardiology Suite Application
-import { debugLog } from "../utils/logger.js";
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 debugLog("🚀 Initializing Cardiology Suite...");
 
 // Import configuration and utilities
 import { config } from "../../config/environment.js";
 import { fetchJSON } from "../utils/network.js";
-import { debugWarn, debugError } from "../utils/logger.js";
-import { addListener, cleanupListeners } from "../utils/eventManager.js";
+import { addListener } from "../utils/eventManager.js";
 
 // Import required modules
 import "../utils/debugInstrumentation.js";
@@ -22,26 +21,103 @@ import "../parsers/hintedParser.js";
 // Import evidence-based plan generator bridge
 import "../parsers/evidenceBasedPlanBridge.js";
 
+/**
+ * @typedef {{ id: string; name: string }} DiagnosisSummary
+ */
+
+/**
+ * @typedef {{
+ *   id?: string;
+ *   name?: string;
+ *   title?: string;
+ *   description?: string;
+ *   features?: string[];
+ *   workup?: string[];
+ *   management?: string[];
+ *   pearls?: string[];
+ *   guidelines?: string | string[];
+ *   pdfs?: Array<{ title: string; description?: string; path: string }>;
+ * }} DiagnosisDetail
+ */
+
+/**
+ * @typedef {{ diagnoses?: DiagnosisDetail[] }} DiagnosisDatabase
+ */
+
+/**
+ * @typedef {{
+ *   mountMeds?: (root: HTMLElement) => Promise<void> | void;
+ *   unmountMeds?: (root: HTMLElement) => void;
+ * }} MedsModule
+ */
+
+/**
+ * @typedef {{
+ *   mountGuidelines?: (root: HTMLElement) => Promise<void> | void;
+ *   unmountGuidelines?: (root: HTMLElement) => void;
+ * }} GuidelinesModule
+ */
+
+const appGlobals = /**
+ * @type {Window & typeof globalThis & {
+ *   DIAGNOSES?: DiagnosisSummary[];
+ *   __spaRouterInit?: boolean;
+ * }}
+ */ (globalThis);
+
 // Basic application initialization
-addListener(document, "DOMContentLoaded", function () {
+console.log("⏰ Registering DOMContentLoaded listener...");
+console.log("⏰ document.readyState =", document.readyState);
+
+// If DOM is already loaded, run immediately
+if (document.readyState === 'loading') {
+  console.log("⏰ DOM still loading, adding event listener");
+  addListener(document, "DOMContentLoaded", initializeApp);
+} else {
+  console.log("⏰ DOM already loaded! Running initialization immediately");
+  initializeApp();
+}
+
+async function initializeApp() {
+  console.log("🚀🚀🚀 INITIALIZING APP NOW");
+  console.log("📍 Current URL:", globalThis.location.href);
+  console.log("📍 Current hash:", globalThis.location.hash);
   debugLog("✅ DOM loaded, initializing app...");
+  
+  // Add visible status indicator
+  const statusDiv = document.createElement('div');
+  statusDiv.id = 'init-status';
+  statusDiv.style.cssText = 'position:fixed;top:60px;right:10px;background:#0a0;color:#fff;padding:8px;z-index:9999;font-family:monospace;font-size:11px;border-radius:4px;max-width:300px;';
+  statusDiv.textContent = '✅ app.js loaded';
+  document.body.appendChild(statusDiv);
+  
+  const updateStatus = (/** @type {string} */ msg) => {
+    console.log('STATUS:', msg);
+    statusDiv.textContent = msg;
+  };
 
   try {
     // Initialize RAG configuration globals for UI diagnostics
-    /** @type {any} */ (window).__AZURE_SEARCH_INDEX = 'cardiology-index';
-    /** @type {any} */ (window).__RAG_TOP_K = 5;
-    /** @type {any} */ (window).__STRICT_GROUNDING = false; // Set to true if using strict mode
+    const globalDebug = /** @type {{ [key: string]: unknown }} */ (globalThis);
+    globalDebug.__AZURE_SEARCH_INDEX = "cardiology-index";
+    globalDebug.__RAG_TOP_K = 5;
+    globalDebug.__STRICT_GROUNDING = false; // Set to true if using strict mode
     
     // Load feature flags and show/hide conditional nav items
+    updateStatus('📋 Loading feature flags...');
+    console.log("📋 Loading feature flags...");
     loadFeatureFlags();
 
     // Always wire theme toggle if present
+    updateStatus('🎨 Initializing theme...');
     console.log("Initializing theme...");
     initializeTheme();
 
     // Detect if this is the main page (presence of .dx-list)
+    updateStatus('🔍 Checking page type...');
     const isMainPage = !!document.querySelector(".dx-list");
     if (!isMainPage) {
+      updateStatus('ℹ️ Not main page - skipping init');
       console.log(
         "ℹ️ Skipping main app init: .dx-list not found (non-main page)",
       );
@@ -49,27 +125,52 @@ addListener(document, "DOMContentLoaded", function () {
     }
 
     // Initialize basic interactions
+    updateStatus('⚙️ Initializing interactions...');
     console.log("Initializing interactions...");
     initializeInteractions();
 
     // Initialize search functionality
-    console.log("Initializing search...");
-    initializeSearch();
+  updateStatus('🔎 Initializing search...');
+  console.log("🚀 BEFORE initializeSearch call");
+  try {
+    await initializeSearch();
+    console.log("✅ AFTER initializeSearch completed successfully");
+  } catch (e) {
+    console.error("❌ initializeSearch THREW ERROR:", e);
+    throw e;
+  }
 
     // Initialize lab values table
+    updateStatus('🧪 Initializing lab values...');
     console.log("Initializing lab values...");
     initializeLabValues();
 
+    updateStatus('✅ Initialization complete!');
     console.log("✅ Cardiology Suite initialized successfully");
+    
+    setTimeout(() => statusDiv.remove(), 3000);
 
     // Announce AI Search helpers
     console.log(
       "🔎 AI Search helpers ready: checkSearchHealth() and runSearch(query, top)"
     );
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    updateStatus(`❌ ERROR: ${errorMsg}`);
+    statusDiv.style.background = '#f00';
     console.error("❌ Error during initialization:", error);
+    
+    // Show error in diagnoses sidebar too
+    const dxList = document.querySelector(".dx-list");
+    if (dxList) {
+      dxList.innerHTML = `<div class="dx-empty" style="color: red;">
+        ❌ Initialization Error<br>
+        <small>${errorMsg}</small><br>
+        <small>Check status indicator (top-right)</small>
+      </div>`;
+    }
   }
-});
+}
 
 /**
  * Load feature flags and conditionally show nav items
@@ -82,13 +183,13 @@ function loadFeatureFlags() {
       if (features.meds_feature === true) {
         const medsNavTab = document.getElementById("meds-nav-tab");
         if (medsNavTab) {
-          medsNavTab.style.display = "";
-          console.log("✅ Medications feature enabled");
+          medsNavTab.classList.remove("hidden"); // Remove the hidden class
+          debugLog("✅ Medications feature enabled");
         }
       }
     })
     .catch((err) => {
-      console.warn("⚠️ Could not load feature flags:", err);
+      debugWarn("⚠️ Could not load feature flags:", err);
     });
 }
 
@@ -114,7 +215,7 @@ function initializeTheme() {
  */
 function getSearchApiBase() {
   // Prefer Codespaces-port rewrite when applicable
-  const origin = window.location.origin;
+  const origin = globalThis.location.origin;
   if (origin.includes("-8080.app.github.dev")) {
     return origin.replace("-8080.app.github.dev", "-8081.app.github.dev");
   }
@@ -125,7 +226,9 @@ function getSearchApiBase() {
 async function checkSearchHealth() {
   const base = getSearchApiBase();
   try {
-    const data = await fetchJSON(`${base}/health`, { cache: "no-store" });
+    const data = /** @type {{ ok?: boolean }} */ (
+      await fetchJSON(`${base}/health`, { cache: "no-store" })
+    );
     if (data && data.ok) {
       debugLog("✅ AI Search /health:", data);
     } else {
@@ -155,13 +258,17 @@ async function runSearch(query = "*", top = 5) {
 }
 
 // Expose to window for quick console access
-window.checkSearchHealth = checkSearchHealth;
-window.runSearch = runSearch;
+const windowWithSearch = /** @type {typeof globalThis & {
+  checkSearchHealth?: typeof checkSearchHealth;
+  runSearch?: typeof runSearch;
+}} */ (globalThis);
+windowWithSearch.checkSearchHealth = checkSearchHealth;
+windowWithSearch.runSearch = runSearch;
 
 // ================= Dev Panel (non-intrusive) =================
 (function mountAISearchDevPanel() {
   // Show panel only in dev contexts (Codespaces or localhost)
-  const isDevHost = /localhost|github\.dev/.test(window.location.host);
+  const isDevHost = /localhost|github\.dev/.test(globalThis.location.host);
   if (!isDevHost) return;
 
   const panel = document.createElement("div");
@@ -205,30 +312,43 @@ window.runSearch = runSearch;
 
   document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(panel);
-    const $ = (id) => panel.querySelector(id);
-    $("#ai-search-close").addEventListener("click", () => panel.remove());
-    $("#ai-btn-health").addEventListener("click", async () => {
-      const out = $("#ai-out");
-      out.textContent = "Checking /health...";
-      try {
-        const j = await checkSearchHealth();
-        out.textContent = JSON.stringify(j, null, 2);
-      } catch (e) {
-        out.textContent = String(e);
-      }
-    });
-    $("#ai-btn-search").addEventListener("click", async () => {
-      const out = $("#ai-out");
-      const q = $("#ai-q").value || "*";
-      const top = Number($("#ai-top").value || 5);
-      out.textContent = `Searching for "${q}"...`;
-      try {
-        const j = await runSearch(q, top);
-        out.textContent = JSON.stringify(j, null, 2);
-      } catch (e) {
-        out.textContent = String(e);
-      }
-    });
+    const $ = (
+      /** @type {string} */ selector,
+    ) => /** @type {HTMLElement | null} */ (
+      panel.querySelector(selector)
+    );
+    const closeButton = $("#ai-search-close");
+    if (closeButton) closeButton.addEventListener("click", () => panel.remove());
+    const healthButton = $("#ai-btn-health");
+    if (healthButton)
+      healthButton.addEventListener("click", async () => {
+        const out = $("#ai-out");
+        if (!out) return;
+        out.textContent = "Checking /health...";
+        try {
+          const j = await checkSearchHealth();
+          out.textContent = JSON.stringify(j, null, 2);
+        } catch (e) {
+          out.textContent = String(e);
+        }
+      });
+    const searchButton = $("#ai-btn-search");
+    if (searchButton)
+      searchButton.addEventListener("click", async () => {
+        const out = $("#ai-out");
+      const qInput = /** @type {HTMLInputElement | null} */ ($("#ai-q"));
+      const topInput = /** @type {HTMLInputElement | null} */ ($("#ai-top"));
+        if (!out || !qInput || !topInput) return;
+        const q = qInput.value || "*";
+        const top = Number(topInput.value || 5);
+        out.textContent = `Searching for "${q}"...`;
+        try {
+          const j = await runSearch(q, top);
+          out.textContent = JSON.stringify(j, null, 2);
+        } catch (e) {
+          out.textContent = String(e);
+        }
+      });
   });
 })();
 
@@ -248,28 +368,39 @@ function initializeInteractions() {
   }
 
   // Navigation breadcrumbs
-  const breadcrumbItems = document.querySelectorAll(".breadcrumb-item");
-  breadcrumbItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
-      const section = e.currentTarget.dataset.section;
+  const breadcrumbItems = /** @type {HTMLElement[]} */ (
+    Array.from(document.querySelectorAll(".breadcrumb-item"))
+  );
+  for (const item of breadcrumbItems) {
+    item.addEventListener("click", (/** @type {MouseEvent} */ e) => {
+      const target = /** @type {HTMLElement} */ (e.currentTarget);
+      const section = target.dataset.section;
       console.log("Navigation clicked:", section);
     });
-  });
+  }
 }
 
 /**
  * Initialize search functionality and populate diagnoses
  */
-function initializeSearch() {
-  const searchInput = document.getElementById("search");
-  const searchClear = document.querySelector(".search-clear");
+async function initializeSearch() {
+  console.log("🔎🔎🔎 === ENTERING initializeSearch() ===");
+  const searchInput = /** @type {HTMLInputElement | null} */ (
+    document.getElementById("search")
+  );
+  const searchClear = /** @type {HTMLElement | null} */ (
+    document.querySelector(".search-clear")
+  );
 
   // Populate diagnoses list
-  populateDiagnoses();
+  console.log("🔎 About to call populateDiagnoses()...");
+  await populateDiagnoses();
+  console.log("🔎 populateDiagnoses() completed");
 
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
-      const query = e.target.value;
+      const target = /** @type {HTMLInputElement} */ (e.target);
+      const query = target.value;
       if (query.length > 0) {
         if (searchClear) searchClear.style.display = "block";
         filterDiagnoses(query);
@@ -296,8 +427,8 @@ function initializeSearch() {
  * Complete diagnoses array - All 80 diagnoses from database (sorted A→Z)
  * Unified on window.DIAGNOSES to avoid duplicate declarations across pages.
  */
-if (!window.DIAGNOSES) {
-  window.DIAGNOSES = [
+if (!appGlobals.DIAGNOSES) {
+  appGlobals.DIAGNOSES = [
     { id: "aaa", name: "Abdominal Aortic Aneurysm (AAA)" },
     { id: "acs", name: "Acute Coronary Syndrome (UA/NSTEMI/STEMI)" },
     { id: "acute_limb_ischemia", name: "Acute Limb Ischemia (ALI)" },
@@ -393,80 +524,180 @@ if (!window.DIAGNOSES) {
   ];
 }
 
-var DIAGNOSES = window.DIAGNOSES;
+// Diagnoses are cached in appGlobals.DIAGNOSES (shared across modules)
+// No module-level variable to avoid TDZ issues
+
+/**
+ * @param {string} name
+ */
+function slugifyDiagnosisId(name) {
+  const base = String(name || "diagnosis").toLowerCase();
+  const tokens = base.match(/[a-z0-9]+/g);
+  return tokens ? tokens.join("-") : "diagnosis";
+}
+
+async function ensureDiagnosesLoaded() {
+  // Check module-level cache first
+  if (Array.isArray(appGlobals.DIAGNOSES) && appGlobals.DIAGNOSES.length > 0) {
+    console.log(`✅ Using cached ${appGlobals.DIAGNOSES.length} diagnoses`);
+    debugLog(`✅ Using cached ${appGlobals.DIAGNOSES.length} diagnoses`);
+    return appGlobals.DIAGNOSES;
+  }
+
+  console.log("📥 Loading diagnoses from JSON...");
+  debugLog("📥 Loading diagnoses from JSON...");
+  
+  try {
+    console.log("🌐 Fetching: ./data/cardiology_diagnoses/cardiology.json");
+    const database = /** @type {{ diagnoses?: Array<{ id?: string; name?: string; title?: string }> }} */ (
+      await fetchJSON("./data/cardiology_diagnoses/cardiology.json", {
+        cache: "no-store",
+      })
+    );
+    console.log("✅ Fetch complete, processing data...", database);
+
+    if (
+      database &&
+      Array.isArray(database.diagnoses) &&
+      database.diagnoses.length > 0
+    ) {
+      console.log(`📋 Loaded ${database.diagnoses.length} diagnoses from database`);
+      debugLog(`📋 Loaded ${database.diagnoses.length} diagnoses from database`);
+      const processed = database.diagnoses
+        .filter((entry) => entry && (entry.name || entry.title))
+        .map((entry) => {
+          const name = entry.name || entry.title || "";
+          const id = entry.id || slugifyDiagnosisId(name);
+          return { id, name };
+        });
+      // Update global cache
+      appGlobals.DIAGNOSES = processed;
+      console.log(`✅ Processed ${processed.length} valid diagnoses`);
+      debugLog(`✅ Processed ${processed.length} valid diagnoses`);
+      return processed;
+    } else {
+      console.warn("⚠️ Database loaded but has no diagnoses array or is empty", database);
+      debugWarn("⚠️ Database loaded but has no diagnoses array or is empty");
+    }
+  } catch (error) {
+    console.error("❌ Failed to load diagnoses list:", error);
+    debugError("❌ Failed to load diagnoses list:", error);
+  }
+
+  return [];
+}
 
 /**
  * Populate the diagnoses list with simple items
  */
-function populateDiagnoses() {
+async function populateDiagnoses() {
   console.log("🔄 Populating diagnoses...");
-  const dxList = document.querySelector(".dx-list");
+  debugLog("🔄 Populating diagnoses...");
+  const dxList = /** @type {HTMLElement | null} */ (
+    document.querySelector(".dx-list")
+  );
   if (!dxList) {
     console.error("❌ .dx-list element not found!");
+    debugError("❌ .dx-list element not found!");
     return;
   }
 
-  console.log(`📝 Found ${DIAGNOSES.length} diagnoses to populate`);
-  dxList.innerHTML = "";
+  dxList.innerHTML = '<div class="dx-empty">Loading diagnoses…</div>';
+  
+  try {
+    console.log("📥 Calling ensureDiagnosesLoaded...");
+    const diagnoses = await ensureDiagnosesLoaded();
+    console.log("📊 Diagnoses loaded:", diagnoses?.length || 0);
+    
+    // Cache is already updated in ensureDiagnosesLoaded()
 
-  DIAGNOSES.forEach((diagnosis) => {
-    const item = document.createElement("div");
-    item.className = "dx-item";
-    item.dataset.diagnosis = diagnosis.id;
-    item.textContent = diagnosis.name;
+    if (!diagnoses || !diagnoses.length) {
+      console.warn("⚠️ No diagnoses loaded, showing fallback message");
+      debugWarn("⚠️ No diagnoses loaded, showing fallback message");
+      dxList.innerHTML = '<div class="dx-empty" style="color: orange;">Unable to load diagnoses. Please refresh.<br><small>Check browser console (F12) for details.</small></div>';
+      return;
+    }
 
-    item.addEventListener("click", () => {
-      console.log("Selected diagnosis:", diagnosis.name);
-      setActiveDiagnosis(diagnosis);
-    });
+    console.log(`📝 Rendering ${diagnoses.length} diagnosis items...`);
+    debugLog(`📝 Rendering ${diagnoses.length} diagnosis items...`);
+    dxList.innerHTML = "";
 
-    dxList.appendChild(item);
-  });
+    for (const diagnosis of diagnoses) {
+      const item = document.createElement("div");
+      item.className = "dx-item";
+      item.dataset.diagnosis = diagnosis.id;
+      item.textContent = diagnosis.name;
 
-  console.log(`✅ Successfully populated ${DIAGNOSES.length} diagnoses`);
+      item.addEventListener("click", () => {
+        debugLog("Selected diagnosis:", diagnosis.name);
+        setActiveDiagnosis(diagnosis);
+      });
+
+      dxList.appendChild(item);
+    }
+
+    console.log(`✅ Successfully populated ${diagnoses.length} diagnoses`);
+    debugLog(`✅ Successfully populated ${diagnoses.length} diagnoses`);
+  } catch (error) {
+    console.error("❌ Error populating diagnoses:", error);
+    debugError("❌ Error populating diagnoses:", error);
+    dxList.innerHTML = `<div class="dx-empty" style="color: red;">Error loading diagnoses.<br><small>${error instanceof Error ? error.message : 'Unknown error'}</small><br><small>Check browser console (F12) for details.</small></div>`;
+  }
 }
 
 /**
  * Filter diagnoses based on search query
  */
+/**
+ * @param {string} query
+ */
 function filterDiagnoses(query) {
-  const items = document.querySelectorAll(".dx-item");
+  const items = /** @type {HTMLElement[]} */ (
+    Array.from(document.querySelectorAll(".dx-item"))
+  );
   const lowerQuery = query.toLowerCase();
 
-  items.forEach((item) => {
+  for (const item of items) {
     const title = item.textContent.toLowerCase();
     if (title.includes(lowerQuery)) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
     }
-  });
+  }
 }
 
 /**
  * Show all diagnoses
  */
 function showAllDiagnoses() {
-  const items = document.querySelectorAll(".dx-item");
-  items.forEach((item) => {
+  const items = /** @type {HTMLElement[]} */ (
+    Array.from(document.querySelectorAll(".dx-item"))
+  );
+  for (const item of items) {
     item.style.display = "block";
-  });
+  }
 }
 
 /**
  * Set active diagnosis and update UI
  */
 // Load comprehensive diagnosis data
+/** @type {DiagnosisDatabase | null} */
 let diagnosisDatabase = null;
 
 async function loadDiagnosisData() {
   if (diagnosisDatabase) return diagnosisDatabase;
 
   try {
-    diagnosisDatabase = await fetchJSON("./data/cardiology_diagnoses/cardiology.json");
+    diagnosisDatabase = /** @type {DiagnosisDatabase} */ (
+      await fetchJSON("./data/cardiology_diagnoses/cardiology.json")
+    );
     debugLog(
       "✅ Loaded diagnosis database with",
-      diagnosisDatabase.diagnoses.length,
+      Array.isArray(diagnosisDatabase.diagnoses)
+        ? diagnosisDatabase.diagnoses.length
+        : 0,
       "diagnoses",
     );
     return diagnosisDatabase;
@@ -476,229 +707,277 @@ async function loadDiagnosisData() {
   }
 }
 
-async function setActiveDiagnosis(diagnosis) {
-  // Remove active class from all items
-  document.querySelectorAll(".dx-item").forEach((item) => {
+function clearActiveDiagnosisState() {
+  const dxItems = /** @type {HTMLElement[]} */ (
+    Array.from(document.querySelectorAll(".dx-item"))
+  );
+  for (const item of dxItems) {
     item.classList.remove("active");
-  });
+  }
+}
 
-  // Add active class to selected item
-  const selectedItem = document.querySelector(
-    `[data-diagnosis="${diagnosis.id}"]`,
+/**
+ * @param {string} diagnosisId
+ */
+function markActiveDiagnosis(diagnosisId) {
+  const selectedItem = /** @type {HTMLElement | null} */ (
+    document.querySelector(`[data-diagnosis="${diagnosisId}"]`)
   );
   if (selectedItem) {
     selectedItem.classList.add("active");
   }
+}
 
-  // Update breadcrumb
-  const currentDxBreadcrumb = document.getElementById("current-dx-breadcrumb");
-  const currentDxName = document.getElementById("current-dx-name");
-
-  if (currentDxBreadcrumb && currentDxName) {
-    currentDxName.textContent = diagnosis.name;
-    currentDxBreadcrumb.style.display = "flex";
+/**
+ * @param {string} name
+ */
+function updateDiagnosisBreadcrumb(name) {
+  const breadcrumb = /** @type {HTMLElement | null} */ (
+    document.getElementById("current-dx-breadcrumb")
+  );
+  const nameEl = /** @type {HTMLElement | null} */ (
+    document.getElementById("current-dx-name")
+  );
+  if (breadcrumb && nameEl) {
+    nameEl.textContent = name;
+    breadcrumb.style.display = "flex";
   }
+}
 
-  // Update main content area with comprehensive data
-  const dxDetail = document.getElementById("dx-detail");
-  if (!dxDetail) {
-    console.error("dx-detail panel not found");
-    return;
-  }
-
-  // Show the panel when diagnosis is selected
-  dxDetail.classList.add("active");
-
-  // Show loading state
-  dxDetail.innerHTML = `
+/**
+ * @param {string} name
+ */
+function renderDiagnosisLoading(name) {
+  return `
     <div class="panel-h">
-      <h3>${diagnosis.name}</h3>
+      <h3>${name}</h3>
     </div>
     <div class="panel-content">
       <div class="loading">Loading comprehensive diagnosis information...</div>
     </div>
   `;
-  dxDetail.style.display = "block";
+}
 
-  // Load comprehensive diagnosis data
-  const database = await loadDiagnosisData();
-  if (!database) {
-    dxDetail.innerHTML = `
-      <div class="panel-h">
-        <h3>${diagnosis.name}</h3>
-      </div>
-      <div class="panel-content">
-        <div class="error">Error loading diagnosis data</div>
-      </div>
-    `;
-    return;
-  }
-
-  // Find the detailed diagnosis data (IDs now match database exactly)
-  let detailedDiagnosis = database.diagnoses.find((d) => d.id === diagnosis.id);
-
-  // If not found by exact ID, try partial name matching as fallback
-  if (!detailedDiagnosis) {
-    detailedDiagnosis = database.diagnoses.find(
-      (d) =>
-        d.name && d.name.toLowerCase().includes(diagnosis.name.toLowerCase()),
-    );
-  }
-
-  if (!detailedDiagnosis) {
-    // Create basic diagnosis info with automatic scrolling
-    dxDetail.innerHTML = `
-      <div class="panel-h">
-        <h3>${diagnosis.name}</h3>
-      </div>
-      <div class="panel-content">
-        <div class="basic-diagnosis-info">
-          <p><strong>Diagnosis:</strong> ${diagnosis.name}</p>
-          <p><em>Loading comprehensive clinical information...</em></p>
-          <div class="diagnosis-placeholder">
-            <h4>Clinical Overview</h4>
-            <p>This section will display detailed clinical information, diagnostic criteria, and management guidelines for ${diagnosis.name}.</p>
-            <h4>Key Points</h4>
-            <ul>
-              <li>Comprehensive diagnostic workup</li>
-              <li>Treatment protocols and guidelines</li>
-              <li>Risk stratification and prognosis</li>
-              <li>Follow-up recommendations</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    `;
-
-    // Automatically scroll to the diagnosis detail panel
-    setTimeout(() => {
-      dxDetail.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }, 100);
-
-    return;
-  }
-
-  // Create comprehensive diagnosis display
-  const content = `
+/**
+ * @param {string} name
+ */
+function renderDiagnosisError(name) {
+  return `
     <div class="panel-h">
-      <h3>${detailedDiagnosis.name}</h3>
-      ${detailedDiagnosis.description ? `<p class="diagnosis-description">${detailedDiagnosis.description}</p>` : ""}
+      <h3>${name}</h3>
     </div>
     <div class="panel-content">
-      ${
-        detailedDiagnosis.features
-          ? `
-      <div class="diagnosis-section">
-        <h4>Clinical Features</h4>
-        <ul class="feature-list">
-          ${detailedDiagnosis.features.map((feature) => `<li>${feature}</li>`).join("")}
-        </ul>
-      </div>
-      `
-          : ""
-      }
+      <div class="error">Error loading diagnosis data</div>
+    </div>
+  `;
+}
 
-      ${
-        detailedDiagnosis.workup
-          ? `
-      <div class="diagnosis-section">
-        <h4>Diagnostic Workup</h4>
-        <ul class="workup-list">
-          ${detailedDiagnosis.workup.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
-      `
-          : ""
-      }
-
-      ${
-        detailedDiagnosis.management
-          ? `
-      <div class="diagnosis-section">
-        <h4>Management & Treatment</h4>
-        <ul class="management-list">
-          ${detailedDiagnosis.management.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
-      `
-          : ""
-      }
-
-      ${
-        detailedDiagnosis.pearls
-          ? `
-      <div class="diagnosis-section">
-        <h4>Clinical Pearls</h4>
-        <ul class="pearls-list">
-          ${detailedDiagnosis.pearls.map((pearl) => `<li>${pearl}</li>`).join("")}
-        </ul>
-      </div>
-      `
-          : ""
-      }
-
-      ${
-        detailedDiagnosis.guidelines
-          ? `
-      <div class="diagnosis-section">
-        <h4>Guidelines</h4>
-        <div class="guidelines-content">
-          ${
-            typeof detailedDiagnosis.guidelines === "string"
-              ? `<p>${detailedDiagnosis.guidelines}</p>`
-              : detailedDiagnosis.guidelines
-                  .map((guideline) => `<p>${guideline}</p>`)
-                  .join("")
-          }
+/**
+ * @param {string} name
+ */
+function renderDiagnosisFallback(name) {
+  return `
+    <div class="panel-h">
+      <h3>${name}</h3>
+    </div>
+    <div class="panel-content">
+      <div class="basic-diagnosis-info">
+        <p><strong>Diagnosis:</strong> ${name}</p>
+        <p><em>Loading comprehensive clinical information...</em></p>
+        <div class="diagnosis-placeholder">
+          <h4>Clinical Overview</h4>
+          <p>This section will display detailed clinical information, diagnostic criteria, and management guidelines for ${name}.</p>
+          <h4>Key Points</h4>
+          <ul>
+            <li>Comprehensive diagnostic workup</li>
+            <li>Treatment protocols and guidelines</li>
+            <li>Risk stratification and prognosis</li>
+            <li>Follow-up recommendations</li>
+          </ul>
         </div>
       </div>
-      `
-          : ""
-      }
+    </div>
+  `;
+}
 
-      ${
-        detailedDiagnosis.pdfs
-          ? `
-      <div class="diagnosis-section">
-        <h4>Reference Materials</h4>
-        <div class="reference-materials">
-          ${detailedDiagnosis.pdfs
-            .map(
-              (pdf) => `
-            <div class="pdf-resource">
-              <h5>${pdf.title}</h5>
-              <p class="pdf-description">${pdf.description}</p>
-              <a href="${pdf.path}" target="_blank" class="pdf-link">
-                📄 View PDF Resource
-              </a>
-            </div>
-          `,
-            )
-            .join("")}
-        </div>
+/**
+ * @param {string} title
+ * @param {string[] | undefined} items
+ * @param {string} listClass
+ */
+function renderListSection(title, items, listClass) {
+  if (!Array.isArray(items) || items.length === 0) return "";
+  const entries = items.map((item) => `<li>${item}</li>`).join("");
+  return `
+    <div class="diagnosis-section">
+      <h4>${title}</h4>
+      <ul class="${listClass}">
+        ${entries}
+      </ul>
+    </div>
+  `;
+}
+
+/**
+ * @param {string | string[] | undefined} guidelines
+ */
+function renderGuidelinesSection(guidelines) {
+  if (!guidelines || (Array.isArray(guidelines) && guidelines.length === 0)) {
+    return "";
+  }
+
+  const content =
+    typeof guidelines === "string"
+      ? `<p>${guidelines}</p>`
+    : guidelines
+      .map((guideline) => `<p>${guideline}</p>`)
+      .join("");
+
+  return `
+    <div class="diagnosis-section">
+      <h4>Guidelines</h4>
+      <div class="guidelines-content">
+        ${content}
       </div>
-      `
+    </div>
+  `;
+}
+
+/**
+ * @param {Array<{ title: string; description?: string; path: string }> | undefined} pdfs
+ */
+function renderReferenceSection(pdfs) {
+  if (!Array.isArray(pdfs) || pdfs.length === 0) return "";
+  const cards = pdfs
+    .map(
+      (pdf) => `
+        <div class="pdf-resource">
+          <h5>${pdf.title}</h5>
+          <p class="pdf-description">${pdf.description || ""}</p>
+          <a href="${pdf.path}" target="_blank" class="pdf-link">
+            📄 View PDF Resource
+          </a>
+        </div>
+      `,
+    )
+    .join("");
+
+  return `
+    <div class="diagnosis-section">
+      <h4>Reference Materials</h4>
+      <div class="reference-materials">
+        ${cards}
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * @param {DiagnosisDetail} detail
+ */
+function renderDiagnosisDetail(detail) {
+  const sections = [
+    renderListSection("Clinical Features", detail.features, "feature-list"),
+    renderListSection("Diagnostic Workup", detail.workup, "workup-list"),
+    renderListSection(
+      "Management & Treatment",
+      detail.management,
+      "management-list",
+    ),
+    renderListSection("Clinical Pearls", detail.pearls, "pearls-list"),
+    renderGuidelinesSection(detail.guidelines),
+    renderReferenceSection(detail.pdfs),
+  ].filter(Boolean);
+
+  return `
+    <div class="panel-h">
+      <h3>${detail.name || "Diagnosis"}</h3>
+      ${
+        detail.description
+          ? `<p class="diagnosis-description">${detail.description}</p>`
           : ""
       }
     </div>
+    <div class="panel-content">
+      ${sections.join("\n")}
+    </div>
   `;
+}
 
-  dxDetail.innerHTML = content;
-
-  // Automatically scroll to the diagnosis detail panel
+/**
+ * @param {HTMLElement} panel
+ */
+function scheduleDiagnosisScroll(panel) {
   setTimeout(() => {
-    dxDetail.scrollIntoView({
+    panel.scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest",
     });
   }, 100);
+}
 
-  console.log("Displayed comprehensive diagnosis:", detailedDiagnosis.name);
+/**
+ * @param {DiagnosisDetail[]} diagnoses
+ * @param {DiagnosisSummary} diagnosis
+ */
+function findDetailedDiagnosis(diagnoses, diagnosis) {
+  const exact = diagnoses.find(
+    /** @param {DiagnosisDetail} detail */ (detail) => detail.id === diagnosis.id,
+  );
+  if (exact) return exact;
+  return diagnoses.find(
+    /** @param {DiagnosisDetail} detail */
+    (detail) =>
+      !!detail.name &&
+      detail.name.toLowerCase().includes(diagnosis.name.toLowerCase()),
+  );
+}
+
+/**
+ * @param {DiagnosisSummary} diagnosis
+ */
+async function setActiveDiagnosis(diagnosis) {
+  clearActiveDiagnosisState();
+  markActiveDiagnosis(diagnosis.id);
+  updateDiagnosisBreadcrumb(diagnosis.name);
+
+  const dxDetail = /** @type {HTMLElement | null} */ (
+    document.getElementById("dx-detail")
+  );
+  if (!dxDetail) {
+    console.error("dx-detail panel not found");
+    return;
+  }
+
+  dxDetail.classList.add("active");
+  dxDetail.style.display = "block";
+  dxDetail.innerHTML = renderDiagnosisLoading(diagnosis.name);
+
+  const database = await loadDiagnosisData();
+  if (!database) {
+    dxDetail.innerHTML = renderDiagnosisError(diagnosis.name);
+    return;
+  }
+
+  const diagnoses = Array.isArray(database.diagnoses)
+    ? database.diagnoses
+    : [];
+  const detailedDiagnosis = findDetailedDiagnosis(diagnoses, diagnosis);
+
+  if (!detailedDiagnosis) {
+    dxDetail.innerHTML = renderDiagnosisFallback(diagnosis.name);
+    scheduleDiagnosisScroll(dxDetail);
+    return;
+  }
+
+  dxDetail.innerHTML = renderDiagnosisDetail(detailedDiagnosis);
+  scheduleDiagnosisScroll(dxDetail);
+
+  console.log(
+    "Displayed comprehensive diagnosis:",
+    detailedDiagnosis.name || diagnosis.name,
+  );
 }
 
 /**
@@ -706,7 +985,15 @@ async function setActiveDiagnosis(diagnosis) {
  */
 async function initializeLabValues() {
   try {
-    const labData = await fetchJSON("./data/labs_reference/labs_reference.json");
+    const labData = /** @type {{
+      ranges: Record<string, {
+        aliases: string[];
+        low: number;
+        high: number;
+        units?: string;
+        note?: string;
+      }>;
+    }} */ (await fetchJSON("./data/labs_reference/labs_reference.json"));
 
     const tbody = document.getElementById("tbl-labs");
     if (!tbody) return;
@@ -737,7 +1024,7 @@ async function initializeLabValues() {
     ];
 
     // Populate table with reference ranges
-    cardiologyLabs.forEach((labKey) => {
+    for (const labKey of cardiologyLabs) {
       const lab = labData.ranges[labKey];
       if (lab) {
         const row = document.createElement("tr");
@@ -759,7 +1046,7 @@ async function initializeLabValues() {
 
         tbody.appendChild(row);
       }
-    });
+    }
 
     console.log("✅ Lab values table populated with reference ranges");
   } catch (error) {
@@ -786,15 +1073,25 @@ async function initializeLabValues() {
 
 // ===== SPA Router for #/meds and #/guidelines (lazy-loaded pages) =====
 (() => {
-  if (window.__spaRouterInit) return;
-  window.__spaRouterInit = true;
+  if (appGlobals.__spaRouterInit) return;
+  appGlobals.__spaRouterInit = true;
 
+  const browserWindow = /** @type {Window & typeof globalThis} */ (globalThis);
+
+  /** @type {MedsModule | null} */
   let medsModule = null;
+  /** @type {GuidelinesModule | null} */
   let guidelinesModule = null;
 
+  /**
+   * @returns {HTMLElement[]}
+   */
   function getMainContainers() {
     const ids = ["layout", "main", "app"];
-    return ids.map((id) => document.getElementById(id)).filter(Boolean);
+    const nodes = ids
+      .map((id) => document.getElementById(id))
+      .filter((el) => el instanceof HTMLElement);
+    return /** @type {HTMLElement[]} */ (nodes);
   }
 
   function ensureMedsContainer() {
@@ -811,7 +1108,7 @@ async function initializeLabValues() {
         document.body.appendChild(el);
       }
     }
-    return el;
+    return /** @type {HTMLElement} */ (el);
   }
 
   function ensureGuidelinesContainer() {
@@ -828,7 +1125,7 @@ async function initializeLabValues() {
         document.body.appendChild(el);
       }
     }
-    return el;
+    return /** @type {HTMLElement} */ (el);
   }
 
   function show404() {
@@ -838,113 +1135,178 @@ async function initializeLabValues() {
     location.hash = "";
   }
 
-  async function handleRoute() {
-    const hash = (location.hash || "").replace(/^#\/?/, "");
-    const isMeds = hash.startsWith("meds");
-    const isGuidelines = hash.startsWith("guidelines");
-    const medsRoot = ensureMedsContainer();
-    const guidelinesRoot = ensureGuidelinesContainer();
-    const mains = getMainContainers();
+  /**
+   * @typedef {{
+   *   medsRoot: HTMLElement;
+   *   guidelinesRoot: HTMLElement;
+   *   mains: HTMLElement[];
+   * }} RouteContext
+   */
 
-    // Update active nav tab
-    document.querySelectorAll(".nav-tab").forEach((tab) => {
+  /**
+   * @param {string} hash
+   */
+  function updateNavTabs(hash) {
+    const navTabs = /** @type {HTMLElement[]} */ (
+      Array.from(document.querySelectorAll(".nav-tab"))
+    );
+    for (const tab of navTabs) {
       tab.classList.remove("active");
       const page = tab.dataset.page;
-      if (
+      const isActive =
         (hash === "" && page === "main") ||
-        (isMeds && page === "meds") ||
-        (isGuidelines && page === "guidelines")
-      ) {
+        (hash.startsWith("meds") && page === "meds") ||
+        (hash.startsWith("guidelines") && page === "guidelines");
+      if (isActive) {
         tab.classList.add("active");
       }
-    });
-
-    if (isMeds) {
-      // Hide everything else
-      mains.forEach((m) => (m.style.display = "none"));
-      guidelinesRoot.style.display = "none";
-      medsRoot.style.display = "";
-
-      // Unmount guidelines
-      if (
-        guidelinesModule &&
-        typeof guidelinesModule.unmountGuidelines === "function"
-      ) {
-        try {
-          guidelinesModule.unmountGuidelines(guidelinesRoot);
-        } catch (error) {
-          console.warn("Error unmounting guidelines:", error);
-        }
-      }
-
-      // Load and mount meds
-      if (!medsModule) {
-        medsModule = await import("/pages/meds.js").catch((e) => {
-          console.error("Failed to load Meds module:", e);
-          return null;
-        });
-      }
-      if (medsModule && typeof medsModule.mountMeds === "function") {
-        await medsModule.mountMeds(medsRoot);
-      }
-    } else if (isGuidelines) {
-      // Hide everything else
-      mains.forEach((m) => (m.style.display = "none"));
-      medsRoot.style.display = "none";
-      guidelinesRoot.style.display = "";
-
-      // Unmount meds
-      if (medsModule && typeof medsModule.unmountMeds === "function") {
-        try {
-          medsModule.unmountMeds(medsRoot);
-        } catch (error) {
-          console.warn("Error unmounting meds:", error);
-        }
-      }
-
-      // Load and mount guidelines
-      if (!guidelinesModule) {
-        guidelinesModule = await import("/pages/guidelines.js").catch((e) => {
-          console.error("Failed to load Guidelines module:", e);
-          return null;
-        });
-      }
-      if (
-        guidelinesModule &&
-        typeof guidelinesModule.mountGuidelines === "function"
-      ) {
-        await guidelinesModule.mountGuidelines(guidelinesRoot);
-      }
-    } else if (hash && hash !== "") {
-      // Unknown route - show 404 and redirect home
-      show404();
-    } else {
-      // Home route - unmount both
-      if (medsModule && typeof medsModule.unmountMeds === "function") {
-        try {
-          medsModule.unmountMeds(medsRoot);
-        } catch (error) {
-          console.warn("Error unmounting meds:", error);
-        }
-      }
-      if (
-        guidelinesModule &&
-        typeof guidelinesModule.unmountGuidelines === "function"
-      ) {
-        try {
-          guidelinesModule.unmountGuidelines(guidelinesRoot);
-          } catch {
-            // Ignore unmount errors
-          }
-      }
-      medsRoot.style.display = "none";
-      guidelinesRoot.style.display = "none";
-      mains.forEach((m) => (m.style.display = ""));
     }
   }
 
-  window.addEventListener("hashchange", handleRoute);
-  window.addEventListener("DOMContentLoaded", handleRoute);
+  /**
+   * @param {HTMLElement[]} mains
+   */
+  function hideMainPanels(mains) {
+    for (const main of mains) {
+      main.style.display = "none";
+    }
+  }
+
+  /**
+   * @param {HTMLElement[]} mains
+   */
+  function showMainPanels(mains) {
+    for (const main of mains) {
+      main.style.display = "";
+    }
+  }
+
+  /**
+   * @param {HTMLElement} root
+   */
+  function unmountMeds(root) {
+    if (medsModule && typeof medsModule.unmountMeds === "function") {
+      try {
+        medsModule.unmountMeds(root);
+      } catch (error) {
+        console.warn("Error unmounting meds:", error);
+      }
+    }
+  }
+
+  /**
+   * @param {HTMLElement} root
+   */
+  function unmountGuidelines(root) {
+    if (
+      guidelinesModule &&
+      typeof guidelinesModule.unmountGuidelines === "function"
+    ) {
+      try {
+        guidelinesModule.unmountGuidelines(root);
+      } catch (error) {
+        console.warn("Error unmounting guidelines:", error);
+      }
+    }
+  }
+
+  async function ensureMedsModule() {
+    if (medsModule) return medsModule;
+    const module = await import("../../pages/meds.js").catch((error) => {
+      console.error("Failed to load Meds module:", error);
+      return null;
+    });
+    if (module) {
+      medsModule = /** @type {MedsModule} */ (module);
+    }
+    return medsModule;
+  }
+
+  async function ensureGuidelinesModule() {
+    if (guidelinesModule) return guidelinesModule;
+    const module = await import("../../pages/guidelines.js").catch((error) => {
+      console.error("Failed to load Guidelines module:", error);
+      return null;
+    });
+    if (module) {
+      guidelinesModule = /** @type {GuidelinesModule} */ (module);
+    }
+    return guidelinesModule;
+  }
+
+  /**
+   * @param {RouteContext} context
+   */
+  async function showMedsRoute(context) {
+    hideMainPanels(context.mains);
+    context.guidelinesRoot.style.display = "none";
+    context.medsRoot.style.display = "";
+
+    unmountGuidelines(context.guidelinesRoot);
+
+    const module = await ensureMedsModule();
+    if (module && typeof module.mountMeds === "function") {
+      await module.mountMeds(context.medsRoot);
+    }
+  }
+
+  /**
+   * @param {RouteContext} context
+   */
+  async function showGuidelinesRoute(context) {
+    hideMainPanels(context.mains);
+    context.medsRoot.style.display = "none";
+    context.guidelinesRoot.style.display = "";
+
+    unmountMeds(context.medsRoot);
+
+    const module = await ensureGuidelinesModule();
+    if (module && typeof module.mountGuidelines === "function") {
+      await module.mountGuidelines(context.guidelinesRoot);
+    }
+  }
+
+  /**
+   * @param {RouteContext} context
+   */
+  function showHomeRoute(context) {
+    unmountMeds(context.medsRoot);
+    unmountGuidelines(context.guidelinesRoot);
+    context.medsRoot.style.display = "none";
+    context.guidelinesRoot.style.display = "none";
+    showMainPanels(context.mains);
+  }
+
+  async function handleRoute() {
+    const hash = (location.hash || "").replace(/^#\/?/, "");
+    const context = {
+      medsRoot: ensureMedsContainer(),
+      guidelinesRoot: ensureGuidelinesContainer(),
+      mains: getMainContainers(),
+    };
+
+    updateNavTabs(hash);
+
+    if (hash.startsWith("meds")) {
+      await showMedsRoute(context);
+      return;
+    }
+
+    if (hash.startsWith("guidelines")) {
+      await showGuidelinesRoute(context);
+      return;
+    }
+
+    if (hash) {
+      show404();
+      return;
+    }
+
+    showHomeRoute(context);
+  }
+
+  browserWindow.addEventListener("hashchange", handleRoute);
+  browserWindow.addEventListener("DOMContentLoaded", handleRoute);
   if (
     document.readyState === "complete" ||
     document.readyState === "interactive"

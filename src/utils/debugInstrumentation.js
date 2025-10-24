@@ -8,6 +8,14 @@ import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 
 /* eslint-disable no-undef */
 
+// why: legacy code may reference `process.env` in browser; provide harmless shim in dev
+if (typeof window !== 'undefined' && typeof window.process === 'undefined') {
+  window.process = { env: {} };
+}
+window.debugError = window.debugError || function (...args) {
+  try { console.error('[debugError]', ...args); } catch (_) {}
+};
+
 // ============================================================================
 // DEBUG MODE CHECK
 // ============================================================================

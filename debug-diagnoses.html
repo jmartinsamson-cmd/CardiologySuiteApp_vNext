@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnoses Debug</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+    #log {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    #result {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .error { color: #ff6b6b; }
+    .success { color: #51cf66; }
+    .warning { color: #ffd43b; }
+    .info { color: #74c0fc; }
+    button {
+      background: #4c6ef5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #3b5bdb;
+    }
+  </style>
+</head>
+<body>
+  <h1>Diagnoses Loading Debug</h1>
+  
+  <div id="log"></div>
+  
+  <button onclick="testDirect()">Test Direct Fetch</button>
+  <button onclick="testWithFetchJSON()">Test with fetchJSON</button>
+  <button onclick="clearLog()">Clear Log</button>
+  
+  <div id="result"></div>
+  
+  <script type="module">
+    import { fetchJSON } from './src/utils/network.js';
+    
+    window.fetchJSON = fetchJSON;
+    
+    function log(msg, type = 'info') {
+      const logEl = document.getElementById('log');
+      const line = document.createElement('div');
+      line.className = type;
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
+      console.log(msg);
+    }
+    
+    window.log = log;
+    
+    window.clearLog = function() {
+      document.getElementById('log').innerHTML = '';
+      document.getElementById('result').innerHTML = '';
+    };
+    
+    window.testDirect = async function() {
+      log('🧪 Testing direct fetch...', 'info');
+      try {
+        const response = await fetch('./data/cardiology_diagnoses/cardiology.json');
+        log(`✅ Response status: ${response.status} ${response.statusText}`, 'success');
+        
+        const data = await response.json();
+        log(`✅ JSON parsed successfully`, 'success');
+        log(`📊 Diagnoses count: ${data.diagnoses?.length || 0}`, 'success');
+        
+        const resultEl = document.getElementById('result');
+        resultEl.innerHTML = `
+          <div class="success">
+            <h3>Success!</h3>
+            <p>Loaded ${data.diagnoses?.length || 0} diagnoses</p>
+            <p>First diagnosis: ${data.diagnoses?.[0]?.name || 'N/A'}</p>
+            <details>
+              <summary>First 5 diagnoses</summary>
+              <pre>${JSON.stringify(data.diagnoses?.slice(0, 5), null, 2)}</pre>
+            </details>
+          </div>
+        `;
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        log(`❌ Stack: ${error.stack}`, 'error');
+        
+        const resultEl = document.getElementById('result');
+        resultEl.innerHTML = `
+          <div class="error">
+            <h3>Error!</h3>
+            <p>${error.message}</p>
+            <pre>${error.stack}</pre>
+          </div>
+        `;
+      }
+    };
+    
+    window.testWithFetchJSON = async function() {
+      log('🧪 Testing with fetchJSON utility...', 'info');
+      try {
+        const data = await window.fetchJSON('./data/cardiology_diagnoses/cardiology.json', {
+          cache: 'no-store'
+        });
+        log(`✅ fetchJSON successful`, 'success');
+        log(`📊 Diagnoses count: ${data.diagnoses?.length || 0}`, 'success');
+        
+        const resultEl = document.getElementById('result');
+        resultEl.innerHTML = `
+          <div class="success">
+            <h3>Success with fetchJSON!</h3>
+            <p>Loaded ${data.diagnoses?.length || 0} diagnoses</p>
+            <p>First diagnosis: ${data.diagnoses?.[0]?.name || 'N/A'}</p>
+            <details>
+              <summary>First 5 diagnoses</summary>
+              <pre>${JSON.stringify(data.diagnoses?.slice(0, 5), null, 2)}</pre>
+            </details>
+          </div>
+        `;
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        log(`❌ Stack: ${error.stack}`, 'error');
+        
+        const resultEl = document.getElementById('result');
+        resultEl.innerHTML = `
+          <div class="error">
+            <h3>Error with fetchJSON!</h3>
+            <p>${error.message}</p>
+            <pre>${error.stack}</pre>
+          </div>
+        `;
+      }
+    };
+    
+    // Auto-run test on load
+    log('🚀 Debug page loaded', 'info');
+    log('Click buttons to test diagnosis loading', 'info');
+  </script>
+</body>
+</html>

@@ -49,6 +49,19 @@ body {
   width: 100%;
 }
 
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #dx-rail {
+    display: none;
+  }
+  
+  #main {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+
 /* Panels and Grids */
 .vitals-labs-grid {
   display: grid;

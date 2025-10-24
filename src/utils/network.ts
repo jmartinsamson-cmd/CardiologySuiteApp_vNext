@@ -91,7 +91,7 @@ function delay(ms: number): Promise<void> {
  */
 export async function safeFetch(url: string, options: RequestInit = {}, retryConfig: RetryConfig = config.retry): Promise<Response> {
   const { maxAttempts, delayMs, backoffMultiplier } = retryConfig;
-  let lastError: NetworkError | Error;
+  let lastError: NetworkError | Error | undefined;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
@@ -133,7 +133,7 @@ export async function safeFetch(url: string, options: RequestInit = {}, retryCon
 
   // All retries failed
   debugError(`💥 All ${maxAttempts} fetch attempts failed for:`, url);
-  if (!lastError!) {
+  if (!lastError) {
     throw new NetworkError('All fetch attempts failed', url, null, null);
   }
   throw lastError;

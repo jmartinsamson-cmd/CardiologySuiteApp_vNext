@@ -1,53 +1,82 @@
 /// <reference types="@playwright/test" />
 import { defineConfig, devices } from "@playwright/test";
 
-// Use Vite preview server for SPA testing
-const PORT = 5173;
-const HOST = "localhost";
-const ORIGIN = `http://${HOST}:${PORT}`;
+const HOST = process.env.PW_HOST ?? "localhost";
+const PORT = Number(process.env.PW_PORT ?? 5173);
+const DEFAULT_BASE_URL = `http://${HOST}:${PORT}`;
+const BASE_URL = process.env.PW_BASE_URL ?? DEFAULT_BASE_URL;
 
 export default defineConfig({
-  // Keep tests in ./tests for sanity; adjust if yours live elsewhere.
   testDir: ".",
-
-  // One solid matcher; supports .js/.ts/.mjs/.cjs/.jsx/.tsx
   testMatch: /.*\.spec\.(?:[cm]?js|[cm]?ts|jsx|tsx)$/,
-
-  // Perf-friendly defaults
-  workers: 1,                    // deterministic perf numbers
+  workers: 1,
   fullyParallel: false,
+  retries: 1,
   timeout: 30_000,
+  snapshotPathTemplate: "{testDir}/__snapshots__/{projectName}/{testFilePath}/{arg}{ext}",
 
   expect: {
-    timeout: 5_000,
+    timeout: 10_000,
     toHaveScreenshot: {
-      animations: "disabled",
-      maxDiffPixels: 100,
-      threshold: 0.2,
+      maxDiffPixelRatio: 0.015,
     },
   },
 
-  // Use Vite preview server (already running or start with npm run preview)
   webServer: {
-    // build is executed in CI prior to this; here we force preview to our port
-    command: `npm run preview -- --port ${PORT}`,
-    url: `${ORIGIN}`, // Playwright waits until this responds
-    reuseExistingServer: true,   // Always reuse for faster tests
-    timeout: 60_000,             // give CI more time to boot server
-    cwd: "..",                   // relative to repo root
+    command: `npm run preview -- --port ${PORT} --host ${HOST}`,
+    url: BASE_URL,
+    reuseExistingServer: true,
+    timeout: 60_000,
+    cwd: "..",
   },
 
   use: {
-    baseURL: ORIGIN,             // so page.goto('/index.html') works
-    actionTimeout: 10_000,
-    headless: true,              // Run headless chromium
-    screenshot: "only-on-failure",
+    baseURL: BASE_URL,
+    headless: true,
+    viewport: { width: 1280, height: 900 },
+    deviceScaleFactor: 1,
+    locale: "en-US",
+    timezoneId: "UTC",
+    colorScheme: "light",
+    // @ts-expect-error Playwright exposes reducedMotion at runtime
+    reducedMotion: "reduce",
+    trace: "on-first-retry",
     video: "retain-on-failure",
-    trace: "retain-on-failure",  // helpful when a perf test flakes
-    ...devices["Desktop Chrome"],
+    screenshot: "only-on-failure",
   },
 
-  // Visual baselines
-  snapshotDir: "./snapshots",
-  snapshotPathTemplate: "{snapshotDir}/{testFilePath}/{arg}{ext}",
+  projects: [
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        deviceScaleFactor: 1,
+        viewport: { width: 1280, height: 900 },
+        launchOptions: {
+          args: [
+            "--disable-gpu",
+            "--font-render-hinting=medium",
+            "--disable-lcd-text",
+            "--disable-font-subpixel-positioning",
+          ],
+        },
+      },
+    },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        deviceScaleFactor: 1,
+        viewport: { width: 1280, height: 900 },
+      },
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        deviceScaleFactor: 1,
+        viewport: { width: 1280, height: 900 },
+      },
+    },
+  ],
 });

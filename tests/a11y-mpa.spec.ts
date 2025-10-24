@@ -9,9 +9,7 @@ import { injectAxe, checkA11y, getViolations } from "axe-playwright";
 
 test.describe("Accessibility Audit - Main Pages", () => {
   test("index.html - Home page accessibility", async ({ page }) => {
-    await page.goto(
-      "/cardiology-site-7813ad486aa6cffa44584bb9e254c91b82c4595a/index.html",
-    );
+    await page.goto("/index.html");
     await injectAxe(page);
 
     const violations = await getViolations(page);
@@ -39,9 +37,7 @@ test.describe("Accessibility Audit - Main Pages", () => {
   });
 
   test("SPA route #/guidelines - Guidelines page accessibility", async ({ page }) => {
-    await page.goto(
-      "/cardiology-site-7813ad486aa6cffa44584bb9e254c91b82c4595a/index.html#/guidelines",
-    );
+    await page.goto("/index.html#/guidelines");
     await injectAxe(page);
 
     const violations = await getViolations(page);
@@ -63,9 +59,7 @@ test.describe("Accessibility Audit - Main Pages", () => {
   });
 
   test("meds SPA route accessibility", async ({ page }) => {
-    await page.goto(
-      "/cardiology-site-7813ad486aa6cffa44584bb9e254c91b82c4595a/index.html#/meds",
-    );
+    await page.goto("/index.html#/meds");
     await injectAxe(page);
 
     const violations = await getViolations(page);
@@ -87,9 +81,7 @@ test.describe("Accessibility Audit - Main Pages", () => {
   });
 
   test("Color contrast check - index.html", async ({ page }) => {
-    await page.goto(
-      "/cardiology-site-7813ad486aa6cffa44584bb9e254c91b82c4595a/index.html",
-    );
+    await page.goto("/index.html");
     await injectAxe(page);
 
     const violations = await getViolations(page, null, {

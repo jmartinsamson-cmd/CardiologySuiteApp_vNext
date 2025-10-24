@@ -3494,3 +3494,8 @@ if (typeof window !== 'undefined') {
   window.TemplateRenderer = TemplateRenderer;
 }
 
+// Browser safety: ensure window.templateRenderer is set with fallbacks
+if (typeof window !== 'undefined') {
+  window.templateRenderer = window.renderTemplate;
+}
+
