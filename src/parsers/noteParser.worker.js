@@ -15,7 +15,7 @@
 // Import parser functions (they need to be self-contained)
 // Note: Web Workers can't access window object or DOM
 
-import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+import { debugLog, debugError } from "../utils/logger.js";
 self.addEventListener("message", async (event) => {
   const { type, text, parserId } = event.data;
 

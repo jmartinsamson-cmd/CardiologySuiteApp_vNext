@@ -1,7 +1,9 @@
+/* eslint-env node */
+/* global __ENV */
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
-export let options = {
+export const options = {
   vus: 10, // 10 virtual users
   duration: '30s', // Test duration
   thresholds: {
@@ -12,7 +14,7 @@ export let options = {
 
 const BASE_URL = __ENV.BASE_URL || 'http://localhost:7071';
 
-export default function () {
+export default function runLoadTest() {
   // Health check
   let response = http.get(`${BASE_URL}/api/health`);
   check(response, {

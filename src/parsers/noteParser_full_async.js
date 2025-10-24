@@ -15,7 +15,7 @@
 */
 
 import { yieldToMain } from '../utils/scheduler.js';
-import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+import { debugWarn } from "../utils/logger.js";
 
 const MAX_INPUT_LENGTH = 200000; // 200k char limit
 
