@@ -847,9 +847,10 @@ class TemplateRenderer {
       plans.push('Cath reviewed');
     }
 
-    // DAPT management for ACS/PCI (only if not on anticoagulation)
+    // DAPT management for ACS/PCI (only if not on anticoagulation and actively diagnosed)
     const onAnticoag = /apixaban|eliquis|rivaroxaban|xarelto|warfarin|coumadin|dabigatran|pradaxa/i.test(fullText);
-    if (/STEMI|NSTEMI|ACS|PCI|stent/i.test(assessment + fullText) && !onAnticoag) {
+    // Only add DAPT if these conditions are in the ASSESSMENT (not just mentioned in history)
+    if (/STEMI|NSTEMI|ACS|recent.*?PCI|recent.*?stent/i.test(assessment) && !onAnticoag) {
       const p2y12Drug = fullText.match(/\b(ticagrelor|brilinta|clopidogrel|plavix|prasugrel|effient)\b/i);
       if (p2y12Drug) {
         const drugName = p2y12Drug[1].toLowerCase();
@@ -1400,15 +1401,17 @@ class TemplateRenderer {
     // Admission reasoning
     if (hpiAnalysis.admissionReason) {
       rewrittenHPI += `Secondary to the patient's symptoms and diagnostic findings he was admitted for ${hpiAnalysis.admissionReason}. `;
-    } else {
-      rewrittenHPI += `Secondary to the patient's symptoms and diagnostic findings he was admitted for ${primarySymptom?.name || 'CP'} R/O. `;
+    } else if (primarySymptom?.name) {
+      rewrittenHPI += `Secondary to the patient's symptoms and diagnostic findings he was admitted for ${primarySymptom.name} R/O. `;
+    } else if (hpiAnalysis.symptoms.length > 0) {
+      rewrittenHPI += `Secondary to the patient's symptoms and diagnostic findings he was admitted for further evaluation. `;
     }
 
     // Current status/update
     if (hpiAnalysis.currentStatus) {
       rewrittenHPI += `${hpiAnalysis.currentStatus} (sentence about current status and update on the patient).`;
     } else {
-      rewrittenHPI += `The patient continues to have intermittent symptoms and reports stable condition since admission (sentence about current status and update on the patient).`;
+      rewrittenHPI += `(sentence about current status and update on the patient).`;
     }
 
     return rewrittenHPI;
