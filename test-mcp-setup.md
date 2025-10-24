@@ -111,7 +111,7 @@ Should return:
 {
   "ok": true,
   "mode": "static",
-  "endpoint": "https://cardiologysuite-search.search.windows.net",
+  "endpoint": "https://cardiologysuite-search-pro.search.windows.net",
   "index": "edu-index-v2"
 }
 ```

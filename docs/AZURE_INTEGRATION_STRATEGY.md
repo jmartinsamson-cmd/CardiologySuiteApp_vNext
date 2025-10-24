@@ -124,7 +124,7 @@ func azure functionapp publish cardiologysuite-functions
 
 **Current Setup**:
 - ✅ Index: `edu-index-v2` exists
-- ✅ Endpoint: `cardiologysuite-search.search.windows.net`
+- ✅ Endpoint: `cardiologysuite-search-pro.search.windows.net`
 - ⚠️ **Gap**: Not fully integrated with blob PDFs
 
 **Enhanced Architecture**:

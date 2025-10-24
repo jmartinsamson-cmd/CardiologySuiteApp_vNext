@@ -162,9 +162,10 @@ AZURE_OPENAI_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_API_VERSION=2024-10-21-preview
 
 # Azure AI Search (required)
-AZURE_SEARCH_ENDPOINT=https://your-service.search.windows.net
-AZURE_SEARCH_INDEX=edu-index-v2
-AZURE_SEARCH_ADMIN_KEY=your-key
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
+AZURE_SEARCH_INDEX=cardiology-index
+AZURE_SEARCH_API_KEY=your-key
 
 # RAG Settings
 RAG_MAX_CHARS=12000

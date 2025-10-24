@@ -24,13 +24,17 @@ import 'dotenv/config';
  * @returns {Object} Configuration object
  */
 function getConfig() {
-  const svc = process.env.AZURE_SEARCH_NAME;
-  const idx = process.env.AZURE_SEARCH_INDEX || 'cardiology-index';
-  const apiKey = process.env.AZURE_SEARCH_ADMIN_KEY;
-  const ver = process.env.AZURE_SEARCH_API_VERSION || '2024-07-01';
-  const endpoint = svc ? `https://${svc}.search.windows.net` : null;
+  // Prefer explicit endpoint over constructed from service name
+  const endpoint = process.env.AZURE_SEARCH_ENDPOINT || 
+    (process.env.AZURE_SEARCH_SERVICE_NAME 
+      ? `https://${process.env.AZURE_SEARCH_SERVICE_NAME}.search.windows.net`
+      : null);
   
-  return { svc, idx, apiKey, ver, endpoint };
+  const idx = process.env.AZURE_SEARCH_INDEX || 'cardiology-index';
+  const apiKey = process.env.AZURE_SEARCH_API_KEY || process.env.AZURE_SEARCH_ADMIN_KEY;
+  const ver = process.env.AZURE_SEARCH_API_VERSION || '2024-07-01';
+  
+  return { endpoint, idx, apiKey, ver };
 }
 
 /**

@@ -12,7 +12,7 @@ Azure AI Search SDK (`@azure/search-documents` v12.2.0) was returning an empty p
 
 ### 1. Verified Index & Credentials ✅
 ```bash
-curl -X POST "https://cardiologysuite-search.search.windows.net/indexes/edu-index/docs/search?api-version=2024-07-01" \
+curl -X POST "https://cardiologysuite-search-pro.search.windows.net/indexes/edu-index/docs/search?api-version=2024-07-01" \
   -H "api-key: ***" \
   -d '{"search":"heart failure", "top":3}'
 ```
