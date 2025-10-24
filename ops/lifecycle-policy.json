@@ -1,0 +1,85 @@
+{
+  "rules": [
+    {
+      "enabled": true,
+      "name": "delete-temp-files",
+      "type": "Lifecycle",
+      "definition": {
+        "actions": {
+          "baseBlob": {
+            "delete": {
+              "daysAfterModificationGreaterThan": 30
+            }
+          }
+        },
+        "filters": {
+          "blobTypes": ["blockBlob"],
+          "blobIndexMatch": [
+            {
+              "name": "retention_class",
+              "op": "==",
+              "value": "temp"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "enabled": true,
+      "name": "refresh-annual-content",
+      "type": "Lifecycle",
+      "definition": {
+        "actions": {
+          "baseBlob": {
+            "tierToCool": {
+              "daysAfterModificationGreaterThan": 90
+            },
+            "tierToArchive": {
+              "daysAfterModificationGreaterThan": 180
+            },
+            "delete": {
+              "daysAfterModificationGreaterThan": 365
+            }
+          }
+        },
+        "filters": {
+          "blobTypes": ["blockBlob"],
+          "blobIndexMatch": [
+            {
+              "name": "retention_class",
+              "op": "==",
+              "value": "refresh_annual"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "enabled": true,
+      "name": "archive-permanent-content",
+      "type": "Lifecycle",
+      "definition": {
+        "actions": {
+          "baseBlob": {
+            "tierToCool": {
+              "daysAfterModificationGreaterThan": 365
+            },
+            "tierToArchive": {
+              "daysAfterModificationGreaterThan": 1095
+            }
+          }
+        },
+        "filters": {
+          "blobTypes": ["blockBlob"],
+          "blobIndexMatch": [
+            {
+              "name": "retention_class",
+              "op": "==",
+              "value": "permanent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

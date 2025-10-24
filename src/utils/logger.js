@@ -1,86 +1,224 @@
 /**
- * Debug Logger Utility
+ * Enhanced Logger Utility with PHI Redaction and Structured Logging
  *
- * Provides conditional logging that only outputs in development mode.
- * Prevents console.log clutter in production builds.
- *
- * Usage:
- * ```ts
- * import { debugLog, debugWarn, debugError } from './src/utils/logger.js';
- * debugLog('Parsing note:', noteText);  // Only logs in dev mode
- * console.error('Critical error');      // Always logs (use for real errors)
- * ```
+ * Features:
+ * - Configurable log levels (ERROR, WARN, INFO, DEBUG)
+ * - PHI/PII redaction using regex patterns
+ * - Request ID tracking for correlation
+ * - Structured JSON output for production
+ * - Performance timing
  */
-import { config } from '../../config/environment.js';
+// Log levels
+export var LogLevel;
+(function (LogLevel) {
+    LogLevel[LogLevel["ERROR"] = 0] = "ERROR";
+    LogLevel[LogLevel["WARN"] = 1] = "WARN";
+    LogLevel[LogLevel["INFO"] = 2] = "INFO";
+    LogLevel[LogLevel["DEBUG"] = 3] = "DEBUG";
+})(LogLevel || (LogLevel = {}));
+// PHI/PII patterns to redact
+const PHI_PATTERNS = [
+    // Social Security Numbers
+    /\b\d{3}-\d{2}-\d{4}\b/g,
+    /\b\d{9}\b/g,
+    // Phone numbers
+    /\b\d{3}-\d{3}-\d{4}\b/g,
+    /\b\(\d{3}\)\s*\d{3}-\d{4}\b/g,
+    // Email addresses
+    /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g,
+    // Medical record numbers (common patterns)
+    /\bMRN\s*\d{6,10}\b/gi,
+    /\bMR\s*\d{6,10}\b/gi,
+    // Dates of birth
+    /\b\d{1,2}\/\d{1,2}\/\d{4}\b/g,
+    /\b\d{4}-\d{2}-\d{2}\b/g,
+    // Names (basic pattern - can be enhanced)
+    /\b(?:Dr\.?|Mr\.?|Mrs\.?|Ms\.?)\s+[A-Z][a-z]+\s+[A-Z][a-z]+\b/g
+];
+// Current request context
+let currentRequestId = null;
 /**
- * Log debug information (development only)
- * @param args - Arguments to log
+ * Set the current request ID for correlation
  */
+export function setRequestId(requestId) {
+    currentRequestId = requestId;
+}
+/**
+ * Clear the current request ID
+ */
+export function clearRequestId() {
+    currentRequestId = null;
+}
+/**
+ * Get current log level from environment
+ */
+function getLogLevel() {
+    const level = process.env.LOG_LEVEL || 'INFO';
+    switch (level.toUpperCase()) {
+        case 'ERROR': return LogLevel.ERROR;
+        case 'WARN': return LogLevel.WARN;
+        case 'INFO': return LogLevel.INFO;
+        case 'DEBUG': return LogLevel.DEBUG;
+        default: return LogLevel.INFO;
+    }
+}
+/**
+ * Redact PHI/PII from messages and metadata
+ */
+function redactPHI(text) {
+    if (!text)
+        return text;
+    let redacted = text;
+    for (const pattern of PHI_PATTERNS) {
+        redacted = redacted.replace(pattern, '[REDACTED]');
+    }
+    return redacted;
+}
+/**
+ * Redact PHI from objects recursively
+ */
+function redactObject(obj) {
+    if (typeof obj === 'string') {
+        return redactPHI(obj);
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(redactObject);
+    }
+    if (obj && typeof obj === 'object') {
+        const redacted = {};
+        for (const [key, value] of Object.entries(obj)) {
+            // Redact known PHI fields
+            if (['ssn', 'socialSecurity', 'phone', 'email', 'mrn', 'medicalRecord', 'dob', 'dateOfBirth', 'name', 'patientName'].includes(key.toLowerCase())) {
+                redacted[key] = '[REDACTED]';
+            }
+            else {
+                redacted[key] = redactObject(value);
+            }
+        }
+        return redacted;
+    }
+    return obj;
+}
+/**
+ * Format log entry
+ */
+function formatLogEntry(level, message, meta, error) {
+    const timestamp = new Date().toISOString();
+    const entry = {
+        timestamp,
+        level,
+        message: redactPHI(message),
+        requestId: currentRequestId
+    };
+    if (meta) {
+        entry.meta = redactObject(meta);
+    }
+    if (error) {
+        entry.error = {
+            name: error.name,
+            message: redactPHI(error.message),
+            stack: error.stack
+        };
+    }
+    return entry;
+}
+/**
+ * Write log entry
+ */
+function writeLog(level, levelName, message, meta, error) {
+    const currentLevel = getLogLevel();
+    if (level > currentLevel) {
+        return; // Skip if below current log level
+    }
+    const entry = formatLogEntry(levelName, message, meta, error);
+    // In development, use console with colors
+    if (process.env.NODE_ENV !== 'production') {
+        const color = {
+            ERROR: '\x1b[31m', // Red
+            WARN: '\x1b[33m', // Yellow
+            INFO: '\x1b[36m', // Cyan
+            DEBUG: '\x1b[35m' // Magenta
+        }[levelName] || '\x1b[0m';
+        const reset = '\x1b[0m';
+        const prefix = `${color}[${levelName}]${reset}`;
+        console.log(prefix, entry.message);
+        if (entry.meta)
+            console.log('Meta:', entry.meta);
+        if (entry.error)
+            console.error('Error:', entry.error);
+    }
+    else {
+        // In production, output structured JSON
+        console.log(JSON.stringify(entry));
+    }
+}
+/**
+ * Logger class with methods for different levels
+ */
+class Logger {
+    error(message, error, meta) {
+        writeLog(LogLevel.ERROR, 'ERROR', message, meta, error);
+    }
+    warn(message, meta) {
+        writeLog(LogLevel.WARN, 'WARN', message, meta);
+    }
+    info(message, meta) {
+        writeLog(LogLevel.INFO, 'INFO', message, meta);
+    }
+    debug(message, meta) {
+        writeLog(LogLevel.DEBUG, 'DEBUG', message, meta);
+    }
+    /**
+     * Log with timing
+     */
+    time(label) {
+        const start = Date.now();
+        return () => {
+            const duration = Date.now() - start;
+            this.debug(`${label} completed`, { duration: `${duration}ms` });
+        };
+    }
+    /**
+     * Create child logger with additional context
+     */
+    child(context) {
+        const childLogger = new Logger();
+        // In a more advanced implementation, we'd merge context
+        return childLogger;
+    }
+}
+// Export singleton instance
+export const logger = new Logger();
+// Legacy compatibility exports (deprecated - use logger instead)
 export function debugLog(...args) {
-    if (config.debugMode) {
-        console.log(...args);
-    }
+    logger.debug(args.join(' '));
 }
-/**
- * Log warning (development only)
- * @param args - Arguments to log
- */
 export function debugWarn(...args) {
-    if (config.debugMode) {
-        console.warn(...args);
-    }
+    logger.warn(args.join(' '));
 }
-/**
- * Log error (always logs, even in production)
- * @param args - Arguments to log
- */
 export function debugError(...args) {
-    console.error(...args);
+    logger.error(args.join(' '));
 }
-/**
- * Log information (development only)
- * @param args - Arguments to log
- */
 export function debugInfo(...args) {
-    if (config.debugMode) {
-        console.info(...args);
-    }
+    logger.info(args.join(' '));
 }
-/**
- * Log table (development only)
- * @param data - Data to display as table
- * @param columns - Optional column names
- */
 export function debugTable(data, columns) {
-    if (config.debugMode) {
+    if (getLogLevel() >= LogLevel.DEBUG) {
         console.table(data, columns);
     }
 }
-/**
- * Start a performance timer (development only)
- * @param label - Timer label
- */
 export function debugTimeStart(label) {
-    if (config.debugMode) {
+    if (getLogLevel() >= LogLevel.DEBUG) {
         console.time(label);
     }
 }
-/**
- * End a performance timer (development only)
- * @param label - Timer label
- */
 export function debugTimeEnd(label) {
-    if (config.debugMode) {
+    if (getLogLevel() >= LogLevel.DEBUG) {
         console.timeEnd(label);
     }
 }
-/**
- * Group console output (development only)
- * @param label - Group label
- * @param fn - Function to execute within group
- */
 export function debugGroup(label, fn) {
-    if (config.debugMode) {
+    if (getLogLevel() >= LogLevel.DEBUG) {
         console.group(label);
         try {
             fn();
@@ -93,20 +231,12 @@ export function debugGroup(label, fn) {
         fn();
     }
 }
-/**
- * Assert a condition and log if false (development only)
- * @param condition - Condition to check
- * @param args - Arguments to log if assertion fails
- */
 export function debugAssert(condition, ...args) {
-    if (config.debugMode) {
-        // eslint-disable-next-line no-console
+    if (getLogLevel() >= LogLevel.DEBUG) {
         console.assert(condition, ...args);
     }
 }
-/**
- * Default export with all logging functions
- */
+// Default export for backward compatibility
 export default {
     log: debugLog,
     warn: debugWarn,

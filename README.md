@@ -432,71 +432,209 @@ npm run test:visual:update
 
 ---
 
-## 🤝 Contributing
+## 🔧 Operational Runbook
 
-We welcome contributions from healthcare professionals and developers!
+### System Health Monitoring
 
-### How to Contribute
+#### Health Check Endpoints
+- **API Health**: `GET /api/health` - Comprehensive dependency health check
+  - Cosmos DB connectivity and latency
+  - Table Storage connectivity and latency
+  - Overall system status with per-service metrics
+- **AI Search Health**: `GET /health` (port 8081) - AI search service status
+- **MCP Health**: `GET /mcp/health` (port 8091) - Model Context Protocol service status
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/clinical-enhancement`)
-3. Make your changes with clear commit messages
-4. Ensure tests pass (`npm run test:unit && npm run test:e2e`)
-5. Run linting (`npm run lint:fix`)
-6. Submit a Pull Request
+#### Automated Health Verification
+```bash
+# Quick health check
+curl http://localhost:7071/api/health
 
-### Code Quality Standards
+# Full system verification
+npm run verify:health
 
-- ESLint compliance (zero errors, zero warnings)
-- TypeScript type checking passing
-- Clinical data validation passing
-- Accessibility standards (WCAG 2.1 AA)
-- Comprehensive documentation for clinical logic
+# Dependency probing with timing
+npm run health:deps
+```
 
-### Areas for Contribution
+### API Reliability Testing
 
-- Additional clinical decision trees
-- Enhanced AI prompts and validation
-- New clinical reference data
-- UI/UX improvements
-- Documentation and tutorials
-- Bug fixes and optimizations
+#### Smoke Tests
+- **Automated Testing**: `npm run test:smoke` - Comprehensive API endpoint validation
+  - Schema validation for all request/response payloads
+  - JUnit XML output for CI/CD integration
+  - Concurrent request simulation with jittered timing
+- **CI/CD Integration**: GitHub Actions workflow runs on push/PR/nightly
+  - Test results uploaded as artifacts
+  - Failure notifications and detailed reporting
 
----
+#### Manual Testing
+```bash
+# Run smoke tests locally
+npm run test:smoke
 
-## ⚠️ Clinical Disclaimer
+# Test specific endpoints
+curl -X POST http://localhost:7071/api/sessions/save \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId":"test-123","data":{}}'
 
-**IMPORTANT MEDICAL DISCLAIMER**:
+# Validate payload schemas
+npm run validate:api
+```
 
-The CardiologySuiteApp vNext is a **clinical decision support tool** designed to assist healthcare professionals in clinical decision-making. It is **NOT intended as a substitute for clinical judgment, medical training, or professional medical advice**.
+### Data Management & Validation
 
-- **Educational Purpose**: This tool is for educational and clinical support purposes only
-- **Professional Responsibility**: Healthcare professionals remain fully responsible for all clinical decisions
-- **No Warranties**: Software provided "as-is" without warranties of any kind
-- **Verify Information**: Users must independently verify all clinical recommendations
-- **Not Diagnostic**: This tool does not diagnose, treat, cure, or prevent any disease
-- **Clinical Judgment Required**: Always apply clinical judgment and consult current guidelines
+#### Data Integrity Checks
+```bash
+# Validate all JSON data files
+npm run validate:data
 
-By using this software, you acknowledge that:
+# Check feature flag configuration
+npm run validate:features
 
-- You are a qualified healthcare professional
-- You understand the limitations of clinical decision support tools
-- You will not rely solely on this tool for patient care decisions
-- You will verify all information against current evidence and guidelines
+# Full data pipeline verification
+npm run verify:data
+```
 
----
+#### Blob Storage Lifecycle Management
+- **Automated Retention**: Azure Storage lifecycle policies applied via `ops/apply_lifecycle.sh`
+  - Temporary files: 30-day deletion
+  - Annual refresh: 365-day tiering to archive
+  - Permanent storage: Long-term archive retention
+- **Tag-Based Operations**: Query and manage blobs by metadata tags
+  ```bash
+  # Query needs_review exports
+  python scripts/blob-tag-query.py --tag needs_review
 
-## 📄 License
+  # Sample downloads for verification
+  python scripts/blob-tag-query.py --sample 10
+  ```
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+#### Filename Normalization
+- **Automated Processing**: `scripts/blob-filename-normalizer.py`
+  - Safe filename normalization with checksum verification
+  - Tag-based organization: `{year}-{source_org}-{original}`
+  - Dry-run mode for validation before execution
 
-### Third-Party Licenses
+### Security & Compliance
 
-- Tailwind CSS: MIT License
-- Vite: MIT License
-- Azure SDK: MIT License
-- Express: MIT License
-- See `package.json` for complete dependency list
+#### PHI/PII Protection
+- **Logger Redaction**: Automatic PHI redaction in logs using regex patterns
+  - SSN, email, phone numbers, medical record numbers
+  - Configurable via `LOG_LEVEL` environment variable
+- **Input Validation**: Schema-based validation prevents malformed data
+  - 400 errors returned for invalid payloads
+  - Comprehensive field validation and type checking
+
+#### Security Audits
+```bash
+# Security scan and audit
+npm run security:check
+
+# Dependency vulnerability check
+npm audit
+
+# Code quality and security linting
+npm run lint:security
+```
+
+### Performance Monitoring
+
+#### Response Time Tracking
+- **API Latency**: Health checks include per-dependency timing
+- **Logger Timing**: Built-in performance measurement utilities
+  ```javascript
+  import { logger } from './src/utils/logger.js';
+  const endTimer = logger.time('database-query');
+  // ... perform operation ...
+  endTimer(); // Logs: "database-query completed duration: 150ms"
+  ```
+
+#### Resource Usage
+- **Memory Monitoring**: Node.js memory usage tracking in health endpoints
+- **Bundle Optimization**: Tree-shaken builds with size monitoring
+- **Lighthouse Scores**: Automated performance regression testing
+
+### Troubleshooting Guide
+
+#### Common Issues
+
+**API Health Check Failures**
+```bash
+# Check Azure connectivity
+az account show
+
+# Verify environment variables
+echo $COSMOS_DB_ENDPOINT
+echo $TABLE_STORAGE_CONNECTION
+
+# Test individual dependencies
+npm run health:cosmos
+npm run health:table
+```
+
+**Parser Performance Issues**
+```bash
+# Run parser benchmarks
+npm run test:parser
+
+# Check parser patterns
+npm run parse:samples
+
+# Validate regex patterns
+npm run validate:patterns
+```
+
+**Build/Deployment Failures**
+```bash
+# Clean and rebuild
+npm run clean && npm run build
+
+# Verify dependencies
+npm run verify:deps
+
+# Check TypeScript compilation
+npx tsc --noEmit
+```
+
+#### Log Analysis
+- **Structured Logging**: JSON output in production with request correlation
+- **PHI Redaction**: Automatic sanitization of sensitive data
+- **Log Levels**: Configurable via `LOG_LEVEL` environment variable
+  - ERROR: Critical failures only
+  - WARN: Important warnings
+  - INFO: General operational info
+  - DEBUG: Detailed debugging information
+
+#### Emergency Procedures
+1. **Service Degradation**: Check health endpoints and restart affected services
+2. **Data Corruption**: Use backup validation scripts and restore from known-good state
+3. **Security Incident**: Immediately rotate credentials and audit access logs
+4. **Performance Issues**: Enable DEBUG logging temporarily and analyze bottlenecks
+
+### Maintenance Procedures
+
+#### Daily Operations
+- Monitor CI/CD pipeline status
+- Review automated test results
+- Check health endpoint metrics
+- Validate data integrity
+
+#### Weekly Tasks
+- Run full verification suite: `make verify`
+- Review security audit results
+- Update dependencies: `npm audit fix`
+- Archive old logs and temporary files
+
+#### Monthly Maintenance
+- Full system backup validation
+- Performance benchmark comparison
+- Security patch application
+- Documentation updates
+
+#### Emergency Contacts
+- **Technical Issues**: Create GitHub issue with detailed logs
+- **Security Concerns**: Use GitHub Security Advisories
+- **Clinical Validation**: Contact clinical advisors via project discussions
 
 ---
 
