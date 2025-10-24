@@ -14,10 +14,25 @@ const jestGlobals = {
 };
 
 export default [
+  // JS files - no TS rules, processed first to avoid inheritance issues
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    plugins: {},  // Explicitly no plugins for JS files
+    languageOptions: {
+      globals: browserAndNodeGlobals
+    },
+    rules: {
+      // Keep console allowed for diagnostics-heavy codebase
+      "no-console": "off",
+      // Allow redeclaring globals since files do this
+      "no-redeclare": "off",
+      // Make unused vars warnings
+      "no-unused-vars": "warn"
+    }
+  },
+
   // Base JS rules
   js.configs.recommended,
-
-  // TS rules (type-aware) - only for TS files in main project
   {
     files: ["src/**/*.ts", "types/**/*.d.ts"],
     plugins: {
