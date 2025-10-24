@@ -6,4 +6,4 @@ Pillow==10.1.0
 opencv-python-headless==4.8.1.78
 azure-ai-formrecognizer==3.3.2
 azure-identity==1.15.0
-requests==2.31.0
+requests==2.32.4
