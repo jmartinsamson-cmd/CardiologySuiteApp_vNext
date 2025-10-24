@@ -56,16 +56,18 @@ Add your Azure secrets in GitHub:
 2. Click "New repository secret" for each:
 
 ```
-AZURE_OPENAI_ENDPOINT=https://jsamb-mgvbqri7-eastus2.cognitiveservices.azure.com
+```env
+AZURE_OPENAI_ENDPOINT=https://cardiologysuite-openai.openai.azure.com/
 AZURE_OPENAI_API_KEY=<your-key>
-AZURE_OPENAI_DEPLOYMENT=gpt-4.1-minisamson
-AZURE_OPENAI_API_VERSION=2025-01-01-preview
+AZURE_OPENAI_DEPLOYMENT=gpt-4.1-mini
+AZURE_OPENAI_API_VERSION=2024-02-01
 
-AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search.search.windows.net
-AZURE_SEARCH_NAME=cardiologysuite-search
-AZURE_SEARCH_INDEX=edu-index-v2
-AZURE_SEARCH_ADMIN_KEY=<your-key>
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
+AZURE_SEARCH_INDEX=cardiology-index
+AZURE_SEARCH_API_KEY=<your-key>
 AZURE_SEARCH_API_VERSION=2024-07-01
+```
 ```
 
 ### 3. Deploy
@@ -107,9 +109,9 @@ After deployment, add environment variables in Azure Portal:
    - AZURE_OPENAI_DEPLOYMENT
    - AZURE_OPENAI_API_VERSION
    - AZURE_SEARCH_ENDPOINT
-   - AZURE_SEARCH_NAME
+   - AZURE_SEARCH_SERVICE_NAME
    - AZURE_SEARCH_INDEX
-   - AZURE_SEARCH_ADMIN_KEY
+   - AZURE_SEARCH_API_KEY
    - AZURE_SEARCH_API_VERSION
 
 5. Click "Save"

@@ -136,11 +136,11 @@ Required in `services/ai-search/.env`:
 
 ```env
 # Azure Search (for RAG knowledge base retrieval)
-AZURE_SEARCH_ENDPOINT=https://your-service.search.windows.net
+# Service: cardiologysuite-search-pro
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
 AZURE_SEARCH_INDEX=cardiology-index
-AZURE_SEARCH_QUERY_KEY=your-query-key
-AZURE_SEARCH_NAME=your-service-name
-AZURE_SEARCH_ADMIN_KEY=your-admin-key
+AZURE_SEARCH_API_KEY=your-api-key
 AZURE_SEARCH_API_VERSION=2024-07-01
 
 # Azure OpenAI (for AI-powered analysis)

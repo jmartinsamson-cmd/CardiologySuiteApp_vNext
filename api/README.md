@@ -150,9 +150,10 @@ AZURE_OPENAI_API_KEY=...
 AZURE_OPENAI_DEPLOYMENT=gpt-4.1-minisamson
 AZURE_OPENAI_API_VERSION=2025-01-01-preview
 
-AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search.search.windows.net
-AZURE_SEARCH_INDEX=edu-index-v2
-AZURE_SEARCH_ADMIN_KEY=...
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
+AZURE_SEARCH_INDEX=cardiology-index
+AZURE_SEARCH_API_KEY=...
 ```
 
 ## Deployment

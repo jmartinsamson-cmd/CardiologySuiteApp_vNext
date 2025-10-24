@@ -46,8 +46,10 @@
 
 **New variables in `.env`**:
 ```env
-AZURE_SEARCH_NAME=cardiologysuite-search-pro
-AZURE_SEARCH_ADMIN_KEY=***REDACTED***
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
+AZURE_SEARCH_INDEX=cardiology-index
+AZURE_SEARCH_API_KEY=***REDACTED***
 AZURE_OPENAI_HPI_DEPLOYMENT=gpt-4o-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-small
 OPENAI_ENDPOINT=https://cardiologysuite-openai.openai.azure.com/
@@ -110,7 +112,7 @@ curl -X POST http://localhost:8081/api/paraphrase-hpi \
   -d '{"hpi":"Patient presents with dyspnea..."}' | jq '.'
 
 # Search the index directly
-curl -X POST "https://cardiologysuite-search.search.windows.net/indexes/cardiology-index/docs/search?api-version=2024-07-01" \
+curl -X POST "https://cardiologysuite-search-pro.search.windows.net/indexes/cardiology-index/docs/search?api-version=2024-07-01" \
   -H "Content-Type: application/json" \
   -H "api-key: YOUR_QUERY_KEY" \
   -d '{"search": "heart failure", "top": 3}'

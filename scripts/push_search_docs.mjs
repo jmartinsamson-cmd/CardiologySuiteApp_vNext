@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* eslint-env node */
 
-import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
@@ -12,16 +11,18 @@ const __dirname = path.dirname(__filename);
 // Load .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-const svc = process.env.AZURE_SEARCH_NAME;
-const key = process.env.AZURE_SEARCH_ADMIN_KEY;
+// Prefer AZURE_SEARCH_ENDPOINT, fallback to constructing from SERVICE_NAME
+const endpoint = process.env.AZURE_SEARCH_ENDPOINT || 
+  (process.env.AZURE_SEARCH_SERVICE_NAME 
+    ? `https://${process.env.AZURE_SEARCH_SERVICE_NAME}.search.windows.net`
+    : null);
+const key = process.env.AZURE_SEARCH_API_KEY || process.env.AZURE_SEARCH_ADMIN_KEY;
 const index = process.env.AZURE_SEARCH_INDEX || 'cardiology-index';
 
-if (!svc || !key) {
-  console.error('Error: AZURE_SEARCH_NAME and AZURE_SEARCH_ADMIN_KEY must be set');
+if (!endpoint || !key) {
+  console.error('Error: AZURE_SEARCH_ENDPOINT (or AZURE_SEARCH_SERVICE_NAME) and AZURE_SEARCH_API_KEY must be set');
   process.exit(1);
 }
-
-const endpoint = `https://${svc}.search.windows.net`;
 
 // Sample cardiology documents
 const docs = [

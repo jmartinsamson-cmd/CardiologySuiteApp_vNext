@@ -296,9 +296,9 @@ az webapp config appsettings set \
   --name cardiology-ai-search \
   --resource-group cardiology-suite-rg \
   --settings \
-    AZURE_SEARCH_ENDPOINT=your-endpoint \
-    AZURE_SEARCH_INDEX=your-index \
-    AZURE_SEARCH_QUERY_KEY=your-key \
+    AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net \
+    AZURE_SEARCH_INDEX=cardiology-index \
+    AZURE_SEARCH_API_KEY=your-key \
     AZURE_OPENAI_ENDPOINT=your-openai-endpoint \
     AZURE_OPENAI_KEY=your-openai-key \
     PORT=8080
@@ -364,9 +364,10 @@ These are runtime environment variables:
 
 ```bash
 # Azure Search
-AZURE_SEARCH_ENDPOINT=https://your-service.search.windows.net
-AZURE_SEARCH_INDEX=your-index-name
-AZURE_SEARCH_QUERY_KEY=your-query-key
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
+AZURE_SEARCH_INDEX=cardiology-index
+AZURE_SEARCH_API_KEY=your-api-key
 
 # Azure OpenAI
 AZURE_OPENAI_ENDPOINT=https://your-openai.openai.azure.com

@@ -39,10 +39,12 @@ To enable full AI-powered features, you need:
 Edit `/workspaces/CardiologySuiteApp_vNext/.env`:
 
 ```env
-# Replace these with your actual Azure credentials:
-AZURE_SEARCH_ENDPOINT=https://YOUR-SERVICE.search.windows.net
+```bash
+# Azure Search credentials
+AZURE_SEARCH_ENDPOINT=https://cardiologysuite-search-pro.search.windows.net
+AZURE_SEARCH_SERVICE_NAME=cardiologysuite-search-pro
 AZURE_SEARCH_INDEX=cardiology-index
-AZURE_SEARCH_QUERY_KEY=YOUR-SEARCH-KEY
+AZURE_SEARCH_API_KEY=YOUR-SEARCH-KEY
 
 AZURE_OPENAI_ENDPOINT=https://YOUR-SERVICE.openai.azure.com/
 AZURE_OPENAI_API_KEY=YOUR-OPENAI-KEY
