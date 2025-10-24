@@ -206,5 +206,12 @@
   "azureFunctions.projectLanguage": "JavaScript",
   "azureFunctions.projectRuntime": "~4",
   "azureFunctions.projectLanguageModel": 4,
-  "azureFunctions.preDeployTask": "npm prune (functions)"
+  "azureFunctions.preDeployTask": "npm prune (functions)",
+  
+  // Terminal profiles - Azure Cloud Shell integration
+  "terminal.integrated.defaultProfile.windows": "Azure Cloud Shell (PowerShell)",
+  "terminal.integrated.defaultProfile.osx": "Azure Cloud Shell (Bash)",
+  "terminal.integrated.defaultProfile.linux": "Azure Cloud Shell (Bash)",
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.confirmOnExit": false
 }

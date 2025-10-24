@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+
 // ============================================================================
 // PARSER CHUNKER - Breaks large note parsing into smaller chunks
 // ============================================================================
@@ -8,6 +10,7 @@
 //
 
 /**
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
  * Async wrapper for parsing large notes without blocking UI
  * @param {Function} parserFunc - The parser function to call
  * @param {string} text - The note text to parse
@@ -66,7 +69,7 @@ async function parseNoteChunked(text) {
 
   // For very large notes (>15k), split the work
   if (textLength > 15000) {
-    console.log(
+    debugLog(
       `📊 Large note detected: ${textLength} characters - using chunked parsing`,
     );
 
@@ -77,7 +80,7 @@ async function parseNoteChunked(text) {
     const result = await parseWithYield(
       (globalThis.parseClinicalNoteFull || globalThis.parseClinicalNote),
       text,
-      (msg) => console.log(msg),
+      (msg) => debugLog(msg),
     );
 
     // Stage 3: Allow UI to breathe before returning

@@ -1,5 +1,7 @@
 /* eslint-env browser */
 /* global extractDiagnoses, findAllDatesISO, extractVitals, extractLabs, normalizeWhitespace */
+import { debugLog, debugWarn } from "../utils/logger.js";
+
 /*
   noteParser_full.js - Full Template-Aware Clinical Note Parser (JavaScript)
   noteParser_full.js - Full Template-Aware Clinical Note Parser (JavaScript)
@@ -30,15 +32,15 @@ function parseClinicalNoteFull(text) {
   // Cap input length to prevent performance issues
   const MAX_INPUT_LENGTH = 200000;
   if (text && text.length > MAX_INPUT_LENGTH) {
-    console.warn(`Input truncated from ${text.length} to ${MAX_INPUT_LENGTH} chars`);
+    debugWarn(`Input truncated from ${text.length} to ${MAX_INPUT_LENGTH} chars`);
     text = text.slice(0, MAX_INPUT_LENGTH);
   }
 
-  console.log('🔍 Step 1: Normalizing...');
+  debugLog('🔍 Step 1: Normalizing...');
   const clean = normalize(text);
-  console.log('🔍 Step 2: Segmenting sections...');
+  debugLog('🔍 Step 2: Segmenting sections...');
   const sections = segmentSectionsFull(clean);
-  console.log('🔍 Step 3: Extracting fields...');
+  debugLog('🔍 Step 3: Extracting fields...');
 
   const chiefComplaint = pick(sections, ["Chief Complaint"])?.trim();
   const reasonForConsult = pick(sections, ["Reason for Consult"])
@@ -62,17 +64,17 @@ function parseClinicalNoteFull(text) {
   const reviewManagement = extractReviewManagement(reviewBlock);
 
   // Imaging & ECG from anywhere
-  console.log('🔍 Step 4: Extracting imaging...');
+  debugLog('🔍 Step 4: Extracting imaging...');
   const imaging = extractImaging(
     clean + "\n" + priorBlock + "\n" + reviewBlock,
   );
-  console.log('🔍 Step 5: Extracting ECG...');
+  debugLog('🔍 Step 5: Extracting ECG...');
   const ecg = extractECG(clean + "\n" + reviewBlock);
 
   // Labs: extractLabs handles section detection internally
-  console.log('🔍 Step 6: Extracting labs (this may hang on problematic notes)...');
+  debugLog('🔍 Step 6: Extracting labs (this may hang on problematic notes)...');
   const labs = extractLabs(clean, sections).slice(0, 100);
-  console.log('🔍 Step 7: Labs extracted successfully');
+  debugLog('🔍 Step 7: Labs extracted successfully');
 
   const diagnoses = extractDiagnoses(
     pick(sections, [
@@ -89,9 +91,9 @@ function parseClinicalNoteFull(text) {
   const [age, sex] = quickDemoMeta(clean);
 
   // Vitals (scan whole note once, pass sections for better extraction)
-  console.log('🔍 Step 8: Extracting vitals...');
+  debugLog('🔍 Step 8: Extracting vitals...');
   const vitals = extractVitals(clean, sections);
-  console.log('🔍 Step 9: Building return object...');
+  debugLog('🔍 Step 9: Building return object...');
 
   const result = {
     fullText: clean,
@@ -115,10 +117,10 @@ function parseClinicalNoteFull(text) {
     planFreeText,
   };
 
-  console.log('🔍 Step 10: Returning result...');
+  debugLog('🔍 Step 10: Returning result...');
   return result;
 }
-console.log('✅ parseClinicalNoteFull function defined');
+debugLog('✅ parseClinicalNoteFull function defined');
 
 /* ========================= Section Segmentation ========================= */
 const MAIN_HEADERS = [
@@ -362,7 +364,7 @@ function extractImaging(text) {
   const matches = Array.from(text.matchAll(re)).slice(0, MAX_MATCHES);
 
   if (matches.length >= MAX_MATCHES) {
-    console.warn(`extractImaging: Limited to ${MAX_MATCHES} matches to prevent freeze`);
+    debugWarn(`extractImaging: Limited to ${MAX_MATCHES} matches to prevent freeze`);
   }
 
   for (const m of matches) {

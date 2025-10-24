@@ -1,6 +1,8 @@
 // @ts-nocheck
 /* eslint-env browser */
 /* global requestIdleCallback */
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+
 /*
   templateRenderer.js - Clinical Note Template Renderer
   ====================================================
@@ -225,7 +227,7 @@ const TEMPLATES = {
 // Template renderer class
 class TemplateRenderer {
   constructor() {
-    console.log('🏗️ TemplateRenderer constructor called');
+    debugLog('🏗️ TemplateRenderer constructor called');
     this.useSmartPhrase = false;
     // Lock template to progress
     this.currentTemplate = 'progress';
@@ -233,9 +235,9 @@ class TemplateRenderer {
     this.normalizedSections = {};
     this.unmappedContent = {};
 
-    console.log('🔧 Calling init()...');
+    debugLog('🔧 Calling init()...');
     this.init();
-    console.log('✅ TemplateRenderer constructor completed');
+    debugLog('✅ TemplateRenderer constructor completed');
   }
 
   init() {
@@ -246,7 +248,7 @@ class TemplateRenderer {
 
   // Normalize parsed sections using the mapping
   normalizeSections(parsedData) {
-    console.log('🔍 normalizeSections: Starting...');
+    debugLog('🔍 normalizeSections: Starting...');
     const normalized = {};
     const unmapped = {};
 
@@ -260,9 +262,9 @@ class TemplateRenderer {
 
       // Extract sections from full text if available
       if (fullText) {
-        console.log('🔍 normalizeSections: Extracting sections from full text...');
+        debugLog('🔍 normalizeSections: Extracting sections from full text...');
         const extractedSections = this.extractSectionsFromFullText(fullText);
-        console.log('🔍 normalizeSections: Sections extracted');
+        debugLog('🔍 normalizeSections: Sections extracted');
         // Merge extracted sections into parsedData
         Object.assign(parsedData, extractedSections);
       }
@@ -295,7 +297,7 @@ class TemplateRenderer {
 
         // FIX: Special handling for vitals array before checking normalization map
         if (key === 'vitals' && Array.isArray(value) && value.length > 0) {
-          console.log('🩺 normalizeSections: Processing vitals array');
+          debugLog('🩺 normalizeSections: Processing vitals array');
           const vitalContent = value.map(item => {
             if (typeof item === 'object' && item !== null) {
               return this.formatObject(item);
@@ -304,7 +306,7 @@ class TemplateRenderer {
           }).join('\n');
           if (vitalContent && vitalContent.trim()) {
             normalized['VITALS'] = vitalContent;
-            console.log('✅ Vitals normalized:', vitalContent);
+            debugLog('✅ Vitals normalized:', vitalContent);
           }
           return; // Skip rest of processing for vitals
         }
@@ -337,9 +339,9 @@ class TemplateRenderer {
           if (content && content.trim()) {
             // Special handling for HPI - rewrite it professionally
             if (normalizedKey === 'HPI') {
-              console.log('🔍 normalizeSections: Rewriting HPI (this may hang)...');
+              debugLog('🔍 normalizeSections: Rewriting HPI (this may hang)...');
               content = this.rewriteHPIForConsult(content, parsedData);
-              console.log('🔍 normalizeSections: HPI rewritten');
+              debugLog('🔍 normalizeSections: HPI rewritten');
             }
             normalized[normalizedKey] = content;
           }
@@ -354,13 +356,13 @@ class TemplateRenderer {
       if (!normalized['ASSESSMENT'] || normalized['ASSESSMENT'].trim().length < 20) {
         // Try to use impressionFreeText from parser first
         if (parsedData.impressionFreeText && parsedData.impressionFreeText.trim()) {
-          console.log('✅ Using impressionFreeText from parser for ASSESSMENT');
+          debugLog('✅ Using impressionFreeText from parser for ASSESSMENT');
           normalized['ASSESSMENT'] = parsedData.impressionFreeText.trim();
         } else if (parsedData.diagnoses && Array.isArray(parsedData.diagnoses) && parsedData.diagnoses.length > 0) {
-          console.log('✅ Using diagnoses array for ASSESSMENT');
+          debugLog('✅ Using diagnoses array for ASSESSMENT');
           normalized['ASSESSMENT'] = parsedData.diagnoses.join('\n');
         } else {
-          console.log('🔧 Generating ASSESSMENT from full text analysis');
+          debugLog('🔧 Generating ASSESSMENT from full text analysis');
           normalized['ASSESSMENT'] = this.generateAssessment(parsedData, normalized);
         }
       }
@@ -368,10 +370,10 @@ class TemplateRenderer {
       if (!normalized['PLAN'] || normalized['PLAN'].trim().length < 20) {
         // Try to use planFreeText from parser first
         if (parsedData.planFreeText && parsedData.planFreeText.trim()) {
-          console.log('✅ Using planFreeText from parser for PLAN');
+          debugLog('✅ Using planFreeText from parser for PLAN');
           normalized['PLAN'] = parsedData.planFreeText.trim();
         } else {
-          console.log('🔧 Generating PLAN from full text analysis');
+          debugLog('🔧 Generating PLAN from full text analysis');
           normalized['PLAN'] = this.generatePlan(parsedData, normalized);
         }
       }
@@ -819,6 +821,20 @@ class TemplateRenderer {
     const fullText = parsedData.fullText || '';
     const assessment = normalizedSections['ASSESSMENT'] || '';
 
+    // Try to generate evidence-based plan first (TypeScript integration)
+    if (typeof globalThis.generateEvidenceBasedPlan === 'function') {
+      try {
+        const evidencePlan = globalThis.generateEvidenceBasedPlan(parsedData);
+        if (evidencePlan) {
+          plans.push('=== Evidence-Based Clinical Plan ===');
+          plans.push(evidencePlan);
+          plans.push('\n=== Additional Clinical Considerations ===');
+        }
+      } catch (error) {
+        debugWarn('Evidence-based plan generation failed:', error);
+      }
+    }
+
     // Diagnostic review
     if (/echo|echocardiogram|TTE/i.test(fullText) && /reviewed|review/i.test(fullText)) {
       plans.push('Echo reviewed');
@@ -970,7 +986,7 @@ class TemplateRenderer {
 
     // Vitals if available - defensive null guards
     const vitals = info?.vitals || {};
-    console.log('🩺 rewriteHPIForConsult: info.vitals =', info?.vitals);
+    debugLog('🩺 rewriteHPIForConsult: info.vitals =', info?.vitals);
     
     if (vitals && Object.keys(vitals).length > 0) {
       const vitalsParts = [];
@@ -987,7 +1003,7 @@ class TemplateRenderer {
       if (temp) vitalsParts.push(`Temp: ${temp}°F`);
       if (spo2) vitalsParts.push(`SpO2: ${spo2}%`);
       
-      console.log('🩺 rewriteHPIForConsult: vitalsParts =', vitalsParts);
+      debugLog('🩺 rewriteHPIForConsult: vitalsParts =', vitalsParts);
       if (vitalsParts.length > 0) {
         consultHPI += `On presentation, vitals: ${vitalsParts.join(', ')}. `;
       }
@@ -1143,10 +1159,10 @@ class TemplateRenderer {
 
     // Extract vitals from parsedData if available
     if (parsedData && parsedData.vitals && Object.keys(parsedData.vitals).length > 0) {
-      console.log('🩺 extractHPIInfo: Found vitals in parsedData:', parsedData.vitals);
+      debugLog('🩺 extractHPIInfo: Found vitals in parsedData:', parsedData.vitals);
       info.vitals = parsedData.vitals;
     } else {
-      console.log('🩺 extractHPIInfo: No vitals found. parsedData:', parsedData ? 'exists' : 'null', 
+      debugLog('🩺 extractHPIInfo: No vitals found. parsedData:', parsedData ? 'exists' : 'null', 
                   'parsedData.vitals:', parsedData?.vitals);
     }
 
@@ -1206,7 +1222,7 @@ class TemplateRenderer {
                         fullText.match(/(?:^|\n)VS:\s*(.+?)(?=\n(?:[A-Z][A-Za-z\s]+:|$))/is) ||
                         fullText.match(/(?:^|\n)Vital Signs:\s*(.+?)(?=\n(?:[A-Z][A-Za-z\s]+:|$))/is);
     if (vitalsMatch && vitalsMatch[1].trim()) {
-      console.log('✅ Extracted vitals section');
+      debugLog('✅ Extracted vitals section');
       sections['Vitals'] = vitalsMatch[1].trim();
     }
 
@@ -1683,16 +1699,16 @@ class TemplateRenderer {
       const detectedDiagnoses = this.extractDiagnosesFromAssessment(assessment);
 
       if (detectedDiagnoses.length === 0) {
-        console.log('No diagnoses detected for guidelines generation');
+        debugLog('No diagnoses detected for guidelines generation');
         return;
       }
 
-      console.log('Detected diagnoses:', detectedDiagnoses);
+      debugLog('Detected diagnoses:', detectedDiagnoses);
 
       // Load diagnosis database
       const response = await fetch('./data/cardiology_diagnoses/cardiology.json');
       if (!response.ok) {
-        console.warn('Could not load diagnosis database');
+        debugWarn('Could not load diagnosis database');
         return;
       }
       const database = await response.json();
@@ -1703,7 +1719,7 @@ class TemplateRenderer {
         .filter(d => d !== undefined);
 
       if (matchedDiagnoses.length === 0) {
-        console.log('No matching diagnosis data found');
+        debugLog('No matching diagnosis data found');
         return;
       }
 
@@ -1722,9 +1738,9 @@ class TemplateRenderer {
         teachingContainer.innerHTML = teachingHTML;
       }
 
-      console.log('✅ Guidelines & Teaching populated successfully');
+      debugLog('✅ Guidelines & Teaching populated successfully');
     } catch (error) {
-      console.error('Error populating guidelines:', error);
+      debugError('Error populating guidelines:', error);
     }
   }
 
@@ -1832,7 +1848,7 @@ class TemplateRenderer {
     // ========== INSTRUMENTATION END ==========
 
     if (!text || typeof text !== 'string') {
-      console.warn('Invalid text provided to processNote');
+      debugWarn('Invalid text provided to processNote');
       window.CallGraph.error(new Error('Invalid text input'));
       return;
     }
@@ -1865,7 +1881,7 @@ class TemplateRenderer {
     return new Promise((resolve) => {
       setTimeout(async () => {
         try {
-          console.log('Starting parse...');
+          debugLog('Starting parse...');
 
         // STAGE 1: Detect input type
         window.CallGraph.start('detectHPIOnlyInput', text);
@@ -1877,7 +1893,7 @@ class TemplateRenderer {
 
         if (isHPIOnly) {
           // STAGE 2A: Generate full note from HPI
-          console.log('Detected HPI-only input, generating full note...');
+          debugLog('Detected HPI-only input, generating full note...');
           window.CallGraph.start('generateFullNoteFromHPI', text);
           parsedData = this.generateFullNoteFromHPI(text);
           window.CallGraph.end(parsedData);
@@ -1901,7 +1917,7 @@ class TemplateRenderer {
                             text.length > 15000 ? 600 :
                             text.length > 10000 ? 400 :
                             text.length > 5000 ? 200 : 100;
-          console.log(`Using parse delay: ${parseDelay}ms for ${text.length} characters`);
+          debugLog(`Using parse delay: ${parseDelay}ms for ${text.length} characters`);
 
           // Update button text with estimated wait time for large notes
           if (parseBtn) {
@@ -1923,22 +1939,22 @@ class TemplateRenderer {
 
                 // For very large notes, use simpler parser
                 if (useSimpleParser && window.parseNoteIntoSections) {
-                  console.log('⚠️ Using SIMPLIFIED parser for very large note (>20k chars)');
+                  debugLog('⚠️ Using SIMPLIFIED parser for very large note (>20k chars)');
                   result = window.safeParse('parseNoteIntoSections', window.parseNoteIntoSections, text);
                 } else if (window.parseClinicalNoteFull) {
-                  console.log('✅ Using parseClinicalNoteFull...');
+                  debugLog('✅ Using parseClinicalNoteFull...');
                   result = window.safeParse('parseClinicalNoteFull', window.parseClinicalNoteFull, text);
-                  console.log('🔍 Parser function returned, result type:', typeof result);
-                  console.log('🔍 About to resolve parser promise...');
+                  debugLog('🔍 Parser function returned, result type:', typeof result);
+                  debugLog('🔍 About to resolve parser promise...');
                 } else if (window.parseClinicalNote) {
-                  console.log('✅ Using parseClinicalNote...');
+                  debugLog('✅ Using parseClinicalNote...');
                   result = window.safeParse('parseClinicalNote', window.parseClinicalNote, text);
                 } else if (window.parseNoteIntoSections) {
-                  console.log('✅ Using parseNoteIntoSections...');
+                  debugLog('✅ Using parseNoteIntoSections...');
                   result = window.safeParse('parseNoteIntoSections', window.parseNoteIntoSections, text);
                 } else {
-                  console.error('❌ NO PARSER FOUND!');
-                  console.log('Available parsers:', {
+                  debugError('❌ NO PARSER FOUND!');
+                  debugLog('Available parsers:', {
                     parseClinicalNoteFull: typeof window.parseClinicalNoteFull,
                     parseClinicalNote: typeof window.parseClinicalNote,
                     parseNoteIntoSections: typeof window.parseNoteIntoSections
@@ -1946,22 +1962,22 @@ class TemplateRenderer {
                   rejectParser(new Error('No parsing function available'));
                   return;
                 }
-                console.log('🔍 Calling resolveParser...');
+                debugLog('🔍 Calling resolveParser...');
                 resolveParser(result);
-                console.log('🔍 resolveParser called');
+                debugLog('🔍 resolveParser called');
               } catch (error) {
-                console.error('Parser threw error:', error);
+                debugError('Parser threw error:', error);
                 rejectParser(error);
               }
             };
 
             // For very large notes, wait for browser idle time
             if (useIdleCallback) {
-              console.log('Using requestIdleCallback for large note');
+              debugLog('Using requestIdleCallback for large note');
               let fallbackTriggered = false;
               const fallbackTimer = setTimeout(() => {
                 fallbackTriggered = true;
-                console.warn('requestIdleCallback fallback triggered; running parse immediately');
+                debugWarn('requestIdleCallback fallback triggered; running parse immediately');
                 doParse();
               }, parseDelay);
 
@@ -1977,16 +1993,16 @@ class TemplateRenderer {
             }
           });
 
-          console.log('🔍 Parser promise resolved, calling CallGraph.end...');
+          debugLog('🔍 Parser promise resolved, calling CallGraph.end...');
           window.CallGraph.end(parsedData);
-          console.log('🔍 CallGraph.end complete, calling trace...');
+          debugLog('🔍 CallGraph.end complete, calling trace...');
           // DISABLED: trace can freeze on large objects with circular refs
           // window.trace('STAGE 2B: Parsed note', parsedData);
-          console.log('🔍 Trace skipped, yielding to UI...');
+          debugLog('🔍 Trace skipped, yielding to UI...');
 
           // Yield to UI after parsing
           await new Promise(resolve => requestAnimationFrame(resolve));
-          console.log('🔍 UI yielded, continuing...');
+          debugLog('🔍 UI yielded, continuing...');
         }
 
         if (!parsedData) {
@@ -1996,21 +2012,21 @@ class TemplateRenderer {
         // Debug: quick summary of parsed structure
         try {
           const sectionKeys = parsedData && parsedData.sections ? Object.keys(parsedData.sections) : [];
-          console.log('🧩 Parsed object keys:', Object.keys(parsedData || {}));
-          console.log('🧩 Parsed.sections keys:', sectionKeys);
+          debugLog('🧩 Parsed object keys:', Object.keys(parsedData || {}));
+          debugLog('🧩 Parsed.sections keys:', sectionKeys);
         } catch {
           // ignore
         }
 
         // STAGE 2.5: Enrich with AI Analysis (fail-soft)
         if (typeof window.enrichWithAIAnalysis === 'function') {
-          console.log('🤖 Enriching with AI analysis...');
+          debugLog('🤖 Enriching with AI analysis...');
           try {
             // Call AI analyzer to enrich parsed data
             parsedData = await window.enrichWithAIAnalysis(parsedData, text);
-            console.log('✅ AI enrichment complete');
+            debugLog('✅ AI enrichment complete');
           } catch (aiError) {
-            console.warn('⚠️  AI enrichment failed, continuing with base parse:', aiError);
+            debugWarn('⚠️  AI enrichment failed, continuing with base parse:', aiError);
             // Continue with unenriched data - fail-soft
           }
         }
@@ -2027,7 +2043,7 @@ class TemplateRenderer {
         }
 
         // STAGE 4: Normalize sections
-        console.log('Parse complete, normalizing...');
+        debugLog('Parse complete, normalizing...');
 
         // Yield to UI after parsing before normalization
         if (text.length > 10000) {
@@ -2042,20 +2058,20 @@ class TemplateRenderer {
         let dataToNormalize = parsedData;
         if (isHPIOnly && !parsedData.sections) {
           // HPI-only data is already flat, just pass it through
-          console.log('Processing HPI-only data (already flat)');
+          debugLog('Processing HPI-only data (already flat)');
         }
 
         const { normalized, unmapped } = this.normalizeSections(dataToNormalize);
         window.CallGraph.end({ normalized, unmapped });
         // DISABLED: trace can freeze on large objects
         // window.trace('STAGE 4: Normalized sections', normalized);
-        console.log('🔍 Normalization complete');
+        debugLog('🔍 Normalization complete');
 
         // Ensure core sections exist; if not, regenerate from HPI as a fallback
         const coreSections = ['HPI', 'ASSESSMENT', 'PLAN'];
         const corePresent = coreSections.filter(k => normalized[k] && String(normalized[k]).trim().length > 0);
         if (corePresent.length < 2) {
-          console.warn('⚠️ Normalized output incomplete; regenerating full note from HPI...');
+          debugWarn('⚠️ Normalized output incomplete; regenerating full note from HPI...');
           const regenerated = this.generateFullNoteFromHPI(text);
           const { normalized: regenNormalized, unmapped: regenUnmapped } = this.normalizeSections(regenerated);
           this.normalizedSections = regenNormalized;
@@ -2067,16 +2083,16 @@ class TemplateRenderer {
 
         // STAGE 4.5: Paraphrase HPI if present (fail-soft to original)
         if (this.normalizedSections.HPI && this.normalizedSections.HPI.length > 50) {
-          console.log('🤖 Paraphrasing HPI...');
+          debugLog('🤖 Paraphrasing HPI...');
           this.showSuccess('Paraphrasing HPI...');
           try {
             const paraphrased = await this.paraphraseHPI(this.normalizedSections.HPI);
             if (paraphrased && paraphrased.length > 20) {
               this.normalizedSections.HPI = paraphrased;
-              console.log('✅ HPI paraphrased successfully');
+              debugLog('✅ HPI paraphrased successfully');
             }
           } catch (error) {
-            console.warn('⚠️  HPI paraphrase failed, using original:', error);
+            debugWarn('⚠️  HPI paraphrase failed, using original:', error);
           }
         }
 
@@ -2084,15 +2100,15 @@ class TemplateRenderer {
         window.validateSchema('normalizeSections', normalized, [], { allowEmpty: true });
 
         // STAGE 6: Update UI / Render template
-        console.log('Updating UI...');
+        debugLog('Updating UI...');
         window.CallGraph.start('updateUI', normalized);
         this.updateUI();
         window.CallGraph.end();
         this.saveSettings();
 
-        console.log('✅ Note processed successfully');
-        console.log('Parsed data:', parsedData);
-        console.log('Normalized sections:', normalized);
+        debugLog('✅ Note processed successfully');
+        debugLog('Parsed data:', parsedData);
+        debugLog('Normalized sections:', normalized);
         this.showSuccess('Note processed successfully!');
 
           // Yield before guidelines generation
@@ -2121,7 +2137,7 @@ class TemplateRenderer {
             if (outputPanel) {
               // Scroll the panel into view
               outputPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              console.log('📜 Auto-scrolled to output panel');
+              debugLog('📜 Auto-scrolled to output panel');
 
               // Also focus the output textarea for immediate access
               if (outputTextarea && outputTextarea.value.trim()) {
@@ -2129,11 +2145,11 @@ class TemplateRenderer {
                   outputTextarea.focus();
                   // Scroll to top of textarea content
                   outputTextarea.scrollTop = 0;
-                  console.log('✅ Focused output textarea');
+                  debugLog('✅ Focused output textarea');
                 }, 100);
               }
             } else {
-              console.warn('⚠️ Output panel not found for auto-scroll');
+              debugWarn('⚠️ Output panel not found for auto-scroll');
             }
           }, scrollDelay);
 
@@ -2141,7 +2157,7 @@ class TemplateRenderer {
           resolve();
 
         } catch (error) {
-          console.error('❌ Error processing note:', error);
+          debugError('❌ Error processing note:', error);
           window.CallGraph.error(error);
           window.CallGraph.print();
           this.showError('Error processing note: ' + error.message);
@@ -2344,7 +2360,7 @@ class TemplateRenderer {
       noSectionShortParagraph
     );
 
-    console.log('HPI Detection:', {
+    debugLog('HPI Detection:', {
       wordCount,
       otherSectionCount,
       hpiKeywordCount,
@@ -2382,7 +2398,7 @@ class TemplateRenderer {
       'PLAN': this.generatePlanFromHPI(cleanHPI)
     };
 
-    console.log('Generated full note from HPI:', fullNoteData);
+    debugLog('Generated full note from HPI:', fullNoteData);
     return fullNoteData;
   }
  
@@ -2982,23 +2998,23 @@ class TemplateRenderer {
 
     // Parse button - triggers processing of vs-paste textarea content
     const parseBtn = document.getElementById('vs-parse');
-    console.log('🔍 Parse button element:', parseBtn);
+    debugLog('🔍 Parse button element:', parseBtn);
     if (parseBtn) {
       parseBtn.addEventListener('click', () => {
-        console.log('🖱️ Parse button clicked!');
+        debugLog('🖱️ Parse button clicked!');
         const text = document.getElementById('vs-paste')?.value || '';
-        console.log('📝 Text length:', text.length);
+        debugLog('📝 Text length:', text.length);
         if (text.trim()) {
-          console.log('✅ Processing note...');
+          debugLog('✅ Processing note...');
           this.processNote(text);
         } else {
-          console.log('⚠️ No text to parse');
+          debugLog('⚠️ No text to parse');
           this.showError('Please paste a clinical note to parse.');
         }
       });
-      console.log('✅ Parse button event listener attached');
+      debugLog('✅ Parse button event listener attached');
     } else {
-      console.error('❌ Parse button not found in bindEvents');
+      debugError('❌ Parse button not found in bindEvents');
     }
 
     // Clear All button - clears the input textarea
@@ -3008,11 +3024,11 @@ class TemplateRenderer {
         const textarea = document.getElementById('vs-paste');
         if (textarea) {
           textarea.value = '';
-          console.log('🗑️ Input textarea cleared');
+          debugLog('🗑️ Input textarea cleared');
           this.showSuccess('Input cleared');
         }
       });
-      console.log('✅ Clear All button event listener attached');
+      debugLog('✅ Clear All button event listener attached');
     }
 
     // Keyboard shortcuts
@@ -3036,7 +3052,7 @@ class TemplateRenderer {
 
   // Update UI with current data
   updateUI() {
-    console.log('📝 updateUI called');
+    debugLog('📝 updateUI called');
     
     // Check if we have any parsed data to display
     const ready = this.parsedData && (this.parsedData.sections || this.parsedData.vitals || this.parsedData.labs);
@@ -3046,17 +3062,17 @@ class TemplateRenderer {
     }
     
     const output = this.renderTemplate();
-    console.log('📝 Generated output length:', output?.length);
-    console.log('📝 Output preview:', output?.substring(0, 200));
+    debugLog('📝 Generated output length:', output?.length);
+    debugLog('📝 Output preview:', output?.substring(0, 200));
 
     const textArea = document.getElementById('rendered-output');
-    console.log('📝 TextArea element:', textArea);
+    debugLog('📝 TextArea element:', textArea);
 
     if (textArea) {
       textArea.value = output;
-      console.log('✅ Output written to textarea');
+      debugLog('✅ Output written to textarea');
     } else {
-      console.error('❌ rendered-output textarea not found!');
+      debugError('❌ rendered-output textarea not found!');
     }
 
     // Update template select
@@ -3098,7 +3114,7 @@ class TemplateRenderer {
       return;
     }
 
-  console.log('📊 Extracted vitals:', vitals);
+  debugLog('📊 Extracted vitals:', vitals);
 
     // Map vitals to input fields
     if (vitals.bp) {
@@ -3140,7 +3156,7 @@ class TemplateRenderer {
       if (weightInput) weightInput.value = weightStr;
     }
 
-    console.log('✅ Vitals populated to UI inputs');
+    debugLog('✅ Vitals populated to UI inputs');
   }
 
   // Populate labs table from parsed data
@@ -3153,7 +3169,7 @@ class TemplateRenderer {
     // Try to extract labs from sections
     const labsSection = this.normalizedSections.LABS || this.parsedData.sections.labs || this.parsedData.sections.LABS;
     if (!labsSection) {
-      console.info('🔬 No LABS section text found in normalized/sections; labs UI not updated');
+      debugLog('🔬 No LABS section text found in normalized/sections; labs UI not updated');
       return;
     }
 
@@ -3162,16 +3178,16 @@ class TemplateRenderer {
     if (typeof window.extractLabs === 'function') {
       labs = window.extractLabs(labsSection);
     } else {
-      console.warn('extractLabs helper not available');
+      debugWarn('extractLabs helper not available');
       return;
     }
 
-  console.log('🔬 Extracted labs:', labs);
+  debugLog('🔬 Extracted labs:', labs);
 
     // Get lab table body
     const tbody = document.getElementById('tbl-labs');
     if (!tbody) {
-      console.warn('Lab table body not found');
+      debugWarn('Lab table body not found');
       return;
     }
 
@@ -3211,7 +3227,7 @@ class TemplateRenderer {
       }
     });
 
-    console.log(`✅ Labs populated to table (updated ${updatedCount} row(s))`);
+    debugLog(`✅ Labs populated to table (updated ${updatedCount} row(s))`);
   }
 
   // Populate RAG diagnostics panel
@@ -3265,7 +3281,7 @@ class TemplateRenderer {
     // Try AI paraphrasing first (fail-soft)
     try {
       const AI_SERVER_URL = 'http://127.0.0.1:8081';
-      console.log('[AI Paraphrase] Calling paraphrase endpoint...');
+      debugLog('[AI Paraphrase] Calling paraphrase endpoint...');
 
       // Create abort controller for timeout
       const controller = new AbortController();
@@ -3283,18 +3299,18 @@ class TemplateRenderer {
       if (response.ok) {
         const result = await response.json();
         if (result.paraphrased && result.paraphrased.length > 20) {
-          console.log('[AI Paraphrase] ✅ Success');
+          debugLog('[AI Paraphrase] ✅ Success');
           return result.paraphrased;
         }
       } else {
-        console.warn('[AI Paraphrase] Server returned error:', response.status);
+        debugWarn('[AI Paraphrase] Server returned error:', response.status);
       }
     } catch (error) {
-      console.warn('[AI Paraphrase] Failed, falling back to rules:', error?.message || String(error));
+      debugWarn('[AI Paraphrase] Failed, falling back to rules:', error?.message || String(error));
     }
 
     // Fallback: Use existing rule-based rewriteHPI
-    console.log('[AI Paraphrase] Using rule-based fallback');
+    debugLog('[AI Paraphrase] Using rule-based fallback');
     return this.rewriteHPI(originalHPI, null);
   }
 
@@ -3395,7 +3411,7 @@ class TemplateRenderer {
     try {
       localStorage.setItem('templateRenderer_settings', JSON.stringify(settings));
     } catch (error) {
-      console.warn('Could not save settings to localStorage:', error);
+      debugWarn('Could not save settings to localStorage:', error);
     }
   }
 
@@ -3410,33 +3426,33 @@ class TemplateRenderer {
         // Don't call updateUI() on init - wait for actual parse
       }
     } catch (error) {
-      console.warn('Could not load settings from localStorage:', error);
+      debugWarn('Could not load settings from localStorage:', error);
     }
   }
 }
 
 // Initialize template renderer when DOM is ready
-console.log('🚀 Template renderer script loaded, document ready state:', document.readyState);
+debugLog('🚀 Template renderer script loaded, document ready state:', document.readyState);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('📝 Initializing template renderer via DOMContentLoaded...');
+    debugLog('📝 Initializing template renderer via DOMContentLoaded...');
     try {
       window.templateRenderer = new TemplateRenderer();
       window.TemplateRendererInitialized = true;
-      console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+      debugLog('✅ Template renderer initialized:', !!window.templateRenderer);
     } catch (e) {
-      console.error('TemplateRenderer init error', e);
+      debugError('TemplateRenderer init error', e);
     }
   });
 } else {
-  console.log('📝 Initializing template renderer immediately...');
+  debugLog('📝 Initializing template renderer immediately...');
   try {
     window.templateRenderer = new TemplateRenderer();
     window.TemplateRendererInitialized = true;
-    console.log('✅ Template renderer initialized:', !!window.templateRenderer);
+    debugLog('✅ Template renderer initialized:', !!window.templateRenderer);
   } catch (e) {
-    console.error('TemplateRenderer init error', e);
+    debugError('TemplateRenderer init error', e);
   }
 }
 

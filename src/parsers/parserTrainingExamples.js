@@ -1,3 +1,5 @@
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+
 /**
  * parserTrainingExamples.js - File-Based Parser Training
  * ========================================================
@@ -2494,7 +2496,7 @@ let cachedPatterns = null;
 function getLearnedPatterns() {
   if (!cachedPatterns) {
     cachedPatterns = learnPatternsFromExamples(TRAINING_EXAMPLES);
-    console.log('📚 Learned patterns from training examples:', cachedPatterns);
+    debugLog('📚 Learned patterns from training examples:', cachedPatterns);
   }
   return cachedPatterns;
 }
@@ -2514,16 +2516,16 @@ function checkFileSize() {
   const sizeKB = (examplesJSON.length / 1024).toFixed(2);
   const numExamples = TRAINING_EXAMPLES.length;
   
-  console.log(`📊 Parser Training Stats:
+  debugLog(`📊 Parser Training Stats:
   - ${numExamples} training examples loaded
   - ~${sizeKB} KB in memory
   `);
   
   if (examplesJSON.length > 200000) { // ~200 KB
-    console.error(`🚨 Training file is very large (${sizeKB} KB)!
+    debugError(`🚨 Training file is very large (${sizeKB} KB)!
     This may slow down page loading. Please reduce the number of examples.`);
   } else if (examplesJSON.length > 100000) { // ~100 KB
-    console.warn(`⚠️ Training file is getting large (${sizeKB} KB).
+    debugWarn(`⚠️ Training file is getting large (${sizeKB} KB).
     Consider:
     - Removing old/redundant examples
     - The parser learns quickly - 5-10 diverse examples is usually enough

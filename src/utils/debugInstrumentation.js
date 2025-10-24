@@ -1,4 +1,5 @@
 /**
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
  * Debug Instrumentation for Note Generation Flow
  * Provides call graph tracing, data shape validation, and fault detection
  *
@@ -36,40 +37,40 @@ window.trace = function (label, data, options = {}) {
   console.group(`🔍 TRACE [${timestamp}] ${label}`);
 
   // Type information
-  console.log("Type:", typeof data);
-  console.log("Is Array:", Array.isArray(data));
-  console.log("Is Null:", data === null);
-  console.log("Is Undefined:", data === undefined);
+  debugLog("Type:", typeof data);
+  debugLog("Is Array:", Array.isArray(data));
+  debugLog("Is Null:", data === null);
+  debugLog("Is Undefined:", data === undefined);
 
   // Object inspection
   if (data && typeof data === "object") {
     const keys = Object.keys(data);
-    console.log("Object Keys Count:", keys.length);
-    console.log(
+    debugLog("Object Keys Count:", keys.length);
+    debugLog(
       "Object Keys:",
       keys.slice(0, maxKeys).join(", ") + (keys.length > maxKeys ? "..." : ""),
     );
 
     if (showSample && keys.length > 0) {
-      console.log("Sample Values:");
+      debugLog("Sample Values:");
       keys.slice(0, 5).forEach((key) => {
         const value = data[key];
         const valuePreview =
           typeof value === "string" ? value.substring(0, 100) : value;
-        console.log(`  ${key}:`, valuePreview);
+        debugLog(`  ${key}:`, valuePreview);
       });
     }
   }
 
   // String inspection
   if (typeof data === "string") {
-    console.log("String Length:", data.length);
-    console.log("String Preview:", data.substring(0, 200));
+    debugLog("String Length:", data.length);
+    debugLog("String Preview:", data.substring(0, 200));
   }
 
   // Full data (collapsed)
   console.groupCollapsed("Full Data");
-  console.log(data);
+  debugLog(data);
   console.groupEnd();
 
   console.groupEnd();
@@ -125,7 +126,7 @@ window.CallGraph = {
 
     this.stack.push(node);
     if (window.isDebugMode()) {
-      console.log(`📞 CALL: ${name}`, { inputType: typeof input });
+      debugLog(`📞 CALL: ${name}`, { inputType: typeof input });
     }
     return node;
   },
@@ -136,7 +137,7 @@ window.CallGraph = {
     const node = this.stack.pop();
     node.complete(output);
     if (window.isDebugMode()) {
-      console.log(`✅ RETURN: ${node.name}`, {
+      debugLog(`✅ RETURN: ${node.name}`, {
         duration: node.getDuration() + "ms",
         outputType: typeof output,
       });
@@ -150,7 +151,7 @@ window.CallGraph = {
     const node = this.stack.pop();
     node.fail(err);
     if (window.isDebugMode()) {
-      console.error(`❌ ERROR: ${node.name}`, {
+      debugError(`❌ ERROR: ${node.name}`, {
         duration: node.getDuration() + "ms",
         error: err.message,
       });
@@ -171,10 +172,10 @@ window.CallGraph = {
     const status = node.error ? "❌" : "✅";
     const duration = node.getDuration();
 
-    console.log(`${indent}${status} ${node.name} (${duration}ms)`);
+    debugLog(`${indent}${status} ${node.name} (${duration}ms)`);
 
     if (node.error) {
-      console.log(`${indent}  Error: ${node.error.message}`);
+      debugLog(`${indent}  Error: ${node.error.message}`);
     }
 
     node.children.forEach((child) => this._printNode(child, depth + 1));
@@ -225,14 +226,14 @@ window.verifySelectors = function () {
     const found = !!element;
 
     if (found) {
-      console.log(`✅ ${id}: FOUND`, element.tagName);
+      debugLog(`✅ ${id}: FOUND`, element.tagName);
     } else {
-      console.error(`❌ ${id}: NOT FOUND (expected: ${selector})`);
+      debugError(`❌ ${id}: NOT FOUND (expected: ${selector})`);
       allFound = false;
     }
   });
 
-  console.log(
+  debugLog(
     "\n" + (allFound ? "✅ All selectors valid" : "❌ Some selectors missing"),
   );
   console.groupEnd();
@@ -252,7 +253,7 @@ window.setupErrorHandlers = function () {
   // Synchronous errors
   window.onerror = function (message, source, lineno, colno, error) {
     // Always log errors (production safety)
-    console.error("💥 GLOBAL ERROR:", {
+    debugError("💥 GLOBAL ERROR:", {
       message,
       source,
       line: lineno,
@@ -263,10 +264,10 @@ window.setupErrorHandlers = function () {
     // Verbose details only in debug mode
     if (window.isDebugMode()) {
       console.group("🔍 ERROR DETAILS");
-      console.log("Message:", message);
-      console.log("Source:", source);
-      console.log("Line:", lineno, "Column:", colno);
-      console.log("Stack:", error?.stack);
+      debugLog("Message:", message);
+      debugLog("Source:", source);
+      debugLog("Line:", lineno, "Column:", colno);
+      debugLog("Stack:", error?.stack);
       console.groupEnd();
     }
 
@@ -283,7 +284,7 @@ window.setupErrorHandlers = function () {
   // Unhandled promise rejections
   window.addEventListener("unhandledrejection", function (event) {
     // Always log rejections (production safety)
-    console.error("💥 UNHANDLED PROMISE REJECTION:", {
+    debugError("💥 UNHANDLED PROMISE REJECTION:", {
       reason: event.reason,
       promise: event.promise,
     });
@@ -291,10 +292,10 @@ window.setupErrorHandlers = function () {
     // Verbose details only in debug mode
     if (window.isDebugMode()) {
       console.group("🔍 REJECTION DETAILS");
-      console.log("Reason:", event.reason);
-      console.log("Promise:", event.promise);
+      debugLog("Reason:", event.reason);
+      debugLog("Promise:", event.promise);
       if (event.reason?.stack) {
-        console.log("Stack:", event.reason.stack);
+        debugLog("Stack:", event.reason.stack);
       }
       console.groupEnd();
     }
@@ -308,7 +309,7 @@ window.setupErrorHandlers = function () {
   });
 
   if (window.isDebugMode()) {
-    console.log("✅ Global error handlers installed (DEBUG mode enabled)");
+    debugLog("✅ Global error handlers installed (DEBUG mode enabled)");
   }
 };
 
@@ -319,16 +320,16 @@ window.setupErrorHandlers = function () {
 window.safeParse = function (stageName, fn, input) {
   try {
     if (window.isDebugMode()) {
-      console.log(`🔧 Starting stage: ${stageName}`);
+      debugLog(`🔧 Starting stage: ${stageName}`);
     }
     const result = fn(input);
     if (window.isDebugMode()) {
-      console.log(`✅ Completed stage: ${stageName}`);
+      debugLog(`✅ Completed stage: ${stageName}`);
     }
     return result;
   } catch (error) {
     // Always log errors (production safety)
-    console.error(`❌ Failed stage: ${stageName}`, {
+    debugError(`❌ Failed stage: ${stageName}`, {
       error: error.message,
       stack: error.stack,
       inputSample: typeof input === "string" ? input.substring(0, 100) : input,
@@ -375,7 +376,7 @@ window.validateSchema = function (
 
   // Array check (usually not expected for parser output)
   if (Array.isArray(data) && window.isDebugMode()) {
-    console.warn(`[${stageName}] Output is an array (might be unexpected)`);
+    debugWarn(`[${stageName}] Output is an array (might be unexpected)`);
   }
 
   // Empty check
@@ -388,7 +389,7 @@ window.validateSchema = function (
   const missingKeys = requiredKeys.filter((key) => !(key in data));
   if (missingKeys.length > 0) {
     // Always log validation failures
-    console.error(`[${stageName}] Schema validation failed:`, {
+    debugError(`[${stageName}] Schema validation failed:`, {
       missingKeys,
       actualKeys: keys,
       dataSample: JSON.stringify(data).substring(0, 200),
@@ -399,7 +400,7 @@ window.validateSchema = function (
   }
 
   if (window.isDebugMode()) {
-    console.log(`✅ Schema valid for stage: ${stageName}`, {
+    debugLog(`✅ Schema valid for stage: ${stageName}`, {
       keys: keys.length,
     });
   }
@@ -439,8 +440,8 @@ window.compareShapes = function (expected, actual, label = "Data") {
 
   console.group(`📊 Shape Comparison: ${label}`);
 
-  console.log("Expected Type:", typeof expected);
-  console.log("Actual Type:", typeof actual);
+  debugLog("Expected Type:", typeof expected);
+  debugLog("Actual Type:", typeof actual);
 
   if (typeof expected === "object" && typeof actual === "object") {
     const expectedKeys = Object.keys(expected || {});
@@ -450,11 +451,11 @@ window.compareShapes = function (expected, actual, label = "Data") {
     const extraKeys = actualKeys.filter((k) => !expectedKeys.includes(k));
     const commonKeys = expectedKeys.filter((k) => actualKeys.includes(k));
 
-    console.log("Expected Keys:", expectedKeys);
-    console.log("Actual Keys:", actualKeys);
-    console.log("Missing Keys:", missingKeys.length ? missingKeys : "None");
-    console.log("Extra Keys:", extraKeys.length ? extraKeys : "None");
-    console.log("Common Keys:", commonKeys);
+    debugLog("Expected Keys:", expectedKeys);
+    debugLog("Actual Keys:", actualKeys);
+    debugLog("Missing Keys:", missingKeys.length ? missingKeys : "None");
+    debugLog("Extra Keys:", extraKeys.length ? extraKeys : "None");
+    debugLog("Common Keys:", commonKeys);
 
     // Compare values for common keys
     commonKeys.forEach((key) => {
@@ -462,7 +463,7 @@ window.compareShapes = function (expected, actual, label = "Data") {
       const actualType = typeof actual[key];
 
       if (expectedType !== actualType) {
-        console.warn(`Type mismatch for key "${key}":`, {
+        debugWarn(`Type mismatch for key "${key}":`, {
           expected: expectedType,
           actual: actualType,
         });
@@ -537,7 +538,7 @@ window.waitForCriticalElements = async function () {
   ];
 
   if (window.isDebugMode()) {
-    console.log("⏳ Waiting for critical elements...");
+    debugLog("⏳ Waiting for critical elements...");
   }
 
   try {
@@ -545,12 +546,12 @@ window.waitForCriticalElements = async function () {
       criticalSelectors.map((selector) => waitForElement(selector, 5000)),
     );
     if (window.isDebugMode()) {
-      console.log("✅ All critical elements ready");
+      debugLog("✅ All critical elements ready");
     }
     return true;
   } catch (error) {
     // Always log failures
-    console.error("❌ Failed to find critical elements:", error.message);
+    debugError("❌ Failed to find critical elements:", error.message);
     return false;
   }
 };
@@ -565,11 +566,11 @@ window.ensureHandlersReady = async function (attachFunction) {
 
   if (typeof attachFunction === "function") {
     if (window.isDebugMode()) {
-      console.log("🔗 Attaching event handlers...");
+      debugLog("🔗 Attaching event handlers...");
     }
     attachFunction();
     if (window.isDebugMode()) {
-      console.log("✅ Event handlers attached");
+      debugLog("✅ Event handlers attached");
     }
   }
 };
@@ -584,10 +585,10 @@ window.ensureHandlersReady = async function (attachFunction) {
  */
 window.initDebugInstrumentation = function () {
   if (window.isDebugMode()) {
-    console.log(
+    debugLog(
       "🔧 Initializing debug instrumentation (DEBUG mode enabled)...",
     );
-    console.log('💡 To disable: localStorage.removeItem("DEBUG")');
+    debugLog('💡 To disable: localStorage.removeItem("DEBUG")');
   }
 
   // Setup error handlers (always active)
@@ -614,25 +615,25 @@ window.initDebugInstrumentation = function () {
     ensureHandlersReady: window.ensureHandlersReady,
     enable: () => {
       localStorage.setItem("DEBUG", "true");
-      console.log("✅ Debug mode enabled. Reload page to see verbose logs.");
+      debugLog("✅ Debug mode enabled. Reload page to see verbose logs.");
     },
     disable: () => {
       localStorage.removeItem("DEBUG");
-      console.log("✅ Debug mode disabled. Reload page to apply.");
+      debugLog("✅ Debug mode disabled. Reload page to apply.");
     },
     status: () => {
       const enabled = window.isDebugMode();
-      console.log(`Debug mode: ${enabled ? "✅ ENABLED" : "❌ DISABLED"}`);
+      debugLog(`Debug mode: ${enabled ? "✅ ENABLED" : "❌ DISABLED"}`);
       if (!enabled) {
-        console.log("💡 Enable with: window.debug.enable()");
+        debugLog("💡 Enable with: window.debug.enable()");
       }
     },
   };
 
   if (window.isDebugMode()) {
-    console.log("✅ Debug instrumentation ready");
-    console.log("💡 Use window.debug.* for debugging utilities");
-    console.log("💡 Disable with: window.debug.disable()");
+    debugLog("✅ Debug instrumentation ready");
+    debugLog("💡 Use window.debug.* for debugging utilities");
+    debugLog("💡 Disable with: window.debug.disable()");
   }
 };
 

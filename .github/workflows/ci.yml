@@ -157,6 +157,37 @@ jobs:
           echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
 
+    # ===================================================================
+  # OCR DIAGNOSTIC CHECK
+  # ===================================================================
+
+  ocr-check:
+    name: OCR Diagnostic Check
+    runs-on: ubuntu-latest
+    needs: ci
+    if: success() # Only run if CI passes
+    permissions:
+      id-token: write # Required for Azure login
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: 🔐 Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 🖼️ Run OCR Diagnostic
+        env:
+          AZURE_STORAGE_ACCOUNT: cardiologysuitepub
+          AZURE_STORAGE_CONTAINER: edu-content
+          AZURE_BLOB_NAME: education/Antibiotics_First_Line_Treatments.pdf
+          AZURE_RESOURCE_GROUP: cardiologysuite
+          AZURE_VISION_ENDPOINT: https://cardiologysuite-ocr.cognitiveservices.azure.com
+          AZURE_VISION_KEY: ${{ secrets.AZURE_VISION_KEY }}
+        run: pwsh scripts/ocr-vision-check.ps1
+
   # Optional: Add annotations for common errors
   annotate-errors:
     name: Annotate Errors

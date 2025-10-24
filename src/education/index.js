@@ -14,6 +14,8 @@
 //
 // ============================================================================
 
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+
 /**
  * Education Module - Educational Content Manager
  *
@@ -36,15 +38,15 @@ export class EducationModule {
   async init() {
     if (this.initialized) return;
 
-    console.log("📚 Education Module: Initializing...");
+    debugLog("📚 Education Module: Initializing...");
 
     try {
       // Load available resources
       await this.loadResourceIndex();
       this.initialized = true;
-      console.log("✅ Education Module: Ready");
+      debugLog("✅ Education Module: Ready");
     } catch (error) {
-      console.error("❌ Education Module: Initialization failed", error);
+      debugError("❌ Education Module: Initialization failed", error);
     }
   }
 

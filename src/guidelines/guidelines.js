@@ -9,8 +9,9 @@ import {
   sanitizeDiagnosesList,
   isDiagnosisVisible,
 } from "../utils/diagnosisSanitizer.js";
+import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 
-console.log("🎓 Initializing Guidelines & Teaching page...");
+debugLog("🎓 Initializing Guidelines & Teaching page...");
 
 /**
  * Load diagnosis data from JSON file
@@ -22,14 +23,14 @@ async function loadDiagnosisData() {
       throw new Error(`Failed to load diagnosis data: ${response.status}`);
     }
     const database = await response.json();
-    console.log(
+    debugLog(
       "✅ Loaded diagnosis database with",
       database.diagnoses.length,
       "diagnoses",
     );
     return database;
   } catch (error) {
-    console.error("❌ Error loading diagnosis data:", error);
+    debugError("❌ Error loading diagnosis data:", error);
     return null;
   }
 }
@@ -157,7 +158,7 @@ function hideFilteredDiagnosisItems() {
   });
 
   if (hiddenCount > 0) {
-    console.debug(
+    debugLog(
       `[sidebar] Hid ${hiddenCount} non-medical items from static HTML`,
     );
   }
@@ -171,13 +172,13 @@ function initializeTheme() {
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("theme-light");
-      console.log("Theme toggled");
+      debugLog("Theme toggled");
     });
   }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-  console.log("✅ Guidelines page DOM loaded, initializing...");
+  debugLog("✅ Guidelines page DOM loaded, initializing...");
 
   // Initialize diagnosis sanitizer (preload whitelist/blacklist)
   await initDiagnosisSanitizer();
@@ -194,14 +195,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   initializeGuidelinesSearch();
   initializeGuidelinesTabs();
 
-  console.log("✅ Guidelines page initialized");
+  debugLog("✅ Guidelines page initialized");
   // Attach click handlers to static diagnosis list (if present)
   attachStaticDiagnosisClickHandlers();
 
   // SIMPLE FIX: Add direct click handlers to all diagnosis items
   setTimeout(() => {
     const items = document.querySelectorAll(".guidelines-dx-item");
-    console.log(
+    debugLog(
       `🔧 SIMPLE FIX: Adding direct click handlers to ${items.length} items`,
     );
 
@@ -214,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       // Add simple click handler
       newItem.addEventListener("click", function () {
-        console.log("✅ DIRECT CLICK DETECTED:", this.textContent);
+        debugLog("✅ DIRECT CLICK DETECTED:", this.textContent);
 
         // Simple visual feedback
         document
@@ -233,12 +234,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           title.textContent = this.textContent + " - Clinical Guidelines";
       });
 
-      console.log(
+      debugLog(
         `   ✅ Handler added to: ${newItem.textContent.substring(0, 30)}...`,
       );
     });
 
-    console.log("🎉 SIMPLE FIX: All click handlers added successfully");
+    debugLog("🎉 SIMPLE FIX: All click handlers added successfully");
   }, 2000);
 
   // Observe sidebar for DOM changes (e.g., static HTML injection)
@@ -248,7 +249,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       attachStaticDiagnosisClickHandlers();
     });
     observer.observe(dxList, { childList: true, subtree: false });
-    console.log("👁️ MutationObserver attached to guidelines-dx-list");
+    debugLog("👁️ MutationObserver attached to guidelines-dx-list");
   }
 });
 
@@ -256,20 +257,20 @@ document.addEventListener("DOMContentLoaded", async function () {
  * Attach click event listeners to static .guidelines-dx-item elements (for static HTML injection)
  */
 function attachStaticDiagnosisClickHandlers() {
-  console.log(
+  debugLog(
     "🔗 Attempting to attach click handlers to static diagnosis items...",
   );
 
   // Only run if the list is already present and populated (static HTML)
   const dxList = document.getElementById("guidelines-dx-list");
   if (!dxList) {
-    console.error("❌ guidelines-dx-list element not found!");
+    debugError("❌ guidelines-dx-list element not found!");
     return;
   }
 
   const items = dxList.querySelectorAll(".guidelines-dx-item");
   if (!items.length) {
-    console.warn("⚠️ No .guidelines-dx-item elements found in the list");
+    debugWarn("⚠️ No .guidelines-dx-item elements found in the list");
     return;
   }
 
@@ -277,23 +278,23 @@ function attachStaticDiagnosisClickHandlers() {
   items.forEach((item, index) => {
     // Prevent duplicate handlers
     if (item._guidelinesClickAttached) {
-      console.log(`↩️ Item ${index + 1} already has click handler, skipping`);
+      debugLog(`↩️ Item ${index + 1} already has click handler, skipping`);
       return;
     }
 
     item._guidelinesClickAttached = true;
     item.addEventListener("click", () => {
-      console.log("🖱️ Diagnosis item clicked:", item.textContent);
+      debugLog("🖱️ Diagnosis item clicked:", item.textContent);
 
       const diagnosisId = item.dataset.diagnosis;
       if (!diagnosisId) {
-        console.error("❌ No data-diagnosis attribute found on clicked item");
+        debugError("❌ No data-diagnosis attribute found on clicked item");
         return;
       }
 
       const diagnosis = DIAGNOSES.find((d) => d.id === diagnosisId);
       if (diagnosis) {
-        console.log("✅ Selected diagnosis for guidelines:", diagnosis.name);
+        debugLog("✅ Selected diagnosis for guidelines:", diagnosis.name);
 
         // Add visual feedback
         item.style.background = "rgba(220, 38, 38, 0.2)";
@@ -303,7 +304,7 @@ function attachStaticDiagnosisClickHandlers() {
 
         setActiveGuidelinesDiagnosis(diagnosis);
       } else {
-        console.error(
+        debugError(
           `❌ Diagnosis not found for id: "${diagnosisId}". Available IDs:`,
           DIAGNOSES.map((d) => d.id).slice(0, 5),
         );
@@ -311,12 +312,12 @@ function attachStaticDiagnosisClickHandlers() {
     });
 
     attachedCount++;
-    console.log(
+    debugLog(
       `✅ Attached click handler to item ${index + 1}: "${item.textContent}" (${item.dataset.diagnosis})`,
     );
   });
 
-  console.log(
+  debugLog(
     `🎉 Successfully attached click handlers to ${attachedCount}/${items.length} diagnosis items`,
   );
 }
@@ -403,7 +404,7 @@ async function setActiveGuidelinesDiagnosis(diagnosis) {
   // Load comprehensive diagnosis data
   const database = await loadDiagnosisData();
   if (!database) {
-    console.error("❌ Failed to load diagnosis database");
+    debugError("❌ Failed to load diagnosis database");
     return;
   }
 
@@ -416,7 +417,7 @@ async function setActiveGuidelinesDiagnosis(diagnosis) {
     updateGuidelinesContent(detailedDiagnosis);
     updateMetadata(detailedDiagnosis);
   } else {
-    console.warn(`⚠️ No detailed data found for ${diagnosis.id}`);
+    debugWarn(`⚠️ No detailed data found for ${diagnosis.id}`);
     showPlaceholderContent(diagnosis);
   }
 }
