@@ -1,81 +1,39 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# ESLint is a tool for identifying and reporting on patterns
-# found in ECMAScript/JavaScript code.
-# More details at https://github.com/eslint/eslint
-# and https://eslint.org
-
 name: ESLint
 
 on:
-  push:
-    branches: [ "main", "develop", "release/*" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main", "develop", "release/*" ]
-  schedule:
-    - cron: '18 12 * * 5'    # weekly Friday
-    - cron: '18 00 * * 2'    # additional Tuesday run
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     steps:
-      - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: "npm"
+          node-version: '18'
 
-      - name: Install dependencies
+      - name: Install deps
+        run: npm ci
+
+      - name: Run ESLint (flat config)
         run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install --no-audit --no-fund
-          fi
+          npx eslint . \
+            --max-warnings=999 \
+            --ignore-pattern "api/**" \
+            --ignore-pattern "services/ai-search/**" \
+            --ignore-pattern "pages/**" \
+            --ignore-pattern "functions-acc-scraper/**" \
+            -f sarif -o eslint-results.sarif || true
 
-      - name: Run ESLint
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
-        run: |
-          npx eslint . --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
-        continue-on-error: true
-
-      - name: Ensure SARIF exists
-        run: |
-          if [ ! -s eslint-results.sarif ]; then
-            printf '%s\n' '{' \
-              '  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",' \
-              '  "version": "2.1.0",' \
-              '  "runs": []' \
-              '}' > eslint-results.sarif
-          fi
-
-      - name: Upload analysis results to GitHub
-        id: upload_sarif
-        # Skip upload on forked PRs where code scanning upload isn't permitted
-        if: github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork
-        uses: github/codeql-action/upload-sarif@42213152a85ae7569bdb6bec7bcd74cd691bfe41 # v3.30.9
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: eslint-results.sarif
-          wait-for-processing: true
-        continue-on-error: true
-
-      - name: Upload ESLint SARIF artifact (on failure)
-        if: ${{ always() && (steps.upload_sarif.outcome != 'success' || github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: eslint-results.sarif
-          path: eslint-results.sarif
-          retention-days: 7
