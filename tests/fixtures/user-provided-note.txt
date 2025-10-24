@@ -1,0 +1,253 @@
+Patient is an 86-year-old male presenting with complain of generalized weakness and nausea and vomiting for the last 4-5 days.  Patient states 2 weeks ago he had a AV fistula placed to the left upper extremity secondary to impending dialysis.  Patient denies any abdominal pain.  Denies any chest pain.  No shortness of breath.
+
+ 
+ 
+Review of patient's allergies indicates:
+Allergen	Reactions
+•	Oxycodone-acetaminophen	Rash
+ 
+Past Medical History:
+Diagnosis	Date
+•	Anemia	 
+•	Anxiety	 
+•	Arthritis	 
+•	BPH (benign prostatic hyperplasia)	 
+•	Cancer	 
+ 	hx of kidney cancer
+•	Chronic kidney disease, stage IV (severe)	 
+•	CKD (chronic kidney disease), stage IV	 
+•	CVA (cerebral vascular accident)	10/2020
+•	Diverticulitis	 
+•	GERD (gastroesophageal reflux disease)	 
+•	HLD (hyperlipidemia)	 
+•	HTN (hypertension)	 
+•	OSA (obstructive sleep apnea)	 
+ 	uses auto PAP
+ 
+Past Surgical History:
+Procedure	Laterality	Date
+•	AV FISTULA PLACEMENT	Left	10/6/2025
+ 	Procedure: CREATION, AV FISTULA;  Surgeon: Ghanami, Racheed J., MD;  Location: OLGH OR;  Service: Peripheral Vascular;  Laterality: Left;  supraclavicular block, left brachiocephalic fistula creation
+•	BACK SURGERY	 	1999
+•	CARPAL TUNNEL RELEASE	Bilateral	 
+ 	hands
+•	COLECTOMY, SIGMOID	 	2015
+•	COLONOSCOPY	 	 
+•	EYE SURGERY	Bilateral	 
+ 	cataract w/lens implant
+•	INGUINAL HERNIA REPAIR	Left	 
+•	LUMBAR SPINE SURGERY	 	 
+•	PARTIAL NEPHRECTOMY	Left	2016
+•	TOTAL KNEE ARTHROPLASTY	Right	 
+•	TOTAL SHOULDER ARTHROPLASTY	Right	2017
+•	VENTRAL HERNIA REPAIR	 	2025
+ 
+No family history on file.
+[Social History]
+
+[Social History]
+Tobacco Use
+•	Smoking status:	Never
+•	Smokeless tobacco:	Never
+Vaping Use
+•	Vaping status:	Never Used
+Substance Use Topics
+•	Alcohol use:	Not Currently
+•	Drug use:	Never
+
+Review of Systems 
+All other systems reviewed and are negative.
+
+ 
+Physical Exam
+ 
+Initial Vitals [10/20/25 1224]
+BP	Pulse	Resp	Temp	SpO2
+(!) 170/80	87	(!) 22	97.4 °F (36.3 °C)	(!) 93 %
+ 
+MAP	 	 	 	 
+--	 	 	 	 
+ 
+Physical Exam
+ 
+Nursing note and vitals reviewed.
+Constitutional: He appears well-developed and well-nourished. 
+HENT: 
+Head: Normocephalic and atraumatic. 
+Neck: Neck supple. 
+Normal range of motion.
+Cardiovascular:  Normal rate, regular rhythm and normal heart sounds.         
+Pulmonary/Chest: Breath sounds normal. 
+Abdominal: Abdomen is soft. He exhibits no distension. There is no abdominal tenderness. There is no guarding. 
+Musculoskeletal:    
+   General: Normal range of motion. 
+   Cervical back: Normal range of motion and neck supple. 
+ 
+Neurological: He is alert and oriented to person, place, and time. He has normal strength. 
+Skin: Skin is warm. 
+Psychiatric: He has a normal mood and affect. Thought content normal. 
+
+ 
+ 
+ED Course
+Procedures
+Labs Reviewed
+COMPREHENSIVE METABOLIC PANEL - Abnormal
+    Result	Value	
+ 	Sodium	137 	 
+ 	Potassium	4.4 	 
+ 	Chloride	102 	 
+ 	CO2	23 	 
+ 	Glucose	102 	 
+ 	Blood Urea Nitrogen	72.8 (*)	 
+ 	Creatinine	4.42 (*)	 
+ 	Calcium	9.1 	 
+ 	Protein Total	7.2 	 
+ 	Albumin	3.2 (*)	 
+ 	Globulin	4.0 (*)	 
+ 	Albumin/Globulin Ratio	0.8 (*)	 
+ 	Bilirubin Total	0.7 	 
+ 	ALP	95 	 
+ 	ALT	164 (*)	 
+ 	AST	125 (*)	 
+ 	eGFR	12 	 
+ 	Anion Gap	12.0 	 
+ 	BUN/Creatinine Ratio	16 	 
+TROPONIN I HIGH SENSITIVITY - Abnormal
+ 	Troponin High Sensitive	168 (*)	 
+URINALYSIS, REFLEX TO URINE CULTURE - Abnormal
+ 	Color, UA	Light-Yellow 	 
+ 	Appearance, UA	Clear 	 
+ 	Specific Gravity, UA	1.017 	 
+ 	pH, UA	6.0 	 
+ 	Protein, UA	3+ (*)	 
+ 	Glucose, UA	3+ (*)	 
+ 	Ketones, UA	Negative 	 
+ 	Blood, UA	2+ (*)	 
+ 	Bilirubin, UA	Negative 	 
+ 	Urobilinogen, UA	Normal 	 
+ 	Nitrites, UA	Negative 	 
+ 	Leukocyte Esterase, UA	Negative 	 
+ 	RBC, UA	0-5 	 
+ 	WBC, UA	0-5 	 
+ 	Bacteria, UA	None Seen 	 
+ 	Squamous Epithelial Cells, UA	None Seen 	 
+ 	Mucous, UA	Trace (*)	 
+CBC WITH DIFFERENTIAL - Abnormal
+ 	WBC	13.90 (*)	 
+ 	RBC	4.29 (*)	 
+ 	Hgb	12.9 (*)	 
+ 	Hct	40.7 (*)	 
+ 	MCV	94.9 (*)	 
+ 	MCH	30.1 	 
+ 	MCHC	31.7 (*)	 
+ 	RDW	14.8 	 
+ 	Platelet	279 	 
+ 	MPV	10.0 	 
+ 	Neut %	82.0 	 
+ 	Lymph %	8.5 	 
+ 	Mono %	6.0 	 
+ 	Eos %	2.4 	 
+ 	Basophil %	0.6 	 
+ 	Imm Grans %	0.5 	 
+ 	Neut #	11.40 (*)	 
+ 	Lymph #	1.18 	 
+ 	Mono #	0.83 	 
+ 	Eos #	0.33 	 
+ 	Baso #	0.09 	 
+ 	Imm Gran #	0.07 (*)	 
+ 	NRBC%	0.2 	 
+LIPASE - Normal
+ 	Lipase Level	47 	 
+CBC W/ AUTO DIFFERENTIAL
+ 	Narrative: 
+ 	The following orders were created for panel order CBC auto differential.
+Procedure                               Abnormality         Status                   
+---------                               -----------         ------                   
+CBC with Differential[1348004827]       Abnormal            Final result             
+ 
+Please view results for these tests on the individual orders.
+TROPONIN I HIGH SENSITIVITY
+ 
+EKG Readings: (Independently Interpreted) 
+Initial Reading: No STEMI. Rhythm: Normal Sinus Rhythm. Heart Rate: 83. Ectopy: PVCs. ST Segments: Normal ST Segments. T Waves: Normal. Axis: Left Axis Deviation. 
+
+ECG Results 
+ 
+ 	 
+ 
+ 	
+EKG 12-lead (Final result) 
+ 
+
+ 	
+ 	Collection Time	Result Time	QRS Duration	OHS QTC Calculation
+ 	10/20/25 12:25:32	10/20/25 12:40:52	112	484
+ 
+
+ 
+
+ 
+
+ 	 
+ 
+
+ 	
+Final result by Interface, Lab In Hlseven (10/20/25 12:41:00)
+ 	
+ 
+
+
+
+ 
+
+ 	
+Narrative:
+ 	
+Test Reason : R53.1,
+ 
+Vent. Rate :  83 BPM     Atrial Rate :  83 BPM
+   P-R Int : 232 ms          QRS Dur : 112 ms
+    QT Int : 412 ms       P-R-T Axes :    -43  89 degrees
+  QTcB Int : 484 ms
+ 
+Sinus rhythm with 1st degree A-V block with occasional Premature
+ventricular complexes
+Left axis deviation
+Minimal voltage criteria for LVH, may be normal variant ( Cornell product )
+Inferior infarct ,age undetermined
+Cannot rule out Anterior infarct ,age undetermined
+Abnormal ECG
+When compared with ECG of 17-Oct-2025 18:42,
+Sinus rhythm has replaced Junctional rhythm
+Minimal criteria for Anterior infarct are now Present
+Inferior infarct is now Present
+Confirmed by Gurdin, William (3770) on 10/20/2025 12:40:49 PM
+ 
+Referred By:            Confirmed By: William Gurdin
+
+
+
+ 
+
+ 	 
+ 
+
+ 
+
+ 
+ 
+ 
+Imaging Results 
+None
+ 
+ 
+ 
+Medications
+0.9% NaCl infusion (has no administration in time range)
+ondansetron injection 4 mg (has no administration in time range)
+ 
+
+
+ 
+  
