@@ -496,8 +496,12 @@ class TemplateRenderer {
     }
 
     // === ACUTE CORONARY SYNDROMES (Highest Priority) ===
-    if (/STEMI|ST[- ]elevation myocardial infarction/i.test(fullText)) {
-      const location = fullText.match(/\b(anterior|inferior|lateral|inferolateral|anterolateral|posterior|septal)\b/i);
+    // Only detect STEMI if explicitly mentioned OR if ST elevation is present WITHOUT "No STEMI" or "age undetermined"
+    const hasNoStemi = /No STEMI|ruled out.*?STEMI|r\/o.*?STEMI.*?negative/i.test(fullText);
+    const hasOldInfarct = /age undetermined|old infarct|prior infarct|remote infarct/i.test(fullText);
+    
+    if (!hasNoStemi && !hasOldInfarct && /(?:acute\s+)?STEMI|(?:acute\s+)?ST[- ]elevation myocardial infarction/i.test(fullText)) {
+      const location = fullText.match(/\b(anterior|inferior|lateral|inferolateral|anterolateral|posterior|septal)\b.*?(?:STEMI|infarct)/i);
       assessments.push(location ? `STEMI, ${location[1]}` : 'STEMI');
 
       // PCI details
@@ -1361,16 +1365,22 @@ class TemplateRenderer {
     const primarySymptom = this.identifyPrimarySymptom(hpiAnalysis);
     if (primarySymptom) {
       rewrittenHPI += this.buildSymptomNarrative(primarySymptom, hpiAnalysis);
-    } else {
-      // Default template for chest pain
-      rewrittenHPI += `The patient reported that the CP started ${hpiAnalysis.timing || '2 days'} (timing) prior to admission and was located to his ${hpiAnalysis.location || 'mid-sternal chest wall'} (location). The pain was described as a "${hpiAnalysis.quality || 'stabbing'}" (quality) sensation and lasted for about ${hpiAnalysis.duration || '20 minutes'} (duration) without identifying factors. The patient rated it ${hpiAnalysis.severity || '8 out of 10'} on a verbal assessment scale (severity). `;
+    } else if (hpiAnalysis.timing || hpiAnalysis.location || hpiAnalysis.quality || hpiAnalysis.duration || hpiAnalysis.severity) {
+      // Only include symptom details if they were actually found in the note
+      rewrittenHPI += `The patient reported that the symptoms started `;
+      if (hpiAnalysis.timing) rewrittenHPI += `${hpiAnalysis.timing} (timing) `;
+      rewrittenHPI += `prior to admission`;
+      if (hpiAnalysis.location) rewrittenHPI += ` and were located to ${hpiAnalysis.location} (location)`;
+      rewrittenHPI += `. `;
+      if (hpiAnalysis.quality) rewrittenHPI += `The symptoms were described as "${hpiAnalysis.quality}" (quality) `;
+      if (hpiAnalysis.duration) rewrittenHPI += `and lasted for about ${hpiAnalysis.duration} (duration) `;
+      if (hpiAnalysis.severity) rewrittenHPI += `with severity rated as ${hpiAnalysis.severity} on a verbal assessment scale (severity)`;
+      rewrittenHPI += `. `;
     }
 
     // Associated symptoms
     if (hpiAnalysis.associatedSymptoms.length > 0) {
       rewrittenHPI += `He reported that he had ${hpiAnalysis.associatedSymptoms.join(', ')} associated with the primary complaint (associated symptoms). `;
-    } else {
-      rewrittenHPI += `He reported that he had some SOB and Nausea associated with the primary complaint (associated symptoms). `;
     }
 
     // Emergency department course
@@ -1379,16 +1389,12 @@ class TemplateRenderer {
       if (hpiAnalysis.edCourse.length > 0) {
         rewrittenHPI += `the patient ${hpiAnalysis.edCourse.join(', ')} and `;
       }
-      rewrittenHPI += `had a battery of laboratory and diagnostic studies which revealed `;
+      rewrittenHPI += `had a battery of laboratory and diagnostic studies`;
 
       if (hpiAnalysis.diagnostics.length > 0) {
-        rewrittenHPI += hpiAnalysis.diagnostics.join(', ');
-      } else {
-        rewrittenHPI += `a negative troponin and an EKG with T-wave inversions in the lateral leads`;
+        rewrittenHPI += ` which revealed ${hpiAnalysis.diagnostics.join(', ')}`;
       }
       rewrittenHPI += ` (sentence about what was discovered in the ER). `;
-    } else {
-      rewrittenHPI += `In the ER he had a battery of laboratory and diagnostic studies which revealed a negative troponin and an EKG with T-wave inversions in the lateral leads (sentence about what was discovered in the ER). `;
     }
 
     // Admission reasoning
