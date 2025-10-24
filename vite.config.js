@@ -22,11 +22,22 @@ export default defineConfig({
   server: {
     port: 5173,
     open: false,
+    // Add helpful security and caching headers in dev to silence common warnings
+    headers: {
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      // Vite does not set x-powered-by; Five Server might. This header prevents sniffing issues.
+      // Note: Some headers (like removing x-powered-by) are server-specific and cannot be unset here.
+    },
   },
 
   // Preview config (for testing build)
   preview: {
     port: 5173,
     open: false,
+    headers: {
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+    },
   },
 });
