@@ -58,7 +58,13 @@ export function clearRequestId(): void {
  * Get current log level from environment
  */
 function getLogLevel(): LogLevel {
-  const level = process.env.LOG_LEVEL || 'INFO';
+  // why: browser build has no `process`; support Vite/webpack/env and default safely
+  const fromEnv =
+    (globalThis as any)?.LOG_LEVEL ??
+    (import.meta !== undefined && (import.meta as any)?.env?.VITE_LOG_LEVEL) ??
+    (typeof process !== 'undefined' && (process as any)?.env?.LOG_LEVEL) ??
+    'info';
+  const level = fromEnv;
   switch (level.toUpperCase()) {
     case 'ERROR': return LogLevel.ERROR;
     case 'WARN': return LogLevel.WARN;

@@ -8,6 +8,11 @@ import { debugLog, debugWarn, debugError } from "../utils/logger.js";
 
 /* eslint-disable no-undef */
 
+// why: guard referenced global used by window.onerror
+window.debugError = window.debugError || function (...args) {
+  try { console.error('[debugError]', ...args); } catch (_) {}
+};
+
 // ============================================================================
 // DEBUG MODE CHECK
 // ============================================================================
