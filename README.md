@@ -1,4 +1,5 @@
 [![OCR Check](https://github.com/jmartinsamson-cmd/CardiologySuiteApp_vNext/actions/workflows/ocr-check.yml/badge.svg)](https://github.com/jmartinsamson-cmd/CardiologySuiteApp_vNext/actions/workflows/ocr-check.yml)
+[![Uptime Report](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fjmartinsamson-cmd.github.io%2FCardiologySuiteApp_vNext%2Fuptime.json&query=status&label=Uptime)](https://jmartinsamson-cmd.github.io/CardiologySuiteApp_vNext/uptime.html)
 
 # 🫀 CardiologySuiteApp vNext
 

@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2025-10-24T14:35:25.720Z",
+  "period": "7 days",
+  "status": "up",
+  "uptimePercent": 0,
+  "avgP95": 0,
+  "totalRuns": 0,
+  "successfulRuns": 0,
+  "shields": {
+    "statusShield": "https://img.shields.io/badge/Uptime-UP-brightgreen",
+    "p95Shield": "https://img.shields.io/badge/P95-0ms-brightgreen",
+    "uptimeShield": "https://img.shields.io/badge/Uptime-0.0%25-red"
+  },
+  "recentRuns": []
+}
