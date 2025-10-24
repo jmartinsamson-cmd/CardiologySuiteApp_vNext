@@ -71,6 +71,7 @@ export default [
   // JS files - no TS rules, disable any TS rules that might be inherited
   {
     files: ["**/*.{js,mjs,cjs}"],
+    plugins: {},  // Explicitly no plugins for JS files
     languageOptions: {
       globals: browserAndNodeGlobals
     },
@@ -80,10 +81,7 @@ export default [
       // Allow redeclaring globals since files do this
       "no-redeclare": "off",
       // Make unused vars warnings
-      "no-unused-vars": "warn",
-      // Disable TS rules for JS files
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off"
+      "no-unused-vars": "warn"
     }
   },
 
