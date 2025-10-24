@@ -8,6 +8,7 @@
  */
 
 import { trackEvent } from '../table-storage-config.js';
+import { validatePayload, SCHEMAS } from '../validation.js';
 
 export default async function handler(request, context) {
   if ((request.method || request?.method) !== 'POST') {
@@ -16,11 +17,20 @@ export default async function handler(request, context) {
 
   try {
     const body = (typeof request.json === 'function') ? await request.json() : (request.body || {});
-    const { eventType, metadata = {} } = body;
 
-    if (!eventType) {
-      return { status: 400, jsonBody: { error: 'Missing eventType' } };
+    // Validate payload
+    const validation = validatePayload(body, SCHEMAS.analyticsTrack);
+    if (!validation.valid) {
+      return {
+        status: 400,
+        jsonBody: {
+          error: 'Invalid payload',
+          details: validation.errors
+        }
+      };
     }
+
+    const { eventType, metadata = {} } = body;
 
     const result = await trackEvent(eventType, metadata);
 

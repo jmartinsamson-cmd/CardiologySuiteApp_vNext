@@ -1,217 +1,40 @@
 {
-  "CodeGPT.apiKey": "Perplexity",
-  "liveServer.settings.port": 8081,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "liveServer.settings.donotVerifyTags": true,
-  "liveServer.settings.CustomBrowser": null,
-  "liveServer.settings.NoBrowser": false,
-  "liveServer.settings.ignoreFiles": [
-    ".vscode/**",
-    "**/*.scss",
-    "**/*.sass",
-    "**/*.ts"
-  ],
-  "liveServer.settings.root": "/",
-  "liveServer.settings.mount": [["/", "./"]],
-  "liveServer.settings.file": "index.html",
-  "liveServer.settings.wait": 100,
-  "livePreview.defaultPreviewType": "internalPreview",
-  "livePreview.portNumber": 3000,
-  "livePreview.showStatusBarItem": true,
-  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
-  "livePreview.openPreviewTarget": "Embedded Preview",
-
-  // Stylelint - CSS files only, no HTML/MD processing
-  "stylelint.validate": ["css", "scss", "sass", "less"],
-  "stylelint.ignoreDisables": false,
-  "stylelint.snippet": ["css", "scss", "sass", "less"],
-  "stylelint.config": null,
-  "stylelint.configFile": ".stylelintrc.json",
-  "stylelint.enable": true,
-  "stylelint.packageManager": "npm",
-  "stylelint.reportNeedlessDisables": false,
-
-  // Language-specific overrides - DISABLE problematic linters
-  "[html]": {
-    "stylelint.enable": false,
-    "css.validate": false,
-    "html.validate.scripts": false,
-    "html.validate.styles": false
-  },
-  "[markdown]": {
-    "stylelint.enable": false,
-    "css.validate": false
-  },
-
-  // Problem panel - Filter and suppress known false positives
-  "problems.decorations.enabled": true,
-  "problems.showCurrentInStatus": true,
-  "problems.autoReveal": true,
-  "problems.sortOrder": "severity",
-  
-  // Exclude patterns for Problems panel - hide GitHub Actions YAML false positives
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/*.mjs": true
-  },
-  
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/.hg/store/**": true,
-    ".github/workflows/**": true
-  },
-  
-  // Search exclude to prevent indexing stale files
-  "search.exclude": {
-    "**/.git": true,
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/build": true,
-    "**/*.mjs": true
-  },
-
-  // Validation settings - Clean and minimal
-  "css.validate": true,
-  "scss.validate": true,
-  "less.validate": true,
-  "html.validate.scripts": false,
-  "html.validate.styles": false,
-  "html.suggest.html5": false,
-  "html.format.enable": false,
-
-  // CSS linting - Ignore cosmetic warnings
-  "css.lint.duplicateProperties": "ignore",
-  "css.lint.vendorPrefix": "ignore",
-  "css.lint.unknownProperties": "ignore",
-  "css.lint.boxModel": "ignore",
-  "css.lint.universalSelector": "ignore",
-  "css.lint.zeroUnits": "ignore",
-
-  // JavaScript/TypeScript - Proper validation only
-  "javascript.validate.enable": true,
-  "typescript.validate.enable": true,
-  "eslint.enable": true,
-  "eslint.validate": ["javascript", "typescript"],
-
-  // File associations
-  "files.associations": {
-    "*.js": "javascript",
-    "*.ts": "typescript",
-    "*.md": "markdown",
-    "*.html": "html"
-  },
-
-  // YAML - Completely disabled (causing false positives on GitHub Actions)
-  "yaml.validate": false,
-  "yaml.schemaStore.enable": false,
-  "yaml.format.enable": false,
-  "yaml.completion": false,
-  "yaml.hover": false,
-  "yaml.schemas": {},
-  "yaml.customTags": [],
-  "redhat.telemetry.enabled": false,
-  
-  // Explicitly disable YAML diagnostics from all extensions
-  "yaml.yamlVersion": "1.2",
-  "yaml.disableAdditionalProperties": true,
-  "yaml.maxItemsComputed": 5000,
-  "workbench.editor.languageDetection": false,
-  
-  // Disable all language features for YAML files
-  "[yaml]": {
-    "editor.quickSuggestions": {
-      "other": false,
-      "comments": false,
-      "strings": false
+  "terminal.integrated.profiles.linux": {
+    "PowerShell": {
+      "icon": "terminal-powershell"
     },
-    "editor.suggest.showWords": false,
-    "editor.wordBasedSuggestions": "off"
-  },
-  "[yml]": {
-    "editor.quickSuggestions": {
-      "other": false,
-      "comments": false,
-      "strings": false
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "terminal-bash"
     },
-    "editor.suggest.showWords": false,
-    "editor.wordBasedSuggestions": "off"
-  },
-
-  // Medical dictionary spell checker
-  "cSpell.enabled": true,
-  "cSpell.enabledFileTypes": {
-    "html": true,
-    "javascript": true,
-    "typescript": true,
-    "markdown": true,
-    "json": true,
-    "css": true
-  },
-  "cSpell.words": ["NSTEMI", "STEMI", "TIMI", "cardiology", "Samson"],
-  "cSpell.dictionaries": ["medical-terms", "cardiology-suite-custom"],
-  "cSpell.ignorePaths": [
-    "node_modules/**",
-    ".git/**",
-    "*.min.js",
-    "*.min.css",
-    "dist/**",
-    "build/**",
-    "backups/**"
-  ],
-
-  // Editor - Suppress diagnostic noise
-  "editor.renderValidationDecorations": "off",
-  "workbench.problems.visibility": "filtered",
-  "stylelint.reportInvalidScopeDisables": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": "never"
-  },
-  "python-envs.defaultEnvManager": "ms-python.python:system",
-  "python-envs.pythonProjects": [
-    {
-      "path": "",
-      "envManager": "ms-python.python:system",
-      "packageManager": "ms-python.python:pip"
+    "Bash (no rc)": {
+      "path": "/usr/bin/bash",
+      "args": [
+        "--noprofile",
+        "--norc"
+      ],
+      "icon": "terminal-bash"
+    },
+    "Bash": {
+      "path": "/usr/bin/bash",
+      "icon": "terminal-bash"
+    },
+    "PowerShell (NoProfile)": {
+      "args": [
+        "-NoProfile"
+      ],
+      "icon": "terminal-powershell"
     }
-  ],
-
-  // Azure AI Foundry - Authentication configuration
-  "azure.tenant": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
-  "azure.cloud": "AzureCloud",
-  "aifoundry.subscriptionId": "6ae15877-96d9-4771-928c-080c755701e4",
-  "aifoundry.tenantId": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
-  "azure.authenticationMode": "AzureCLI",
-  "azure.resourceFilter": ["86fd6795-dcf9-4164-935b-72cf98b01b3d/6ae15877-96d9-4771-928c-080c755701e4"],
-  
-  // Terminal environment variables for Azure
-  "terminal.integrated.env.linux": {
-    "AZURE_TENANT_ID": "86fd6795-dcf9-4164-935b-72cf98b01b3d",
-    "AZURE_SUBSCRIPTION_ID": "6ae15877-96d9-4771-928c-080c755701e4",
-    "AZURE_CONFIG_DIR": "/home/codespace/.azure"
   },
-
-  // Model Context Protocol (MCP) - AI Search integration for Copilot
-  "github.copilot.chat.experimental.contextMode": "enhanced",
-  "github.copilot.advanced": {
-    "debug.overrideEngine": "gpt-4o",
-    "debug.useNodeFetcher": true
-  },
+  "terminal.integrated.defaultProfile.linux": "PowerShell",
+  "chat.tools.terminal.terminalProfile.linux": "PowerShell",
+  "terminal.integrated.inheritEnv": true,
+  "terminal.integrated.enablePersistentSessions": true,
   "azureFunctions.projectSubpath": "api",
   "azureFunctions.deploySubpath": "api",
   "azureFunctions.postDeployTask": "npm install (functions)",
   "azureFunctions.projectLanguage": "JavaScript",
   "azureFunctions.projectRuntime": "~4",
   "azureFunctions.projectLanguageModel": 4,
-  "azureFunctions.preDeployTask": "npm prune (functions)",
-  
-  // Terminal profiles - Azure Cloud Shell integration
-  "terminal.integrated.defaultProfile.windows": "Azure Cloud Shell (PowerShell)",
-  "terminal.integrated.defaultProfile.osx": "Azure Cloud Shell (Bash)",
-  "terminal.integrated.defaultProfile.linux": "Azure Cloud Shell (Bash)",
-  "terminal.integrated.enablePersistentSessions": true,
-  "terminal.integrated.confirmOnExit": false
+  "azureFunctions.preDeployTask": "npm prune (functions)"
 }

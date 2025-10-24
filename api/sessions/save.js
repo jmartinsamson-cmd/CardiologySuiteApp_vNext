@@ -8,6 +8,7 @@
  */
 
 import { saveClinicalSession } from '../table-storage-config.js';
+import { validatePayload, SCHEMAS } from '../validation.js';
 
 export default async function handler(request, context) {
   // Only allow POST
@@ -17,11 +18,20 @@ export default async function handler(request, context) {
 
   try {
     const body = (typeof request.json === 'function') ? await request.json() : (request.body || {});
-    const { userId, sessionData } = body;
 
-    if (!userId || !sessionData) {
-      return { status: 400, jsonBody: { error: 'Missing userId or sessionData' } };
+    // Validate payload
+    const validation = validatePayload(body, SCHEMAS.sessionSave);
+    if (!validation.valid) {
+      return {
+        status: 400,
+        jsonBody: {
+          error: 'Invalid payload',
+          details: validation.errors
+        }
+      };
     }
+
+    const { userId, sessionData } = body;
 
     const result = await saveClinicalSession(userId, sessionData);
 

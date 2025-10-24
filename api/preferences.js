@@ -6,6 +6,7 @@
  */
 
 import { getUserPreferences, saveUserPreferences } from '../table-storage-config.js';
+import { validatePayload, SCHEMAS } from './validation.js';
 
 export default async function handler(request, context) {
   try {
@@ -14,6 +15,20 @@ export default async function handler(request, context) {
       const fullUrl = request.url || (request.originalUrl || '');
       const url = new globalThis.URL(fullUrl, 'https://placeholder.local');
       const userId = url.searchParams.get('userId');
+
+      // Validate userId if provided
+      if (userId) {
+        const validation = validatePayload({ userId }, SCHEMAS.preferencesGet);
+        if (!validation.valid) {
+          return {
+            status: 400,
+            jsonBody: {
+              error: 'Invalid userId parameter',
+              details: validation.errors
+            }
+          };
+        }
+      }
 
       if (!userId) {
         return { status: 400, jsonBody: { error: 'Missing userId parameter' } };
@@ -28,11 +43,20 @@ export default async function handler(request, context) {
     } else if ((request.method || request?.method) === 'POST') {
       // Save preferences
       const body = (typeof request.json === 'function') ? await request.json() : (request.body || {});
-      const { userId, preferences } = body;
 
-      if (!userId || !preferences) {
-        return { status: 400, jsonBody: { error: 'Missing userId or preferences' } };
+      // Validate payload
+      const validation = validatePayload(body, SCHEMAS.preferencesPost);
+      if (!validation.valid) {
+        return {
+          status: 400,
+          jsonBody: {
+            error: 'Invalid payload',
+            details: validation.errors
+          }
+        };
       }
+
+      const { userId, preferences } = body;
 
       const result = await saveUserPreferences(userId, preferences);
       return {

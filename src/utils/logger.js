@@ -100,7 +100,7 @@ export function debugGroup(label, fn) {
  */
 export function debugAssert(condition, ...args) {
     if (config.debugMode) {
-        // eslint-disable-next-line no-console
+         
         console.assert(condition, ...args);
     }
 }

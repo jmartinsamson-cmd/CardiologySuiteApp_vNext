@@ -1,0 +1,155 @@
+name: API Smoke Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run nightly at 2 AM UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to test"
+        required: false
+        default: "production"
+        type: choice
+        options:
+          - production
+          - staging
+          - development
+
+env:
+  NODE_VERSION: "20.x"
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Setup Python (for smoke tests)
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install azure-storage-blob azure-identity requests
+
+      - name: Deploy to staging (if needed)
+        if: github.event.inputs.environment == 'staging' || github.event.schedule == 'schedule'
+        run: |
+          echo "Deploying to staging environment..."
+          # Add your deployment commands here
+          # For example: az webapp deploy, etc.
+
+      - name: Wait for deployment
+        if: github.event.inputs.environment == 'staging' || github.event.schedule == 'schedule'
+        run: |
+          echo "Waiting for deployment to be ready..."
+          sleep 30
+
+      - name: Determine API base URL
+        id: api-url
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "staging" ]]; then
+            echo "url=https://cardiology-suite-staging.azurewebsites.net" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.inputs.environment }}" == "development" ]]; then
+            echo "url=https://cardiology-suite-dev.azurewebsites.net" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://cardiology-suite.azurewebsites.net" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run API smoke tests
+        env:
+          API_BASE_URL: ${{ steps.api-url.outputs.url }}
+        run: |
+          echo "Running smoke tests against: $API_BASE_URL"
+          npm run test:smoke:ci
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-test-results-${{ github.run_id }}
+          path: |
+            test-results/smoke-results.xml
+            test-results/e2e-*.zip
+          retention-days: 30
+
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [[ -f "test-results/smoke-results.xml" ]]; then
+            # Extract basic stats from JUnit XML
+            TESTS=$(grep -o 'tests="[0-9]*"' test-results/smoke-results.xml | grep -o '[0-9]*' | head -1)
+            FAILURES=$(grep -o 'failures="[0-9]*"' test-results/smoke-results.xml | grep -o '[0-9]*' | head -1)
+
+            echo "📊 **Test Statistics**" >> $GITHUB_STEP_SUMMARY
+            echo "- Total Tests: $TESTS" >> $GITHUB_STEP_SUMMARY
+            echo "- Failures: $FAILURES" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [[ "$FAILURES" -gt 0 ]]; then
+              echo "❌ **Some tests failed**" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "<details><summary>Failure Details</summary>" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              # Extract failure messages (simplified)
+              grep -A 5 "<failure" test-results/smoke-results.xml | head -20 >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "</details>" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ **All tests passed**" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "⚠️ **Test results file not found**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ steps.api-url.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify on failure
+        if: failure() && github.event.schedule == 'schedule'
+        run: |
+          echo "Nightly smoke tests failed!"
+          # Add notification logic here (Slack, Teams, etc.)
+          # Example: curl -X POST -H 'Content-type: application/json' --data '{"text":"Nightly smoke tests failed!"}' $SLACK_WEBHOOK_URL
+
+  health-check:
+    runs-on: ubuntu-latest
+    needs: smoke-test
+    if: always()
+
+    steps:
+      - name: Check overall status
+        run: |
+          if [[ "${{ needs.smoke-test.result }}" == "success" ]]; then
+            echo "✅ All smoke tests passed"
+            exit 0
+          else
+            echo "❌ Smoke tests failed"
+            exit 1
+          fi

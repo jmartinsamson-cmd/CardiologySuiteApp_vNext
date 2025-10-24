@@ -5,6 +5,7 @@ on:
     branches: [main, chore/**, feat/**]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,7 +23,7 @@ jobs:
       STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
       TEST_BLOB_NAME: ${{ vars.TEST_BLOB_NAME }}
       AZURE_VISION_ENDPOINT: https://eastus.api.cognitive.microsoft.com
-      AZURE_VISION_KEY: ${{ secrets.AZURE_VISION_KEY }}
+      AZURE_VISION_KEY: "${{ secrets.AZURE_VISION_KEY || secrets.AZUREVISIONKEY }}"
       MIN_CHARS: "50"
 
     steps:
@@ -35,9 +36,9 @@ jobs:
       - name: Azure login (OIDC)
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: "${{ secrets.AZURE_CLIENT_ID || secrets.AZURECLIENTID }}"
+          tenant-id: "${{ secrets.AZURE_TENANT_ID || secrets.AZURETENANTID }}"
+          subscription-id: "${{ secrets.AZURE_SUBSCRIPTION_ID || secrets.AZURESUBSCRIPTIONID }}"
 
       - name: OCR → tag → move
         id: run
@@ -158,10 +159,3 @@ jobs:
               repo: context.repo.repo,
               body: summary
             });
-
-on:
-  workflow_dispatch:
-  push:
-    branches: [ main, chore/**, feat/** ]
-  pull_request:
-    branches: [ main ]
