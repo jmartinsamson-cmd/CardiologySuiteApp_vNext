@@ -329,10 +329,12 @@ export async function analyzeNoteWithRAG(note, parsed) {
   const { buildClinicalQuery, retrieveEvidence, concatEvidence } = await import('../rag/retrieveMaterials.js');
   
   // Build clinical query from parsed note or extract from raw note
-  const query = parsed ? buildClinicalQuery(parsed) : extractKeyTerms(note);
+  const query = parsed ? buildClinicalQuery(parsed) : await buildQueryFromNote(note);
+  console.log(`[RAG] Built query: "${query}"`); // DEBUG
   
   // Retrieve evidence documents
   const evidenceDocs = query ? await retrieveEvidence(query) : [];
+  console.log(`[RAG] Retrieved ${evidenceDocs.length} evidence documents.`); // DEBUG
   
   // Concatenate evidence into context string
   const context = concatEvidence(evidenceDocs);
@@ -480,6 +482,43 @@ function extractKeyTerms(note) {
   });
   
   return terms.join(' | ');
+}
+
+/**
+ * Builds a clinical query from the note text using an LLM.
+ * @param {string} note
+ * @returns {Promise<string>}
+ */
+async function buildQueryFromNote(note) {
+  const client = getOpenAIClient();
+  if (!client) {
+    return extractKeyTerms(note);
+  }
+
+  const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini";
+
+  const systemPrompt = `You are an expert at extracting key clinical concepts from a medical note. 
+  From the note provided, identify the primary diagnoses and patient problems.
+  Return a short, keyword-rich query for a medical literature search.
+  For example: "acute kidney injury, hyperkalemia, nausea, vomiting"`;
+
+  try {
+    const completion = await client.chat.completions.create({
+      model: deployment,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: note.substring(0, 4000) } // Limit note size
+      ],
+      temperature: 0.1,
+      max_tokens: 100,
+    });
+
+    const query = completion.choices[0]?.message?.content?.trim();
+    return query || extractKeyTerms(note);
+  } catch (error) {
+    console.error("[buildQueryFromNote] LLM-based query extraction failed, falling back to keywords:", error);
+    return extractKeyTerms(note);
+  }
 }
 
 /**

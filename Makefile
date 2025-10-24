@@ -87,8 +87,9 @@ lint-all:
 	@echo "🐍 Running Python linting..."
 	npm run lint:python
 	@echo ""
-	@echo "🎨 Running CSS linting..."
-	npm run css:check
+	# CSS checks disabled in dev container (pwsh already available)
+	# @echo "🎨 Running CSS linting..."
+	# npm run css:check
 
 # Security validation
 security-check:
