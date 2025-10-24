@@ -1,162 +1,139 @@
+/* @ts-check */
 import js from "@eslint/js";
-import tsParser from "@typescript-eslint/parser";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tseslint from "typescript-eslint";
+import globals from "globals";
+
+const browserAndNodeGlobals = {
+  ...globals.browser,   // window, document, etc.
+  ...globals.node,      // module, require, process, etc.
+  ...globals.es2021,
+};
+
+const jestGlobals = {
+  ...globals.jest,
+};
 
 export default [
-  {
-    ignores: ["node_modules/**", "dist/**"],
-  },
+  // Base JS rules
   js.configs.recommended,
+
+  // TS rules (type-aware) - only for TS files in main project
   {
-    files: ["src/**/*.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      globals: {
-        window: "readonly",
-        document: "readonly",
-        console: "readonly",
-        localStorage: "readonly",
-        fetch: "readonly",
-        setTimeout: "readonly",
-        setInterval: "readonly",
-        clearTimeout: "readonly",
-        clearInterval: "readonly",
-        location: "readonly",
-        navigator: "readonly",
-        alert: "readonly",
-        confirm: "readonly",
-        HTMLElement: "readonly",
-        CustomEvent: "readonly",
-        URLSearchParams: "readonly",
-        Blob: "readonly",
-        URL: "readonly",
-        performance: "readonly",
-        PerformanceObserver: "readonly",
-        module: "readonly",
-        // Browser runtime APIs used in src
-        requestAnimationFrame: "readonly",
-        AbortController: "readonly",
-        Worker: "readonly",
-        MessageChannel: "readonly",
-        SVGSVGElement: "readonly",
-        MutationObserver: "readonly",
-        Node: "readonly",
-      },
-    },
-    rules: {
-      // Allow unused args if intentionally ignored via leading underscore
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    },
-  },
-  {
-    files: ["scripts/**/*.js", "scripts/**/*.cjs"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      globals: {
-        process: "readonly",
-        console: "readonly",
-        require: "readonly",
-        module: "readonly",
-        exports: "readonly",
-        __dirname: "readonly",
-        __filename: "readonly",
-        Buffer: "readonly",
-      },
-    },
-    rules: {
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    },
-  },
-  // TypeScript in src (browser globals)
-  {
-    files: ["src/**/*.ts"],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-      globals: {
-        window: "readonly",
-        document: "readonly",
-        console: "readonly",
-        localStorage: "readonly",
-        fetch: "readonly",
-        setTimeout: "readonly",
-        setInterval: "readonly",
-        clearTimeout: "readonly",
-        clearInterval: "readonly",
-        location: "readonly",
-        navigator: "readonly",
-        alert: "readonly",
-        confirm: "readonly",
-        HTMLElement: "readonly",
-        CustomEvent: "readonly",
-        URLSearchParams: "readonly",
-        Blob: "readonly",
-        URL: "readonly",
-        performance: "readonly",
-        PerformanceObserver: "readonly",
-        module: "readonly",
-        requestAnimationFrame: "readonly",
-        AbortController: "readonly",
-        Worker: "readonly",
-        MessageChannel: "readonly",
-        SVGSVGElement: "readonly",
-        MutationObserver: "readonly",
-        Node: "readonly",
-        // DOM TypeScript types
-        EventTarget: "readonly",
-        EventListener: "readonly",
-        Event: "readonly",
-        Element: "readonly",
-        AddEventListenerOptions: "readonly",
-      },
-    },
+    files: ["src/**/*.ts", "types/**/*.d.ts"],
     plugins: {
-      "@typescript-eslint": tsPlugin,
+      "@typescript-eslint": tseslint.plugin
     },
-    rules: {
-      ...tsPlugin.configs.recommended.rules,
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-      // Disable no-undef for TypeScript files - TypeScript handles this
-      "no-undef": "off",
-    },
-  },
-  // TypeScript in scripts (Node globals)
-  {
-    files: ["scripts/**/*.ts"],
     languageOptions: {
-      parser: tsParser,
+      globals: browserAndNodeGlobals,
+      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-      globals: {
-        process: "readonly",
-        console: "readonly",
-        require: "readonly",
-        module: "readonly",
-        exports: "readonly",
-        __dirname: "readonly",
-        __filename: "readonly",
-        Buffer: "readonly",
-      },
-    },
-    plugins: {
-      "@typescript-eslint": tsPlugin,
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: import.meta.dirname
+      }
     },
     rules: {
-      ...tsPlugin.configs.recommended.rules,
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-    },
+      ...tseslint.configs.recommendedTypeChecked.rules,
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      // Keep console allowed for diagnostics-heavy codebase
+      "no-console": "off",
+      // Allow redeclaring globals since files do this
+      "no-redeclare": "off",
+      // Make unused vars warnings instead of errors
+      "no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": "warn"
+    }
   },
+
+  // TS files not in main project (tests, functions-acc-scraper) - basic rules only
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    ignores: ["src/**/*.ts", "types/**/*.d.ts"],
+    plugins: {
+      "@typescript-eslint": tseslint.plugin
+    },
+    languageOptions: {
+      globals: browserAndNodeGlobals,
+      parser: tseslint.parser
+    },
+    rules: {
+      // Basic TS rules without type checking
+      ...tseslint.configs.recommended.rules,
+      "@typescript-eslint/no-explicit-any": "warn",
+      "no-console": "off",
+      "no-redeclare": "off",
+      "no-unused-vars": "warn"
+    }
+  },
+
+  // JS files - no TS rules, disable any TS rules that might be inherited
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      globals: browserAndNodeGlobals
+    },
+    rules: {
+      // Keep console allowed for diagnostics-heavy codebase
+      "no-console": "off",
+      // Allow redeclaring globals since files do this
+      "no-redeclare": "off",
+      // Make unused vars warnings
+      "no-unused-vars": "warn",
+      // Disable TS rules for JS files
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  },
+
+  // Test files - add jest globals
+  {
+    files: ["**/*.spec.{js,ts}", "**/*.test.{js,ts}", "tests/**"],
+    languageOptions: {
+      globals: {
+        ...browserAndNodeGlobals,
+        ...jestGlobals
+      }
+    },
+    rules: {
+      "no-console": "off",
+      "no-redeclare": "off",
+      "no-unused-vars": "warn"
+    }
+  },
+
+  // Node-centric folders (scripts, tests, tooling) — keep same globals (union) for simplicity
+  {
+    files: ["scripts/**", "tests/**", "**/*.config.*", ".github/**"],
+    languageOptions: {
+      globals: browserAndNodeGlobals
+    },
+    rules: {
+      "no-console": "off",
+      "no-redeclare": "off",
+      "no-unused-vars": "warn"
+    }
+  },
+
+  // Ignore heavy/non-code folders and problematic files
+  {
+    ignores: [
+      "node_modules/",
+      "dist/",
+      "build/",
+      "coverage/",
+      "data/**",
+      "src/assets/**",
+      "src/**/pdfs/**",
+      ".vscode/",
+      "server.py",
+      "**/*.json",  // Ignore all JSON files
+      "functions-acc-scraper/**",  // Separate project, ignore for now
+      "api/**",  // Azure Functions, different setup
+      "services/ai-search/**",  // Node service, different setup
+      "pages/**",  // Static pages, different setup
+      "staticwebapp.config.json"  // JSON config
+    ]
+  }
 ];
