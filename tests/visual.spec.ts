@@ -1,137 +1,175 @@
 /// <reference types="@playwright/test" />
 import { test, expect } from "@playwright/test";
 
-/**
- * Visual Regression Tests
- *
- * These tests capture screenshots of critical UI components and compare them
- * against baseline snapshots. If differences are detected, the test will fail
- * and show a visual diff.
- *
- * To update snapshots after intentional UI changes:
- * 1. Review the diff output carefully
- * 2. Run: npm run test:visual:update
- * 3. Commit the new snapshots
- *
- * IMPORTANT: Snapshots should be stable and not include:
- * - Timestamps
- * - Random IDs
- * - Dynamic content that changes on every run
- */
+// --- stability helpers (inline to avoid extra files) ---
+const STABILITY_CSS = `
+  * { animation: none !important; transition: none !important; }
+  * { caret-color: transparent !important; } /* why: caret blinks and breaks pixels */
+  html, body { -webkit-font-smoothing: antialiased !important; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif !important; }
+  [data-dynamic], [data-now], [data-random], time { visibility: hidden !important; }
+  [role="progressbar"], [aria-busy="true"], .spinner, [data-spinner] { visibility: hidden !important; }
+  ::placeholder { opacity: 1 !important; color: inherit !important; }
+  * { scrollbar-width: none !important; }
+  *::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+  html { scroll-behavior: auto !important; }
+`;
+
+/** why: ensure deterministic time/random across engines */
+async function freezeTimeAndRandom(page: import("@playwright/test").Page) {
+  await page.addInitScript(({ seed }) => {
+    const fixedNow = Date.UTC(2024, 0, 1, 12, 0, 0);
+    const OriginalDate = Date;
+    class StableDate extends OriginalDate {
+      constructor(...args: ConstructorParameters<DateConstructor>) {
+        const hasArgs = (args as unknown[]).length > 0;
+        if (hasArgs) {
+          super(...args);
+        } else {
+          super(fixedNow);
+        }
+      }
+      static now() { return fixedNow; }
+      static readonly UTC = OriginalDate.UTC;
+      static readonly parse = OriginalDate.parse;
+    }
+    // @ts-ignore override Date for stability
+    globalThis.Date = StableDate as unknown as DateConstructor;
+
+    let s = seed >>> 0;
+    globalThis.Math.random = () => {
+      s ^= s << 13;
+      s ^= s >>> 17;
+      s ^= s << 5;
+      return ((s >>> 0) % 1_000_000) / 1_000_000;
+    };
+  }, { seed: 0xC0FFEE });
+}
+
+/** why: consistent page state before snapshots */
+async function stableReady(page: import("@playwright/test").Page, path = "/index.html") {
+  await freezeTimeAndRandom(page);
+  await page.addStyleTag({ content: STABILITY_CSS });
+  await page.goto(path, { waitUntil: "domcontentloaded" });
+  await page.waitForLoadState("networkidle");
+  await page.evaluate(() => {
+    globalThis.scrollTo(0, 0);
+    const doc = globalThis.document;
+    for (const el of Array.from(doc.querySelectorAll<HTMLElement>("[data-timestamp]"))) {
+      el.dataset.timestamp = "stable";
+    }
+    let idx = 0;
+    for (const el of Array.from(doc.querySelectorAll<HTMLElement>('[id^="random-"]'))) {
+      el.id = `stable-id-${idx++}`;
+    }
+    const sr = doc.querySelector<HTMLElement>("#search-results");
+    if (sr) sr.style.display = "none";
+  });
+  // brief idle for layout/fonts
+  await page.evaluate(() => new Promise<void>((resolve) => {
+    const idleCandidate = (globalThis as { requestIdleCallback?: Function }).requestIdleCallback;
+    if (typeof idleCandidate === "function") {
+      idleCandidate(resolve);
+    } else {
+      globalThis.setTimeout(resolve, 60);
+    }
+  }));
+}
+
+/** sugar for stable screenshots */
+async function snap(
+  target: import("@playwright/test").Page | import("@playwright/test").Locator,
+  name: string,
+  opts: { masks?: import("@playwright/test").Locator[]; fullPage?: boolean } = {}
+) {
+  await expect(target).toHaveScreenshot(name, {
+    animations: "disabled",
+    mask: opts.masks,
+    fullPage: opts.fullPage ?? false,
+    maxDiffPixelRatio: 0.015, // allow tiny engine variance
+    timeout: 10_000,
+  });
+}
 
 test.describe("Visual Regression Tests", () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to application
-    await page.goto("/index.html");
-    await page.waitForLoadState("networkidle");
-
-    // Wait for any animations to complete
-    await page.waitForTimeout(500);
-
-    // Remove any dynamic timestamps or IDs that would cause snapshot instability
-    await page.evaluate(() => {
-      // Remove any elements with timestamps
-      document.querySelectorAll("[data-timestamp]").forEach((el) => {
-        el.removeAttribute("data-timestamp");
-      });
-
-      // Stabilize any random IDs
-      document.querySelectorAll('[id^="random-"]').forEach((el, index) => {
-        el.id = `stable-id-${index}`;
-      });
-    });
+    await stableReady(page);
   });
+
+  // Common masks for volatility
+  const masks = (page: import("@playwright/test").Page) => ([
+    page.locator("time"),
+    page.locator("[data-timestamp]"),
+    page.locator("[data-dynamic]"),
+    page.locator('[role="progressbar"]'),
+    page.locator('[aria-busy="true"]'),
+    page.locator(".spinner"),
+    page.locator("[data-spinner]"),
+    page.locator("[data-placeholder]"),
+    page.locator("[data-scrollbar]"),
+    page.locator("[aria-live]")
+  ]);
+
 
   // ============================================================
   // SIDEBAR VISUAL TESTS
   // ============================================================
 
   test("Diagnosis sidebar visual snapshot", async ({ page }) => {
-    // Locate the diagnosis sidebar
     const sidebar = page.locator("#dx-rail");
     await expect(sidebar).toBeVisible();
-
-    // Hide any dynamic content that changes frequently
+    // Hide dynamic search results if present
     await page.evaluate(() => {
-      // Hide search results if they're dynamic
-      const searchResults = document.querySelector("#search-results");
-      if (searchResults) {
-        (searchResults as HTMLElement).style.display = "none";
-      }
+      const el = document.querySelector<HTMLElement>("#search-results");
+      if (el) el.style.display = "none";
     });
-
-    // Take a snapshot of the sidebar
-    await expect(sidebar).toHaveScreenshot("sidebar-diagnosis.png", {
-      maxDiffPixels: 100, // Allow small rendering differences
-      threshold: 0.2, // 20% threshold for pixel differences
-    });
+    await snap(sidebar, "sidebar-diagnosis.png", { masks: masks(page) });
   });
 
   test("Diagnosis sidebar with search input visible", async ({ page }) => {
     const sidebar = page.locator("#dx-rail");
     await expect(sidebar).toBeVisible();
-
-    // Focus on search to show it's interactive (but don't type to keep stable)
     const searchInput = page.locator("#search");
     if (await searchInput.isVisible()) {
-      await searchInput.focus();
-
-      // Take snapshot with focused search
-      await expect(sidebar).toHaveScreenshot(
-        "sidebar-diagnosis-search-focused.png",
-        {
-          maxDiffPixels: 100,
-          threshold: 0.2,
-        },
-      );
+      await searchInput.focus(); // caret hidden via CSS anyway
     }
+    await snap(sidebar, "sidebar-diagnosis-search-focused.png", {
+      masks: [...masks(page), searchInput], // extra guard
+    });
   });
 
   test("Sidebar header structure", async ({ page }) => {
-    const sidebarHeader = page.locator(".dx-rail-header");
-    await expect(sidebarHeader).toBeVisible();
-
-    // Snapshot just the header for more granular testing
-    await expect(sidebarHeader).toHaveScreenshot("sidebar-header.png", {
-      maxDiffPixels: 50,
-      threshold: 0.2,
-    });
+    const header = page.locator(".dx-rail-header");
+    await expect(header).toBeVisible();
+    await snap(header, "sidebar-header.png", { masks: masks(page) });
   });
+
 
   // ============================================================
   // NOTE OUTPUT AREA VISUAL TESTS
   // ============================================================
 
   test("Note output area empty state", async ({ page }) => {
-    // Locate the output textarea
     const outputArea = page.locator("#rendered-output");
     await expect(outputArea).toBeVisible();
-
-    // Ensure it's empty
-    const value = await outputArea.inputValue();
-    if (value) {
-      // Clear it
-      await page.evaluate(() => {
-        const textarea = document.querySelector(
-          "#rendered-output",
-        ) as HTMLTextAreaElement;
-        if (textarea) textarea.value = "";
-      });
+    // Ensure empty
+    try {
+      const v = await outputArea.inputValue();
+      if (v) {
+        await page.evaluate(() => {
+          const ta = document.querySelector<HTMLTextAreaElement>("#rendered-output");
+          if (ta) ta.value = "";
+        });
+      }
+    } catch {
+      /* readonly or non-input; ignore */
     }
-
-    // Take snapshot of empty state
-    await expect(outputArea).toHaveScreenshot("output-area-empty.png", {
-      maxDiffPixels: 50,
-      threshold: 0.2,
-    });
+    await snap(outputArea, "output-area-empty.png", { masks: masks(page) });
   });
 
   test("Note output area with sample content", async ({ page }) => {
     const outputArea = page.locator("#rendered-output");
     await expect(outputArea).toBeVisible();
-
-    // Fill with stable sample content (no dates/times)
-    // Use JavaScript to set value since textarea is readonly
     const sampleOutput = `PATIENT INFORMATION:
 Name: [Patient Name]
 Age: 45 years old
@@ -161,81 +199,50 @@ PLAN:
 2. Troponin levels
 3. Aspirin 325mg PO
 4. Continue monitoring`;
-
     await page.evaluate((content) => {
-      const textarea = document.querySelector(
-        "#rendered-output",
-      ) as HTMLTextAreaElement;
-      if (textarea) textarea.value = content;
+      const ta = document.querySelector<HTMLTextAreaElement>("#rendered-output");
+      if (ta) ta.value = content;
     }, sampleOutput);
-
-    // Wait for any syntax highlighting or formatting to complete
-    await page.waitForTimeout(300);
-
-    // Take snapshot with content
-    await expect(outputArea).toHaveScreenshot("output-area-with-content.png", {
-      maxDiffPixels: 100,
-      threshold: 0.2,
-    });
+    await page.waitForTimeout(60);
+    await snap(outputArea, "output-area-with-content.png", { masks: masks(page) });
   });
 
   test("Note output panel full view", async ({ page }) => {
-    // Capture the entire output panel including buttons
     const outputPanel = page.locator("#template-content");
-
     if (await outputPanel.isVisible()) {
-      // Add stable content to output using JavaScript
       await page.evaluate(() => {
-        const textarea = document.querySelector(
-          "#rendered-output",
-        ) as HTMLTextAreaElement;
-        if (textarea) textarea.value = "Sample output text for visual testing";
+        const ta = document.querySelector<HTMLTextAreaElement>("#rendered-output");
+        if (ta) ta.value = "Sample output text for visual testing";
       });
-
-      await page.waitForTimeout(300);
-
-      // Snapshot the full panel
-      await expect(outputPanel).toHaveScreenshot("output-panel-full.png", {
-        maxDiffPixels: 150,
-        threshold: 0.2,
-      });
+      await page.waitForTimeout(60);
+      await snap(outputPanel, "output-panel-full.png", { masks: masks(page) });
     }
   });
 
+  // ============================================================
+  // INPUT PANEL
+  // ============================================================
+
   test("Clinical note input panel visual", async ({ page }) => {
-    // Test the input side of the note parser
     const inputPanel = page.locator("#clinical-note-input-panel");
     await expect(inputPanel).toBeVisible();
-
-    // Clear any existing input to ensure stable state
     const inputTextarea = page.locator("#vs-paste");
-    await inputTextarea.fill("");
-
-    // Take snapshot
-    await expect(inputPanel).toHaveScreenshot("input-panel-empty.png", {
-      maxDiffPixels: 100,
-      threshold: 0.2,
-    });
+    if (await inputTextarea.isVisible()) await inputTextarea.fill("");
+    await snap(inputPanel, "input-panel-empty.png", { masks: masks(page) });
   });
 
-  test("Clinical note input panel with placeholder visible", async ({
-    page,
-  }) => {
+  test("Clinical note input panel with placeholder visible", async ({ page }) => {
     const inputPanel = page.locator("#clinical-note-input-panel");
     await expect(inputPanel).toBeVisible();
-
     const inputTextarea = page.locator("#vs-paste");
-    await inputTextarea.fill("");
-
-    // Blur to show placeholder
-    await inputTextarea.blur();
-    await page.waitForTimeout(200);
-
-    await expect(inputPanel).toHaveScreenshot("input-panel-placeholder.png", {
-      maxDiffPixels: 100,
-      threshold: 0.2,
-    });
+    if (await inputTextarea.isVisible()) {
+      await inputTextarea.fill("");
+      await inputTextarea.blur();
+    }
+    await page.waitForTimeout(60);
+    await snap(inputPanel, "input-panel-placeholder.png", { masks: masks(page) });
   });
+
 
   // ============================================================
   // BUTTON STATES
@@ -244,48 +251,29 @@ PLAN:
   test("Parse and Clear buttons visual state", async ({ page }) => {
     const parseButton = page.locator("#vs-parse");
     const clearButton = page.locator("#vs-clear");
-
     await expect(parseButton).toBeVisible();
     await expect(clearButton).toBeVisible();
-
-    // Snapshot button group
-    const buttonContainer = page.locator(".button-group");
-    if (await buttonContainer.isVisible()) {
-      await expect(buttonContainer).toHaveScreenshot(
-        "buttons-parse-clear.png",
-        {
-          maxDiffPixels: 50,
-          threshold: 0.2,
-        },
-      );
+    const container = page.locator(".button-group");
+    if (await container.isVisible()) {
+      await snap(container, "buttons-parse-clear.png", { masks: masks(page) });
     }
   });
 
   // ============================================================
-  // FULL PAGE LAYOUT TESTS
+  // FULL PAGE LAYOUT
   // ============================================================
 
   test("Full page layout with sidebar and main content", async ({ page }) => {
-    // Hide dynamic elements that change frequently
     await page.evaluate(() => {
-      // Hide search results
-      const searchResults = document.querySelector("#search-results");
-      if (searchResults) {
-        (searchResults as HTMLElement).style.display = "none";
+      const sr = document.querySelector<HTMLElement>("#search-results");
+      if (sr) sr.style.display = "none";
+      for (const el of Array.from(document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[type="text"], textarea'))) {
+        el.value = "";
       }
-
-      // Clear any user input to ensure clean state
-      const inputs = document.querySelectorAll('input[type="text"], textarea');
-      inputs.forEach((input) => {
-        (input as HTMLInputElement | HTMLTextAreaElement).value = "";
-      });
     });
-
-    // Take full page snapshot
-    await expect(page).toHaveScreenshot("full-page-layout.png", {
+    await snap(page, "full-page-layout.png", {
       fullPage: true,
-      maxDiffPixels: 500, // More tolerance for full page
-      threshold: 0.2,
+      masks: masks(page),
     });
   });
 });

@@ -192,7 +192,7 @@ async function runHealthCheck() {
 }
 
 // Run the health check
-// eslint-disable-next-line no-console
+ 
 runHealthCheck().catch((error) => {
   console.error('💥 Health check script failed:', error);
   appendFileSync(process.env.GITHUB_OUTPUT || '/dev/stdout', 'status=failure\n');

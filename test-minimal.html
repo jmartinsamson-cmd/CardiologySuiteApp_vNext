@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minimal Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+    .error { color: #f00; }
+    .success { color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>Module Loading Test</h1>
+  <div id="status">Testing...</div>
+  <div id="log"></div>
+  
+  <script>
+    const log = (msg, isError = false) => {
+      const div = document.createElement('div');
+      div.className = isError ? 'error' : 'success';
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      document.getElementById('log').appendChild(div);
+      console.log(msg);
+    };
+    
+    log('✅ Basic JavaScript works');
+    log(`✅ Location: ${window.location.href}`);
+    
+    // Test if fetch works
+    fetch('/data/cardiology_diagnoses/cardiology.json')
+      .then(r => {
+        log(`✅ Fetch response: ${r.status} ${r.statusText}`);
+        return r.json();
+      })
+      .then(data => {
+        log(`✅ JSON parsed: ${data.diagnoses?.length || 0} diagnoses`);
+        document.getElementById('status').textContent = 'SUCCESS!';
+        document.getElementById('status').className = 'success';
+      })
+      .catch(err => {
+        log(`❌ Error: ${err.message}`, true);
+        document.getElementById('status').textContent = 'FAILED!';
+        document.getElementById('status').className = 'error';
+      });
+  </script>
+  
+  <script type="module">
+    const logModule = (msg) => {
+      const div = document.createElement('div');
+      div.className = 'success';
+      div.textContent = `[MODULE] ${msg}`;
+      document.getElementById('log').appendChild(div);
+      console.log(`[MODULE] ${msg}`);
+    };
+    
+    logModule('✅ ES Modules work!');
+    
+    // Try to import the network utility
+    try {
+      const { fetchJSON } = await import('./src/utils/network.js');
+      logModule('✅ network.js imported successfully');
+      
+      const data = await fetchJSON('./data/cardiology_diagnoses/cardiology.json');
+      logModule(`✅ fetchJSON works: ${data.diagnoses?.length || 0} diagnoses`);
+    } catch (err) {
+      const div = document.createElement('div');
+      div.className = 'error';
+      div.textContent = `[MODULE ERROR] ${err.message}\n${err.stack}`;
+      document.getElementById('log').appendChild(div);
+      console.error('[MODULE ERROR]', err);
+    }
+  </script>
+</body>
+</html>
