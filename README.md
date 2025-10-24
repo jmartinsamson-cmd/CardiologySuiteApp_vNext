@@ -1,3 +1,5 @@
+[![OCR Check](https://github.com/jmartinsamson-cmd/CardiologySuiteApp_vNext/actions/workflows/ocr-check.yml/badge.svg)](https://github.com/jmartinsamson-cmd/CardiologySuiteApp_vNext/actions/workflows/ocr-check.yml)
+
 # 🫀 CardiologySuiteApp vNext
 
 ## Modern Clinical Decision Support System with AI-Enhanced Features
