@@ -17,7 +17,6 @@ export default [
   // JS files - no TS rules, processed first to avoid inheritance issues
   {
     files: ["**/*.{js,mjs,cjs}"],
-    plugins: {},  // Explicitly no plugins for JS files
     languageOptions: {
       globals: browserAndNodeGlobals
     },
