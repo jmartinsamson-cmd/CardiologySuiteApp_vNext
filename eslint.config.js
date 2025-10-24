@@ -76,6 +76,9 @@ export default [
       globals: browserAndNodeGlobals
     },
     rules: {
+      // Explicitly disable all TS rules for JS files
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
       // Keep console allowed for diagnostics-heavy codebase
       "no-console": "off",
       // Allow redeclaring globals since files do this
