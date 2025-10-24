@@ -64,8 +64,8 @@ export async function searchGuidelines(query, options = 5) {
       searchMode: 'any',
       queryType: 'simple',
       top,
-      // Map to actual Azure Blob Storage index fields
-      select: 'id,metadata_storage_name,content,metadata_storage_path,language,keyPhrases',
+      // Do not use $select to maximize compatibility across index schemas
+      // (blob indexers expose metadata_storage_*; custom indexes expose title/url/etc.)
       vectorQueries: [],
       semanticConfiguration: undefined
     };
@@ -87,14 +87,14 @@ export async function searchGuidelines(query, options = 5) {
     }
 
     const data = await res.json();
-    // Map Azure Blob Storage index fields to expected structure
+    // Map to a common shape regardless of index schema
     const results = (data?.value || []).map((v) => ({
       id: v.id,
-      title: v.metadata_storage_name || 'Untitled Document', // Use filename as title
-      content: v.content || '',
-      sourceId: v.id, // Use document id as sourceId
-      url: v.metadata_storage_path || '', // Storage path as URL
-      chunkIndex: 0, // Single-document index (no chunking configured)
+      title: v.title || v.metadata_storage_name || 'Untitled Document',
+      content: v.content || v.text || '',
+      sourceId: v.sourceId || v.id,
+      url: v.url || v.metadata_storage_path || '',
+      chunkIndex: typeof v.chunkIndex === 'number' ? v.chunkIndex : 0,
       score: v['@search.score'],
       language: v.language,
       keyPhrases: v.keyPhrases || []

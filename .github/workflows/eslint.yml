@@ -2,9 +2,9 @@ name: ESLint
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install deps
         run: npm ci
@@ -31,9 +31,10 @@ jobs:
             --ignore-pattern "services/ai-search/**" \
             --ignore-pattern "pages/**" \
             --ignore-pattern "functions-acc-scraper/**" \
-            -f sarif -o eslint-results.sarif || true
+            -f sarif -o eslint-results.sarif || echo "ESLint found issues"
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
           sarif_file: eslint-results.sarif

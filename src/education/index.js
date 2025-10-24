@@ -14,7 +14,7 @@
 //
 // ============================================================================
 
-import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+import { debugLog, debugError } from "../utils/logger.js";
 
 /**
  * Education Module - Educational Content Manager

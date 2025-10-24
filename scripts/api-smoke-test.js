@@ -8,12 +8,12 @@
  * Usage: node scripts/api-smoke-test.js [baseUrl] [--junit output.xml] [--concurrency N] [--iterations N]
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+dirname(__filename); // Keep for potential future use
 
 // Test configuration
 const DEFAULT_BASE_URL = 'http://localhost:7071'; // Azure Functions local
@@ -240,7 +240,7 @@ async function makeRequest(baseUrl, testCase) {
       error: null
     };
 
-  } catch (error) {
+  } catch (err) {
     return {
       success: false,
       status: null,
@@ -248,7 +248,7 @@ async function makeRequest(baseUrl, testCase) {
       responseTime: Date.now() - startTime,
       schemaValid: true,
       schemaErrors: [],
-      error: error.message
+      error: err instanceof Error ? err.message : String(err)
     };
   }
 }
@@ -350,14 +350,14 @@ function generateJUnitXML(results, totalTime) {
 // Main execution
 async function main() {
   const args = process.argv.slice(2);
-  const baseUrl = args[0] || process.env.API_BASE_URL || DEFAULT_BASE_URL;
-
+  
+  // Parse arguments first
+  let baseUrl = null;
   let junitOutput = null;
   let concurrency = DEFAULT_CONCURRENCY;
   let iterations = DEFAULT_ITERATIONS;
 
-  // Parse arguments
-  for (let i = 1; i < args.length; i++) {
+  for (let i = 0; i < args.length; i++) {
     if (args[i] === '--junit' && args[i + 1]) {
       junitOutput = args[i + 1];
       i++;
@@ -367,8 +367,14 @@ async function main() {
     } else if (args[i] === '--iterations' && args[i + 1]) {
       iterations = parseInt(args[i + 1]);
       i++;
+    } else if (!args[i].startsWith('--') && !baseUrl) {
+      // First non-flag argument is the base URL
+      baseUrl = args[i];
     }
   }
+
+  // Use provided baseUrl, or fall back to env var, or default
+  baseUrl = baseUrl || process.env.API_BASE_URL || DEFAULT_BASE_URL;
 
   console.log(`🚀 Starting API smoke tests`);
   console.log(`Base URL: ${baseUrl}`);
