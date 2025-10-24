@@ -3,7 +3,7 @@
 # Simple reorganization - move just one file for testing
 
 CONTAINER="edu-content"
-CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=cardiologysuitepub;AccountKey=DQEN5DozUQSQtgYX3PCCTtVP2/BM9i9TZckRkdiLXY2RSQ0xldsJd/P4B86Agf0hv8pV1IE/2Cwy+AStHCciHg==;EndpointSuffix=core.windows.net"
+CONNECTION_STRING="${AZURE_STORAGE_CONNECTION_STRING:-UseEnvironmentVariable}"
 
 blob="education/006 - Cardiovascular Physiology] EKG Basics - How to Read & Interpret EKGs~ Updated Lecture.pdf"
 filename=$(basename "$blob")

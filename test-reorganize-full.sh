@@ -5,7 +5,7 @@
 set -e
 
 CONTAINER="edu-content"
-CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=cardiologysuitepub;AccountKey=DQEN5DozUQSQtgYX3PCCTtVP2/BM9i9TZckRkdiLXY2RSQ0xldsJd/P4B86Agf0hv8pV1IE/2Cwy+AStHCciHg==;EndpointSuffix=core.windows.net"
+CONNECTION_STRING="${AZURE_STORAGE_CONNECTION_STRING:-UseEnvironmentVariable}"
 
 echo "Testing edu-content reorganization with first 5 files..."
 
