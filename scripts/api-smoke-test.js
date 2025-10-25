@@ -8,7 +8,7 @@
  * Usage: node scripts/api-smoke-test.js [baseUrl] [--junit output.xml] [--concurrency N] [--iterations N]
  */
 
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'url';
 
@@ -241,6 +241,8 @@ async function makeRequest(baseUrl, testCase) {
     };
 
   } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`Fetch failed for ${testCase.name}: ${message}`);
     return {
       success: false,
       status: null,
@@ -248,7 +250,7 @@ async function makeRequest(baseUrl, testCase) {
       responseTime: Date.now() - startTime,
       schemaValid: true,
       schemaErrors: [],
-      error: err instanceof Error ? err.message : String(err)
+      error: message
     };
   }
 }
@@ -419,6 +421,10 @@ async function main() {
 
   // Generate JUnit XML if requested
   if (junitOutput) {
+    const outputDir = dirname(junitOutput);
+    if (outputDir && outputDir !== '.') {
+      mkdirSync(outputDir, { recursive: true });
+    }
     const junitXml = generateJUnitXML(allResults, totalTime);
     writeFileSync(junitOutput, junitXml);
     console.log(`JUnit XML written to: ${junitOutput}`);
