@@ -5,6 +5,10 @@
  * Usage: import { sanitizeDiagnosesList } from './utils/diagnosisSanitizer.js';
  */
 
+const WHITELIST_URL = new URL("../../data/diagnosis_whitelist.json?url", import.meta.url).href;
+const BLACKLIST_URL = new URL("../../data/diagnosis_blacklist.json?url", import.meta.url).href;
+const FEATURES_URL = new URL("../../config/features.json?url", import.meta.url).href;
+
 // Lazy-loaded data
 let WHITELIST = null;
 let BLACKLIST = null;
@@ -28,9 +32,9 @@ async function loadConfig() {
 
   try {
     const [whitelistRes, blacklistRes, featuresRes] = await Promise.all([
-      fetch("./data/diagnosis_whitelist.json"),
-      fetch("./data/diagnosis_blacklist.json"),
-      fetch("./config/features.json"),
+      fetch(WHITELIST_URL),
+      fetch(BLACKLIST_URL),
+      fetch(FEATURES_URL),
     ]);
 
     WHITELIST = await whitelistRes.json();

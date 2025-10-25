@@ -225,6 +225,8 @@ const TEMPLATES = {
 };
 
 // Template renderer class
+const DIAGNOSES_DATA_URL = new URL('../../data/cardiology_diagnoses/cardiology.json?url', import.meta.url).href;
+
 class TemplateRenderer {
   constructor() {
     debugLog('🏗️ TemplateRenderer constructor called');
@@ -1706,7 +1708,7 @@ class TemplateRenderer {
       debugLog('Detected diagnoses:', detectedDiagnoses);
 
       // Load diagnosis database
-      const response = await fetch('./data/cardiology_diagnoses/cardiology.json');
+      const response = await fetch(DIAGNOSES_DATA_URL);
       if (!response.ok) {
         debugWarn('Could not load diagnosis database');
         return;
@@ -3021,12 +3023,23 @@ class TemplateRenderer {
     const vsClearBtn = document.getElementById('vs-clear');
     if (vsClearBtn) {
       vsClearBtn.addEventListener('click', () => {
-        const textarea = document.getElementById('vs-paste');
+        const textarea = /** @type {HTMLTextAreaElement | null} */ (document.getElementById('vs-paste'));
         if (textarea) {
           textarea.value = '';
+          textarea.dispatchEvent(new Event('input', { bubbles: true }));
           debugLog('🗑️ Input textarea cleared');
-          this.showSuccess('Input cleared');
         }
+
+        const outputArea = /** @type {HTMLTextAreaElement | null} */ (document.getElementById('rendered-output'));
+        if (outputArea) {
+          outputArea.value = '';
+        }
+
+        this.parsedData = null;
+        this.normalizedSections = {};
+        this.unmappedContent = {};
+
+        this.showSuccess('Input cleared');
       });
       debugLog('✅ Clear All button event listener attached');
     }
