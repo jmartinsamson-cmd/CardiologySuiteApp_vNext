@@ -18,7 +18,6 @@ window.debugError = window.debugError || function (...args) {
     console.error("[debugError]", ...args);
   } catch (loggingError) {
     // Intentionally swallow logging errors when console is unavailable
-    void loggingError;
   }
 };
 
