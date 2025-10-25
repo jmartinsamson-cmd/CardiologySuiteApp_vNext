@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      test_blob_name:
+        description: "Blob name to run through OCR validation"
+        required: false
+        default: ""
+      min_chars:
+        description: "Minimum characters expected from OCR"
+        required: false
+        default: "50"
 
 permissions:
   contents: read
@@ -21,10 +30,10 @@ jobs:
       RESOURCE_GROUP: ${{ secrets.AZURE_RG }}
       STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
       STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
-      TEST_BLOB_NAME: ${{ vars.TEST_BLOB_NAME }}
+      TEST_BLOB_NAME: ${{ inputs.test_blob_name || vars.TEST_BLOB_NAME || vars.DEFAULT_TEST_BLOB_NAME || '' }}
       AZURE_VISION_ENDPOINT: https://eastus.api.cognitive.microsoft.com
       AZURE_VISION_KEY: "${{ secrets.AZURE_VISION_KEY || secrets.AZUREVISIONKEY }}"
-      MIN_CHARS: "50"
+      MIN_CHARS: ${{ inputs.min_chars || vars.MIN_CHARS || '50' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +55,11 @@ jobs:
         run: |
           $ErrorActionPreference='Stop'
 
-          if ([string]::IsNullOrWhiteSpace($env:TEST_BLOB_NAME)) { throw "vars.TEST_BLOB_NAME is required" }
+          if ([string]::IsNullOrWhiteSpace($env:TEST_BLOB_NAME)) {
+            "# OCR Check Results`n`n**Status:** FAIL`n**Issue:** vars.TEST_BLOB_NAME (or workflow input) is required." |
+              Out-File -FilePath ocr_summary.md -Encoding UTF8
+            throw "vars.TEST_BLOB_NAME is required"
+          }
 
           # --- Build SAS (1h) ---
           $acctKey = az storage account keys list -g $env:RESOURCE_GROUP -n $env:STORAGE_ACCOUNT --query [0].value -o tsv
@@ -93,6 +106,19 @@ jobs:
           "pass=$pass" >> $env:GITHUB_OUTPUT
 
           if (-not $pass) { throw "OCR validation failed: $chars chars < $env:MIN_CHARS minimum" }
+
+      - name: Ensure summary exists
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -f ocr_summary.md ]; then
+            cat <<'EOF' > ocr_summary.md
+# OCR Check Results
+
+**Status:** FAIL
+**Issue:** OCR summary was not generated due to an earlier failure.
+EOF
+          fi
 
       - name: Tag & move blob (on success)
         if: steps.run.outputs.pass == 'True'
