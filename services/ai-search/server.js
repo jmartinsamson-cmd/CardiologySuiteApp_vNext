@@ -62,6 +62,14 @@ app.use(cors({
   origin(origin, callback) {
     if (!origin) return callback(null, true); // allow same-origin/no-origin requests (curl)
     if (corsAllowlist.has(origin)) return callback(null, true);
+    
+    // Allow any GitHub Codespaces origin (dynamic port forwarding)
+    if (origin && (origin.includes('.github.dev') || origin.includes('.githubpreview.dev'))) {
+      console.log('[CORS] Allowing Codespaces origin:', origin);
+      return callback(null, true);
+    }
+    
+    console.log('[CORS] Blocked origin:', origin);
     return callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
