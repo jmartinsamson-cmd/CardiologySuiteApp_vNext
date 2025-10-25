@@ -1,5 +1,6 @@
-/**
 import { debugLog, debugWarn, debugError } from "../utils/logger.js";
+
+/**
  * Debug Instrumentation for Note Generation Flow
  * Provides call graph tracing, data shape validation, and fault detection
  *
@@ -13,7 +14,11 @@ if (typeof window !== 'undefined' && typeof window.process === 'undefined') {
   window.process = { env: {} };
 }
 window.debugError = window.debugError || function (...args) {
-  try { console.error('[debugError]', ...args); } catch (_) {}
+  try {
+    console.error("[debugError]", ...args);
+  } catch (loggingError) {
+    // Intentionally swallow logging errors when console is unavailable
+  }
 };
 
 // ============================================================================
