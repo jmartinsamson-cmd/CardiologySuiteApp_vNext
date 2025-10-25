@@ -58,12 +58,14 @@ if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_
 }
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "").split(",").map(s => s.trim()).filter(Boolean);
 const corsAllowlist = new Set([...defaultOrigins, ...allowedOrigins]);
+
+// Simplified CORS for Codespaces - allow all origins in development
+const isDevelopment = process.env.NODE_ENV !== 'production';
 app.use(cors({
-  origin(origin, callback) {
-    if (!origin) return callback(null, true); // allow same-origin/no-origin requests (curl)
+  origin: isDevelopment ? true : function(origin, callback) {
+    if (!origin) return callback(null, true);
     if (corsAllowlist.has(origin)) return callback(null, true);
     
-    // Allow any GitHub Codespaces origin (dynamic port forwarding)
     if (origin && (origin.includes('.github.dev') || origin.includes('.githubpreview.dev'))) {
       console.log('[CORS] Allowing Codespaces origin:', origin);
       return callback(null, true);
