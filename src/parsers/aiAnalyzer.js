@@ -16,8 +16,29 @@ const USE_AI_ANALYZER = true;
 
 /**
  * Server endpoint configuration
+ * Auto-detects Codespaces/dev container environment
  */
-const AI_SERVER_URL = 'http://127.0.0.1:8081';
+const AI_SERVER_URL = (() => {
+  // In Codespaces, use relative path to leverage port forwarding
+  if (typeof window !== 'undefined' && 
+      (window.location.hostname.includes('github.dev') || 
+       window.location.hostname.includes('codespaces'))) {
+    // Use same origin with different port - Codespaces handles forwarding
+    const protocol = window.location.protocol;
+    const hostname = window.location.hostname;
+    // For GitHub Codespaces, construct the forwarded URL
+    // Pattern: https://{codespace-name}-{port}.app.github.dev
+    const match = hostname.match(/^(.+?)-\d+\.(.+)$/);
+    if (match) {
+      const baseUrl = `${protocol}//${match[1]}-8081.${match[2]}`;
+      console.log('[AI Analyzer] Detected Codespaces, using:', baseUrl);
+      return baseUrl;
+    }
+  }
+  // Fallback to localhost for local development
+  console.log('[AI Analyzer] Using localhost:', 'http://127.0.0.1:8081');
+  return 'http://127.0.0.1:8081';
+})();
 
 /**
  * Enrich parsed note result with AI analysis

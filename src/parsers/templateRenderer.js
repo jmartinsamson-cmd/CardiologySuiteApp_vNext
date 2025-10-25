@@ -3289,7 +3289,21 @@ class TemplateRenderer {
 
     // Try AI paraphrasing first (fail-soft)
     try {
-      const AI_SERVER_URL = 'http://127.0.0.1:8081';
+      // Auto-detect Codespaces environment
+      const AI_SERVER_URL = (() => {
+        if (typeof window !== 'undefined' && 
+            (window.location.hostname.includes('github.dev') || 
+             window.location.hostname.includes('codespaces'))) {
+          const protocol = window.location.protocol;
+          const hostname = window.location.hostname;
+          const match = hostname.match(/^(.+?)-\d+\.(.+)$/);
+          if (match) {
+            return `${protocol}//${match[1]}-8081.${match[2]}`;
+          }
+        }
+        return 'http://127.0.0.1:8081';
+      })();
+      
       debugLog('[AI Paraphrase] Calling paraphrase endpoint...');
 
       // Create abort controller for timeout
