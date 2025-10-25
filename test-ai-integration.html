@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Integration Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; }
+    textarea { width: 100%; height: 300px; }
+    button { padding: 10px 20px; margin: 10px 0; }
+    .output { white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>AI Integration Test</h1>
+  <p>This page tests the AI enrichment integration without the full app context.</p>
+  
+  <textarea id="noteInput" placeholder="Paste clinical note here...">
+65-year-old male presenting with chest pain.
+
+Chief Complaint: Chest pain
+
+History of Present Illness:
+Patient reports chest discomfort that started 2 hours ago while watching TV. Describes it as pressure-like, substernal, radiating to left arm. Associated with diaphoresis and mild shortness of breath. Denies nausea or vomiting. Has history of hypertension and hyperlipidemia. Takes daily aspirin.
+
+Past Medical History:
+- Hypertension
+- Hyperlipidemia
+- Type 2 Diabetes
+
+Vital Signs:
+BP 155/92, HR 88, RR 18, SpO2 97% on RA, Temp 98.2°F
+
+Physical Exam:
+Gen: Alert, uncomfortable appearing, diaphoretic
+CV: Regular rate and rhythm, no murmurs
+Lungs: Clear bilaterally
+Ext: No edema
+
+Medical Decision Making:
+ECG shows ST elevation in leads II, III, and aVF. Troponin elevated at 2.5 ng/mL.
+
+X-Ray Report:
+Chest X-ray: No acute cardiopulmonary process. Heart size normal. Lungs clear.
+
+ED Course:
+Patient given aspirin 325mg, clopidogrel 300mg, and started on heparin drip. Cardiology consulted for urgent cardiac catheterization.
+  </textarea>
+  
+  <button id="testBtn">Test AI Integration</button>
+  
+  <div id="output" class="output"></div>
+  
+  <script type="module">
+    import { debugLog, debugWarn } from './src/utils/logger.js';
+    import { enrichWithAIAnalysis } from './src/parsers/aiAnalyzer.js';
+    
+    const testBtn = document.getElementById('testBtn');
+    const noteInput = document.getElementById('noteInput');
+    const output = document.getElementById('output');
+    
+    testBtn.addEventListener('click', async () => {
+      const noteText = noteInput.value.trim();
+      if (!noteText) {
+        output.innerHTML = '<div class="error">Please enter a note</div>';
+        return;
+      }
+      
+      output.innerHTML = '<div>Testing AI integration...</div>';
+      
+      try {
+        // Simulate parsed data structure (minimal sections)
+        const baseResult = {
+          fullText: noteText,
+          sections: {
+            'Chief Complaint': 'Chest pain',
+            'History of Present Illness': noteText.split('History of Present Illness:')[1]?.split('Past Medical History:')[0]?.trim() || '',
+            'Past Medical History': '- Hypertension\n- Hyperlipidemia\n- Type 2 Diabetes',
+            'Vital Signs': 'BP 155/92, HR 88, RR 18, SpO2 97% on RA, Temp 98.2°F'
+          }
+        };
+        
+        console.log('Base result:', baseResult);
+        
+        // Call enrichWithAIAnalysis
+        const enriched = await enrichWithAIAnalysis(baseResult, noteText);
+        
+        console.log('Enriched result:', enriched);
+        
+        // Display results
+        let html = '<div class="success">✅ AI enrichment successful!</div><br>';
+        
+        html += '<strong>Sections after enrichment:</strong><br>';
+        if (enriched.sections) {
+          for (const [key, value] of Object.entries(enriched.sections)) {
+            html += `<br><strong>${key}:</strong><br>${String(value).substring(0, 200)}${String(value).length > 200 ? '...' : ''}<br>`;
+          }
+        }
+        
+        html += '<br><strong>AI Metadata:</strong><br>';
+        html += `Assessment array: ${enriched.assessment ? enriched.assessment.length + ' items' : 'none'}<br>`;
+        html += `Plan array: ${enriched.plan ? enriched.plan.length + ' items' : 'none'}<br>`;
+        html += `Citations: ${enriched.citations ? enriched.citations.length + ' items' : 'none'}<br>`;
+        html += `Evidence docs: ${enriched.evidenceDocs ? enriched.evidenceDocs.length + ' items' : 'none'}<br>`;
+        
+        if (enriched.assessment && Array.isArray(enriched.assessment)) {
+          html += '<br><strong>AI Assessment:</strong><br>';
+          enriched.assessment.forEach((item, i) => {
+            html += `${i + 1}. ${item}<br>`;
+          });
+        }
+        
+        if (enriched.plan && Array.isArray(enriched.plan)) {
+          html += '<br><strong>AI Plan:</strong><br>';
+          enriched.plan.forEach((item, i) => {
+            html += `${i + 1}. ${item}<br>`;
+          });
+        }
+        
+        output.innerHTML = html;
+        
+      } catch (error) {
+        console.error('Test failed:', error);
+        output.innerHTML = `<div class="error">❌ Test failed: ${error.message}</div><pre>${error.stack}</pre>`;
+      }
+    });
+  </script>
+</body>
+</html>

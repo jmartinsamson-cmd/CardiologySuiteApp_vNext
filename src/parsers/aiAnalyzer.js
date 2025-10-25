@@ -21,9 +21,9 @@ const AI_SERVER_URL = 'http://127.0.0.1:8081';
 
 /**
  * Enrich parsed note result with AI analysis
- * @param {import('./smartParser.js').ParseResult} baseResult - Base parser result
+ * @param {any} baseResult - Base parser result (structure varies by parser)
  * @param {string} originalNote - Original note text
- * @returns {Promise<import('./smartParser.js').ParseResult>} Enriched result
+ * @returns {Promise<any>} Enriched result
  */
 export async function enrichWithAIAnalysis(baseResult, originalNote) {
   // Skip if feature disabled
@@ -66,15 +66,52 @@ export async function enrichWithAIAnalysis(baseResult, originalNote) {
       citations: aiData.citations?.length || 0
     });
     
-    // Merge AI data with base result (non-destructive)
+    // Format AI assessment and plan as text content (will be merged into sections)
+    let assessmentText = '';
+    if (Array.isArray(aiData.assessment) && aiData.assessment.length > 0) {
+      assessmentText = aiData.assessment.map((/** @type {any} */ item, /** @type {number} */ i) => `${i + 1}. ${item}`).join('\n');
+    }
+    
+    let planText = '';
+    if (Array.isArray(aiData.plan) && aiData.plan.length > 0) {
+      planText = aiData.plan.map((/** @type {any} */ item, /** @type {number} */ i) => `${i + 1}. ${item}`).join('\n');
+    }
+    
+    // Create enriched result with AI metadata
+    /** @type {any} */
     const enriched = {
       ...baseResult,
+      // Keep original metadata for debugging/provenance
       assessment: Array.isArray(aiData.assessment) ? aiData.assessment : undefined,
       plan: Array.isArray(aiData.plan) ? aiData.plan : undefined,
       citations: Array.isArray(aiData.citations) ? aiData.citations : undefined,
       evidenceDocs: Array.isArray(aiData.evidenceDocs) ? aiData.evidenceDocs : undefined,
       source: aiData.source || undefined
     };
+    
+    // Inject AI content into sections for normalization
+    // parseClinicalNoteFull returns {sections: {...}, ...}
+    if (!enriched.sections) {
+      enriched.sections = {};
+    }
+    
+    // Only override ASSESSMENT and PLAN if AI generated meaningful content
+    // AND if the base parser didn't find good content
+    if (assessmentText) {
+      const existingAssessment = enriched.sections.ASSESSMENT || enriched.sections['Impression and Plan'] || enriched.sections['Impression:'] || '';
+      if (existingAssessment.length < 50) {
+        enriched.sections.ASSESSMENT = assessmentText;
+        debugLog('[AI Analyzer] Injected AI assessment into sections');
+      }
+    }
+    
+    if (planText) {
+      const existingPlan = enriched.sections.PLAN || enriched.sections['Plan:'] || '';
+      if (existingPlan.length < 50) {
+        enriched.sections.PLAN = planText;
+        debugLog('[AI Analyzer] Injected AI plan into sections');
+      }
+    }
     
     return enriched;
     
