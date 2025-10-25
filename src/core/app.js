@@ -65,6 +65,12 @@ const appGlobals = /**
  * }}
  */ (globalThis);
 
+const STATIC_ASSETS = {
+  features: new URL("../../config/features.json?url", import.meta.url).href,
+  diagnoses: new URL("../../data/cardiology_diagnoses/cardiology.json?url", import.meta.url).href,
+  labs: new URL("../../data/labs_reference/labs_reference.json?url", import.meta.url).href,
+};
+
 // Basic application initialization
 console.log("⏰ Registering DOMContentLoaded listener...");
 console.log("⏰ document.readyState =", document.readyState);
@@ -176,7 +182,7 @@ async function initializeApp() {
  * Load feature flags and conditionally show nav items
  */
 function loadFeatureFlags() {
-  fetch("./config/features.json")
+  fetch(STATIC_ASSETS.features)
     .then((r) => r.json())
     .then((features) => {
       // Show/hide medications nav tab based on feature flag
@@ -550,7 +556,7 @@ async function ensureDiagnosesLoaded() {
   try {
     console.log("🌐 Fetching: ./data/cardiology_diagnoses/cardiology.json");
     const database = /** @type {{ diagnoses?: Array<{ id?: string; name?: string; title?: string }> }} */ (
-      await fetchJSON("./data/cardiology_diagnoses/cardiology.json", {
+      await fetchJSON(STATIC_ASSETS.diagnoses, {
         cache: "no-store",
       })
     );
@@ -691,7 +697,7 @@ async function loadDiagnosisData() {
 
   try {
     diagnosisDatabase = /** @type {DiagnosisDatabase} */ (
-      await fetchJSON("./data/cardiology_diagnoses/cardiology.json")
+      await fetchJSON(STATIC_ASSETS.diagnoses)
     );
     debugLog(
       "✅ Loaded diagnosis database with",
@@ -993,7 +999,7 @@ async function initializeLabValues() {
         units?: string;
         note?: string;
       }>;
-    }} */ (await fetchJSON("./data/labs_reference/labs_reference.json"));
+    }} */ (await fetchJSON(STATIC_ASSETS.labs));
 
     const tbody = document.getElementById("tbl-labs");
     if (!tbody) return;
@@ -1087,7 +1093,7 @@ async function initializeLabValues() {
    * @returns {HTMLElement[]}
    */
   function getMainContainers() {
-    const ids = ["layout", "main", "app"];
+    const ids = ["layout", "main"];
     const nodes = ids
       .map((id) => document.getElementById(id))
       .filter((el) => el instanceof HTMLElement);

@@ -20,11 +20,13 @@ let guidelinesData = null;
  * Load diagnosis data from JSON
  * @returns {Promise<Object>}
  */
+const DIAGNOSES_DATA_URL = new URL("../data/cardiology_diagnoses/cardiology.json?url", import.meta.url).href;
+
 async function loadDiagnosisData() {
   if (guidelinesData) return guidelinesData;
 
   try {
-    const response = await fetch("./data/cardiology_diagnoses/cardiology.json");
+    const response = await fetch(DIAGNOSES_DATA_URL);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     guidelinesData = await response.json();
     console.log("✅ Loaded diagnosis database");

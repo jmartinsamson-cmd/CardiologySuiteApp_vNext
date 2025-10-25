@@ -24,8 +24,9 @@ let medsData = null;
 async function loadMedicationsData() {
   if (medsData) return medsData;
 
+  const medsDataUrl = new URL("../data/meds/cardiac_meds.json?url", import.meta.url).href;
   try {
-    const response = await fetch("./data/meds/cardiac_meds.json");
+    const response = await fetch(medsDataUrl);
     if (!response.ok) {
       throw new Error(`Failed to load medications: ${response.status}`);
     }

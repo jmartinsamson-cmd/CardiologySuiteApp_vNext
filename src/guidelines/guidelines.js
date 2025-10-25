@@ -16,9 +16,11 @@ debugLog("🎓 Initializing Guidelines & Teaching page...");
 /**
  * Load diagnosis data from JSON file
  */
+const DIAGNOSES_DATA_URL = new URL("../data/cardiology_diagnoses/cardiology.json?url", import.meta.url).href;
+
 async function loadDiagnosisData() {
   try {
-    const response = await fetch("./data/cardiology_diagnoses/cardiology.json");
+    const response = await fetch(DIAGNOSES_DATA_URL);
     if (!response.ok) {
       throw new Error(`Failed to load diagnosis data: ${response.status}`);
     }
