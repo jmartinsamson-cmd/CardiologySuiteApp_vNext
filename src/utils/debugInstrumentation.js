@@ -13,7 +13,11 @@ if (typeof window !== 'undefined' && typeof window.process === 'undefined') {
   window.process = { env: {} };
 }
 window.debugError = window.debugError || function (...args) {
-  try { console.error('[debugError]', ...args); } catch (_) {}
+  try {
+    console.error('[debugError]', ...args);
+  } catch (_) {
+    // Intentionally swallow console errors; logging is best-effort in debug mode.
+  }
 };
 
 // ============================================================================
