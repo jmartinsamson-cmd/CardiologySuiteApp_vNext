@@ -146,10 +146,12 @@ jobs:
     steps:
       - name: Check overall status
         run: |
-          if [[ "${{ needs.smoke-test.result }}" == "success" ]]; then
+          SMOKE_TEST_STATUS="${{ needs.smoke-test.result }}"
+
+          if [[ "$SMOKE_TEST_STATUS" == "success" ]]; then
             echo "✅ All smoke tests passed"
             exit 0
           else
-            echo "❌ Smoke tests failed"
+            echo "❌ Smoke tests failed (status: $SMOKE_TEST_STATUS)"
             exit 1
           fi
