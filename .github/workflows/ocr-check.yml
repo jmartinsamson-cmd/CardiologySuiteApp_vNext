@@ -84,8 +84,11 @@ jobs:
           $(if ($pass) { "**Next:** Blob will be tagged and moved to organized/ocr-ok/" } else { "**Issue:** Insufficient text extracted from document" })
           "@
 
-          # --- Write summary to file ---
-          $summary | Out-File -FilePath ocr_summary.md -Encoding UTF8
+          try {
+              $summary | Out-File -FilePath ocr_summary.md -Encoding UTF8
+          } catch {
+              throw "Failed to create ocr_summary.md: $($_.Exception.Message)"
+          }
 
           # --- Set outputs ---
           "lines=$($lines.Count)" >> $env:GITHUB_OUTPUT
