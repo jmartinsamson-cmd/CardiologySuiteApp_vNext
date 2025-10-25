@@ -31,7 +31,7 @@ jobs:
             --ignore-pattern "services/ai-search/**" \
             --ignore-pattern "pages/**" \
             --ignore-pattern "functions-acc-scraper/**" \
-            -f sarif -o eslint-results.sarif || echo "ESLint found issues"
+            -f node_modules/@microsoft/eslint-formatter-sarif -o eslint-results.sarif || echo "ESLint found issues"
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
