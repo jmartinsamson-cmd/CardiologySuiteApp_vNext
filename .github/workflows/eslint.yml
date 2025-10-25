@@ -31,10 +31,20 @@ jobs:
             --ignore-pattern "services/ai-search/**" \
             --ignore-pattern "pages/**" \
             --ignore-pattern "functions-acc-scraper/**" \
-            -f sarif -o eslint-results.sarif || echo "ESLint found issues"
+            -f @microsoft/eslint-formatter-sarif -o eslint-results.sarif || echo "ESLint found issues"
+
+      - name: Verify SARIF file
+        id: sarif_check
+        run: |
+          if [ -f eslint-results.sarif ]; then
+            echo "sarif_exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "SARIF report was not generated"
+            echo "sarif_exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
+        if: steps.sarif_check.outputs.sarif_exists == 'true'
         with:
           sarif_file: eslint-results.sarif
